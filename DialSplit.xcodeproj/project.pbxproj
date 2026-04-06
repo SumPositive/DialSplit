@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC9D231461363EC29442A9E /* AZDial */; };
+		0DD4F1E63EAE767229C8423B /* LeatherBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */; };
+		3D46D5B41FD202C53399E30F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD101A4BF44E11075CF17514 /* Assets.xcassets */; };
+		4479B7022ED917A4B393B2F7 /* BrassFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */; };
+		5E36CF7F28ABCBC79971B413 /* SplitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */; };
+		9A3CC7AD8CE36855195495CF /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75996EAEFC508B777967A50 /* PanelView.swift */; };
+		A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3697A10C0EFF185C359F8DB /* SettingsView.swift */; };
+		A670342EB9D61FFA777DA4F0 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */; };
+		B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */; };
+		B95D897234F1A9591EAD2C2B /* AZCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECED1B2914CF38D023593C8 /* AZCalc */; };
+		B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8EDD5282E5537EC9490C0 /* SplitView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3B4E53DC0F3D53B85B73C1B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		46D8EDD5282E5537EC9490C0 /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
+		53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialSplitApp.swift; sourceTree = "<group>"; };
+		57E3F9D5896BF2CA28B724CD /* DialSplit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DialSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrassFrame.swift; sourceTree = "<group>"; };
+		AD101A4BF44E11075CF17514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B3697A10C0EFF185C359F8DB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B75996EAEFC508B777967A50 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
+		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
+		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DBA24386C205F0AF85E6FE2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */,
+				B95D897234F1A9591EAD2C2B /* AZCalc in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		13F4D6260A8FB74294E3B94C = {
+			isa = PBXGroup;
+			children = (
+				64FCE8BDEAB2F45E04FE6F4B /* DialSplit */,
+				BEB4D055063B4BAC5CFAED9C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3607910E528D76580371F6AA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B3697A10C0EFF185C359F8DB /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		64FCE8BDEAB2F45E04FE6F4B /* DialSplit */ = {
+			isa = PBXGroup;
+			children = (
+				AD101A4BF44E11075CF17514 /* Assets.xcassets */,
+				E41BC1CA29277EEDB8C916D1 /* App */,
+				FD6967EBBE26D9BBAECA5519 /* Components */,
+				C66CEC611B542E0E56D012DC /* Features */,
+				FD5F64158ACA09DF7B226CDB /* Resources */,
+			);
+			path = DialSplit;
+			sourceTree = "<group>";
+		};
+		7E6263DCBBED09963F5646AE /* Split */ = {
+			isa = PBXGroup;
+			children = (
+				B75996EAEFC508B777967A50 /* PanelView.swift */,
+				46D8EDD5282E5537EC9490C0 /* SplitView.swift */,
+				EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */,
+			);
+			path = Split;
+			sourceTree = "<group>";
+		};
+		BEB4D055063B4BAC5CFAED9C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				57E3F9D5896BF2CA28B724CD /* DialSplit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C66CEC611B542E0E56D012DC /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				3607910E528D76580371F6AA /* Settings */,
+				7E6263DCBBED09963F5646AE /* Split */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		E41BC1CA29277EEDB8C916D1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */,
+				53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FD5F64158ACA09DF7B226CDB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B4E53DC0F3D53B85B73C1B3 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FD6967EBBE26D9BBAECA5519 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */,
+				F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4D213D58F54460B23772CA23 /* DialSplit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CD9E313BC14D2BBA06AAAD6 /* Build configuration list for PBXNativeTarget "DialSplit" */;
+			buildPhases = (
+				DC0BEAC2B083A8B9C219C15F /* Sources */,
+				28D3B8D97CAB1131AA07C783 /* Resources */,
+				DBA24386C205F0AF85E6FE2C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DialSplit;
+			packageProductDependencies = (
+				6DC9D231461363EC29442A9E /* AZDial */,
+				7ECED1B2914CF38D023593C8 /* AZCalc */,
+			);
+			productName = DialSplit;
+			productReference = 57E3F9D5896BF2CA28B724CD /* DialSplit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1DDCC9047EA4A55A85E4641A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 3CBD7E56951B789D1E27BE1B /* Build configuration list for PBXProject "DialSplit" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 13F4D6260A8FB74294E3B94C;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */,
+				759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BEB4D055063B4BAC5CFAED9C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4D213D58F54460B23772CA23 /* DialSplit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		28D3B8D97CAB1131AA07C783 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D46D5B41FD202C53399E30F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC0BEAC2B083A8B9C219C15F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A670342EB9D61FFA777DA4F0 /* AppSettings.swift in Sources */,
+				4479B7022ED917A4B393B2F7 /* BrassFrame.swift in Sources */,
+				B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */,
+				0DD4F1E63EAE767229C8423B /* LeatherBackground.swift in Sources */,
+				9A3CC7AD8CE36855195495CF /* PanelView.swift in Sources */,
+				A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */,
+				B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */,
+				5E36CF7F28ABCBC79971B413 /* SplitViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2B6416C8021E9B26E4E826C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4B8088D64DB9EC60398C5A4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = DialSplit/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.DialSplit;
+				SDKROOT = iphoneos;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		6C6159F1D5DF531730810481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = DialSplit/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.DialSplit;
+				SDKROOT = iphoneos;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D21E0623C91C06048DCEAE58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3CBD7E56951B789D1E27BE1B /* Build configuration list for PBXProject "DialSplit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D21E0623C91C06048DCEAE58 /* Debug */,
+				2B6416C8021E9B26E4E826C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4CD9E313BC14D2BBA06AAAD6 /* Build configuration list for PBXNativeTarget "DialSplit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C6159F1D5DF531730810481 /* Debug */,
+				4B8088D64DB9EC60398C5A4F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SumPositive/AZCalc";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SumPositive/AZDial";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6DC9D231461363EC29442A9E /* AZDial */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */;
+			productName = AZDial;
+		};
+		7ECED1B2914CF38D023593C8 /* AZCalc */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */;
+			productName = AZCalc;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1DDCC9047EA4A55A85E4641A /* Project object */;
+}
