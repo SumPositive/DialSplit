@@ -1,5 +1,5 @@
 import SwiftUI
-import AZCalc
+import AZDecimal
 
 struct SettingsView: View {
     @Environment(AppSettings.self) private var settings

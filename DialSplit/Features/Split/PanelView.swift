@@ -1,5 +1,5 @@
 import SwiftUI
-import AZCalc
+import AZDecimal
 import AZDial
 
 struct PanelView: View {

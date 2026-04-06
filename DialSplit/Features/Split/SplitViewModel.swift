@@ -1,5 +1,5 @@
 import SwiftUI
-import AZCalc
+import AZDecimal
 
 @Observable
 final class SplitViewModel {

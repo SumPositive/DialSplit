@@ -1,0 +1,24 @@
+{
+  "originHash" : "fbc1bb8211ec65355aa291c96ba0a71330a9c4fcee53eae40b872b73078c3a2a",
+  "pins" : [
+    {
+      "identity" : "azcalc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SumPositive/AZCalc",
+      "state" : {
+        "revision" : "6bd67141c629e5b23c4972f0afd988731e036d3d",
+        "version" : "1.2.1"
+      }
+    },
+    {
+      "identity" : "azdial",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SumPositive/AZDial",
+      "state" : {
+        "revision" : "719eedf2a54014a3491b6da0c48c3d22fde9b106",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -16,7 +16,7 @@
 		A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3697A10C0EFF185C359F8DB /* SettingsView.swift */; };
 		A670342EB9D61FFA777DA4F0 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */; };
 		B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */; };
-		B95D897234F1A9591EAD2C2B /* AZCalc in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECED1B2914CF38D023593C8 /* AZCalc */; };
+		B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */ = {isa = PBXBuildFile; productRef = 56FFB9935599C33779D4A54D /* AZDecimal */; };
 		B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8EDD5282E5537EC9490C0 /* SplitView.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +40,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */,
-				B95D897234F1A9591EAD2C2B /* AZCalc in Frameworks */,
+				B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +146,7 @@
 			name = DialSplit;
 			packageProductDependencies = (
 				6DC9D231461363EC29442A9E /* AZDial */,
-				7ECED1B2914CF38D023593C8 /* AZCalc */,
+				56FFB9935599C33779D4A54D /* AZDecimal */,
 			);
 			productName = DialSplit;
 			productReference = 57E3F9D5896BF2CA28B724CD /* DialSplit.app */;
@@ -418,15 +418,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		56FFB9935599C33779D4A54D /* AZDecimal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */;
+			productName = AZDecimal;
+		};
 		6DC9D231461363EC29442A9E /* AZDial */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */;
 			productName = AZDial;
-		};
-		7ECED1B2914CF38D023593C8 /* AZCalc */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */;
-			productName = AZCalc;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
