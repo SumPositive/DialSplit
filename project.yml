@@ -9,7 +9,7 @@ options:
 packages:
   AZDial:
     url: https://github.com/SumPositive/AZDial
-    from: 1.0.0
+    from: 3.0.0
   AZCalc:
     url: https://github.com/SumPositive/AZCalc
     from: 1.0.0
