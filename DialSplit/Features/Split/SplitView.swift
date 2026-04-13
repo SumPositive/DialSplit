@@ -30,7 +30,7 @@ struct SplitView: View {
                         LeatherDivider()
                             .padding(.horizontal, 24)
 
-                        // 大富豪パネル（自動計算・切上表示）
+                        // A（大富豪）パネル — 自動計算
                         Panel0View(
                             name:     settings.name(for: 0),
                             persons0: $vm.persons0,
@@ -40,7 +40,7 @@ struct SplitView: View {
                         )
                         .padding(.horizontal, 16)
 
-                        // 富豪パネル
+                        // B（富豪）パネル
                         PanelSubView(
                             name:     settings.name(for: 1),
                             persons:  $vm.persons1,
@@ -49,7 +49,7 @@ struct SplitView: View {
                         )
                         .padding(.horizontal, 16)
 
-                        // 平民パネル
+                        // C（平民）パネル
                         PanelSubView(
                             name:     settings.name(for: 2),
                             persons:  $vm.persons2,
@@ -58,7 +58,16 @@ struct SplitView: View {
                         )
                         .padding(.horizontal, 16)
 
-                        // ダイアル単位セグメント（富豪/平民の金額ダイアルのstepを切り替え）
+                        // D（貧民）パネル
+                        PanelSubView(
+                            name:     settings.name(for: 3),
+                            persons:  $vm.persons3,
+                            split:    $vm.split3,
+                            dialUnit: vm.dialUnit
+                        )
+                        .padding(.horizontal, 16)
+
+                        // ダイアル単位セグメント
                         DialUnitSegment(selectedIndex: $vm.dialUnitIndex)
                             .padding(.horizontal, 24)
                             .padding(.top, 6)
@@ -114,6 +123,13 @@ private struct HeaderBar: View {
 
 private struct TotalAmountPanel: View {
     @Binding var totalRaw: Int
+    @Environment(AppSettings.self) private var settings
+    @Environment(\.colorScheme) private var cs
+    @State private var numpadConfig: NumpadConfig?
+
+    private var amountColor: Color {
+        cs == .dark ? .yellow.opacity(0.95) : Color(red: 0.50, green: 0.35, blue: 0.00)
+    }
 
     var body: some View {
         BrassFrame {
@@ -121,25 +137,38 @@ private struct TotalAmountPanel: View {
                 VStack(spacing: 4) {
                     Text("合計金額")
                         .font(.caption.bold())
-                        .foregroundStyle(.white.opacity(0.7))
+                        .foregroundStyle(cs == .dark ? .white.opacity(0.70) : Color(.secondaryLabel))
                     Text(totalRaw == 0 ? "¥ ---" : "¥ \(totalRaw.formatted())")
-                        .font(.title.bold().monospacedDigit())
-                        .foregroundStyle(.yellow.opacity(0.95))
-                        .shadow(color: .black.opacity(0.6), radius: 2)
-                        .minimumScaleFactor(0.5)
+                        .font(.largeTitle.bold().monospacedDigit())
+                        .foregroundStyle(totalRaw == 0 ? (cs == .dark ? .white.opacity(0.40) : Color(.tertiaryLabel)) : amountColor)
+                        .shadow(color: .black.opacity(cs == .dark ? 0.6 : 0.1), radius: 2)
+                        .minimumScaleFactor(0.4)
                         .lineLimit(1)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            numpadConfig = NumpadConfig(
+                                title: "合計金額",
+                                initialValue: totalRaw,
+                                maxValue: 999_900,
+                                minValue: 0,
+                                step: 100,
+                                isAmount: true,
+                                onConfirm: { totalRaw = $0 }
+                            )
+                        }
                 }
                 .frame(maxWidth: .infinity)
 
                 AZDialView(
                     value: $totalRaw,
                     min: 0, max: 999_900,
-                    step: 100, stepperStep: 100,
-                    style: .brass, dialWidth: 180
+                    step: 100, stepperStep: 0,
+                    style: settings.dialStyle, dialWidth: 180
                 )
             }
             .padding(14)
         }
+        .sheet(item: $numpadConfig) { NumpadView(config: $0) }
     }
 }
 

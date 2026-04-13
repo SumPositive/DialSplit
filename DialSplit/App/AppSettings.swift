@@ -4,10 +4,11 @@
 //
 
 import SwiftUI
+import AZDial
 
 @Observable
 final class AppSettings {
-    /// 各クラスの名前（大富豪/富豪/平民）
+    /// 区別ごとの名称（A=大富豪 / B=富豪 / C=平民 / D=貧民）
     var panelNames: [String] {
         didSet { UserDefaults.standard.set(panelNames, forKey: "panelNames") }
     }
@@ -17,12 +18,23 @@ final class AppSettings {
         didSet { UserDefaults.standard.set(leatherStyle.rawValue, forKey: "leatherStyle") }
     }
 
+    /// ダイアルスタイル
+    var dialStyle: DialStyle {
+        didSet { UserDefaults.standard.set(dialStyle.id, forKey: "dialStyle") }
+    }
+
     init() {
-        let names = UserDefaults.standard.stringArray(forKey: "panelNames")
-        panelNames = names ?? ["大富豪", "富豪", "平民"]
+        let defaults = ["大富豪", "富豪", "平民", "貧民"]
+        var names = UserDefaults.standard.stringArray(forKey: "panelNames") ?? defaults
+        // 旧3段階からの移行: 足りない分を補完
+        while names.count < 4 { names.append(defaults[names.count]) }
+        panelNames = names
 
         let styleRaw = UserDefaults.standard.string(forKey: "leatherStyle") ?? ""
         leatherStyle = LeatherStyle(rawValue: styleRaw) ?? .brown
+
+        let dialId = UserDefaults.standard.string(forKey: "dialStyle") ?? "brass"
+        dialStyle = DialStyle.builtin(id: dialId) ?? .brass
     }
 
     func name(for index: Int) -> String {
@@ -31,9 +43,7 @@ final class AppSettings {
     }
 
     func setName(_ name: String, for index: Int) {
-        while panelNames.count <= index {
-            panelNames.append("\(panelNames.count + 1)")
-        }
+        while panelNames.count <= index { panelNames.append("\(panelNames.count + 1)") }
         panelNames[index] = name
     }
 }

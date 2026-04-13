@@ -53,13 +53,16 @@ private struct LeatherStitchOverlay: View {
     }
 }
 
-/// Horizontal divider that blends with leather
+/// Horizontal divider that blends with the panel background
 struct LeatherDivider: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
+        let midOpacity: Double = colorScheme == .dark ? 0.40 : 0.25
         Rectangle()
             .fill(
                 LinearGradient(
-                    colors: [.clear, .black.opacity(0.4), .clear],
+                    colors: [.clear, .black.opacity(midOpacity), .clear],
                     startPoint: .leading, endPoint: .trailing
                 )
             )

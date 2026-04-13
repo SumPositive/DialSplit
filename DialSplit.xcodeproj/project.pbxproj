@@ -18,6 +18,7 @@
 		B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */; };
 		B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */ = {isa = PBXBuildFile; productRef = 56FFB9935599C33779D4A54D /* AZDecimal */; };
 		B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8EDD5282E5537EC9490C0 /* SplitView.swift */; };
+		C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		B3697A10C0EFF185C359F8DB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B75996EAEFC508B777967A50 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
+		D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadView.swift; sourceTree = "<group>"; };
 		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 			children = (
 				8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */,
 				F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */,
+				D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */,
 				B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */,
 				5E36CF7F28ABCBC79971B413 /* SplitViewModel.swift in Sources */,
+				C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
