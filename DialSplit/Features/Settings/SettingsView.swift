@@ -21,6 +21,24 @@ struct SettingsView: View {
         @Bindable var settings = settings
         NavigationStack {
             Form {
+                // MARK: プリセット
+                Section("プリセット") {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(NamePreset.all) { preset in
+                                PresetChip(
+                                    preset: preset,
+                                    isSelected: settings.panelNames == preset.names
+                                )
+                                .onTapGesture { settings.panelNames = preset.names }
+                            }
+                        }
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 2)
+                    }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
+                }
+
                 // MARK: 区別名称
                 Section("区別") {
                     ForEach(0..<tiers.count, id: \.self) { index in
@@ -59,8 +77,8 @@ struct SettingsView: View {
                     .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
                 }
 
-                // MARK: レザーデザイン
-                Section("レザー") {
+                // MARK: 背景デザイン
+                Section("背景") {
                     Picker("デザイン", selection: $settings.leatherStyle) {
                         ForEach(LeatherStyle.allCases, id: \.self) { style in
                             Text(style.localizedName).tag(style)
@@ -77,6 +95,38 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - プリセットチップ
+
+private struct PresetChip: View {
+    let preset: NamePreset
+    let isSelected: Bool
+
+    @Environment(\.colorScheme) private var cs
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            ForEach(preset.names, id: \.self) { name in
+                Text(name)
+                    .font(.caption2.bold())
+                    .foregroundStyle(isSelected ? Color.accentColor : .primary)
+                    .lineLimit(1)
+            }
+        }
+        .padding(.horizontal, 11)
+        .padding(.vertical, 8)
+        .background(
+            isSelected
+                ? Color.accentColor.opacity(cs == .dark ? 0.20 : 0.12)
+                : Color(.secondarySystemFill)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 9))
+        .overlay(
+            RoundedRectangle(cornerRadius: 9)
+                .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 1.5)
+        )
     }
 }
 

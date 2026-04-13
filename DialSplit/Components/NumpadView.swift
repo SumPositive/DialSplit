@@ -8,12 +8,22 @@
 //  初期値はプレースホルダー表示（薄いカラー）。
 //  数字キーを押した瞬間にクリアされ、1桁目から入力開始。
 //
+//  レイアウト:
+//  ┌─────────────────────────┐
+//  │  7  │  8  │  9          │
+//  │  4  │  5  │  6          │
+//  │  1  │  2  │  3          │
+//  │  ⌫  │  0  │  00         │
+//  │        完 了             │  ← 全幅
+//  └─────────────────────────┘
+//
 
 import SwiftUI
 import UIKit
 
 // MARK: - ハプティクス
 
+@MainActor
 private func selectionHaptic() {
     UISelectionFeedbackGenerator().selectionChanged()
 }
@@ -93,7 +103,7 @@ struct NumpadView: View {
             Text(displayText)
                 .font(.system(size: 42, weight: .bold, design: .monospaced))
                 .foregroundStyle(
-                    isOverMax    ? AnyShapeStyle(.red) :
+                    isOverMax     ? AnyShapeStyle(.red) :
                     isPlaceholder ? AnyShapeStyle(.tertiary) :
                                     AnyShapeStyle(.primary)
                 )
@@ -105,7 +115,7 @@ struct NumpadView: View {
 
             Divider()
 
-            // テンキーグリッド
+            // テンキーグリッド（7〜3 + ⌫/0/00）
             Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                 GridRow {
                     digitKey("7"); digitKey("8"); digitKey("9")
@@ -118,29 +128,34 @@ struct NumpadView: View {
                 }
                 GridRow {
                     actionKey(
-                        label: "⌫",
                         icon: "delete.left",
                         color: .primary,
-                        background: Color(.tertiarySystemBackground),
-                        enabled: true
+                        background: Color(.tertiarySystemBackground)
                     ) { deleteDigit() }
 
                     digitKey("0")
-
-                    actionKey(
-                        label: "完了",
-                        icon: nil,
-                        color: .white,
-                        background: canConfirm ? Color.accentColor : Color.accentColor.opacity(0.35),
-                        enabled: canConfirm
-                    ) { confirm() }
+                    digitKey("00")
                 }
             }
             .background(Color(.separator))
-            .padding(.bottom, 0)
+
+            // 完了ボタン（全幅）
+            Button {
+                confirm()
+                selectionHaptic()
+            } label: {
+                Text("完了")
+                    .font(.headline.bold())
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 52)
+                    .background(canConfirm ? Color.accentColor : Color.accentColor.opacity(0.35))
+            }
+            .buttonStyle(.plain)
+            .disabled(!canConfirm)
         }
         .background(Color(.systemBackground))
-        .presentationDetents([.height(350)])
+        .presentationDetents([.height(390)])
         .presentationDragIndicator(.visible)
         .presentationCornerRadius(20)
     }
@@ -157,7 +172,7 @@ struct NumpadView: View {
                 .font(.title2.bold())
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity)
-                .frame(height: 58)
+                .frame(height: 56)
                 .background(Color(.secondarySystemBackground))
         }
         .buttonStyle(.plain)
@@ -165,33 +180,23 @@ struct NumpadView: View {
 
     @ViewBuilder
     private func actionKey(
-        label: String,
-        icon: String?,
+        icon: String,
         color: Color,
         background: Color,
-        enabled: Bool,
         action: @escaping () -> Void
     ) -> some View {
         Button {
             action()
             selectionHaptic()
         } label: {
-            Group {
-                if let icon {
-                    Image(systemName: icon)
-                        .font(.title3.bold())
-                } else {
-                    Text(label)
-                        .font(.headline.bold())
-                }
-            }
-            .foregroundStyle(color)
-            .frame(maxWidth: .infinity)
-            .frame(height: 58)
-            .background(background)
+            Image(systemName: icon)
+                .font(.title3.bold())
+                .foregroundStyle(color)
+                .frame(maxWidth: .infinity)
+                .frame(height: 56)
+                .background(background)
         }
         .buttonStyle(.plain)
-        .disabled(!enabled)
     }
 
     // MARK: ロジック
@@ -200,7 +205,13 @@ struct NumpadView: View {
         // プレースホルダー中は入力をリセットしてから1桁目を受け付ける
         if isPlaceholder {
             isPlaceholder = false
-            inputStr = d == "0" ? "" : d
+            inputStr = (d == "0" || d == "00") ? "" : d
+            return
+        }
+        // "00" は "0" を2回追加
+        if d == "00" {
+            appendDigit("0")
+            appendDigit("0")
             return
         }
         // 先頭ゼロを除去

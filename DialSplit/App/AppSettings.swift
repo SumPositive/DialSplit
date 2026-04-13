@@ -6,9 +6,29 @@
 import SwiftUI
 import AZDial
 
+// MARK: - 名称プリセット
+
+struct NamePreset: Identifiable {
+    let names: [String]   // 必ず4要素
+    var id: String { names.joined(separator: "/") }
+
+    static let all: [NamePreset] = [
+        NamePreset(names: ["A",    "B",    "C",    "D"   ]),  // デフォルト
+        NamePreset(names: ["1",    "2",    "3",    "4"   ]),
+        NamePreset(names: ["大富豪", "富豪",  "平民",  "貧民" ]),
+        NamePreset(names: ["社長",  "部長",  "課長",  "係長" ]),
+        NamePreset(names: ["金",    "銀",    "銅",    "鉄"  ]),
+        NamePreset(names: ["特上",  "上",    "並",    "下"  ]),
+        NamePreset(names: ["先輩",  "同僚",  "後輩",  "新人"]),
+        NamePreset(names: ["",     "",     "",     ""    ]),  // ブランク
+    ]
+}
+
+// MARK: - AppSettings
+
 @Observable
 final class AppSettings {
-    /// 区別ごとの名称（A=大富豪 / B=富豪 / C=平民 / D=貧民）
+    /// 区別ごとの名称
     var panelNames: [String] {
         didSet { UserDefaults.standard.set(panelNames, forKey: "panelNames") }
     }
@@ -24,9 +44,9 @@ final class AppSettings {
     }
 
     init() {
-        let defaults = ["大富豪", "富豪", "平民", "貧民"]
+        let defaults = NamePreset.all[0].names   // ["A","B","C","D"]
         var names = UserDefaults.standard.stringArray(forKey: "panelNames") ?? defaults
-        // 旧3段階からの移行: 足りない分を補完
+        // 旧バージョンからの移行: 足りない分を補完
         while names.count < 4 { names.append(defaults[names.count]) }
         panelNames = names
 
@@ -51,20 +71,41 @@ final class AppSettings {
 // MARK: - LeatherStyle
 
 enum LeatherStyle: String, CaseIterable {
+    case monotone
     case brown
     case black
 
     var backgroundImage: String {
         switch self {
-        case .brown: return "leather_brown"
-        case .black: return "leather_black"
+        case .monotone: return ""               // テクスチャなし → フォールバックグラデーション
+        case .brown:    return "leather_brown"
+        case .black:    return "leather_black"
         }
     }
 
+    /// フォールバック用グラデーションカラー（モノトーンはカラースキーム対応）
+    func fallbackColors(for cs: ColorScheme) -> [Color] {
+        switch self {
+        case .monotone:
+            return cs == .dark
+                ? [Color(red: 0.13, green: 0.13, blue: 0.15),
+                   Color(red: 0.06, green: 0.06, blue: 0.08)]
+                : [Color(white: 0.68), Color(white: 0.54)]
+        case .brown:    return [Color(red: 0.35, green: 0.22, blue: 0.12),
+                                Color(red: 0.22, green: 0.13, blue: 0.07)]
+        case .black:    return [Color(red: 0.18, green: 0.18, blue: 0.18),
+                                Color(red: 0.08, green: 0.08, blue: 0.08)]
+        }
+    }
+
+    /// ステッチ装飾を表示するか
+    var showsStitch: Bool { self != .monotone }
+
     var localizedName: String {
         switch self {
-        case .brown: return "ブラウン"
-        case .black: return "ブラック"
+        case .monotone: return "モノトーン"
+        case .brown:    return "ブラウンレザー"
+        case .black:    return "ブラックレザー"
         }
     }
 }

@@ -25,7 +25,7 @@ import AZDial
 
 // MARK: - レイアウト定数
 
-private let PERSONS_COL_W: CGFloat = 96    // 人数列幅（×1.2 拡大）
+private let PERSONS_COL_W: CGFloat = 115   // 人数列幅（×1.2 拡大）
 private let NAME_W:        CGFloat = 110   // 名称列幅（固定 → 位置が金額桁数で動かない）
 private let H_PAD:         CGFloat = 16    // 左右パディング（人数の左マージンを確保）
 private let H_GAP:         CGFloat = 8     // 列間スペーシング
@@ -107,7 +107,7 @@ struct Panel0View: View {
                         min: 0, max: 999_900,
                         step: 100, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: 220
+                        dialWidth: 200
                     )
                     .frame(maxWidth: .infinity)
                     .allowsHitTesting(false)
@@ -200,7 +200,7 @@ struct PanelSubView: View {
                         min: 0, max: 999_900,
                         step: dialUnit, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: 220
+                        dialWidth: 200
                     )
                     .frame(maxWidth: .infinity)
                 }

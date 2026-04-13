@@ -1,36 +1,38 @@
 import SwiftUI
 
-/// Full-screen leather texture background
+/// Full-screen background（モノトーン / ブラウンレザー / ブラックレザー）
 struct LeatherBackground: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        let imageName = settings.leatherStyle.backgroundImage
+        let style = settings.leatherStyle
+        let imageName = style.backgroundImage
+
         Group {
-            if let _ = UIImage(named: imageName) {
+            if !imageName.isEmpty, UIImage(named: imageName) != nil {
                 Image(imageName)
                     .resizable()
                     .ignoresSafeArea()
             } else {
-                // Fallback gradient when texture image is not available
+                // テクスチャ画像が無い場合のフォールバックグラデーション
                 LinearGradient(
-                    colors: settings.leatherStyle == .brown
-                        ? [Color(red: 0.35, green: 0.22, blue: 0.12), Color(red: 0.22, green: 0.13, blue: 0.07)]
-                        : [Color(red: 0.18, green: 0.18, blue: 0.18), Color(red: 0.08, green: 0.08, blue: 0.08)],
+                    colors: style.fallbackColors(for: colorScheme),
                     startPoint: .top,
                     endPoint: .bottom
                 )
                 .ignoresSafeArea()
                 .overlay {
-                    // Subtle stitch pattern overlay
-                    LeatherStitchOverlay()
+                    if style.showsStitch {
+                        LeatherStitchOverlay()
+                    }
                 }
             }
         }
     }
 }
 
-/// Decorative stitch line overlay for fallback leather look
+/// 装飾ステッチライン（レザー系のみ表示）
 private struct LeatherStitchOverlay: View {
     var body: some View {
         GeometryReader { geo in
@@ -53,7 +55,7 @@ private struct LeatherStitchOverlay: View {
     }
 }
 
-/// Horizontal divider that blends with the panel background
+/// パネル内の水平区切り線
 struct LeatherDivider: View {
     @Environment(\.colorScheme) private var colorScheme
 
