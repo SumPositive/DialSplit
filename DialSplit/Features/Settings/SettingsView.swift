@@ -1,25 +1,28 @@
+//
+//  SettingsView.swift
+//  DialSplit
+//
+
 import SwiftUI
-import AZDecimal
 
 struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.dismiss) private var dismiss
 
+    private let panelLabels = ["大富豪", "富豪", "平民"]
+
     var body: some View {
         @Bindable var settings = settings
         NavigationStack {
             Form {
-                Section("パネル数") {
-                    Stepper("\(settings.panelCount) パネル", value: $settings.panelCount, in: 1...3)
-                }
-
-                Section("パネル名") {
-                    ForEach(0..<settings.panelCount, id: \.self) { index in
+                Section("名前") {
+                    ForEach(0..<3, id: \.self) { index in
                         HStack {
-                            Text("パネル \(index + 1)")
+                            Text(panelLabels[index])
                                 .foregroundStyle(.secondary)
+                                .frame(width: 60, alignment: .leading)
                             TextField(
-                                "名前",
+                                panelLabels[index],
                                 text: Binding(
                                     get: { settings.name(for: index) },
                                     set: { settings.setName($0, for: index) }
@@ -28,16 +31,6 @@ struct SettingsView: View {
                             .multilineTextAlignment(.trailing)
                         }
                     }
-                }
-
-                Section("丸め") {
-                    Picker("丸めモード", selection: $settings.roundType) {
-                        Text("四捨五入").tag(AZDecimalConfig.RoundType.r54)
-                        Text("切り捨て").tag(AZDecimalConfig.RoundType.truncate)
-                        Text("切り上げ").tag(AZDecimalConfig.RoundType.rup)
-                        Text("銀行丸め").tag(AZDecimalConfig.RoundType.r55)
-                    }
-                    .pickerStyle(.menu)
                 }
 
                 Section("デザイン") {

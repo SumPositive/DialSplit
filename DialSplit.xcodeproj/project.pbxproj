@@ -24,7 +24,7 @@
 		3B4E53DC0F3D53B85B73C1B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		46D8EDD5282E5537EC9490C0 /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
 		53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialSplitApp.swift; sourceTree = "<group>"; };
-		57E3F9D5896BF2CA28B724CD /* DialSplit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DialSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		57E3F9D5896BF2CA28B724CD /* DialSplit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DialSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrassFrame.swift; sourceTree = "<group>"; };
 		AD101A4BF44E11075CF17514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,8 +160,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1600;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 3CBD7E56951B789D1E27BE1B /* Build configuration list for PBXProject "DialSplit" */;
 			developmentRegion = en;
@@ -277,7 +275,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				INFOPLIST_FILE = DialSplit/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -297,7 +295,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				INFOPLIST_FILE = DialSplit/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

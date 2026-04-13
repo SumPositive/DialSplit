@@ -1,30 +1,25 @@
+//
+//  AppSettings.swift
+//  DialSplit
+//
+
 import SwiftUI
-import AZDecimal
 
 @Observable
 final class AppSettings {
-    var panelCount: Int {
-        didSet { UserDefaults.standard.set(panelCount, forKey: "panelCount") }
-    }
+    /// 各クラスの名前（大富豪/富豪/平民）
     var panelNames: [String] {
         didSet { UserDefaults.standard.set(panelNames, forKey: "panelNames") }
     }
-    var roundType: AZDecimalConfig.RoundType {
-        didSet { UserDefaults.standard.set(roundType.rawValue, forKey: "roundType") }
-    }
+
+    /// レザーデザイン
     var leatherStyle: LeatherStyle {
         didSet { UserDefaults.standard.set(leatherStyle.rawValue, forKey: "leatherStyle") }
     }
 
     init() {
-        let count = UserDefaults.standard.integer(forKey: "panelCount")
-        panelCount = count > 0 ? count : 3
-
         let names = UserDefaults.standard.stringArray(forKey: "panelNames")
-        panelNames = names ?? ["Aさん", "Bさん", "Cさん"]
-
-        let modeRaw = UserDefaults.standard.integer(forKey: "roundType")
-        roundType = AZDecimalConfig.RoundType(rawValue: modeRaw) ?? .r54
+        panelNames = names ?? ["大富豪", "富豪", "平民"]
 
         let styleRaw = UserDefaults.standard.string(forKey: "leatherStyle") ?? ""
         leatherStyle = LeatherStyle(rawValue: styleRaw) ?? .brown
@@ -41,11 +36,9 @@ final class AppSettings {
         }
         panelNames[index] = name
     }
-
-    var roundConfig: AZDecimalConfig {
-        AZDecimalConfig.default.rounding(roundType).digits(0)
-    }
 }
+
+// MARK: - LeatherStyle
 
 enum LeatherStyle: String, CaseIterable {
     case brown
