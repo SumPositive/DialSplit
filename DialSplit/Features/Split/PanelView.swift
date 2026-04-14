@@ -99,9 +99,7 @@ private struct PanelColors {
 struct Panel0View: View {
     let name: String
     @Binding var persons0: Int
-    @Binding var split0: Int
-    let canEditA: Bool
-    let dialUnit: Int
+    let split0: Int
     let status: Split0Status
     let totalRaw: Int
     let panelWidth: CGFloat
@@ -137,7 +135,7 @@ struct Panel0View: View {
 
                 LeatherDivider()
 
-                // ダイアル行: 人数（左）+ 自動計算金額・読み取り専用（右）
+                // ダイアル行: 人数（左）のみ（A金額は表示専用）
                 HStack(spacing: H_GAP) {
                     AZDialView(
                         value: $persons0,
@@ -147,20 +145,7 @@ struct Panel0View: View {
                         dialWidth: layout.personsDialW
                     )
                     .frame(width: layout.personsDialW)
-
-                    // canEditA のときインタラクティブ、そうでなければ表示専用
-                    AZDialView(
-                        value: Binding(
-                            get: { max(0, split0) },
-                            set: { if canEditA { split0 = $0 } }
-                        ),
-                        min: 0, max: 999_900,
-                        step: dialUnit, stepperStep: 0,
-                        style: settings.dialStyle,
-                        dialWidth: layout.amountDialW
-                    )
-                    .frame(maxWidth: .infinity)
-                    .allowsHitTesting(canEditA)
+                    Spacer(minLength: 0)
                 }
                 .padding(.horizontal, H_PAD)
                 .padding(.vertical, 8)
@@ -221,18 +206,6 @@ struct Panel0View: View {
                         .fixedSize()
                         .offset(y: -30)
                 }
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                guard canEditA else { return }
-                numpadConfig = NumpadConfig(
-                    title: localizedNamedTitle("金額（%@）", name),
-                    initialValue: split0,
-                    maxValue: 999_900,
-                    minValue: 0,
-                    isAmount: true,
-                    onConfirm: { split0 = $0 }
-                )
             }
 
         }

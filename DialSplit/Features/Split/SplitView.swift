@@ -52,13 +52,11 @@ struct SplitView: View {
                             LeatherDivider()
                                 .frame(width: cardWidth)
 
-                            // A（大富豪）パネル — B/C/D 合計 > 0 のとき金額編集可
+                            // A（大富豪）パネル — 金額は自動計算の表示専用
                             Panel0View(
                                 name:     settings.name(for: 0),
                                 persons0: $vm.persons0,
-                                split0:   Binding(get: { vm.split0 }, set: { vm.adjustA($0) }),
-                                canEditA: vm.canEditA,
-                                dialUnit: vm.dialUnit,
+                                split0:   vm.split0,
                                 status:   vm.split0Status,
                                 totalRaw: vm.totalRaw,
                                 panelWidth: cardWidth
