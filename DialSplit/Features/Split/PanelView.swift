@@ -9,9 +9,7 @@
 //  │  [人数Dal] [======= 金額Dal(220pt) =========]│ ← ダイアル行
 //  └──────────────────────────────────────────────┘
 //
-//  人数列: PERSONS_COL_W = 96pt
-//  名称列: NAME_W = 110pt（固定）→ 金額桁数に関係なく位置が変わらない
-//  金額:   Spacer() で右端に固定、fixedSize() で自然幅
+//  列幅は panelWidth から動的算出（SE〜Pro Max まで対応）
 //  H_PAD:  16pt（人数の左マージンを確保）
 //
 //  Panel0View（A）: 右列ダイアルは読み取り専用（.allowsHitTesting(false)）
@@ -45,10 +43,34 @@ private func localizedAmount(_ value: Int, placeholder: String = "---") -> Strin
 
 // MARK: - レイアウト定数
 
-private let PERSONS_COL_W: CGFloat = 115   // 人数列幅（×1.2 拡大）
-private let NAME_W:        CGFloat = 110   // 名称列幅（固定 → 位置が金額桁数で動かない）
 private let H_PAD:         CGFloat = 16    // 左右パディング（人数の左マージンを確保）
 private let H_GAP:         CGFloat = 8     // 列間スペーシング
+
+private struct PanelLayout {
+    let personsDialW: CGFloat
+    let amountDialW: CGFloat
+    let personsTextW: CGFloat
+    let nameW: CGFloat
+    let amountTextW: CGFloat
+
+    static func make(panelWidth: CGFloat) -> PanelLayout {
+        let inner = max(220, panelWidth - H_PAD * 2)
+        let personsDialW = min(115, max(84, inner * 0.32))
+        let amountDialW = max(96, inner - personsDialW - H_GAP)
+
+        let personsTextW = min(76, max(52, personsDialW * 0.66))
+        let nameW = min(110, max(62, inner * 0.26))
+        let amountTextW = max(88, inner - personsTextW - nameW - (H_GAP * 3 + 4))
+
+        return PanelLayout(
+            personsDialW: personsDialW,
+            amountDialW: amountDialW,
+            personsTextW: personsTextW,
+            nameW: nameW,
+            amountTextW: amountTextW
+        )
+    }
+}
 
 // MARK: - カラーテーマ
 
@@ -82,12 +104,14 @@ struct Panel0View: View {
     let dialUnit: Int
     let status: Split0Status
     let totalRaw: Int
+    let panelWidth: CGFloat
 
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
     @State private var numpadConfig: NumpadConfig?
 
     private var colors: PanelColors { .make(cs) }
+    private var layout: PanelLayout { .make(panelWidth: panelWidth) }
 
     private var amountColor: Color {
         switch status {
@@ -120,9 +144,9 @@ struct Panel0View: View {
                         min: 1, max: 99,
                         step: 1, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: PERSONS_COL_W
+                        dialWidth: layout.personsDialW
                     )
-                    .frame(width: PERSONS_COL_W)
+                    .frame(width: layout.personsDialW)
 
                     // canEditA のときインタラクティブ、そうでなければ表示専用
                     AZDialView(
@@ -133,7 +157,7 @@ struct Panel0View: View {
                         min: 0, max: 999_900,
                         step: dialUnit, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: 200
+                        dialWidth: layout.amountDialW
                     )
                     .frame(maxWidth: .infinity)
                     .allowsHitTesting(canEditA)
@@ -142,6 +166,7 @@ struct Panel0View: View {
                 .padding(.vertical, 8)
             }
         }
+        .frame(maxWidth: .infinity)
         .sheet(item: $numpadConfig) { NumpadView(config: $0) }
     }
 
@@ -152,7 +177,7 @@ struct Panel0View: View {
                 .font(.title.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
-                .frame(width: PERSONS_COL_W/3*2, alignment: .trailing)
+                .frame(width: layout.personsTextW, alignment: .trailing)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     numpadConfig = NumpadConfig(
@@ -170,7 +195,7 @@ struct Panel0View: View {
                 .font(.subheadline.bold())
                 .foregroundStyle(colors.primary)
                 .lineLimit(1)
-                .frame(width: NAME_W, alignment: .center)
+                .frame(width: layout.nameW, alignment: .center)
 
             // 柔軟スペーサー
             Spacer(minLength: 4)
@@ -186,7 +211,8 @@ struct Panel0View: View {
             }
             .foregroundStyle(totalRaw == 0 ? colors.secondary : amountColor)
             .lineLimit(1)
-            .fixedSize()
+            .minimumScaleFactor(0.65)
+            .frame(width: layout.amountTextW, alignment: .trailing)
             .overlay(alignment: .bottomTrailing) {
                 if status == .rounded {
                     Text("端数切り上げ")
@@ -209,7 +235,6 @@ struct Panel0View: View {
                 )
             }
 
-            Spacer(minLength: 16)
         }
     }
 }
@@ -221,12 +246,14 @@ struct PanelSubView: View {
     @Binding var persons: Int
     @Binding var split: Int
     let dialUnit: Int
+    let panelWidth: CGFloat
 
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
     @State private var numpadConfig: NumpadConfig?
 
     private var colors: PanelColors { .make(cs) }
+    private var layout: PanelLayout { .make(panelWidth: panelWidth) }
 
     var body: some View {
         BrassFrame {
@@ -246,16 +273,16 @@ struct PanelSubView: View {
                         min: 0, max: 99,
                         step: 1, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: PERSONS_COL_W
+                        dialWidth: layout.personsDialW
                     )
-                    .frame(width: PERSONS_COL_W)
+                    .frame(width: layout.personsDialW)
 
                     AZDialView(
                         value: $split,
                         min: 0, max: 999_900,
                         step: dialUnit, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: 200
+                        dialWidth: layout.amountDialW
                     )
                     .frame(maxWidth: .infinity)
                 }
@@ -263,6 +290,7 @@ struct PanelSubView: View {
                 .padding(.vertical, 8)
             }
         }
+        .frame(maxWidth: .infinity)
         .sheet(item: $numpadConfig) { NumpadView(config: $0) }
     }
 
@@ -273,7 +301,7 @@ struct PanelSubView: View {
                 .font(.title.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
-                .frame(width: PERSONS_COL_W/3*2, alignment: .trailing)
+                .frame(width: layout.personsTextW, alignment: .trailing)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     numpadConfig = NumpadConfig(
@@ -291,7 +319,7 @@ struct PanelSubView: View {
                 .font(.subheadline.bold())
                 .foregroundStyle(colors.primary)
                 .lineLimit(1)
-                .frame(width: NAME_W, alignment: .center)
+                .frame(width: layout.nameW, alignment: .center)
 
             // 柔軟スペーサー（名称と金額の間）
             Spacer(minLength: 4)
@@ -307,7 +335,8 @@ struct PanelSubView: View {
             }
             .foregroundStyle(persons == 0 ? colors.secondary : colors.accent)
             .lineLimit(1)
-            .fixedSize()
+            .minimumScaleFactor(0.65)
+            .frame(width: layout.amountTextW, alignment: .trailing)
             .contentShape(Rectangle())
             .onTapGesture {
                 guard persons > 0 else { return }
@@ -321,7 +350,6 @@ struct PanelSubView: View {
                 )
             }
 
-            Spacer(minLength: 16)
         }
     }
 }

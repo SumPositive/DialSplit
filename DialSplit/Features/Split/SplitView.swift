@@ -29,6 +29,7 @@ struct SplitView: View {
     @Environment(AppSettings.self) private var settings
     @State private var vm = SplitViewModel()
     @State private var showSettings = false
+    private let cardSideMargin: CGFloat = 16
 
     var body: some View {
         @Bindable var vm = vm
@@ -39,62 +40,70 @@ struct SplitView: View {
             VStack(spacing: 0) {
                 HeaderBar(showSettings: $showSettings)
 
-                ScrollView {
-                    VStack(spacing: 10) {
-                        // 合計金額パネル
-                        TotalAmountPanel(totalRaw: $vm.totalRaw, totalPersons: vm.totalPersons, dialUnit: vm.dialUnit)
-                            .padding(.horizontal, 16)
-                            .padding(.top, 14)
+                GeometryReader { proxy in
+                    let cardWidth = max(0, proxy.size.width - cardSideMargin * 2)
+                    ScrollView {
+                        VStack(spacing: 10) {
+                            // 合計金額パネル
+                            TotalAmountPanel(totalRaw: $vm.totalRaw, totalPersons: vm.totalPersons, dialUnit: vm.dialUnit)
+                                .frame(width: cardWidth)
+                                .padding(.top, 14)
 
-                        LeatherDivider()
-                            .padding(.horizontal, 24)
+                            LeatherDivider()
+                                .frame(width: cardWidth)
 
-                        // A（大富豪）パネル — B/C/D 合計 > 0 のとき金額編集可
-                        Panel0View(
-                            name:     settings.name(for: 0),
-                            persons0: $vm.persons0,
-                            split0:   Binding(get: { vm.split0 }, set: { vm.adjustA($0) }),
-                            canEditA: vm.canEditA,
-                            dialUnit: vm.dialUnit,
-                            status:   vm.split0Status,
-                            totalRaw: vm.totalRaw
-                        )
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 20)
+                            // A（大富豪）パネル — B/C/D 合計 > 0 のとき金額編集可
+                            Panel0View(
+                                name:     settings.name(for: 0),
+                                persons0: $vm.persons0,
+                                split0:   Binding(get: { vm.split0 }, set: { vm.adjustA($0) }),
+                                canEditA: vm.canEditA,
+                                dialUnit: vm.dialUnit,
+                                status:   vm.split0Status,
+                                totalRaw: vm.totalRaw,
+                                panelWidth: cardWidth
+                            )
+                            .frame(width: cardWidth)
+                            .padding(.bottom, 20)
 
-                        // B（富豪）パネル
-                        PanelSubView(
-                            name:     settings.name(for: 1),
-                            persons:  $vm.persons1,
-                            split:    $vm.split1,
-                            dialUnit: vm.dialUnit
-                        )
-                        .padding(.horizontal, 16)
+                            // B（富豪）パネル
+                            PanelSubView(
+                                name:     settings.name(for: 1),
+                                persons:  $vm.persons1,
+                                split:    $vm.split1,
+                                dialUnit: vm.dialUnit,
+                                panelWidth: cardWidth
+                            )
+                            .frame(width: cardWidth)
 
-                        // C（平民）パネル
-                        PanelSubView(
-                            name:     settings.name(for: 2),
-                            persons:  $vm.persons2,
-                            split:    $vm.split2,
-                            dialUnit: vm.dialUnit
-                        )
-                        .padding(.horizontal, 16)
+                            // C（平民）パネル
+                            PanelSubView(
+                                name:     settings.name(for: 2),
+                                persons:  $vm.persons2,
+                                split:    $vm.split2,
+                                dialUnit: vm.dialUnit,
+                                panelWidth: cardWidth
+                            )
+                            .frame(width: cardWidth)
 
-                        // D（貧民）パネル
-                        PanelSubView(
-                            name:     settings.name(for: 3),
-                            persons:  $vm.persons3,
-                            split:    $vm.split3,
-                            dialUnit: vm.dialUnit
-                        )
-                        .padding(.horizontal, 16)
+                            // D（貧民）パネル
+                            PanelSubView(
+                                name:     settings.name(for: 3),
+                                persons:  $vm.persons3,
+                                split:    $vm.split3,
+                                dialUnit: vm.dialUnit,
+                                panelWidth: cardWidth
+                            )
+                            .frame(width: cardWidth)
 
-                        // ダイアル単位セグメント
-                        DialUnitSegment(dialUnit: $vm.dialUnit)
-                            .padding(.horizontal, 16)
-                            .padding(.top, 6)
+                            // ダイアル単位セグメント
+                            DialUnitSegment(dialUnit: $vm.dialUnit)
+                                .frame(width: cardWidth)
+                                .padding(.top, 6)
 
-                        Spacer().frame(height: 4)
+                            Spacer().frame(height: 4)
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                 }
             }
@@ -206,6 +215,7 @@ private struct TotalAmountPanel: View {
             }
             .padding(14)
         }
+        .frame(maxWidth: .infinity)
         .sheet(item: $numpadConfig) { NumpadView(config: $0) }
     }
 }
