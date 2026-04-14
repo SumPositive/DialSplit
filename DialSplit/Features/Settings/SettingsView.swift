@@ -16,7 +16,7 @@ struct SettingsView: View {
         return "\(v).\(b)"
     }
 
-    private let tiers: [(label: String, placeholder: String)] = [
+    private let tiers: [(label: String, placeholderKey: String)] = [
         ("A", "大富豪"),
         ("B", "富豪"),
         ("C", "平民"),
@@ -54,7 +54,7 @@ struct SettingsView: View {
                                 .foregroundStyle(.secondary)
                                 .frame(width: 28, alignment: .center)
                             TextField(
-                                tiers[index].placeholder,
+                                NSLocalizedString(tiers[index].placeholderKey, comment: ""),
                                 text: Binding(
                                     get: { settings.name(for: index) },
                                     set: { settings.setName($0, for: index) }

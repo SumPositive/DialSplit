@@ -12,16 +12,18 @@ struct NamePreset: Identifiable {
     let names: [String]   // 必ず4要素
     var id: String { names.joined(separator: "/") }
 
-    static let all: [NamePreset] = [
+    static var all: [NamePreset] {
+        [
         NamePreset(names: ["A",    "B",    "C",    "D"   ]),  // デフォルト
         NamePreset(names: ["1",    "2",    "3",    "4"   ]),
-        NamePreset(names: ["大富豪", "富豪",  "平民",  "貧民" ]),
-        NamePreset(names: ["社長",  "部長",  "課長",  "係長" ]),
-        NamePreset(names: ["金",    "銀",    "銅",    "鉄"  ]),
-        NamePreset(names: ["特上",  "上",    "並",    "下"  ]),
-        NamePreset(names: ["先輩",  "同僚",  "後輩",  "新人"]),
+        NamePreset(names: [String(localized: "大富豪"), String(localized: "富豪"), String(localized: "平民"), String(localized: "貧民")]),
+        NamePreset(names: [String(localized: "社長"), String(localized: "部長"), String(localized: "課長"), String(localized: "係長")]),
+        NamePreset(names: [String(localized: "金"), String(localized: "銀"), String(localized: "銅"), String(localized: "鉄")]),
+        NamePreset(names: [String(localized: "特上"), String(localized: "上"), String(localized: "並"), String(localized: "下")]),
+        NamePreset(names: [String(localized: "先輩"), String(localized: "同僚"), String(localized: "後輩"), String(localized: "新人")]),
         NamePreset(names: ["",     "",     "",     ""    ]),  // ブランク
     ]
+    }
 }
 
 // MARK: - AppSettings
@@ -103,9 +105,9 @@ enum LeatherStyle: String, CaseIterable {
 
     var localizedName: String {
         switch self {
-        case .monotone: return "モノトーン"
-        case .brown:    return "ブラウンレザー"
-        case .black:    return "ブラックレザー"
+        case .monotone: return String(localized: "モノトーン")
+        case .brown:    return String(localized: "ブラウンレザー")
+        case .black:    return String(localized: "ブラックレザー")
         }
     }
 }

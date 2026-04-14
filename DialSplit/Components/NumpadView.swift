@@ -21,6 +21,17 @@
 import SwiftUI
 import UIKit
 
+private func isEnglishUI() -> Bool {
+    Locale.preferredLanguages.first?.hasPrefix("en") == true
+}
+
+private func localizedAmountText(_ value: Int) -> String {
+    if isEnglishUI() {
+        return "$ \(value.formatted()).00"
+    }
+    return "¥ \(value.formatted())"
+}
+
 // MARK: - ハプティクス
 
 @MainActor
@@ -65,12 +76,12 @@ struct NumpadView: View {
     private var displayText: String {
         let n = currentInt
         if isPlaceholder {
-            return config.isAmount ? "¥ \(n.formatted())" : "\(n)"
+            return config.isAmount ? localizedAmountText(n) : "\(n)"
         }
         guard !inputStr.isEmpty else {
-            return config.isAmount ? "¥ 0" : "0"
+            return config.isAmount ? localizedAmountText(0) : "0"
         }
-        return config.isAmount ? "¥ \(n.formatted())" : "\(n)"
+        return config.isAmount ? localizedAmountText(n) : "\(n)"
     }
 
     private var canConfirm: Bool {

@@ -14,6 +14,8 @@
 		5E36CF7F28ABCBC79971B413 /* SplitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */; };
 		9A3CC7AD8CE36855195495CF /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75996EAEFC508B777967A50 /* PanelView.swift */; };
 		A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3697A10C0EFF185C359F8DB /* SettingsView.swift */; };
+		A1B2C3D4E5F60718293A4B5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5D /* InfoPlist.strings */; };
+		A1B2C3D4E5F60718293A4B6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B6B /* Localizable.strings */; };
 		A670342EB9D61FFA777DA4F0 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */; };
 		B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */; };
 		B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */ = {isa = PBXBuildFile; productRef = 56FFB9935599C33779D4A54D /* AZDecimal */; };
@@ -28,6 +30,10 @@
 		57E3F9D5896BF2CA28B724CD /* DialSplit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DialSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrassFrame.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B6D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD101A4BF44E11075CF17514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3697A10C0EFF185C359F8DB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B75996EAEFC508B777967A50 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
@@ -117,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				3B4E53DC0F3D53B85B73C1B3 /* Info.plist */,
+				A1B2C3D4E5F60718293A4B5D /* InfoPlist.strings */,
+				A1B2C3D4E5F60718293A4B6B /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -170,6 +178,7 @@
 			knownRegions = (
 				Base,
 				en,
+				ja,
 			);
 			mainGroup = 13F4D6260A8FB74294E3B94C;
 			minimizedProjectReferenceProxies = 1;
@@ -193,6 +202,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D46D5B41FD202C53399E30F /* Assets.xcassets in Resources */,
+				A1B2C3D4E5F60718293A4B5C /* InfoPlist.strings in Resources */,
+				A1B2C3D4E5F60718293A4B6A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +227,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A1B2C3D4E5F60718293A4B5D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1B2C3D4E5F60718293A4B5E /* en */,
+				A1B2C3D4E5F60718293A4B5F /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A1B2C3D4E5F60718293A4B6B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1B2C3D4E5F60718293A4B6C /* en */,
+				A1B2C3D4E5F60718293A4B6D /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2B6416C8021E9B26E4E826C3 /* Release */ = {
@@ -280,12 +312,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = 5C2UYK6F45;
 				INFOPLIST_FILE = DialSplit/Resources/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.DialSplit;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -303,12 +337,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = 5C2UYK6F45;
 				INFOPLIST_FILE = DialSplit/Resources/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.DialSplit;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

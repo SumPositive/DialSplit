@@ -12,6 +12,10 @@
 
 import SwiftUI
 
+private func isEnglishUI() -> Bool {
+    Locale.preferredLanguages.first?.hasPrefix("en") == true
+}
+
 // MARK: - A区分（大富豪）の計算ステータス
 
 enum Split0Status {
@@ -149,9 +153,10 @@ final class SplitViewModel {
 
     init() {
         let d = UserDefaults.standard
+        let isEN = isEnglishUI()
 
         let rawObj = d.object(forKey: "sv_totalRaw")
-        _totalRaw = rawObj != nil ? d.integer(forKey: "sv_totalRaw") : 10_000
+        _totalRaw = rawObj != nil ? d.integer(forKey: "sv_totalRaw") : (isEN ? 100 : 10_000)
 
         let p0 = d.integer(forKey: "sv_persons0")
         _persons0 = p0 > 0 ? p0 : 1
@@ -162,11 +167,11 @@ final class SplitViewModel {
         _persons3 = d.integer(forKey: "sv_persons3")
 
         let s1 = d.integer(forKey: "sv_split1")
-        _split1 = s1 > 0 ? s1 : 2_500
+        _split1 = s1 > 0 ? s1 : (isEN ? 25 : 2_500)
         let s2 = d.integer(forKey: "sv_split2")
-        _split2 = s2 > 0 ? s2 : 1_000
+        _split2 = s2 > 0 ? s2 : (isEN ? 10 : 1_000)
         let s3 = d.integer(forKey: "sv_split3")
-        _split3 = s3 > 0 ? s3 : 1_000
+        _split3 = s3 > 0 ? s3 : (isEN ? 10 : 1_000)
 
         if let _ = d.object(forKey: "sv_dialUnit") {
             // 新形式: 実値で保存済み
@@ -177,7 +182,7 @@ final class SplitViewModel {
             let idx = d.integer(forKey: "sv_dialUnitIndex")
             _dialUnit = idx < oldUnits.count ? oldUnits[idx] : 1_000
         } else {
-            _dialUnit = 500
+            _dialUnit = isEnglishUI() ? 5 : 500
         }
     }
 

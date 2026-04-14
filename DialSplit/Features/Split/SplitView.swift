@@ -6,6 +6,25 @@
 import SwiftUI
 import AZDial
 
+private func isEnglishUI() -> Bool {
+    Locale.preferredLanguages.first?.hasPrefix("en") == true
+}
+
+private func localizedPeople(_ count: Int) -> String {
+    let format = NSLocalizedString("%lld人短", comment: "")
+    return String(format: format, locale: Locale.current, count)
+}
+
+private func localizedAmount(_ value: Int, placeholder: String = "---", spaced: Bool = false) -> String {
+    if value == 0 {
+        return isEnglishUI() ? (spaced ? "$ \(placeholder)" : "$\(placeholder)") : "¥ \(placeholder)"
+    }
+    if isEnglishUI() {
+        return spaced ? "$ \(value.formatted())" : "$\(value.formatted())"
+    }
+    return spaced ? "¥ \(value.formatted())" : "¥\(value.formatted())"
+}
+
 struct SplitView: View {
     @Environment(AppSettings.self) private var settings
     @State private var vm = SplitViewModel()
@@ -94,7 +113,7 @@ private struct HeaderBar: View {
 
     var body: some View {
         HStack {
-            Text("DialSplit")
+            Text("割勘")
                 .font(.title2.bold())
                 .foregroundStyle(.white)
                 .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
@@ -130,6 +149,10 @@ private struct TotalAmountPanel: View {
         cs == .dark ? .yellow.opacity(0.95) : Color(red: 0.50, green: 0.35, blue: 0.00)
     }
 
+    private var showsCentSuffix: Bool {
+        isEnglishUI() && totalRaw > 0
+    }
+
     var body: some View {
         BrassFrame {
             HStack(alignment: .center, spacing: 16) {
@@ -140,30 +163,36 @@ private struct TotalAmountPanel: View {
                         Text("合計")
                             .font(.title3.bold())
                             .foregroundStyle(.secondary)
-                        Text("\(totalPersons)人")
+                        Text(localizedPeople(totalPersons))
                             .font(.title3.bold().monospacedDigit())
                             .foregroundStyle(.secondary)
                     }
                     // 2行目: 大きな金額（タップでテンキー）
-                    Text(totalRaw == 0 ? "¥ ---" : "¥ \(totalRaw.formatted())")
-                        .font(.largeTitle.bold().monospacedDigit())
-                        .foregroundStyle(totalRaw == 0
-                            ? (cs == .dark ? .white.opacity(0.40) : Color(.tertiaryLabel))
-                            : amountColor)
-                        .shadow(color: .black.opacity(cs == .dark ? 0.6 : 0.1), radius: 2)
-                        .minimumScaleFactor(0.4)
-                        .lineLimit(1)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            numpadConfig = NumpadConfig(
-                                title: "合計金額",
-                                initialValue: totalRaw,
-                                maxValue: 999_900,
-                                minValue: 0,
-                                isAmount: true,
-                                onConfirm: { totalRaw = $0 }
-                            )
+                    HStack(alignment: .firstTextBaseline, spacing: 0) {
+                        Text(localizedAmount(totalRaw, spaced: true))
+                            .font(.largeTitle.bold().monospacedDigit())
+                        if showsCentSuffix {
+                            Text(".00")
+                                .font(.title3.bold().monospacedDigit())
                         }
+                    }
+                    .foregroundStyle(totalRaw == 0
+                        ? (cs == .dark ? .white.opacity(0.40) : Color(.tertiaryLabel))
+                        : amountColor)
+                    .shadow(color: .black.opacity(cs == .dark ? 0.6 : 0.1), radius: 2)
+                    .minimumScaleFactor(0.4)
+                    .lineLimit(1)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        numpadConfig = NumpadConfig(
+                            title: String(localized: "合計金額"),
+                            initialValue: totalRaw,
+                            maxValue: 999_900,
+                            minValue: 0,
+                            isAmount: true,
+                            onConfirm: { totalRaw = $0 }
+                        )
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -185,11 +214,21 @@ private struct TotalAmountPanel: View {
 
 private struct DialUnitSegment: View {
     @Binding var dialUnit: Int
-    private let units  = [1, 10, 100, 500, 1_000]
-    private let labels = ["¥1", "¥10", "¥100", "¥500", "¥1,000"]
+
+    private var units: [Int] {
+        isEnglishUI() ? [1, 5, 10, 50, 100] : [1, 10, 100, 500, 1_000]
+    }
+
+    private var labels: [String] {
+        isEnglishUI() ? ["$1", "$5", "$10", "$50", "$100"] : ["¥1", "¥10", "¥100", "¥500", "¥1,000"]
+    }
 
     private var selectedIndex: Int {
         units.firstIndex(of: dialUnit) ?? (units.count - 1)
+    }
+
+    private var defaultUnit: Int {
+        isEnglishUI() ? 5 : 500
     }
 
     var body: some View {
@@ -207,6 +246,11 @@ private struct DialUnitSegment: View {
                 }
             }
             .pickerStyle(.segmented)
+        }
+        .onAppear {
+            if !units.contains(dialUnit), let fallback = units.first(where: { $0 == defaultUnit }) ?? units.last {
+                dialUnit = fallback
+            }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
@@ -251,4 +295,3 @@ private struct DialUnitSegment: View {
         .shadow(color: .black.opacity(0.12), radius:  3, x: 0, y: 1)
     }
 }
-

@@ -23,6 +23,26 @@
 import SwiftUI
 import AZDial
 
+private func isEnglishUI() -> Bool {
+    Locale.preferredLanguages.first?.hasPrefix("en") == true
+}
+
+private func localizedPeopleCompact(_ count: Int) -> String {
+    let format = NSLocalizedString("%lld人短", comment: "")
+    return String(format: format, locale: Locale.current, count)
+}
+
+private func localizedNamedTitle(_ formatKey: String, _ name: String) -> String {
+    let format = NSLocalizedString(formatKey, comment: "")
+    return String(format: format, locale: Locale.current, name)
+}
+
+private func localizedAmount(_ value: Int, placeholder: String = "---") -> String {
+    if value == 0 { return placeholder }
+    if isEnglishUI() { return "$\(value.formatted())" }
+    return "¥\(value.formatted())"
+}
+
 // MARK: - レイアウト定数
 
 private let PERSONS_COL_W: CGFloat = 115   // 人数列幅（×1.2 拡大）
@@ -128,7 +148,7 @@ struct Panel0View: View {
     @ViewBuilder private var infoRow: some View {
         HStack(alignment: .firstTextBaseline, spacing: H_GAP) {
             // 人数（左固定）— タップでテンキー
-            Text("\(persons0)人")
+            Text(localizedPeopleCompact(persons0))
                 .font(.title.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
@@ -136,7 +156,7 @@ struct Panel0View: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     numpadConfig = NumpadConfig(
-                        title: "人数（\(name)）",
+                        title: localizedNamedTitle("人数（%@）", name),
                         initialValue: persons0,
                         maxValue: 99,
                         minValue: 1,
@@ -156,32 +176,38 @@ struct Panel0View: View {
             Spacer(minLength: 4)
 
             // 金額（右端固定）— 端数切り上げラベルを上に overlay
-            Text(totalRaw == 0 ? "---" : "¥\(split0.formatted())")
-                .font(.title.bold().monospacedDigit())
-                .foregroundStyle(totalRaw == 0 ? colors.secondary : amountColor)
-                .lineLimit(1)
-                .fixedSize()
-                .overlay(alignment: .bottomTrailing) {
-                    if status == .rounded {
-                        Text("端数切り上げ")
-                            .font(.caption2.bold())
-                            .foregroundStyle(amountColor)
-                            .fixedSize()
-                            .offset(y: -30)
-                    }
+            HStack(alignment: .firstTextBaseline, spacing: 0) {
+                Text(localizedAmount(totalRaw == 0 ? 0 : split0))
+                    .font(.title.bold().monospacedDigit())
+                if isEnglishUI() && totalRaw > 0 {
+                    Text(".00")
+                        .font(.caption.bold().monospacedDigit())
                 }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    guard canEditA else { return }
-                    numpadConfig = NumpadConfig(
-                        title: "金額（\(name)）",
-                        initialValue: split0,
-                        maxValue: 999_900,
-                        minValue: 0,
-                        isAmount: true,
-                        onConfirm: { split0 = $0 }
-                    )
+            }
+            .foregroundStyle(totalRaw == 0 ? colors.secondary : amountColor)
+            .lineLimit(1)
+            .fixedSize()
+            .overlay(alignment: .bottomTrailing) {
+                if status == .rounded {
+                    Text("端数切り上げ")
+                        .font(.caption2.bold())
+                        .foregroundStyle(amountColor)
+                        .fixedSize()
+                        .offset(y: -30)
                 }
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                guard canEditA else { return }
+                numpadConfig = NumpadConfig(
+                    title: localizedNamedTitle("金額（%@）", name),
+                    initialValue: split0,
+                    maxValue: 999_900,
+                    minValue: 0,
+                    isAmount: true,
+                    onConfirm: { split0 = $0 }
+                )
+            }
 
             Spacer(minLength: 16)
         }
@@ -243,7 +269,7 @@ struct PanelSubView: View {
     @ViewBuilder private var infoRow: some View {
         HStack(alignment: .firstTextBaseline, spacing: H_GAP) {
             // 人数（左固定）— タップでテンキー
-            Text("\(persons)人")
+            Text(localizedPeopleCompact(persons))
                 .font(.title.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
@@ -251,7 +277,7 @@ struct PanelSubView: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     numpadConfig = NumpadConfig(
-                        title: "人数（\(name)）",
+                        title: localizedNamedTitle("人数（%@）", name),
                         initialValue: persons,
                         maxValue: 99,
                         minValue: 0,
@@ -271,23 +297,29 @@ struct PanelSubView: View {
             Spacer(minLength: 4)
 
             // 金額（右端に固定）— 人数>0 のときタップでテンキー
-            Text(persons == 0 ? "---" : "¥\(split.formatted())")
-                .font(.title.bold().monospacedDigit())
-                .foregroundStyle(persons == 0 ? colors.secondary : colors.accent)
-                .lineLimit(1)
-                .fixedSize()
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    guard persons > 0 else { return }
-                    numpadConfig = NumpadConfig(
-                        title: "金額（\(name)）",
-                        initialValue: split,
-                        maxValue: 999_900,
-                        minValue: 0,
-                        isAmount: true,
-                        onConfirm: { split = $0 }
-                    )
+            HStack(alignment: .firstTextBaseline, spacing: 0) {
+                Text(persons == 0 ? "---" : localizedAmount(split))
+                    .font(.title.bold().monospacedDigit())
+                if isEnglishUI() && persons > 0 {
+                    Text(".00")
+                        .font(.caption.bold().monospacedDigit())
                 }
+            }
+            .foregroundStyle(persons == 0 ? colors.secondary : colors.accent)
+            .lineLimit(1)
+            .fixedSize()
+            .contentShape(Rectangle())
+            .onTapGesture {
+                guard persons > 0 else { return }
+                numpadConfig = NumpadConfig(
+                    title: localizedNamedTitle("金額（%@）", name),
+                    initialValue: split,
+                    maxValue: 999_900,
+                    minValue: 0,
+                    isAmount: true,
+                    onConfirm: { split = $0 }
+                )
+            }
 
             Spacer(minLength: 16)
         }
