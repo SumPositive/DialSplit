@@ -35,7 +35,7 @@ final class SplitViewModel {
     @ObservationIgnored private var _split1:        Int = 1_000
     @ObservationIgnored private var _split2:        Int = 1_000
     @ObservationIgnored private var _split3:        Int = 1_000
-    @ObservationIgnored private var _dialUnitIndex: Int = 2
+    @ObservationIgnored private var _dialUnit: Int = 1_000
 
     // MARK: - Observable properties（クランプ・スナップをセッタで完結）
 
@@ -86,26 +86,15 @@ final class SplitViewModel {
         set { withMutation(keyPath: \.split3) { _split3 = snap(newValue) }; saveState() }
     }
 
-    /// ダイアル単位インデックス: 0=¥100, 1=¥500, 2=¥1,000
-    var dialUnitIndex: Int {
-        get { access(keyPath: \.dialUnitIndex); return _dialUnitIndex }
-        set {
-            withMutation(keyPath: \.dialUnitIndex) { _dialUnitIndex = newValue }
-            let u = dialUnit
-            withMutation(keyPath: \.split1) { _split1 = (_split1 / u) * u }
-            withMutation(keyPath: \.split2) { _split2 = (_split2 / u) * u }
-            withMutation(keyPath: \.split3) { _split3 = (_split3 / u) * u }
-            saveState()
-        }
-    }
-
-    // MARK: - Computed
-
+    /// 金額ダイアルステップ（実値で保持: 1/10/100/500/1000）
     var dialUnit: Int {
-        switch _dialUnitIndex {
-        case 0:  return 100
-        case 1:  return 500
-        default: return 1_000
+        get { access(keyPath: \.dialUnit); return _dialUnit }
+        set {
+            withMutation(keyPath: \.dialUnit) { _dialUnit = newValue }
+            withMutation(keyPath: \.split1) { _split1 = (_split1 / newValue) * newValue }
+            withMutation(keyPath: \.split2) { _split2 = (_split2 / newValue) * newValue }
+            withMutation(keyPath: \.split3) { _split3 = (_split3 / newValue) * newValue }
+            saveState()
         }
     }
 
@@ -129,28 +118,67 @@ final class SplitViewModel {
 
     var totalPersons: Int { persons0 + persons1 + persons2 + persons3 }
 
+    /// B/C/D 合計 > 0 のとき A は編集可（再配分できる相手がいる）
+    var canEditA: Bool {
+        persons1 * split1 + persons2 * split2 + persons3 * split3 > 0
+    }
+
+    /// A の1人あたり目標額をセットし、B/C/D を ¥1 単位で比例縮小。端数は A に戻る。
+    func adjustA(_ newSplit0: Int) {
+        let bcdTotal = persons1 * split1 + persons2 * split2 + persons3 * split3
+        guard bcdTotal > 0 else { return }
+
+        let remaining = totalRaw - persons0 * newSplit0
+
+        if remaining <= 0 {
+            // A が合計以上を占めるなら B/C/D をゼロに
+            withMutation(keyPath: \.split1) { _split1 = 0 }
+            withMutation(keyPath: \.split2) { _split2 = 0 }
+            withMutation(keyPath: \.split3) { _split3 = 0 }
+        } else {
+            // ¥1 単位で比例縮小（dialUnit への丸めは行わない）
+            let scale = Double(remaining) / Double(bcdTotal)
+            withMutation(keyPath: \.split1) { _split1 = max(0, Int((Double(_split1) * scale).rounded())) }
+            withMutation(keyPath: \.split2) { _split2 = max(0, Int((Double(_split2) * scale).rounded())) }
+            withMutation(keyPath: \.split3) { _split3 = max(0, Int((Double(_split3) * scale).rounded())) }
+        }
+        saveState()
+    }
+
     // MARK: - Init & Persistence
 
     init() {
         let d = UserDefaults.standard
 
-        _totalRaw = d.integer(forKey: "sv_totalRaw")
+        let rawObj = d.object(forKey: "sv_totalRaw")
+        _totalRaw = rawObj != nil ? d.integer(forKey: "sv_totalRaw") : 10_000
 
         let p0 = d.integer(forKey: "sv_persons0")
         _persons0 = p0 > 0 ? p0 : 1
-        _persons1 = d.integer(forKey: "sv_persons1")
+
+        let p1obj = d.object(forKey: "sv_persons1")
+        _persons1 = p1obj != nil ? d.integer(forKey: "sv_persons1") : 2
         _persons2 = d.integer(forKey: "sv_persons2")
         _persons3 = d.integer(forKey: "sv_persons3")
 
         let s1 = d.integer(forKey: "sv_split1")
-        _split1 = s1 > 0 ? s1 : 1_000
+        _split1 = s1 > 0 ? s1 : 2_500
         let s2 = d.integer(forKey: "sv_split2")
         _split2 = s2 > 0 ? s2 : 1_000
         let s3 = d.integer(forKey: "sv_split3")
         _split3 = s3 > 0 ? s3 : 1_000
 
-        let duiObj = d.object(forKey: "sv_dialUnitIndex")
-        _dialUnitIndex = duiObj != nil ? d.integer(forKey: "sv_dialUnitIndex") : 2
+        if let _ = d.object(forKey: "sv_dialUnit") {
+            // 新形式: 実値で保存済み
+            _dialUnit = d.integer(forKey: "sv_dialUnit")
+        } else if let _ = d.object(forKey: "sv_dialUnitIndex") {
+            // 旧形式からの移行: index → 実値 (旧: 0=100, 1=500, 2=1000)
+            let oldUnits = [100, 500, 1_000]
+            let idx = d.integer(forKey: "sv_dialUnitIndex")
+            _dialUnit = idx < oldUnits.count ? oldUnits[idx] : 1_000
+        } else {
+            _dialUnit = 500
+        }
     }
 
     private func saveState() {
@@ -163,7 +191,7 @@ final class SplitViewModel {
         d.set(_split1,        forKey: "sv_split1")
         d.set(_split2,        forKey: "sv_split2")
         d.set(_split3,        forKey: "sv_split3")
-        d.set(_dialUnitIndex, forKey: "sv_dialUnitIndex")
+        d.set(_dialUnit,      forKey: "sv_dialUnit")
     }
 
     private func snap(_ value: Int) -> Int {

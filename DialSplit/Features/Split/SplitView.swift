@@ -23,22 +23,25 @@ struct SplitView: View {
                 ScrollView {
                     VStack(spacing: 10) {
                         // 合計金額パネル
-                        TotalAmountPanel(totalRaw: $vm.totalRaw)
+                        TotalAmountPanel(totalRaw: $vm.totalRaw, totalPersons: vm.totalPersons, dialUnit: vm.dialUnit)
                             .padding(.horizontal, 16)
                             .padding(.top, 14)
 
                         LeatherDivider()
                             .padding(.horizontal, 24)
 
-                        // A（大富豪）パネル — 自動計算
+                        // A（大富豪）パネル — B/C/D 合計 > 0 のとき金額編集可
                         Panel0View(
                             name:     settings.name(for: 0),
                             persons0: $vm.persons0,
-                            split0:   vm.split0,
+                            split0:   Binding(get: { vm.split0 }, set: { vm.adjustA($0) }),
+                            canEditA: vm.canEditA,
+                            dialUnit: vm.dialUnit,
                             status:   vm.split0Status,
                             totalRaw: vm.totalRaw
                         )
                         .padding(.horizontal, 16)
+                        .padding(.bottom, 20)
 
                         // B（富豪）パネル
                         PanelSubView(
@@ -68,17 +71,11 @@ struct SplitView: View {
                         .padding(.horizontal, 16)
 
                         // ダイアル単位セグメント
-                        DialUnitSegment(selectedIndex: $vm.dialUnitIndex)
-                            .padding(.horizontal, 24)
+                        DialUnitSegment(dialUnit: $vm.dialUnit)
+                            .padding(.horizontal, 16)
                             .padding(.top, 6)
 
-                        // サマリー
-                        SummaryRow(
-                            totalPersons: vm.totalPersons,
-                            totalRaw:     vm.totalRaw
-                        )
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 12)
+                        Spacer().frame(height: 4)
                     }
                 }
             }
@@ -123,6 +120,8 @@ private struct HeaderBar: View {
 
 private struct TotalAmountPanel: View {
     @Binding var totalRaw: Int
+    let totalPersons: Int
+    let dialUnit: Int
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
     @State private var numpadConfig: NumpadConfig?
@@ -133,14 +132,24 @@ private struct TotalAmountPanel: View {
 
     var body: some View {
         BrassFrame {
-            HStack(spacing: 16) {
-                VStack(spacing: 4) {
-                    Text("合計金額")
-                        .font(.caption.bold())
-                        .foregroundStyle(cs == .dark ? .white.opacity(0.70) : Color(.secondaryLabel))
+            HStack(alignment: .center, spacing: 16) {
+                // 左: タイトル行 + 金額行
+                VStack(alignment: .leading, spacing: 4) {
+                    // 1行目: 「合計」＋人数
+                    HStack(spacing: 6) {
+                        Text("合計")
+                            .font(.caption.bold())
+                            .foregroundStyle(.secondary)
+                        Text("\(totalPersons)人")
+                            .font(.caption.bold().monospacedDigit())
+                            .foregroundStyle(.secondary)
+                    }
+                    // 2行目: 大きな金額（タップでテンキー）
                     Text(totalRaw == 0 ? "¥ ---" : "¥ \(totalRaw.formatted())")
                         .font(.largeTitle.bold().monospacedDigit())
-                        .foregroundStyle(totalRaw == 0 ? (cs == .dark ? .white.opacity(0.40) : Color(.tertiaryLabel)) : amountColor)
+                        .foregroundStyle(totalRaw == 0
+                            ? (cs == .dark ? .white.opacity(0.40) : Color(.tertiaryLabel))
+                            : amountColor)
                         .shadow(color: .black.opacity(cs == .dark ? 0.6 : 0.1), radius: 2)
                         .minimumScaleFactor(0.4)
                         .lineLimit(1)
@@ -151,18 +160,19 @@ private struct TotalAmountPanel: View {
                                 initialValue: totalRaw,
                                 maxValue: 999_900,
                                 minValue: 0,
-                                step: 100,
+                                step: dialUnit,
                                 isAmount: true,
                                 onConfirm: { totalRaw = $0 }
                             )
                         }
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
+                // 右: ダイアル（縦センター）
                 AZDialView(
                     value: $totalRaw,
                     min: 0, max: 999_900,
-                    step: 100, stepperStep: 0,
+                    step: dialUnit, stepperStep: 0,
                     style: settings.dialStyle, dialWidth: 180
                 )
             }
@@ -175,40 +185,71 @@ private struct TotalAmountPanel: View {
 // MARK: - ダイアル単位セグメント
 
 private struct DialUnitSegment: View {
-    @Binding var selectedIndex: Int
-    private let labels = ["¥100", "¥500", "¥1,000"]
+    @Binding var dialUnit: Int
+    private let units  = [1, 10, 100, 500, 1_000]
+    private let labels = ["¥1", "¥10", "¥100", "¥500", "¥1,000"]
+
+    private var selectedIndex: Int {
+        units.firstIndex(of: dialUnit) ?? (units.count - 1)
+    }
 
     var body: some View {
-        VStack(spacing: 5) {
-            Text("金額ダイアル 単位")
-                .font(.caption2)
-                .foregroundStyle(.white.opacity(0.45))
+        VStack(spacing: 8) {
+            Text("金額ダイアルステップ")
+                .font(.caption.bold())
+                .foregroundStyle(.primary)
 
-            Picker("単位", selection: $selectedIndex) {
+            Picker("ステップ", selection: Binding(
+                get: { selectedIndex },
+                set: { dialUnit = units[$0] }
+            )) {
                 ForEach(0..<labels.count, id: \.self) { i in
                     Text(labels[i]).tag(i)
                 }
             }
             .pickerStyle(.segmented)
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(
+            ZStack {
+                // ① ブラー層（背景を透かす）
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.ultraThinMaterial)
+
+                // ② 上部スペキュラ（光が当たるハイライト）
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                .white.opacity(0.30),
+                                .white.opacity(0.06),
+                                .clear,
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+
+                // ③ ガラス縁（上が明るく・下が暗い）
+                RoundedRectangle(cornerRadius: 16)
+                    .strokeBorder(
+                        LinearGradient(
+                            colors: [
+                                .white.opacity(0.75),
+                                .white.opacity(0.20),
+                                .black.opacity(0.15),
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ),
+                        lineWidth: 1
+                    )
+            }
+        )
+        // ④ 手前に浮かせるシャドウ（大＋小の2層）
+        .shadow(color: .black.opacity(0.28), radius: 14, x: 0, y: 7)
+        .shadow(color: .black.opacity(0.12), radius:  3, x: 0, y: 1)
     }
 }
 
-// MARK: - サマリー行
-
-private struct SummaryRow: View {
-    let totalPersons: Int
-    let totalRaw: Int
-
-    var body: some View {
-        HStack {
-            Text("合計 \(totalPersons)人")
-                .font(.caption.bold())
-                .foregroundStyle(.white.opacity(0.6))
-            Spacer()
-            Text(totalRaw == 0 ? "---" : "¥ \(totalRaw.formatted())")
-                .font(.callout.bold().monospacedDigit())
-                .foregroundStyle(.white.opacity(0.7))
-        }
-    }
-}

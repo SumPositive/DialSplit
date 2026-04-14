@@ -44,7 +44,7 @@ final class AppSettings {
     }
 
     init() {
-        let defaults = NamePreset.all[0].names   // ["A","B","C","D"]
+        let defaults = NamePreset.all[2].names   // ["大富豪","富豪","平民","貧民"]
         var names = UserDefaults.standard.stringArray(forKey: "panelNames") ?? defaults
         // 旧バージョンからの移行: 足りない分を補完
         while names.count < 4 { names.append(defaults[names.count]) }

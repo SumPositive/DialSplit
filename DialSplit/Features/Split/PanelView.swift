@@ -57,7 +57,9 @@ private struct PanelColors {
 struct Panel0View: View {
     let name: String
     @Binding var persons0: Int
-    let split0: Int
+    @Binding var split0: Int
+    let canEditA: Bool
+    let dialUnit: Int
     let status: Split0Status
     let totalRaw: Int
 
@@ -101,16 +103,19 @@ struct Panel0View: View {
                     )
                     .frame(width: PERSONS_COL_W)
 
-                    // split0 を視覚的に表示するだけ（操作不可）
+                    // canEditA のときインタラクティブ、そうでなければ表示専用
                     AZDialView(
-                        value: Binding(get: { max(0, split0) }, set: { _ in }),
+                        value: Binding(
+                            get: { max(0, split0) },
+                            set: { if canEditA { split0 = $0 } }
+                        ),
                         min: 0, max: 999_900,
-                        step: 100, stepperStep: 0,
+                        step: dialUnit, stepperStep: 0,
                         style: settings.dialStyle,
                         dialWidth: 200
                     )
                     .frame(maxWidth: .infinity)
-                    .allowsHitTesting(false)
+                    .allowsHitTesting(canEditA)
                 }
                 .padding(.horizontal, H_PAD)
                 .padding(.vertical, 8)
@@ -126,7 +131,7 @@ struct Panel0View: View {
                 .font(.title3.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
-                .frame(width: PERSONS_COL_W, alignment: .leading)
+                .frame(width: PERSONS_COL_W/3*2, alignment: .trailing)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     numpadConfig = NumpadConfig(
@@ -150,12 +155,27 @@ struct Panel0View: View {
             // 柔軟スペーサー（名称と金額の間）
             Spacer(minLength: 4)
 
-            // 金額（右端に固定・自動計算のためタップ不可）
+            // 金額（canEditA のときタップでテンキー）
             Text(totalRaw == 0 ? "---" : "¥\(split0.formatted())")
                 .font(.title2.bold().monospacedDigit())
                 .foregroundStyle(totalRaw == 0 ? colors.secondary : amountColor)
                 .lineLimit(1)
                 .fixedSize()
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    guard canEditA else { return }
+                    numpadConfig = NumpadConfig(
+                        title: "金額（\(name)）",
+                        initialValue: split0,
+                        maxValue: 999_900,
+                        minValue: 0,
+                        step: dialUnit,
+                        isAmount: true,
+                        onConfirm: { split0 = $0 }
+                    )
+                }
+
+            Spacer(minLength: 16)
         }
     }
 }
@@ -218,7 +238,7 @@ struct PanelSubView: View {
                 .font(.title3.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
-                .frame(width: PERSONS_COL_W, alignment: .leading)
+                .frame(width: PERSONS_COL_W/3*2, alignment: .trailing)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     numpadConfig = NumpadConfig(
@@ -261,6 +281,8 @@ struct PanelSubView: View {
                         onConfirm: { split = $0 }
                     )
                 }
+
+            Spacer(minLength: 16)
         }
     }
 }
