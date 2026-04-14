@@ -84,6 +84,20 @@ struct NumpadView: View {
         return config.isAmount ? localizedAmountText(n) : "\(n)"
     }
 
+    private var displayAmountMainText: String {
+        let n = currentInt
+        if isEnglishUI() {
+            return "$ \(n.formatted())"
+        }
+        return "¥ \(n.formatted())"
+    }
+
+    private var displayColorStyle: AnyShapeStyle {
+        if isOverMax { return AnyShapeStyle(.red) }
+        if isPlaceholder { return AnyShapeStyle(.tertiary) }
+        return AnyShapeStyle(.primary)
+    }
+
     private var canConfirm: Bool {
         currentInt >= config.minValue && !isOverMax
     }
@@ -110,18 +124,29 @@ struct NumpadView: View {
             .padding(.bottom, 4)
 
             // 入力値表示（プレースホルダー中は薄く表示）
-            Text(displayText)
-                .font(.system(size: 42, weight: .bold, design: .monospaced))
-                .foregroundStyle(
-                    isOverMax     ? AnyShapeStyle(.red) :
-                    isPlaceholder ? AnyShapeStyle(.tertiary) :
-                                    AnyShapeStyle(.primary)
-                )
-                .minimumScaleFactor(0.5)
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 16)
+            Group {
+                if config.isAmount && isEnglishUI() {
+                    HStack(alignment: .firstTextBaseline, spacing: 0) {
+                        Text(displayAmountMainText)
+                            .font(.system(size: 42, weight: .bold, design: .monospaced))
+                        Text(".00")
+                            .font(.system(size: 24, weight: .bold, design: .monospaced))
+                    }
+                    .foregroundStyle(displayColorStyle)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                } else {
+                    Text(displayText)
+                        .font(.system(size: 42, weight: .bold, design: .monospaced))
+                        .foregroundStyle(displayColorStyle)
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+            }
+            .padding(.horizontal, 24)
+            .padding(.bottom, 16)
 
             Divider()
 
