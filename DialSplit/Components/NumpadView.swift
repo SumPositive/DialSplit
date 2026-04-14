@@ -36,7 +36,6 @@ struct NumpadConfig: Identifiable {
     let initialValue: Int
     let maxValue: Int
     let minValue: Int
-    let step: Int        // 1 = そのまま確定、>1 = stepの倍数に丸める
     let isAmount: Bool   // true → "¥" 表示
     let onConfirm: (Int) -> Void
 }
@@ -240,10 +239,7 @@ struct NumpadView: View {
 
     private func confirm() {
         guard canConfirm else { return }
-        var n = max(config.minValue, min(config.maxValue, currentInt))
-        if config.step > 1 {
-            n = (n / config.step) * config.step   // step の倍数に切り捨て
-        }
+        let n = max(config.minValue, min(config.maxValue, currentInt))
         config.onConfirm(n)
         dismiss()
     }

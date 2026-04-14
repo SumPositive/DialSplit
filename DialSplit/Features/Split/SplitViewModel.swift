@@ -71,19 +71,19 @@ final class SplitViewModel {
     /// B（富豪）1人あたり金額
     var split1: Int {
         get { access(keyPath: \.split1); return _split1 }
-        set { withMutation(keyPath: \.split1) { _split1 = snap(newValue) }; saveState() }
+        set { withMutation(keyPath: \.split1) { _split1 = max(0, newValue) }; saveState() }
     }
 
     /// C（平民）1人あたり金額
     var split2: Int {
         get { access(keyPath: \.split2); return _split2 }
-        set { withMutation(keyPath: \.split2) { _split2 = snap(newValue) }; saveState() }
+        set { withMutation(keyPath: \.split2) { _split2 = max(0, newValue) }; saveState() }
     }
 
     /// D（貧民）1人あたり金額
     var split3: Int {
         get { access(keyPath: \.split3); return _split3 }
-        set { withMutation(keyPath: \.split3) { _split3 = snap(newValue) }; saveState() }
+        set { withMutation(keyPath: \.split3) { _split3 = max(0, newValue) }; saveState() }
     }
 
     /// 金額ダイアルステップ（実値で保持: 1/10/100/500/1000）
@@ -194,9 +194,4 @@ final class SplitViewModel {
         d.set(_dialUnit,      forKey: "sv_dialUnit")
     }
 
-    private func snap(_ value: Int) -> Int {
-        let u = dialUnit
-        guard u > 0 else { return value }
-        return (value / u) * u
-    }
 }

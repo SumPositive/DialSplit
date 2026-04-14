@@ -88,7 +88,8 @@ struct Panel0View: View {
                 // 情報行
                 infoRow
                     .padding(.horizontal, H_PAD)
-                    .padding(.vertical, 9)
+                    .padding(.top, 16)
+                    .padding(.bottom, 4)
 
                 LeatherDivider()
 
@@ -128,7 +129,7 @@ struct Panel0View: View {
         HStack(alignment: .firstTextBaseline, spacing: H_GAP) {
             // 人数（左固定）— タップでテンキー
             Text("\(persons0)人")
-                .font(.title3.bold().monospacedDigit())
+                .font(.title.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
                 .frame(width: PERSONS_COL_W/3*2, alignment: .trailing)
@@ -139,28 +140,36 @@ struct Panel0View: View {
                         initialValue: persons0,
                         maxValue: 99,
                         minValue: 1,
-                        step: 1,
                         isAmount: false,
                         onConfirm: { persons0 = $0 }
                     )
                 }
 
-            // 名称（固定幅 → 位置が変わらない）
+            // 名称（固定幅）
             Text(name)
                 .font(.subheadline.bold())
                 .foregroundStyle(colors.primary)
                 .lineLimit(1)
                 .frame(width: NAME_W, alignment: .center)
 
-            // 柔軟スペーサー（名称と金額の間）
+            // 柔軟スペーサー
             Spacer(minLength: 4)
 
-            // 金額（canEditA のときタップでテンキー）
+            // 金額（右端固定）— 端数切り上げラベルを上に overlay
             Text(totalRaw == 0 ? "---" : "¥\(split0.formatted())")
-                .font(.title2.bold().monospacedDigit())
+                .font(.title.bold().monospacedDigit())
                 .foregroundStyle(totalRaw == 0 ? colors.secondary : amountColor)
                 .lineLimit(1)
                 .fixedSize()
+                .overlay(alignment: .bottomTrailing) {
+                    if status == .rounded {
+                        Text("端数切り上げ")
+                            .font(.caption2.bold())
+                            .foregroundStyle(amountColor)
+                            .fixedSize()
+                            .offset(y: -30)
+                    }
+                }
                 .contentShape(Rectangle())
                 .onTapGesture {
                     guard canEditA else { return }
@@ -169,7 +178,6 @@ struct Panel0View: View {
                         initialValue: split0,
                         maxValue: 999_900,
                         minValue: 0,
-                        step: dialUnit,
                         isAmount: true,
                         onConfirm: { split0 = $0 }
                     )
@@ -200,7 +208,8 @@ struct PanelSubView: View {
                 // 情報行
                 infoRow
                     .padding(.horizontal, H_PAD)
-                    .padding(.vertical, 9)
+                    .padding(.top, 16)
+                    .padding(.bottom, 4)
 
                 LeatherDivider()
 
@@ -235,7 +244,7 @@ struct PanelSubView: View {
         HStack(alignment: .firstTextBaseline, spacing: H_GAP) {
             // 人数（左固定）— タップでテンキー
             Text("\(persons)人")
-                .font(.title3.bold().monospacedDigit())
+                .font(.title.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
                 .frame(width: PERSONS_COL_W/3*2, alignment: .trailing)
@@ -246,7 +255,6 @@ struct PanelSubView: View {
                         initialValue: persons,
                         maxValue: 99,
                         minValue: 0,
-                        step: 1,
                         isAmount: false,
                         onConfirm: { persons = $0 }
                     )
@@ -264,7 +272,7 @@ struct PanelSubView: View {
 
             // 金額（右端に固定）— 人数>0 のときタップでテンキー
             Text(persons == 0 ? "---" : "¥\(split.formatted())")
-                .font(.title2.bold().monospacedDigit())
+                .font(.title.bold().monospacedDigit())
                 .foregroundStyle(persons == 0 ? colors.secondary : colors.accent)
                 .lineLimit(1)
                 .fixedSize()
@@ -276,7 +284,6 @@ struct PanelSubView: View {
                         initialValue: split,
                         maxValue: 999_900,
                         minValue: 0,
-                        step: dialUnit,
                         isAmount: true,
                         onConfirm: { split = $0 }
                     )

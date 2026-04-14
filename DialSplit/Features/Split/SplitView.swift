@@ -138,10 +138,10 @@ private struct TotalAmountPanel: View {
                     // 1行目: 「合計」＋人数
                     HStack(spacing: 6) {
                         Text("合計")
-                            .font(.caption.bold())
+                            .font(.title3.bold())
                             .foregroundStyle(.secondary)
                         Text("\(totalPersons)人")
-                            .font(.caption.bold().monospacedDigit())
+                            .font(.title3.bold().monospacedDigit())
                             .foregroundStyle(.secondary)
                     }
                     // 2行目: 大きな金額（タップでテンキー）
@@ -160,7 +160,6 @@ private struct TotalAmountPanel: View {
                                 initialValue: totalRaw,
                                 maxValue: 999_900,
                                 minValue: 0,
-                                step: dialUnit,
                                 isAmount: true,
                                 onConfirm: { totalRaw = $0 }
                             )
