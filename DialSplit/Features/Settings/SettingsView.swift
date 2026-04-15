@@ -5,10 +5,17 @@
 
 import SwiftUI
 import AZDial
+import StoreKit
 
 struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
+    @Environment(\.requestReview) private var requestReview
+    @State private var showAbout = false
+    @State private var showSupportPrompt = false
+
+    private let aboutURLJa = URL(string: "https://docs.azukid.com/jp/sumpo/DialSplit/dialsplit.html")
 
     private var versionString: String {
         let v = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
@@ -93,6 +100,16 @@ struct SettingsView: View {
                     .pickerStyle(.segmented)
                 }
 
+                // MARK: サポート
+                Section("サポート") {
+                    Button(String(localized: "このアプリについて")) {
+                        showAbout = true
+                    }
+                    Button(String(localized: "開発者を応援")) {
+                        showSupportPrompt = true
+                    }
+                }
+
                 // MARK: バージョン（最下部）
                 Section {
                     HStack {
@@ -110,6 +127,24 @@ struct SettingsView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("完了") { dismiss() }
                 }
+            }
+            .alert(String(localized: "このアプリについて"), isPresented: $showAbout) {
+                Button(String(localized: "開く")) {
+                    if let url = aboutURLJa {
+                        openURL(url)
+                    }
+                }
+                Button(String(localized: "閉じる"), role: .cancel) {}
+            } message: {
+                Text("DialSplit v\(versionString)")
+            }
+            .alert(String(localized: "開発者を応援"), isPresented: $showSupportPrompt) {
+                Button(String(localized: "レビューを書く")) {
+                    requestReview()
+                }
+                Button(String(localized: "閉じる"), role: .cancel) {}
+            } message: {
+                Text(String(localized: "レビューお願い文言"))
             }
         }
     }
