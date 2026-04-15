@@ -44,15 +44,21 @@ struct SplitView: View {
 
                 GeometryReader { proxy in
                     let cardWidth = min(max(0, proxy.size.width - cardSideMargin * 2), maxContentWidth)
+                    let totalPanelWidth = min(cardWidth + 20, max(0, proxy.size.width - 4))
+                    let panelAWidth = min(cardWidth + 6, max(0, proxy.size.width - 12))
                     ScrollView {
-                        VStack(spacing: 10) {
+                        VStack(spacing: 8) {
                             // 合計金額パネル
-                            TotalAmountPanel(totalRaw: $vm.totalRaw, totalPersons: vm.totalPersons, dialUnit: vm.dialUnit)
-                                .frame(width: cardWidth)
-                                .padding(.top, 14)
-
-                            LeatherDivider()
-                                .frame(width: cardWidth)
+                            TotalAmountPanel(
+                                totalRaw: $vm.totalRaw,
+                                totalPersons: vm.totalPersons,
+                                dialUnit: vm.dialUnit,
+                                panelWidth: cardWidth
+                            )
+                            .frame(width: totalPanelWidth)
+                            .padding(.top, 14)
+                            .shadow(color: .black.opacity(0.40), radius: 24, x: 0, y: 14)
+                            .shadow(color: .black.opacity(0.18), radius: 7, x: 0, y: 3)
 
                             // A（大富豪）パネル — 金額は自動計算の表示専用
                             Panel0View(
@@ -63,8 +69,9 @@ struct SplitView: View {
                                 totalRaw: vm.totalRaw,
                                 panelWidth: cardWidth
                             )
-                            .frame(width: cardWidth)
-                            .padding(.bottom, 20)
+                            .frame(width: panelAWidth)
+                            .shadow(color: .black.opacity(0.24), radius: 14, x: 0, y: 8)
+                            .shadow(color: .black.opacity(0.10), radius: 4, x: 0, y: 2)
 
                             // B（富豪）パネル
                             PanelSubView(
@@ -170,6 +177,7 @@ private struct TotalAmountPanel: View {
     @Binding var totalRaw: Int
     let totalPersons: Int
     let dialUnit: Int
+    let panelWidth: CGFloat
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
     @State private var numpadConfig: NumpadConfig?
@@ -186,21 +194,56 @@ private struct TotalAmountPanel: View {
         isEnglishUI() && totalRaw > 0
     }
 
+    private let hPad: CGFloat = 16
+    private let hGap: CGFloat = 8
+
+    private var innerWidth: CGFloat {
+        max(220, panelWidth - hPad * 2)
+    }
+
+    private var personsDialW: CGFloat {
+        min(115, max(84, innerWidth * 0.32))
+    }
+
+    private var personsTextW: CGFloat {
+        min(76, max(52, personsDialW * 0.66))
+    }
+
+    private var nameW: CGFloat {
+        min(110, max(62, innerWidth * 0.26))
+    }
+
+    private var amountTextW: CGFloat {
+        max(88, innerWidth - personsTextW - nameW - (hGap * 3 + 4))
+    }
+
+    private var totalDialW: CGFloat {
+        let target = innerWidth * (2.0 / 3.0)
+        let maxFittable = max(96, innerWidth - personsDialW)
+        return min(max(96, target), maxFittable)
+    }
+
     var body: some View {
         BrassFrame {
-            HStack(alignment: .center, spacing: 16) {
-                // 左: タイトル行 + 金額行
-                VStack(alignment: .leading, spacing: 4) {
-                    // 1行目: 「合計」＋人数
-                    HStack(spacing: 6) {
-                        Text("合計")
-                            .font(.title3.bold())
-                            .foregroundStyle(.secondary)
-                        Text(localizedPeople(totalPersons))
-                            .font(.title3.bold().monospacedDigit())
-                            .foregroundStyle(secondaryTextColor)
-                    }
-                    // 2行目: 大きな金額（タップでテンキー）
+            VStack(spacing: 0) {
+                // 情報行（ABCD同様: 人数 / 区分名 / 金額）
+                HStack(alignment: .firstTextBaseline, spacing: hGap) {
+                    Text(localizedPeople(totalPersons))
+                        .font(.title.bold().monospacedDigit())
+                        .foregroundStyle(secondaryTextColor)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.55)
+                        .allowsTightening(true)
+                        .frame(width: personsTextW, alignment: .trailing)
+
+                    Text("合計")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(cs == .dark ? .white.opacity(0.62) : Color(.secondaryLabel))
+                        .lineLimit(1)
+                        .frame(width: nameW, alignment: .center)
+
+                    Spacer(minLength: 4)
+
                     HStack(alignment: .firstTextBaseline, spacing: 0) {
                         Text(localizedAmount(totalRaw, spaced: true))
                             .font(.largeTitle.bold().monospacedDigit())
@@ -213,8 +256,9 @@ private struct TotalAmountPanel: View {
                         ? secondaryTextColor.opacity(cs == .dark ? 0.75 : 0.70)
                         : amountColor)
                     .shadow(color: .black.opacity(cs == .dark ? 0.6 : 0.1), radius: 2)
-                    .minimumScaleFactor(0.4)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.4)
+                    .frame(width: amountTextW, alignment: .trailing)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         numpadConfig = NumpadConfig(
@@ -227,17 +271,29 @@ private struct TotalAmountPanel: View {
                         )
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, hPad)
+                .padding(.top, 16)
+                .padding(.bottom, 4)
 
-                // 右: ダイアル（縦センター）
-                AZDialView(
-                    value: $totalRaw,
-                    min: 0, max: 999_900,
-                    step: dialUnit, stepperStep: 0,
-                    style: settings.dialStyle, dialWidth: 180
-                )
+                LeatherDivider()
+
+                // ダイアル行（人数ダイアルなし / 金額ダイアルのみ・サイズ維持）
+                HStack(spacing: hGap) {
+                    Color.clear
+                        .frame(width: personsDialW, height: 1)
+                    Spacer(minLength: 0)
+                    AZDialView(
+                        value: $totalRaw,
+                        min: 0, max: 999_900,
+                        step: dialUnit, stepperStep: 0,
+                        style: settings.dialStyle,
+                        dialWidth: totalDialW
+                    )
+                    .frame(width: totalDialW)
+                }
+                .padding(.horizontal, hPad)
+                .padding(.vertical, 8)
             }
-            .padding(14)
         }
         .frame(maxWidth: .infinity)
         .sheet(item: $numpadConfig) { NumpadView(config: $0) }
@@ -359,8 +415,8 @@ private struct PanelStyleSegment: View {
 
     private var textColorText: String {
         let value = normalizedTextHueValue(textHue)
-        if value == -20 { return "黒" }
-        if value == -10 { return "白" }
+        if value == -20 { return String(localized: "黒") }
+        if value == -10 { return String(localized: "白") }
         return "\(value)°"
     }
 
@@ -371,7 +427,7 @@ private struct PanelStyleSegment: View {
                 .foregroundStyle(.primary)
 
             HStack(spacing: 8) {
-                Text("パネルの明るさ \(brightnessText)")
+                Text("\(String(localized: "パネルの明るさ")) \(brightnessText)")
                     .font(.caption2.bold())
                     .foregroundStyle(.secondary)
                     .frame(width: 130, alignment: .leading)
@@ -387,7 +443,7 @@ private struct PanelStyleSegment: View {
             }
 
             HStack(spacing: 8) {
-                Text("文字の色 \(textColorText)")
+                Text("\(String(localized: "文字の色")) \(textColorText)")
                     .font(.caption2.bold())
                     .foregroundStyle(.secondary)
                     .frame(width: 130, alignment: .leading)
@@ -403,7 +459,7 @@ private struct PanelStyleSegment: View {
             }
 
             HStack(spacing: 8) {
-                Text("濃淡 \(textTone)")
+                Text("\(String(localized: "濃淡")) \(textTone)")
                     .font(.caption2.bold())
                     .foregroundStyle(.secondary)
                     .frame(width: 130, alignment: .leading)

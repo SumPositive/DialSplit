@@ -3,6 +3,12 @@
 "合計金額" = "Total Amount";
 "金額ダイアルステップ" = "Amount Dial Step";
 "ステップ" = "Step";
+"パネルスタイル" = "Panel Style";
+"パネルの明るさ" = "Panel Brightness";
+"文字の色" = "Text Color";
+"濃淡" = "Tone";
+"黒" = "Black";
+"白" = "White";
 "端数切り上げ" = "Rounded Up";
 "人数（%@）" = "People (%@)";
 "金額（%@）" = "Amount (%@)";

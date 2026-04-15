@@ -45,6 +45,7 @@ private func localizedAmount(_ value: Int, placeholder: String = "---") -> Strin
 
 private let H_PAD:         CGFloat = 16    // 左右パディング（人数の左マージンを確保）
 private let H_GAP:         CGFloat = 8     // 列間スペーシング
+private let DIAL_MIN_GAP:  CGFloat = 32    // 人数ダイアルと金額ダイアルの最小間隔
 
 private struct PanelLayout {
     let personsDialW: CGFloat
@@ -56,7 +57,7 @@ private struct PanelLayout {
     static func make(panelWidth: CGFloat) -> PanelLayout {
         let inner = max(220, panelWidth - H_PAD * 2)
         let personsDialW = min(115, max(84, inner * 0.32))
-        let amountDialW = max(96, inner - personsDialW - H_GAP)
+        let amountDialW = max(96, inner - personsDialW - DIAL_MIN_GAP)
 
         let personsTextW = min(76, max(52, personsDialW * 0.66))
         let nameW = min(110, max(62, inner * 0.26))
@@ -82,7 +83,8 @@ private struct PanelColors {
     static func make(_ cs: ColorScheme, textHue: Int, textTone: Int) -> PanelColors {
         let linked = linkedTextColor(hue: textHue, tone: textTone, for: cs)
         return PanelColors(
-            primary: cs == .dark ? .white : Color(.label),
+            // 区分名は「合計」ラベルと同等の濃淡へ
+            primary: cs == .dark ? .white.opacity(0.62) : Color(.secondaryLabel),
             secondary: linked.opacity(cs == .dark ? 0.62 : 0.72),
             accent: linked
         )
@@ -226,7 +228,7 @@ struct PanelSubView: View {
                 LeatherDivider()
 
                 // ダイアル行: 人数（左）+ 金額（右）
-                HStack(spacing: H_GAP) {
+                HStack(spacing: DIAL_MIN_GAP) {
                     AZDialView(
                         value: $persons,
                         min: 0, max: 99,
