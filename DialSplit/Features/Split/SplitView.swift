@@ -30,6 +30,8 @@ struct SplitView: View {
     @State private var vm = SplitViewModel()
     @State private var showSettings = false
     private let cardSideMargin: CGFloat = 16
+    // iPadでは、iPhone Pro Max相当の幅を上限にして中央カラム表示
+    private let maxContentWidth: CGFloat = 430
 
     var body: some View {
         @Bindable var vm = vm
@@ -41,7 +43,7 @@ struct SplitView: View {
                 HeaderBar(showSettings: $showSettings)
 
                 GeometryReader { proxy in
-                    let cardWidth = max(0, proxy.size.width - cardSideMargin * 2)
+                    let cardWidth = min(max(0, proxy.size.width - cardSideMargin * 2), maxContentWidth)
                     ScrollView {
                         VStack(spacing: 10) {
                             // 合計金額パネル
@@ -94,18 +96,19 @@ struct SplitView: View {
                             )
                             .frame(width: cardWidth)
 
-                            // ダイアル単位セグメント
+                            // ダイアル単位セグメント（通常フロー末尾）
                             DialUnitSegment(dialUnit: $vm.dialUnit)
                                 .frame(width: cardWidth)
                                 .padding(.top, 6)
-
-                            Spacer().frame(height: 4)
+                                .padding(.bottom, 4)
                         }
                         .frame(maxWidth: .infinity)
                     }
+                    .safeAreaPadding(.bottom, 28)
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .sheet(isPresented: $showSettings) {
             SettingsView()
                 .environment(settings)
@@ -119,21 +122,22 @@ private struct HeaderBar: View {
     @Binding var showSettings: Bool
 
     var body: some View {
-        HStack {
+        ZStack {
             Text("割勘")
                 .font(.title2.bold())
                 .foregroundStyle(.white)
                 .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
 
-            Spacer()
-
-            Button {
-                showSettings = true
-            } label: {
-                Image(systemName: "gearshape.fill")
-                    .font(.title3)
-                    .foregroundStyle(.white.opacity(0.85))
-                    .shadow(color: .black.opacity(0.5), radius: 1)
+            HStack {
+                Spacer()
+                Button {
+                    showSettings = true
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                        .font(.title3)
+                        .foregroundStyle(.white.opacity(0.85))
+                        .shadow(color: .black.opacity(0.5), radius: 1)
+                }
             }
         }
         .padding(.horizontal, 20)
