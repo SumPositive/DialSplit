@@ -27,6 +27,10 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-7576639777972199~8822933495</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>広告の効果測定と改善のために使用します。</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UIStatusBarStyle</key>
