@@ -334,13 +334,37 @@ private struct DialUnitSegment: View {
                         dialUnit = units[i]
                     } label: {
                         Text(labels[i])
-                            .font(.caption.bold().monospacedDigit())
-                            .foregroundStyle(isSelected ? .primary : .secondary)
+                            .font(.subheadline.bold().monospacedDigit())
+                            .foregroundStyle(
+                                isSelected
+                                    ? Color(red: 1.0, green: 0.9647, blue: 0.8784)
+                                    : .primary.opacity(0.82)
+                            )
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 6)
+                            .padding(.vertical, 8)
                             .background(
-                                Capsule()
-                                    .fill(isSelected ? .white.opacity(0.90) : .clear)
+                                Group {
+                                    if isSelected {
+                                        Capsule()
+                                            .fill(Color(red: 0.4196, green: 0.3059, blue: 0.1176))
+                                    }
+                                }
+                            )
+                            .overlay(
+                                Group {
+                                    if isSelected {
+                                        Capsule()
+                                            .stroke(.white.opacity(0.18), lineWidth: 1.2)
+                                    }
+                                }
+                            )
+                            .shadow(
+                                color: isSelected ? .black.opacity(0.25) : .clear,
+                                radius: isSelected ? 4 : 0,
+                                x: 0,
+                                y: isSelected ? 1 : 0
                             )
                     }
                     .buttonStyle(.plain)
@@ -349,7 +373,7 @@ private struct DialUnitSegment: View {
             .padding(4)
             .background(
                 Capsule()
-                    .fill(.black.opacity(0.11))
+                    .fill(.black.opacity(0.22))
             )
         }
         .onAppear {

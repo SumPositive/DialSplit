@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-			0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC9D231461363EC29442A9E /* AZDial */; };
-			0DD4F1E63EAE767229C8423B /* LeatherBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */; };
-			3D46D5B41FD202C53399E30F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD101A4BF44E11075CF17514 /* Assets.xcassets */; };
-			4420F4B5E4D44A0FA90F6B11 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4420F4B5E4D44A0FA90F6B10 /* GoogleMobileAds */; };
-			4479B7022ED917A4B393B2F7 /* BrassFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */; };
+		0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC9D231461363EC29442A9E /* AZDial */; };
+		0DD4F1E63EAE767229C8423B /* LeatherBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */; };
+		3D46D5B41FD202C53399E30F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD101A4BF44E11075CF17514 /* Assets.xcassets */; };
+		4420F4B5E4D44A0FA90F6B11 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4420F4B5E4D44A0FA90F6B10 /* GoogleMobileAds */; };
+		4479B7022ED917A4B393B2F7 /* BrassFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */; };
 		5E36CF7F28ABCBC79971B413 /* SplitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */; };
 		9A3CC7AD8CE36855195495CF /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75996EAEFC508B777967A50 /* PanelView.swift */; };
 		A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3697A10C0EFF185C359F8DB /* SettingsView.swift */; };
@@ -47,11 +47,11 @@
 		DBA24386C205F0AF85E6FE2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
-				files = (
-					0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */,
-					B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */,
-					4420F4B5E4D44A0FA90F6B11 /* GoogleMobileAds in Frameworks */,
-				);
+			files = (
+				0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */,
+				B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */,
+				4420F4B5E4D44A0FA90F6B11 /* GoogleMobileAds in Frameworks */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -157,11 +157,11 @@
 			dependencies = (
 			);
 			name = DialSplit;
-				packageProductDependencies = (
-					6DC9D231461363EC29442A9E /* AZDial */,
-					56FFB9935599C33779D4A54D /* AZDecimal */,
-					4420F4B5E4D44A0FA90F6B10 /* GoogleMobileAds */,
-				);
+			packageProductDependencies = (
+				6DC9D231461363EC29442A9E /* AZDial */,
+				56FFB9935599C33779D4A54D /* AZDecimal */,
+				4420F4B5E4D44A0FA90F6B10 /* GoogleMobileAds */,
+			);
 			productName = DialSplit;
 			productReference = 57E3F9D5896BF2CA28B724CD /* DialSplit.app */;
 			productType = "com.apple.product-type.application";
@@ -185,11 +185,11 @@
 			);
 			mainGroup = 13F4D6260A8FB74294E3B94C;
 			minimizedProjectReferenceProxies = 1;
-				packageReferences = (
-					2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */,
-					759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */,
-					4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
-				);
+			packageReferences = (
+				2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */,
+				759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */,
+				4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BEB4D055063B4BAC5CFAED9C /* Products */;
 			projectDirPath = "";
@@ -324,7 +324,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.DialSplit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.AzSplitIt;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -349,7 +349,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.DialSplit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.AzSplitIt;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -455,34 +455,34 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-			759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */ = {
-				isa = XCRemoteSwiftPackageReference;
-				repositoryURL = "https://github.com/SumPositive/AZDial";
-				requirement = {
-					kind = upToNextMajorVersion;
-					minimumVersion = 3.0.0;
-				};
+		4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
 			};
-			4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-				isa = XCRemoteSwiftPackageReference;
-				repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-				requirement = {
-					kind = upToNextMajorVersion;
-					minimumVersion = 12.0.0;
-				};
+		};
+		759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SumPositive/AZDial";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
 			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-			4420F4B5E4D44A0FA90F6B10 /* GoogleMobileAds */ = {
-				isa = XCSwiftPackageProductDependency;
-				package = 4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-				productName = GoogleMobileAds;
-			};
-			56FFB9935599C33779D4A54D /* AZDecimal */ = {
-				isa = XCSwiftPackageProductDependency;
-				package = 2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */;
-				productName = AZDecimal;
+		4420F4B5E4D44A0FA90F6B10 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		56FFB9935599C33779D4A54D /* AZDecimal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */;
+			productName = AZDecimal;
 		};
 		6DC9D231461363EC29442A9E /* AZDial */ = {
 			isa = XCSwiftPackageProductDependency;

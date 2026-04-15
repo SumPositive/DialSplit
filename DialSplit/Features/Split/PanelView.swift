@@ -109,7 +109,7 @@ struct Panel0View: View {
     private var layout: PanelLayout { .make(panelWidth: panelWidth) }
 
     private var amountColor: Color {
-        colors.accent
+        status == .negative ? .red : colors.accent
     }
 
     var body: some View {
