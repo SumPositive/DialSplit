@@ -81,11 +81,11 @@ final class AppSettings {
         let migratedHueObj = UserDefaults.standard.object(forKey: "amountHue")
         let storedHue = hueObj != nil
             ? UserDefaults.standard.integer(forKey: "textHue")
-            : (migratedHueObj != nil ? UserDefaults.standard.integer(forKey: "amountHue") : 40)
+            : (migratedHueObj != nil ? UserDefaults.standard.integer(forKey: "amountHue") : -20)
         textHue = normalizedTextHueValue(storedHue)
 
         let toneObj = UserDefaults.standard.object(forKey: "textTone")
-        let storedTone = toneObj != nil ? UserDefaults.standard.integer(forKey: "textTone") : 80
+        let storedTone = toneObj != nil ? UserDefaults.standard.integer(forKey: "textTone") : 0
         textTone = min(100, max(0, storedTone))
     }
 

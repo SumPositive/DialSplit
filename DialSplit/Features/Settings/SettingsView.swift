@@ -17,10 +17,15 @@ struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @State private var showAbout = false
     @State private var showSupportSheet = false
 
-    private let aboutURLJa = URL(string: "https://docs.azukid.com/jp/sumpo/DialSplit/dialsplit.html")
+    private var aboutURL: URL? {
+        let isEnglish = Locale.preferredLanguages.first?.hasPrefix("en") == true
+        let path = isEnglish
+            ? "https://docs.azukid.com/en/sumpo/DialSplit/dialsplit.html"
+            : "https://docs.azukid.com/jp/sumpo/DialSplit/dialsplit.html"
+        return URL(string: path)
+    }
 
     private var versionString: String {
         let v = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
@@ -40,7 +45,7 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 // MARK: プリセット
-                Section("プリセット") {
+                Section(String(localized: "区分プリセット")) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 8) {
                             ForEach(NamePreset.all) { preset in
@@ -58,7 +63,7 @@ struct SettingsView: View {
                 }
 
                 // MARK: 区別名称
-                Section("区別") {
+                Section(String(localized: "区分と名称")) {
                     ForEach(0..<tiers.count, id: \.self) { index in
                         HStack {
                             Text(tiers[index].label)
@@ -108,7 +113,9 @@ struct SettingsView: View {
                 // MARK: サポート
                 Section("サポート") {
                     Button(String(localized: "このアプリについて")) {
-                        showAbout = true
+                        if let url = aboutURL {
+                            openURL(url)
+                        }
                     }
                     Button(String(localized: "開発者を応援")) {
                         showSupportSheet = true
@@ -133,16 +140,6 @@ struct SettingsView: View {
                     Button("完了") { dismiss() }
                 }
             }
-            .alert(String(localized: "このアプリについて"), isPresented: $showAbout) {
-                Button(String(localized: "開く")) {
-                    if let url = aboutURLJa {
-                        openURL(url)
-                    }
-                }
-                Button(String(localized: "閉じる"), role: .cancel) {}
-            } message: {
-                Text("DialSplit v\(versionString)")
-            }
             .sheet(isPresented: $showSupportSheet) {
                 SupportDeveloperSheet()
             }
@@ -157,7 +154,7 @@ struct SettingsView: View {
 private final class TipStore {
     static let shared = TipStore()
 
-    private let productIds = ["Tips_1", "Tips_5"]
+    private let productIds = ["DialSplit_Tips_1", "DialSplit_Tips_5"]
     var products: [Product] = []
     var isLoadingProducts = false
     var isPurchasing = false
@@ -334,8 +331,10 @@ private struct AdSupportSheet: View {
 
 #if DEBUG
 private let ADMOB_REWARD_UNIT_ID = "ca-app-pub-3940256099942544/1712485313"
+private let ADMOB_BANNER_UNIT_ID = "ca-app-pub-3940256099942544/2435281174"
 #else
-private let ADMOB_REWARD_UNIT_ID = "ca-app-pub-7576639777972199/4693657810"
+private let ADMOB_REWARD_UNIT_ID = "ca-app-pub-7576639777972199/7862774227"
+private let ADMOB_BANNER_UNIT_ID = "ca-app-pub-7576639777972199/9670679914"
 #endif
 
 private struct AdMobRewardedSheet: View {
@@ -346,6 +345,11 @@ private struct AdMobRewardedSheet: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
+                AdMobBannerView(
+                    adUnitID: ADMOB_BANNER_UNIT_ID,
+                    size: CGSize(width: 300, height: 250)
+                )
+
                 Text(String(localized: "動画広告"))
                     .font(.headline)
 
@@ -365,6 +369,14 @@ private struct AdMobRewardedSheet: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .disabled(!loader.isReady)
+
+                    Label {
+                        Text(String(localized: "音が出ます！"))
+                            .font(.footnote.weight(.semibold))
+                    } icon: {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                    }
+                    .foregroundStyle(.red)
                 }
 
                 if loader.errorMessage != nil {
@@ -389,6 +401,108 @@ private struct AdMobRewardedSheet: View {
                     onRewardEarned()
                 }
             }
+        }
+    }
+}
+
+private struct AdMobBannerView: View {
+    let adUnitID: String
+    let size: CGSize
+
+    @State private var isLoading = true
+    @State private var errorMessage: String?
+    @State private var reloadToken = UUID()
+
+    var body: some View {
+        VStack(spacing: 8) {
+            AdMobBannerRepresentable(
+                adUnitID: adUnitID,
+                size: size,
+                onReceiveAd: {
+                    isLoading = false
+                    errorMessage = nil
+                },
+                onFailToReceiveAd: { _ in
+                    isLoading = false
+                    errorMessage = String(localized: "現在、特典付きの広告がありません。後ほどお試しください")
+                },
+                reloadToken: reloadToken
+            )
+            .id(reloadToken)
+            .frame(width: size.width, height: size.height)
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(uiColor: .tertiarySystemBackground))
+            )
+
+            if isLoading {
+                ProgressView(String(localized: "広告を読み込み中..."))
+                    .font(.caption)
+            } else if errorMessage != nil {
+                Button(String(localized: "再読み込み")) {
+                    reloadToken = UUID()
+                    isLoading = true
+                    errorMessage = nil
+                }
+                .buttonStyle(.bordered)
+            }
+        }
+    }
+}
+
+private struct AdMobBannerRepresentable: UIViewControllerRepresentable {
+    let adUnitID: String
+    let size: CGSize
+    let onReceiveAd: () -> Void
+    let onFailToReceiveAd: (Error) -> Void
+    let reloadToken: UUID
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(onReceiveAd: onReceiveAd, onFailToReceiveAd: onFailToReceiveAd)
+    }
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .clear
+
+        let bannerView = BannerView(adSize: adSizeFor(cgSize: size))
+        bannerView.adUnitID = adUnitID
+        bannerView.rootViewController = viewController
+        bannerView.delegate = context.coordinator
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+
+        viewController.view.addSubview(bannerView)
+        NSLayoutConstraint.activate([
+            bannerView.centerXAnchor.constraint(equalTo: viewController.view.centerXAnchor),
+            bannerView.centerYAnchor.constraint(equalTo: viewController.view.centerYAnchor),
+        ])
+
+        context.coordinator.bannerView = bannerView
+        bannerView.load(Request())
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        context.coordinator.bannerView?.rootViewController = uiViewController
+    }
+
+    final class Coordinator: NSObject, BannerViewDelegate {
+        weak var bannerView: BannerView?
+        private let onReceiveAd: () -> Void
+        private let onFailToReceiveAd: (Error) -> Void
+
+        init(onReceiveAd: @escaping () -> Void, onFailToReceiveAd: @escaping (Error) -> Void) {
+            self.onReceiveAd = onReceiveAd
+            self.onFailToReceiveAd = onFailToReceiveAd
+        }
+
+        func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+            onReceiveAd()
+        }
+
+        func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
+            onFailToReceiveAd(error)
         }
     }
 }

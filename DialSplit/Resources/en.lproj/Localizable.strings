@@ -16,6 +16,8 @@
 "%lld人短" = "%lldp";
 "プリセット" = "Presets";
 "区別" = "Tiers";
+"区分プリセット" = "Tier Presets";
+"区分と名称" = "Tiers & Names";
 "ダイアルスタイル" = "Dial Style";
 "背景" = "Background";
 "デザイン" = "Design";
@@ -39,6 +41,7 @@
 "最後まで視聴すると閉じる【×】ボタンが現れます" = "Watch to the end and the close [×] button will appear.";
 "広告を読み込み中..." = "Loading ad...";
 "広告を再生する" = "Play Ad";
+"音が出ます！" = "Sound will play!";
 "再読み込み" = "Reload";
 "現在、特典付きの広告がありません。後ほどお試しください" = "No rewarded ads are available right now. Please try again later.";
 "AdMob未導入" = "AdMob Not Linked";
