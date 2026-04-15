@@ -12,7 +12,7 @@
 //  列幅は panelWidth から動的算出（SE〜Pro Max まで対応）
 //  H_PAD:  16pt（人数の左マージンを確保）
 //
-//  Panel0View（A）: 右列ダイアルは読み取り専用（.allowsHitTesting(false)）
+//  Panel0View（A）: 人数のみダイアル操作（A金額は表示専用）
 //  PanelSubView（B/C/D）: 右列ダイアルは通常のインタラクティブ
 //
 //  テンキー: 人数・金額テキストをタップすると NumpadView がポップアップ
@@ -79,18 +79,13 @@ private struct PanelColors {
     let secondary: Color   // 人数・サブラベル
     let accent:    Color   // 金額強調
 
-    static func make(_ cs: ColorScheme) -> PanelColors {
-        cs == .dark
-            ? PanelColors(
-                primary:   .white,
-                secondary: .white.opacity(0.50),
-                accent:    .yellow.opacity(0.95)
-              )
-            : PanelColors(
-                primary:   Color(.label),
-                secondary: Color(.secondaryLabel),
-                accent:    Color(red: 0.50, green: 0.35, blue: 0.00)
-              )
+    static func make(_ cs: ColorScheme, textHue: Int, textTone: Int) -> PanelColors {
+        let linked = linkedTextColor(hue: textHue, tone: textTone, for: cs)
+        return PanelColors(
+            primary: cs == .dark ? .white : Color(.label),
+            secondary: linked.opacity(cs == .dark ? 0.62 : 0.72),
+            accent: linked
+        )
     }
 }
 
@@ -108,20 +103,11 @@ struct Panel0View: View {
     @Environment(\.colorScheme) private var cs
     @State private var numpadConfig: NumpadConfig?
 
-    private var colors: PanelColors { .make(cs) }
+    private var colors: PanelColors { .make(cs, textHue: settings.textHue, textTone: settings.textTone) }
     private var layout: PanelLayout { .make(panelWidth: panelWidth) }
 
     private var amountColor: Color {
-        switch status {
-        case .exact:
-            return cs == .dark ? .yellow.opacity(0.95)
-                               : Color(red: 0.50, green: 0.35, blue: 0.00)
-        case .rounded:
-            return cs == .dark ? Color(red: 0.45, green: 0.75, blue: 1.00)
-                               : Color(red: 0.10, green: 0.45, blue: 0.80)
-        case .negative:
-            return .red.opacity(cs == .dark ? 0.90 : 0.80)
-        }
+        colors.accent
     }
 
     var body: some View {
@@ -225,7 +211,7 @@ struct PanelSubView: View {
     @Environment(\.colorScheme) private var cs
     @State private var numpadConfig: NumpadConfig?
 
-    private var colors: PanelColors { .make(cs) }
+    private var colors: PanelColors { .make(cs, textHue: settings.textHue, textTone: settings.textTone) }
     private var layout: PanelLayout { .make(panelWidth: panelWidth) }
 
     var body: some View {

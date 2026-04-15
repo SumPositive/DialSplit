@@ -3,6 +3,7 @@ import SwiftUI
 /// パネルフレーム — ガラスモーフィズム試験版
 struct BrassFrame<Content: View>: View {
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(AppSettings.self) private var settings
     let content: () -> Content
 
     init(@ViewBuilder content: @escaping () -> Content) {
@@ -10,6 +11,14 @@ struct BrassFrame<Content: View>: View {
     }
 
     var body: some View {
+        let bright = Double(settings.panelBrightness) / 100.0
+        let tintOpacity = max(0.06, min(0.34, 0.22 + bright * 0.45))
+        let topStrong = max(0.35, min(0.90, 0.72 + bright * 0.55))
+        let topSoft = max(0.12, min(0.45, 0.28 + bright * 0.30))
+        let rimTop = max(0.55, min(0.95, 0.90 + bright * 0.25))
+        let rimMid = max(0.20, min(0.55, 0.40 + bright * 0.20))
+        let rimBottom = max(0.12, min(0.34, 0.20 - bright * 0.18))
+        let outerShadow = max(0.18, min(0.44, 0.32 - bright * 0.28))
         content()
             .background(
                 ZStack {
@@ -17,15 +26,15 @@ struct BrassFrame<Content: View>: View {
                     RoundedRectangle(cornerRadius: 14)
                         .fill(.ultraThinMaterial)
                     RoundedRectangle(cornerRadius: 14)
-                        .fill(.white.opacity(0.22))
+                        .fill(.white.opacity(tintOpacity))
 
                     // ② 上部スペキュラ（強い光反射で上半分を明るく）
                     RoundedRectangle(cornerRadius: 14)
                         .fill(
                             LinearGradient(
                                 colors: [
-                                    .white.opacity(0.72),
-                                    .white.opacity(0.28),
+                                    .white.opacity(topStrong),
+                                    .white.opacity(topSoft),
                                     .white.opacity(0.04),
                                     .clear,
                                 ],
@@ -54,9 +63,10 @@ struct BrassFrame<Content: View>: View {
                             LinearGradient(
                                 colors: [
                                     .white.opacity(0.90),
-                                    .white.opacity(0.40),
+                                    .white.opacity(rimTop),
+                                    .white.opacity(rimMid),
                                     .white.opacity(0.08),
-                                    .black.opacity(0.20),
+                                    .black.opacity(rimBottom),
                                 ],
                                 startPoint: .top,
                                 endPoint: .bottom
@@ -66,7 +76,7 @@ struct BrassFrame<Content: View>: View {
                 }
             )
             // ⑤ 3層シャドウ（柔らかい大＋鋭い小＋環境光）
-            .shadow(color: .black.opacity(0.32), radius: 18, x: 0, y:  9)
+            .shadow(color: .black.opacity(outerShadow), radius: 18, x: 0, y:  9)
             .shadow(color: .black.opacity(0.14), radius:  4, x: 0, y:  2)
             .shadow(color: .white.opacity(0.06), radius:  2, x: 0, y: -1)
     }

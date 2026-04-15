@@ -100,7 +100,25 @@ struct SplitView: View {
                             DialUnitSegment(dialUnit: $vm.dialUnit)
                                 .frame(width: cardWidth)
                                 .padding(.top, 6)
-                                .padding(.bottom, 4)
+                                .padding(.bottom, 2)
+
+                            PanelStyleSegment(
+                                panelBrightness: Binding(
+                                    get: { settings.panelBrightness },
+                                    set: { settings.panelBrightness = min(40, max(-40, $0)) }
+                                ),
+                                textHue: Binding(
+                                    get: { settings.textHue },
+                                    set: { settings.textHue = normalizedTextHueValue($0) }
+                                ),
+                                textTone: Binding(
+                                    get: { settings.textTone },
+                                    set: { settings.textTone = min(100, max(0, $0)) }
+                                ),
+                                dialStyle: settings.dialStyle
+                            )
+                            .frame(width: cardWidth)
+                            .padding(.bottom, 4)
                         }
                         .frame(maxWidth: .infinity)
                     }
@@ -157,7 +175,11 @@ private struct TotalAmountPanel: View {
     @State private var numpadConfig: NumpadConfig?
 
     private var amountColor: Color {
-        cs == .dark ? .yellow.opacity(0.95) : Color(red: 0.50, green: 0.35, blue: 0.00)
+        linkedTextColor(hue: settings.textHue, tone: settings.textTone, for: cs)
+    }
+
+    private var secondaryTextColor: Color {
+        amountColor.opacity(cs == .dark ? 0.66 : 0.72)
     }
 
     private var showsCentSuffix: Bool {
@@ -176,7 +198,7 @@ private struct TotalAmountPanel: View {
                             .foregroundStyle(.secondary)
                         Text(localizedPeople(totalPersons))
                             .font(.title3.bold().monospacedDigit())
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(secondaryTextColor)
                     }
                     // 2行目: 大きな金額（タップでテンキー）
                     HStack(alignment: .firstTextBaseline, spacing: 0) {
@@ -188,7 +210,7 @@ private struct TotalAmountPanel: View {
                         }
                     }
                     .foregroundStyle(totalRaw == 0
-                        ? (cs == .dark ? .white.opacity(0.40) : Color(.tertiaryLabel))
+                        ? secondaryTextColor.opacity(cs == .dark ? 0.75 : 0.70)
                         : amountColor)
                     .shadow(color: .black.opacity(cs == .dark ? 0.6 : 0.1), radius: 2)
                     .minimumScaleFactor(0.4)
@@ -249,15 +271,30 @@ private struct DialUnitSegment: View {
                 .font(.caption.bold())
                 .foregroundStyle(.primary)
 
-            Picker("ステップ", selection: Binding(
-                get: { selectedIndex },
-                set: { dialUnit = units[$0] }
-            )) {
+            HStack(spacing: 6) {
                 ForEach(0..<labels.count, id: \.self) { i in
-                    Text(labels[i]).tag(i)
+                    let isSelected = i == selectedIndex
+                    Button {
+                        dialUnit = units[i]
+                    } label: {
+                        Text(labels[i])
+                            .font(.caption.bold().monospacedDigit())
+                            .foregroundStyle(isSelected ? .primary : .secondary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule()
+                                    .fill(isSelected ? .white.opacity(0.90) : .clear)
+                            )
+                    }
+                    .buttonStyle(.plain)
                 }
             }
-            .pickerStyle(.segmented)
+            .padding(4)
+            .background(
+                Capsule()
+                    .fill(.black.opacity(0.11))
+            )
         }
         .onAppear {
             if !units.contains(dialUnit), let fallback = units.first(where: { $0 == defaultUnit }) ?? units.last {
@@ -305,5 +342,91 @@ private struct DialUnitSegment: View {
         // ④ 手前に浮かせるシャドウ（大＋小の2層）
         .shadow(color: .black.opacity(0.28), radius: 14, x: 0, y: 7)
         .shadow(color: .black.opacity(0.12), radius:  3, x: 0, y: 1)
+    }
+}
+
+// MARK: - パネルスタイル
+
+private struct PanelStyleSegment: View {
+    @Binding var panelBrightness: Int
+    @Binding var textHue: Int
+    @Binding var textTone: Int
+    let dialStyle: DialStyle
+
+    private var brightnessText: String {
+        panelBrightness > 0 ? "+\(panelBrightness)" : "\(panelBrightness)"
+    }
+
+    private var textColorText: String {
+        let value = normalizedTextHueValue(textHue)
+        if value == -20 { return "黒" }
+        if value == -10 { return "白" }
+        return "\(value)°"
+    }
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Text("パネルスタイル")
+                .font(.caption.bold())
+                .foregroundStyle(.primary)
+
+            HStack(spacing: 8) {
+                Text("パネルの明るさ \(brightnessText)")
+                    .font(.caption2.bold())
+                    .foregroundStyle(.secondary)
+                    .frame(width: 130, alignment: .leading)
+
+                AZDialView(
+                    value: $panelBrightness,
+                    min: -40, max: 40,
+                    step: 1, stepperStep: 0,
+                    style: dialStyle,
+                    dialWidth: 160
+                )
+                .frame(maxWidth: .infinity)
+            }
+
+            HStack(spacing: 8) {
+                Text("文字の色 \(textColorText)")
+                    .font(.caption2.bold())
+                    .foregroundStyle(.secondary)
+                    .frame(width: 130, alignment: .leading)
+
+                AZDialView(
+                    value: $textHue,
+                    min: -20, max: 360,
+                    step: 10, stepperStep: 0,
+                    style: dialStyle,
+                    dialWidth: 160
+                )
+                .frame(maxWidth: .infinity)
+            }
+
+            HStack(spacing: 8) {
+                Text("濃淡 \(textTone)")
+                    .font(.caption2.bold())
+                    .foregroundStyle(.secondary)
+                    .frame(width: 130, alignment: .leading)
+
+                AZDialView(
+                    value: $textTone,
+                    min: 0, max: 100,
+                    step: 5, stepperStep: 0,
+                    style: dialStyle,
+                    dialWidth: 160
+                )
+                .frame(maxWidth: .infinity)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.ultraThinMaterial)
+                RoundedRectangle(cornerRadius: 16)
+                    .strokeBorder(.white.opacity(0.24), lineWidth: 1)
+            }
+        )
     }
 }

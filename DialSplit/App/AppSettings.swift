@@ -45,6 +45,21 @@ final class AppSettings {
         didSet { UserDefaults.standard.set(dialStyle.id, forKey: "dialStyle") }
     }
 
+    /// パネル明るさ（-40 ... 40）
+    var panelBrightness: Int {
+        didSet { UserDefaults.standard.set(panelBrightness, forKey: "panelBrightness") }
+    }
+
+    /// 文字色（黒=-20 / 白=-10 / 色相=0...360, 10刻み）
+    var textHue: Int {
+        didSet { UserDefaults.standard.set(textHue, forKey: "textHue") }
+    }
+
+    /// 文字の濃淡（0...100）
+    var textTone: Int {
+        didSet { UserDefaults.standard.set(textTone, forKey: "textTone") }
+    }
+
     init() {
         let defaults = NamePreset.all[2].names   // ["大富豪","富豪","平民","貧民"]
         var names = UserDefaults.standard.stringArray(forKey: "panelNames") ?? defaults
@@ -57,6 +72,21 @@ final class AppSettings {
 
         let dialId = UserDefaults.standard.string(forKey: "dialStyle") ?? "brass"
         dialStyle = DialStyle.builtin(id: dialId) ?? .brass
+
+        let storedBrightness = UserDefaults.standard.integer(forKey: "panelBrightness")
+        panelBrightness = min(40, max(-40, storedBrightness))
+
+        // 旧キー amountHue から移行しつつ、新キー textHue を優先
+        let hueObj = UserDefaults.standard.object(forKey: "textHue")
+        let migratedHueObj = UserDefaults.standard.object(forKey: "amountHue")
+        let storedHue = hueObj != nil
+            ? UserDefaults.standard.integer(forKey: "textHue")
+            : (migratedHueObj != nil ? UserDefaults.standard.integer(forKey: "amountHue") : 40)
+        textHue = normalizedTextHueValue(storedHue)
+
+        let toneObj = UserDefaults.standard.object(forKey: "textTone")
+        let storedTone = toneObj != nil ? UserDefaults.standard.integer(forKey: "textTone") : 80
+        textTone = min(100, max(0, storedTone))
     }
 
     func name(for index: Int) -> String {
@@ -68,6 +98,31 @@ final class AppSettings {
         while panelNames.count <= index { panelNames.append("\(panelNames.count + 1)") }
         panelNames[index] = name
     }
+}
+
+func normalizedTextHueValue(_ raw: Int) -> Int {
+    if raw <= -15 { return -20 }   // black
+    if raw < 0 { return -10 }      // white
+    let clamped = min(360, max(0, raw))
+    let snapped = Int((Double(clamped) / 10.0).rounded()) * 10
+    return min(360, max(0, snapped))
+}
+
+func linkedTextColor(hue: Int, tone: Int, for cs: ColorScheme) -> Color {
+    let normalized = normalizedTextHueValue(hue)
+    let t = Double(min(100, max(0, tone))) / 100.0
+    if normalized == -20 {
+        let v = cs == .dark ? (0.10 + t * 0.55) : (0.00 + t * 0.35)
+        return Color(white: v)
+    }
+    if normalized == -10 {
+        let v = cs == .dark ? (0.75 + t * 0.25) : (0.82 + t * 0.18)
+        return Color(white: min(1.0, v))
+    }
+    let normalizedHue = Double(normalized % 360) / 360.0
+    let saturation = 0.10 + (cs == .dark ? 0.82 : 0.90) * t
+    let brightness = cs == .dark ? (0.65 + 0.30 * t) : (0.38 + 0.34 * t)
+    return Color(hue: normalizedHue, saturation: saturation, brightness: brightness)
 }
 
 // MARK: - LeatherStyle
