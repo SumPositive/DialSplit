@@ -17,7 +17,9 @@ struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @State private var showSupportSheet = false
+    @State private var showTipSheet = false
+    @State private var showAdSheet = false
+    @State private var showAdThanks = false
 
     private var aboutURL: URL? {
         let isEnglish = Locale.preferredLanguages.first?.hasPrefix("en") == true
@@ -117,8 +119,15 @@ struct SettingsView: View {
                             openURL(url)
                         }
                     }
-                    Button(String(localized: "開発者を応援")) {
-                        showSupportSheet = true
+                }
+
+                // MARK: 開発者を応援
+                Section(String(localized: "開発者を応援")) {
+                    Button(String(localized: "投げ銭で応援する")) {
+                        showTipSheet = true
+                    }
+                    Button(String(localized: "広告を見て応援する")) {
+                        showAdSheet = true
                     }
                 }
 
@@ -140,8 +149,18 @@ struct SettingsView: View {
                     Button("完了") { dismiss() }
                 }
             }
-            .sheet(isPresented: $showSupportSheet) {
-                SupportDeveloperSheet()
+            .sheet(isPresented: $showTipSheet) {
+                TipSheetView()
+            }
+            .sheet(isPresented: $showAdSheet) {
+                AdSupportSheet {
+                    showAdThanks = true
+                }
+            }
+            .alert(String(localized: "ありがとうございます！"), isPresented: $showAdThanks) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(String(localized: "広告をご覧いただきありがとうございます。これからも改善を続けてまいります！"))
             }
         }
     }
@@ -184,111 +203,49 @@ private final class TipStore {
     }
 }
 
-private struct SupportDeveloperSheet: View {
-    @Environment(\.dismiss) private var dismiss
-    @State private var showTipSheet = false
-    @State private var showAdSheet = false
-    @State private var showAdThanks = false
-
-    var body: some View {
-        NavigationStack {
-            VStack(spacing: 16) {
-                Text(String(localized: "このアプリの開発を応援していただけると励みになります。"))
-                    .font(.callout)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal, 16)
-
-                Button(String(localized: "投げ銭　寄付する")) {
-                    showTipSheet = true
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.teal)
-                .frame(maxWidth: .infinity)
-
-                Button(String(localized: "広告を見て応援する")) {
-                    showAdSheet = true
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.brown)
-                .frame(maxWidth: .infinity)
-
-                Spacer(minLength: 0)
-            }
-            .padding(20)
-            .navigationTitle(String(localized: "開発者を応援"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(String(localized: "閉じる")) { dismiss() }
-                }
-            }
-            .sheet(isPresented: $showTipSheet) {
-                TipSheetView()
-            }
-            .sheet(isPresented: $showAdSheet) {
-                AdSupportSheet {
-                    showAdThanks = true
-                }
-            }
-            .alert(String(localized: "ありがとうございます！"), isPresented: $showAdThanks) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text(String(localized: "広告をご覧いただきありがとうございます。これからも改善を続けてまいります！"))
-            }
-        }
-    }
-}
-
 private struct TipSheetView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var store = TipStore.shared
     @State private var showThanks = false
+    @State private var activeThrow: CoinThrow? = nil
+    @State private var targetScale: CGFloat = 1.0
+
+    private struct CoinThrow: Identifiable {
+        let id = UUID()
+        let buttonIndex: Int
+        let color: Color
+        let product: Product
+    }
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                Image(systemName: "heart.fill")
-                    .font(.system(size: 48))
-                    .foregroundStyle(.pink)
-
-                Text(String(localized: "このアプリの開発を応援していただけると励みになります。"))
-                    .font(.callout)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal)
-
-                if store.isLoadingProducts {
-                    ProgressView()
-                } else if store.products.isEmpty {
-                    Text(String(localized: "現在ご利用いただけません。"))
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                } else {
-                    HStack(spacing: 12) {
-                        ForEach(store.products, id: \.id) { product in
-                            Button {
-                                Task {
-                                    if await store.purchase(product) {
-                                        showThanks = true
-                                    }
-                                }
-                            } label: {
-                                Text(product.displayPrice)
-                                    .frame(maxWidth: .infinity)
+            GeometryReader { geo in
+                ZStack {
+                    sheetContent(geo: geo)
+                    if let t = activeThrow {
+                        let startX = t.buttonIndex == 0
+                            ? geo.size.width * 0.33
+                            : geo.size.width * 0.67
+                        TossedCoin(
+                            key: t.id,
+                            start: CGPoint(x: startX, y: geo.size.height - 130),
+                            end: CGPoint(x: geo.size.width * 0.5, y: 90),
+                            color: t.color
+                        ) {
+                            withAnimation(.spring(response: 0.22, dampingFraction: 0.35)) {
+                                targetScale = 1.22
                             }
-                            .buttonStyle(.borderedProminent)
-                            .tint(.pink)
-                            .disabled(store.isPurchasing)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
+                                withAnimation(.spring) { targetScale = 1.0 }
+                            }
+                            let product = t.product
+                            activeThrow = nil
+                            Task { if await store.purchase(product) { showThanks = true } }
                         }
                     }
-                    .padding(.horizontal)
                 }
-
-                Spacer()
             }
-            .padding(.top, 24)
-            .navigationTitle(String(localized: "投げ銭　寄付する"))
+            .navigationTitle(String(localized: "投げ銭で応援する"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -302,6 +259,242 @@ private struct TipSheetView: View {
                 Text(String(localized: "応援いただきありがとうございます。これからも改善を続けてまいります！"))
             }
         }
+    }
+
+    @ViewBuilder
+    private func sheetContent(geo: GeometryProxy) -> some View {
+        VStack(spacing: 0) {
+            developerTarget
+                .padding(.top, 32)
+
+            TossArcHint()
+                .frame(height: 52)
+                .padding(.horizontal, 56)
+                .padding(.top, 6)
+
+            Text(String(localized: "このアプリの開発を応援していただけると励みになります。"))
+                .font(.callout)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 32)
+                .padding(.top, 16)
+
+            Spacer()
+            coinSection
+                .padding(.bottom, 56)
+        }
+    }
+
+    private var developerTarget: some View {
+        ZStack {
+            Circle()
+                .fill(.teal.opacity(0.10))
+                .frame(width: 108, height: 108)
+            Circle()
+                .stroke(.teal.opacity(0.22), lineWidth: 1.5)
+                .frame(width: 108, height: 108)
+            Image(systemName: "person.fill")
+                .font(.system(size: 50))
+                .foregroundStyle(.teal)
+            Image(systemName: "heart.fill")
+                .font(.system(size: 18))
+                .foregroundStyle(.pink)
+                .offset(x: 24, y: -24)
+        }
+        .scaleEffect(targetScale)
+    }
+
+    @ViewBuilder
+    private var coinSection: some View {
+        if store.isLoadingProducts {
+            ProgressView()
+        } else if store.products.isEmpty {
+            Text(String(localized: "現在ご利用いただけません。"))
+                .font(.callout)
+                .foregroundStyle(.secondary)
+        } else {
+            HStack(spacing: 40) {
+                ForEach(Array(store.products.enumerated()), id: \.element.id) { index, product in
+                    let isLarge = index == store.products.count - 1
+                    let coinColor: Color = isLarge
+                        ? Color(red: 0.90, green: 0.72, blue: 0.18)
+                        : Color(red: 0.72, green: 0.45, blue: 0.20)
+                    CoinButtonView(
+                        price: product.displayPrice,
+                        label: isLarge
+                            ? String(localized: "たっぷり応援")
+                            : String(localized: "少し応援"),
+                        color: coinColor,
+                        disabled: activeThrow != nil || store.isPurchasing
+                    ) {
+                        activeThrow = CoinThrow(
+                            buttonIndex: index,
+                            color: coinColor,
+                            product: product
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - コインボタン
+
+private struct CoinButtonView: View {
+    let price: String
+    let label: String
+    let color: Color
+    let disabled: Bool
+    let action: () -> Void
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Button(action: action) {
+                ZStack {
+                    Circle()
+                        .fill(LinearGradient(
+                            colors: [color.opacity(0.18), color.opacity(0.06)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ))
+                    Circle()
+                        .stroke(
+                            LinearGradient(
+                                colors: [color, color.opacity(0.45)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 3
+                        )
+                    Circle()
+                        .stroke(color.opacity(0.25), lineWidth: 1)
+                        .padding(10)
+                    Text(price)
+                        .font(.subheadline.bold().monospacedDigit())
+                        .foregroundStyle(color)
+                }
+                .frame(width: 100, height: 100)
+                .shadow(color: color.opacity(0.35), radius: 10, x: 0, y: 5)
+            }
+            .buttonStyle(CoinPressStyle())
+            .disabled(disabled)
+            .opacity(disabled ? 0.5 : 1.0)
+
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+}
+
+private struct CoinPressStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.88 : 1.0)
+            .animation(.spring(response: 0.2, dampingFraction: 0.55), value: configuration.isPressed)
+    }
+}
+
+// MARK: - 軌跡ヒント（点線アーク）
+
+private struct TossArcHint: View {
+    var body: some View {
+        Canvas { ctx, size in
+            let w = size.width
+            let h = size.height
+            for (startRatio, controlRatio) in [(0.25, 0.82), (0.75, 0.18)] as [(Double, Double)] {
+                var p = Path()
+                p.move(to: CGPoint(x: w * startRatio, y: h))
+                p.addQuadCurve(
+                    to: CGPoint(x: w * 0.5, y: 0),
+                    control: CGPoint(x: w * controlRatio, y: h * 0.12)
+                )
+                ctx.stroke(p, with: .color(.secondary.opacity(0.28)),
+                           style: StrokeStyle(lineWidth: 1.5, dash: [3, 5]))
+            }
+        }
+    }
+}
+
+// MARK: - 飛ぶコイン
+
+private struct TossedCoin: View {
+    let key: UUID
+    let start: CGPoint
+    let end: CGPoint
+    let color: Color
+    let onLanded: () -> Void
+
+    private struct KF {
+        var offsetX: CGFloat = 0
+        var offsetY: CGFloat = 0
+        var rotation: Double = 0
+        var scale: CGFloat = 1
+        var opacity: Double = 1
+    }
+
+    @State private var fire = false
+    private let duration: Double = 0.65
+
+    private var dx: CGFloat { end.x - start.x }
+    private var dy: CGFloat { end.y - start.y }
+    private var bulge: CGFloat { dx >= 0 ? 45 : -45 }
+
+    var body: some View {
+        Circle()
+            .fill(LinearGradient(
+                colors: [color.opacity(0.95), color.opacity(0.70)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            ))
+            .overlay(
+                ZStack {
+                    Circle().stroke(.white.opacity(0.28), lineWidth: 1.5).padding(5)
+                    Text("¥").font(.title3.bold()).foregroundStyle(.white)
+                }
+            )
+            .shadow(color: color.opacity(0.55), radius: 10, x: 0, y: 4)
+            .frame(width: 50, height: 50)
+            .keyframeAnimator(initialValue: KF(), trigger: fire) { content, v in
+                content
+                    .offset(x: v.offsetX, y: v.offsetY)
+                    .rotationEffect(.degrees(v.rotation))
+                    .scaleEffect(v.scale)
+                    .opacity(v.opacity)
+            } keyframes: { _ in
+                KeyframeTrack(\.offsetX) {
+                    LinearKeyframe(0, duration: 0.01)
+                    CubicKeyframe(dx * 0.5 + bulge, duration: duration * 0.5)
+                    CubicKeyframe(dx, duration: duration * 0.5)
+                }
+                KeyframeTrack(\.offsetY) {
+                    LinearKeyframe(0, duration: 0.01)
+                    CubicKeyframe(dy * 0.30, duration: duration * 0.40)
+                    CubicKeyframe(dy, duration: duration * 0.60)
+                }
+                KeyframeTrack(\.rotation) {
+                    LinearKeyframe(0, duration: 0.01)
+                    LinearKeyframe(540, duration: duration)
+                }
+                KeyframeTrack(\.scale) {
+                    LinearKeyframe(1.0, duration: duration * 0.88)
+                    LinearKeyframe(0.4, duration: duration * 0.12)
+                }
+                KeyframeTrack(\.opacity) {
+                    LinearKeyframe(1.0, duration: duration * 0.82)
+                    LinearKeyframe(0.0, duration: duration * 0.18)
+                }
+            }
+            .position(start)
+            .allowsHitTesting(false)
+            .onAppear {
+                fire = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.05) {
+                    onLanded()
+                }
+            }
+            .id(key)
     }
 }
 
