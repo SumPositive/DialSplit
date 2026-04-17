@@ -323,7 +323,7 @@ private struct TipSheetView: View {
                         price: product.displayPrice,
                         label: isLarge
                             ? String(localized: "たっぷり応援")
-                            : String(localized: "少し応援"),
+                            : String(localized: "しっかり応援"),
                         color: coinColor,
                         disabled: activeThrow != nil || store.isPurchasing
                     ) {
