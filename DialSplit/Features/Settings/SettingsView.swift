@@ -20,6 +20,7 @@ struct SettingsView: View {
     @State private var showTipSheet = false
     @State private var showAdSheet = false
     @State private var showAdThanks = false
+    @State private var showDialSettings = false
 
     private var aboutURL: URL? {
         let isEnglish = Locale.preferredLanguages.first?.hasPrefix("en") == true
@@ -46,26 +47,40 @@ struct SettingsView: View {
         @Bindable var settings = settings
         NavigationStack {
             Form {
-                // MARK: プリセット
-                Section(String(localized: "区分プリセット")) {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 8) {
-                            ForEach(NamePreset.all) { preset in
-                                PresetChip(
-                                    preset: preset,
-                                    isSelected: settings.panelNames == preset.names
-                                )
-                                .onTapGesture { settings.panelNames = preset.names }
+                // MARK: 区分
+                Section(String(localized: "区分")) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(String(localized: "プリセット表示名称"))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                            .padding(.top, 8)
+
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 8) {
+                                ForEach(NamePreset.all) { preset in
+                                    PresetChip(
+                                        preset: preset,
+                                        isSelected: settings.panelNames == preset.names
+                                    )
+                                    .onTapGesture { settings.panelNames = preset.names }
+                                }
                             }
+                            .padding(.top, 12)
+                            .padding(.bottom, 8)
+                            .padding(.leading, 2)
+                            .padding(.trailing, 2)
                         }
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 2)
                     }
                     .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
-                }
 
-                // MARK: 区別名称
-                Section(String(localized: "区分と名称")) {
+                    HStack {
+                        Text(String(localized: "区分"))
+                        Spacer()
+                        Text(String(localized: "表示名称"))
+                    }
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+
                     ForEach(0..<tiers.count, id: \.self) { index in
                         HStack {
                             Text(tiers[index].label)
@@ -84,32 +99,35 @@ struct SettingsView: View {
                     }
                 }
 
-                // MARK: ダイアルスタイル
-                Section("ダイアルスタイル") {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(DialStyle.allBuiltin, id: \.id) { style in
-                                DialStyleCell(
-                                    style: style,
-                                    isSelected: style.id == settings.dialStyle.id
-                                )
-                                .onTapGesture { settings.dialStyle = style }
+                // MARK: 表示・操作
+                Section(String(localized: "表示・操作")) {
+                    Button {
+                        showDialSettings = true
+                    } label: {
+                        HStack {
+                            Text(String(localized: "ダイアル設定"))
+                            Spacer()
+                            Text(settings.dialStyle.label)
+                                .foregroundStyle(.secondary)
+                            Image(systemName: "slider.horizontal.3")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(String(localized: "背景"))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.secondary)
+
+                        Picker("デザイン", selection: $settings.leatherStyle) {
+                            ForEach(LeatherStyle.allCases, id: \.self) { style in
+                                Text(style.localizedName).tag(style)
                             }
                         }
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 2)
+                        .pickerStyle(.segmented)
                     }
-                    .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
-                }
-
-                // MARK: 背景デザイン
-                Section("背景") {
-                    Picker("デザイン", selection: $settings.leatherStyle) {
-                        ForEach(LeatherStyle.allCases, id: \.self) { style in
-                            Text(style.localizedName).tag(style)
-                        }
-                    }
-                    .pickerStyle(.segmented)
+                    .padding(.top, 4)
+                    .padding(.bottom, 2)
                 }
 
                 // MARK: サポート
@@ -155,6 +173,21 @@ struct SettingsView: View {
             .sheet(isPresented: $showAdSheet) {
                 AdSupportSheet {
                     showAdThanks = true
+                }
+            }
+            .sheet(isPresented: $showDialSettings) {
+                NavigationStack {
+                    AZDialSettingsView(
+                        tuning: $settings.dialTuning,
+                        style: $settings.dialStyle
+                    )
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("完了") {
+                                showDialSettings = false
+                            }
+                        }
+                    }
                 }
             }
             .alert(String(localized: "ありがとうございます！"), isPresented: $showAdThanks) {
@@ -817,35 +850,5 @@ private struct PresetChip: View {
             RoundedRectangle(cornerRadius: 9)
                 .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 1.5)
         )
-    }
-}
-
-// MARK: - ダイアルスタイル選択セル
-
-private struct DialStyleCell: View {
-    let style: DialStyle
-    let isSelected: Bool
-
-    var body: some View {
-        VStack(spacing: 5) {
-            AZDialSurface(offset: 0, tickGap: 10, style: style)
-                .frame(width: 64, height: 32)
-                .clipShape(RoundedRectangle(cornerRadius: 6))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .stroke(
-                            isSelected ? Color.accentColor : Color.gray.opacity(0.3),
-                            lineWidth: isSelected ? 2.5 : 1
-                        )
-                )
-                .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
-
-            Text(style.label)
-                .font(.caption2)
-                .foregroundStyle(isSelected ? .primary : .secondary)
-                .lineLimit(1)
-        }
-        .frame(width: 64)
-        .contentShape(Rectangle())
     }
 }

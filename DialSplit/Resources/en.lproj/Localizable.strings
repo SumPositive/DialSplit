@@ -15,10 +15,16 @@
 "%lld人" = "%lld people";
 "%lld人短" = "%lldp";
 "プリセット" = "Presets";
+"プリセット表示名称" = "Preset Display Names";
 "区別" = "Tiers";
+"名称" = "Names";
+"表示名称" = "Display Names";
+"表示・操作" = "Display & Controls";
+"ダイアル" = "Dial";
 "区分プリセット" = "Tier Presets";
 "区分と名称" = "Tiers & Names";
 "ダイアルスタイル" = "Dial Style";
+"ダイアル設定" = "Dial Settings";
 "背景" = "Background";
 "デザイン" = "Design";
 "設定" = "Settings";

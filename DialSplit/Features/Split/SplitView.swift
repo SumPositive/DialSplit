@@ -122,7 +122,8 @@ struct SplitView: View {
                                     get: { settings.textTone },
                                     set: { settings.textTone = min(100, max(0, $0)) }
                                 ),
-                                dialStyle: settings.dialStyle
+                                dialStyle: settings.dialStyle,
+                                dialTuning: settings.dialTuning
                             )
                             .frame(width: cardWidth)
                             .padding(.bottom, 4)
@@ -287,7 +288,8 @@ private struct TotalAmountPanel: View {
                         min: 0, max: 999_900,
                         step: dialUnit, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: totalDialW
+                        dialWidth: totalDialW,
+                        tuning: settings.dialTuning
                     )
                     .frame(width: totalDialW)
                 }
@@ -432,6 +434,7 @@ private struct PanelStyleSegment: View {
     @Binding var textHue: Int
     @Binding var textTone: Int
     let dialStyle: DialStyle
+    let dialTuning: AZDialInteractionTuning
 
     private var brightnessText: String {
         panelBrightness > 0 ? "+\(panelBrightness)" : "\(panelBrightness)"
@@ -461,7 +464,8 @@ private struct PanelStyleSegment: View {
                     min: -40, max: 40,
                     step: 1, stepperStep: 0,
                     style: dialStyle,
-                    dialWidth: 160
+                    dialWidth: 160,
+                    tuning: dialTuning
                 )
                 .frame(maxWidth: .infinity)
             }
@@ -477,7 +481,8 @@ private struct PanelStyleSegment: View {
                     min: -20, max: 360,
                     step: 10, stepperStep: 0,
                     style: dialStyle,
-                    dialWidth: 160
+                    dialWidth: 160,
+                    tuning: dialTuning
                 )
                 .frame(maxWidth: .infinity)
             }
@@ -493,7 +498,8 @@ private struct PanelStyleSegment: View {
                     min: 0, max: 100,
                     step: 5, stepperStep: 0,
                     style: dialStyle,
-                    dialWidth: 160
+                    dialWidth: 160,
+                    tuning: dialTuning
                 )
                 .frame(maxWidth: .infinity)
             }

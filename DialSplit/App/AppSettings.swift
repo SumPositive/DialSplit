@@ -45,6 +45,11 @@ final class AppSettings {
         didSet { UserDefaults.standard.set(dialStyle.id, forKey: "dialStyle") }
     }
 
+    /// ダイアル操作設定
+    var dialTuning: AZDialInteractionTuning {
+        didSet { Self.saveDialTuning(dialTuning) }
+    }
+
     /// パネル明るさ（-40 ... 40）
     var panelBrightness: Int {
         didSet { UserDefaults.standard.set(panelBrightness, forKey: "panelBrightness") }
@@ -72,6 +77,7 @@ final class AppSettings {
 
         let dialId = UserDefaults.standard.string(forKey: "dialStyle") ?? "brass"
         dialStyle = DialStyle.builtin(id: dialId) ?? .brass
+        dialTuning = Self.loadDialTuning()
 
         let storedBrightness = UserDefaults.standard.integer(forKey: "panelBrightness")
         panelBrightness = min(40, max(-40, storedBrightness))
@@ -97,6 +103,21 @@ final class AppSettings {
     func setName(_ name: String, for index: Int) {
         while panelNames.count <= index { panelNames.append("\(panelNames.count + 1)") }
         panelNames[index] = name
+    }
+
+    private static func loadDialTuning() -> AZDialInteractionTuning {
+        guard
+            let data = UserDefaults.standard.data(forKey: "dialTuning"),
+            let tuning = try? JSONDecoder().decode(AZDialInteractionTuning.self, from: data)
+        else {
+            return .default
+        }
+        return tuning
+    }
+
+    private static func saveDialTuning(_ tuning: AZDialInteractionTuning) {
+        guard let data = try? JSONEncoder().encode(tuning) else { return }
+        UserDefaults.standard.set(data, forKey: "dialTuning")
     }
 }
 

@@ -130,7 +130,8 @@ struct Panel0View: View {
                         min: 1, max: 99,
                         step: 1, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: layout.personsDialW
+                        dialWidth: layout.personsDialW,
+                        tuning: settings.dialTuning
                     )
                     .frame(width: layout.personsDialW)
                     Spacer(minLength: 0)
@@ -234,7 +235,8 @@ struct PanelSubView: View {
                         min: 0, max: 99,
                         step: 1, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: layout.personsDialW
+                        dialWidth: layout.personsDialW,
+                        tuning: settings.dialTuning
                     )
                     .frame(width: layout.personsDialW)
 
@@ -243,7 +245,8 @@ struct PanelSubView: View {
                         min: 0, max: 999_900,
                         step: dialUnit, stepperStep: 0,
                         style: settings.dialStyle,
-                        dialWidth: layout.amountDialW
+                        dialWidth: layout.amountDialW,
+                        tuning: settings.dialTuning
                     )
                     .frame(maxWidth: .infinity)
                 }
