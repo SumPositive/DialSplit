@@ -15,10 +15,13 @@ Originally inspired by WariKan (2011), fully rebuilt in SwiftUI with SPM depende
 
 - Scroll-wheel dial input via [AZDial](https://github.com/SumPositive/AZDial)
 - BCD decimal arithmetic via [AZCalc](https://github.com/SumPositive/AZCalc) — no floating-point errors
-- 1–3 panels with custom names
+- 1–3 panels with custom names and tier presets
 - Skeuomorphic leather texture background (brown / black)
 - Brass-style dial frames
 - Configurable rounding mode (四捨五入 / 切り捨て / 切り上げ / 銀行丸め)
+- People lock and full control lock
+- Dial sensitivity tuning via dial settings sheet
+- In-app tip (StoreKit 2) and rewarded ad (AdMob) support
 
 ## Architecture
 
@@ -40,6 +43,18 @@ DialSplit/
 - iOS 17.0+
 - Xcode 16+
 - Swift 6
+
+## Changelog
+
+### 2.1.0
+- Added people lock and full control lock
+- Added dial settings sheet with sensitivity tuning
+- Refreshed settings UI layout
+- Added coin-toss animation to the tip sheet
+- Moved tip and ad support buttons directly into Settings
+
+### 2.0.1
+- Bug fixes
 
 ## License
 
