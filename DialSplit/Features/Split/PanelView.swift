@@ -100,6 +100,8 @@ struct Panel0View: View {
     let status: Split0Status
     let totalRaw: Int
     let panelWidth: CGFloat
+    let isPeopleLocked: Bool
+    @Binding var isAllLocked: Bool
 
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
@@ -134,7 +136,18 @@ struct Panel0View: View {
                         tuning: settings.dialTuning
                     )
                     .frame(width: layout.personsDialW)
+                    .allowsHitTesting(!isPeopleLocked)
+                    .opacity(isPeopleLocked ? 0.45 : 1)
                     Spacer(minLength: 0)
+                    LockToggleButton(
+                        isLocked: $isAllLocked,
+                        lockedSystemImage: "lock.fill",
+                        unlockedSystemImage: "lock.open",
+                        accessibilityLabel: String(localized: "全操作ロック"),
+                        size: 44,
+                        symbolSize: 22
+                    )
+                    .frame(width: layout.amountTextW, height: 44, alignment: .center)
                 }
                 .padding(.horizontal, H_PAD)
                 .padding(.vertical, 8)
@@ -154,6 +167,7 @@ struct Panel0View: View {
                 .frame(width: layout.personsTextW, alignment: .trailing)
                 .contentShape(Rectangle())
                 .onTapGesture {
+                    guard !isPeopleLocked else { return }
                     numpadConfig = NumpadConfig(
                         title: localizedNamedTitle("人数（%@）", name),
                         initialValue: persons0,
@@ -209,6 +223,8 @@ struct PanelSubView: View {
     @Binding var split: Int
     let dialUnit: Int
     let panelWidth: CGFloat
+    let isPeopleLocked: Bool
+    let isAmountLocked: Bool
 
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
@@ -239,6 +255,8 @@ struct PanelSubView: View {
                         tuning: settings.dialTuning
                     )
                     .frame(width: layout.personsDialW)
+                    .allowsHitTesting(!isPeopleLocked)
+                    .opacity(isPeopleLocked ? 0.45 : 1)
 
                     AZDialView(
                         value: $split,
@@ -249,6 +267,8 @@ struct PanelSubView: View {
                         tuning: settings.dialTuning
                     )
                     .frame(maxWidth: .infinity)
+                    .allowsHitTesting(!isAmountLocked)
+                    .opacity(isAmountLocked ? 0.45 : 1)
                 }
                 .padding(.horizontal, H_PAD)
                 .padding(.vertical, 8)
@@ -268,6 +288,7 @@ struct PanelSubView: View {
                 .frame(width: layout.personsTextW, alignment: .trailing)
                 .contentShape(Rectangle())
                 .onTapGesture {
+                    guard !isPeopleLocked else { return }
                     numpadConfig = NumpadConfig(
                         title: localizedNamedTitle("人数（%@）", name),
                         initialValue: persons,
@@ -303,7 +324,7 @@ struct PanelSubView: View {
             .frame(width: layout.amountTextW, alignment: .trailing)
             .contentShape(Rectangle())
             .onTapGesture {
-                guard persons > 0 else { return }
+                guard persons > 0, !isAmountLocked else { return }
                 numpadConfig = NumpadConfig(
                     title: localizedNamedTitle("金額（%@）", name),
                     initialValue: split,

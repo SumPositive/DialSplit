@@ -21,6 +21,10 @@
 "表示名称" = "Display Names";
 "表示・操作" = "Display & Controls";
 "ダイアル" = "Dial";
+"人数ロック" = "People Lock";
+"全操作ロック" = "Lock All Controls";
+"ロック中" = "Locked";
+"アンロック中" = "Unlocked";
 "区分プリセット" = "Tier Presets";
 "区分と名称" = "Tiers & Names";
 "ダイアルスタイル" = "Dial Style";
