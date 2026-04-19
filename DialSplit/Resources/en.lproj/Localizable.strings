@@ -29,6 +29,10 @@
 "区分と名称" = "Tiers & Names";
 "ダイアルスタイル" = "Dial Style";
 "ダイアル設定" = "Dial Settings";
+"外観モード" = "Appearance Mode";
+"自動" = "Auto";
+"ライト" = "Light";
+"ダーク" = "Dark";
 "背景" = "Background";
 "デザイン" = "Design";
 "設定" = "Settings";

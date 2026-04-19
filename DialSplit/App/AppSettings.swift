@@ -50,6 +50,11 @@ final class AppSettings {
         didSet { Self.saveDialTuning(dialTuning) }
     }
 
+    /// 外観モード
+    var appearanceMode: AppearanceMode {
+        didSet { UserDefaults.standard.set(appearanceMode.rawValue, forKey: "appearanceMode") }
+    }
+
     /// パネル明るさ（-40 ... 40）
     var panelBrightness: Int {
         didSet { UserDefaults.standard.set(panelBrightness, forKey: "panelBrightness") }
@@ -78,6 +83,9 @@ final class AppSettings {
         let dialId = UserDefaults.standard.string(forKey: "dialStyle") ?? "brass"
         dialStyle = DialStyle.builtin(id: dialId) ?? .brass
         dialTuning = Self.loadDialTuning()
+
+        let appearanceRaw = UserDefaults.standard.string(forKey: "appearanceMode") ?? ""
+        appearanceMode = AppearanceMode(rawValue: appearanceRaw) ?? .automatic
 
         let storedBrightness = UserDefaults.standard.integer(forKey: "panelBrightness")
         panelBrightness = min(40, max(-40, storedBrightness))
@@ -118,6 +126,28 @@ final class AppSettings {
     private static func saveDialTuning(_ tuning: AZDialInteractionTuning) {
         guard let data = try? JSONEncoder().encode(tuning) else { return }
         UserDefaults.standard.set(data, forKey: "dialTuning")
+    }
+}
+
+enum AppearanceMode: String, CaseIterable {
+    case automatic
+    case light
+    case dark
+
+    var localizedName: String {
+        switch self {
+        case .automatic: return String(localized: "自動")
+        case .light: return String(localized: "ライト")
+        case .dark: return String(localized: "ダーク")
+        }
+    }
+
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .automatic: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
     }
 }
 

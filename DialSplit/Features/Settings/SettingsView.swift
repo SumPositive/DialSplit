@@ -115,6 +115,21 @@ struct SettingsView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 10) {
+                        Text(String(localized: "外観モード"))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.secondary)
+
+                        Picker("外観モード", selection: $settings.appearanceMode) {
+                            ForEach(AppearanceMode.allCases, id: \.self) { mode in
+                                Text(mode.localizedName).tag(mode)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+                    .padding(.top, 4)
+                    .padding(.bottom, 2)
+
+                    VStack(alignment: .leading, spacing: 10) {
                         Text(String(localized: "背景"))
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)

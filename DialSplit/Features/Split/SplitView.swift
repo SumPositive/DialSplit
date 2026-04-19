@@ -52,6 +52,7 @@ struct LockToggleButton: View {
 
 struct SplitView: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(\.colorScheme) private var colorScheme
     @State private var vm = SplitViewModel()
     @State private var showSettings = false
     @State private var isPeopleLocked = false
@@ -59,6 +60,10 @@ struct SplitView: View {
     private let cardSideMargin: CGFloat = 16
     // iPadでは、iPhone Pro Max相当の幅を上限にして中央カラム表示
     private let maxContentWidth: CGFloat = 430
+
+    private var settingsSheetColorScheme: ColorScheme? {
+        settings.appearanceMode.colorScheme ?? colorScheme
+    }
 
     var body: some View {
         @Bindable var vm = vm
@@ -176,6 +181,7 @@ struct SplitView: View {
         .sheet(isPresented: $showSettings) {
             SettingsView()
                 .environment(settings)
+                .preferredColorScheme(settingsSheetColorScheme)
         }
     }
 }

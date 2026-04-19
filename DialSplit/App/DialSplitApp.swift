@@ -12,6 +12,7 @@ struct DialSplitApp: App {
             SplitView()
                 .environment(settings)
                 .frame(minWidth: isPad ? iPhoneSE3Width : 0)
+                .preferredColorScheme(settings.appearanceMode.colorScheme)
         }
         .defaultSize(
             width: isPad ? iPadDefaultWindowSize.width : UIScreen.main.bounds.width,
