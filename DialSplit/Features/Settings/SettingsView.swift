@@ -210,6 +210,7 @@ struct SettingsView: View {
             } message: {
                 Text(String(localized: "広告をご覧いただきありがとうございます。これからも改善を続けてまいります！"))
             }
+            .preferredColorScheme(settings.appearanceMode.colorScheme)
         }
     }
 }

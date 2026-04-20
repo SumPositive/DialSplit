@@ -518,67 +518,88 @@ private struct PanelStyleSegment: View {
         return "\(value)°"
     }
 
+    @State private var isExpanded = false
+
     var body: some View {
         VStack(spacing: 8) {
-            Text("パネルスタイル")
-                .font(.caption.bold())
-                .foregroundStyle(.primary)
-
-            HStack(spacing: 8) {
-                Text("\(String(localized: "パネルの明るさ")) \(brightnessText)")
-                    .font(.caption2.bold())
-                    .foregroundStyle(.secondary)
-                    .frame(width: 130, alignment: .leading)
-
-                AZDialView(
-                    value: $panelBrightness,
-                    min: -40, max: 40,
-                    step: 1, stepperStep: 0,
-                    style: dialStyle,
-                    dialWidth: 160,
-                    tuning: dialTuning
-                )
-                .frame(maxWidth: .infinity)
-                .allowsHitTesting(!isLocked)
-                .opacity(isLocked ? 0.45 : 1)
+            Button {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
+                    isExpanded.toggle()
+                }
+            } label: {
+                HStack {
+                    Text("パネルスタイル")
+                        .font(.caption.bold())
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Image(systemName: "chevron.down")
+                        .font(.caption.bold())
+                        .foregroundStyle(.secondary)
+                        .rotationEffect(.degrees(isExpanded ? 180 : 0))
+                }
             }
+            .buttonStyle(.plain)
 
-            HStack(spacing: 8) {
-                Text("\(String(localized: "文字の色")) \(textColorText)")
-                    .font(.caption2.bold())
-                    .foregroundStyle(.secondary)
-                    .frame(width: 130, alignment: .leading)
+            if isExpanded {
+                VStack(spacing: 8) {
+                    HStack(spacing: 8) {
+                        Text("\(String(localized: "パネルの明るさ")) \(brightnessText)")
+                            .font(.caption2.bold())
+                            .foregroundStyle(.secondary)
+                            .frame(width: 130, alignment: .leading)
 
-                AZDialView(
-                    value: $textHue,
-                    min: -20, max: 360,
-                    step: 10, stepperStep: 0,
-                    style: dialStyle,
-                    dialWidth: 160,
-                    tuning: dialTuning
-                )
-                .frame(maxWidth: .infinity)
-                .allowsHitTesting(!isLocked)
-                .opacity(isLocked ? 0.45 : 1)
-            }
+                        AZDialView(
+                            value: $panelBrightness,
+                            min: -40, max: 40,
+                            step: 1, stepperStep: 0,
+                            style: dialStyle,
+                            dialWidth: 160,
+                            tuning: dialTuning
+                        )
+                        .frame(maxWidth: .infinity)
+                        .allowsHitTesting(!isLocked)
+                        .opacity(isLocked ? 0.45 : 1)
+                    }
 
-            HStack(spacing: 8) {
-                Text("\(String(localized: "濃淡")) \(textTone)")
-                    .font(.caption2.bold())
-                    .foregroundStyle(.secondary)
-                    .frame(width: 130, alignment: .leading)
+                    HStack(spacing: 8) {
+                        Text("\(String(localized: "文字の色")) \(textColorText)")
+                            .font(.caption2.bold())
+                            .foregroundStyle(.secondary)
+                            .frame(width: 130, alignment: .leading)
 
-                AZDialView(
-                    value: $textTone,
-                    min: 0, max: 100,
-                    step: 5, stepperStep: 0,
-                    style: dialStyle,
-                    dialWidth: 160,
-                    tuning: dialTuning
-                )
-                .frame(maxWidth: .infinity)
-                .allowsHitTesting(!isLocked)
-                .opacity(isLocked ? 0.45 : 1)
+                        AZDialView(
+                            value: $textHue,
+                            min: -20, max: 360,
+                            step: 10, stepperStep: 0,
+                            style: dialStyle,
+                            dialWidth: 160,
+                            tuning: dialTuning
+                        )
+                        .frame(maxWidth: .infinity)
+                        .allowsHitTesting(!isLocked)
+                        .opacity(isLocked ? 0.45 : 1)
+                    }
+
+                    HStack(spacing: 8) {
+                        Text("\(String(localized: "濃淡")) \(textTone)")
+                            .font(.caption2.bold())
+                            .foregroundStyle(.secondary)
+                            .frame(width: 130, alignment: .leading)
+
+                        AZDialView(
+                            value: $textTone,
+                            min: 0, max: 100,
+                            step: 5, stepperStep: 0,
+                            style: dialStyle,
+                            dialWidth: 160,
+                            tuning: dialTuning
+                        )
+                        .frame(maxWidth: .infinity)
+                        .allowsHitTesting(!isLocked)
+                        .opacity(isLocked ? 0.45 : 1)
+                    }
+                }
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
         .padding(.horizontal, 16)
@@ -591,5 +612,6 @@ private struct PanelStyleSegment: View {
                     .strokeBorder(.white.opacity(0.24), lineWidth: 1)
             }
         )
+        .clipped()
     }
 }
