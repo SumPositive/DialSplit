@@ -129,21 +129,6 @@ struct SettingsView: View {
                     .padding(.top, 4)
                     .padding(.bottom, 2)
 
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(String(localized: "settings.background.title"))
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(.secondary)
-
-                        Picker("settings.design.picker", selection: $settings.leatherStyle) {
-                            ForEach(LeatherStyle.allCases, id: \.self) { style in
-                                Text(style.localizedName).tag(style)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                    }
-                    .padding(.top, 4)
-                    .padding(.bottom, 2)
-
                     VStack(alignment: .leading, spacing: 8) {
                         Text(String(localized: "settings.amountDialStep"))
                             .font(.subheadline.weight(.semibold))

@@ -158,6 +158,10 @@ struct SplitView: View {
                                     get: { settings.textTone },
                                     set: { settings.textTone = min(100, max(0, $0)) }
                                 ),
+                                leatherStyle: Binding(
+                                    get: { settings.leatherStyle },
+                                    set: { settings.leatherStyle = $0 }
+                                ),
                                 dialStyle: settings.dialStyle,
                                 dialTuning: settings.dialTuning,
                                 isLocked: isAllLocked
@@ -488,6 +492,7 @@ private struct PanelStyleSegment: View {
     @Binding var panelBrightness: Int
     @Binding var textHue: Int
     @Binding var textTone: Int
+    @Binding var leatherStyle: LeatherStyle
     let dialStyle: DialStyle
     let dialTuning: AZDialInteractionTuning
     let isLocked: Bool
@@ -546,7 +551,7 @@ private struct PanelStyleSegment: View {
                         .opacity(isLocked ? 0.45 : 1)
                     }
 
-                    TextColorPickerView(textHue: $textHue, textTone: $textTone)
+                    TextColorPickerView(textHue: $textHue, textTone: $textTone, leatherStyle: $leatherStyle)
                         .allowsHitTesting(!isLocked)
                         .opacity(isLocked ? 0.45 : 1)
                 }
@@ -572,6 +577,7 @@ private struct PanelStyleSegment: View {
 private struct TextColorPickerView: View {
     @Binding var textHue: Int
     @Binding var textTone: Int
+    @Binding var leatherStyle: LeatherStyle
     @Environment(\.colorScheme) private var cs
 
     private let hueStops: [Int] = [-20, -10, 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
@@ -628,6 +634,19 @@ private struct TextColorPickerView: View {
                     }
                 }
             }
+
+            // 背景
+            Text(String(localized: "settings.background.title"))
+                .font(.footnote.bold())
+                .foregroundStyle(.primary)
+                .padding(.top, 2)
+
+            Picker("settings.background.title", selection: $leatherStyle) {
+                ForEach(LeatherStyle.allCases, id: \.self) { style in
+                    Text(style.localizedName).tag(style)
+                }
+            }
+            .pickerStyle(.segmented)
         }
     }
 }
