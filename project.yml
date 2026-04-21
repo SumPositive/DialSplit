@@ -10,9 +10,6 @@ packages:
   AZDial:
     url: https://github.com/SumPositive/AZDial
     from: 3.0.0
-  AZCalc:
-    url: https://github.com/SumPositive/AZCalc
-    from: 1.0.0
   GoogleMobileAds:
     url: https://github.com/googleads/swift-package-manager-google-mobile-ads.git
     from: 12.0.0
@@ -29,8 +26,6 @@ targets:
     dependencies:
       - package: AZDial
         product: AZDial
-      - package: AZCalc
-        product: AZDecimal
       - package: GoogleMobileAds
         product: GoogleMobileAds
     settings:

@@ -1,15 +1,6 @@
 {
-  "originHash" : "40132c9815b906c253ce7caf2a92e051e06e22fa7f864a6132357cc13cf97ad8",
+  "originHash" : "5d53ddebd294db49331a7adeded5ee0dc1d4a950812881e4479f76096d00c998",
   "pins" : [
-    {
-      "identity" : "azcalc",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SumPositive/AZCalc",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "1d0734ee943c72ebf2134ab10af0c000048b169b"
-      }
-    },
     {
       "identity" : "azdial",
       "kind" : "remoteSourceControl",

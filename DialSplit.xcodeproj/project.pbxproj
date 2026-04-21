@@ -19,7 +19,6 @@
 		A1B2C3D4E5F60718293A4B6A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B6B /* Localizable.xcstrings */; };
 		A670342EB9D61FFA777DA4F0 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */; };
 		B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */; };
-		B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */ = {isa = PBXBuildFile; productRef = 56FFB9935599C33779D4A54D /* AZDecimal */; };
 		B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8EDD5282E5537EC9490C0 /* SplitView.swift */; };
 		C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */; };
 /* End PBXBuildFile section */
@@ -48,7 +47,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */,
-				B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */,
 				4420F4B5E4D44A0FA90F6B11 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,7 +156,6 @@
 			name = DialSplit;
 			packageProductDependencies = (
 				6DC9D231461363EC29442A9E /* AZDial */,
-				56FFB9935599C33779D4A54D /* AZDecimal */,
 				4420F4B5E4D44A0FA90F6B10 /* GoogleMobileAds */,
 			);
 			productName = DialSplit;
@@ -185,7 +182,6 @@
 			mainGroup = 13F4D6260A8FB74294E3B94C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */,
 				759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */,
 				4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
@@ -308,6 +304,7 @@
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 5C2UYK6F45;
 				INFOPLIST_FILE = DialSplit/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DialSplit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -333,6 +330,7 @@
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 5C2UYK6F45;
 				INFOPLIST_FILE = DialSplit/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DialSplit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -437,14 +435,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SumPositive/AZCalc";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
 		4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
@@ -468,11 +458,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
-		};
-		56FFB9935599C33779D4A54D /* AZDecimal */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2338B6A43128697F9AAFF623 /* XCRemoteSwiftPackageReference "AZCalc" */;
-			productName = AZDecimal;
 		};
 		6DC9D231461363EC29442A9E /* AZDial */ = {
 			isa = XCSwiftPackageProductDependency;
