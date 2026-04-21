@@ -385,7 +385,7 @@ private struct DialUnitSegment: View {
                         dialUnit = units[i]
                     } label: {
                         Text(labels[i])
-                            .font(.subheadline.bold().monospacedDigit())
+                            .font(.headline.bold().monospacedDigit())
                             .foregroundStyle(
                                 isSelected
                                     ? Color(red: 1.0, green: 0.9647, blue: 0.8784)
@@ -529,8 +529,8 @@ private struct PanelStyleSegment: View {
                 VStack(spacing: 8) {
                     HStack(spacing: 8) {
                         Text("\(String(localized: "panel.brightness")) \(brightnessText)")
-                            .font(.caption2.bold())
-                            .foregroundStyle(.secondary)
+                            .font(.footnote.bold())
+                            .foregroundStyle(.primary)
                             .frame(width: 130, alignment: .leading)
 
                         AZDialView(
@@ -546,43 +546,9 @@ private struct PanelStyleSegment: View {
                         .opacity(isLocked ? 0.45 : 1)
                     }
 
-                    HStack(spacing: 8) {
-                        Text("\(String(localized: "panel.textColor")) \(textColorText)")
-                            .font(.caption2.bold())
-                            .foregroundStyle(.secondary)
-                            .frame(width: 130, alignment: .leading)
-
-                        AZDialView(
-                            value: $textHue,
-                            min: -20, max: 360,
-                            step: 10, stepperStep: 0,
-                            style: dialStyle,
-                            dialWidth: 160,
-                            tuning: dialTuning
-                        )
-                        .frame(maxWidth: .infinity)
+                    TextColorPickerView(textHue: $textHue, textTone: $textTone)
                         .allowsHitTesting(!isLocked)
                         .opacity(isLocked ? 0.45 : 1)
-                    }
-
-                    HStack(spacing: 8) {
-                        Text("\(String(localized: "panel.tone")) \(textTone)")
-                            .font(.caption2.bold())
-                            .foregroundStyle(.secondary)
-                            .frame(width: 130, alignment: .leading)
-
-                        AZDialView(
-                            value: $textTone,
-                            min: 0, max: 100,
-                            step: 5, stepperStep: 0,
-                            style: dialStyle,
-                            dialWidth: 160,
-                            tuning: dialTuning
-                        )
-                        .frame(maxWidth: .infinity)
-                        .allowsHitTesting(!isLocked)
-                        .opacity(isLocked ? 0.45 : 1)
-                    }
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
@@ -598,5 +564,96 @@ private struct PanelStyleSegment: View {
             }
         )
         .clipped()
+    }
+}
+
+// MARK: - 文字色ピッカー
+
+private struct TextColorPickerView: View {
+    @Binding var textHue: Int
+    @Binding var textTone: Int
+    @Environment(\.colorScheme) private var cs
+
+    private let hueStops: [Int] = [-20, -10, 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+    private let toneStops: [Int] = [0, 20, 40, 60, 80, 100]
+
+    private var selectedHue: Int { normalizedTextHueValue(textHue) }
+    private var nearestTone: Int {
+        toneStops.min(by: { abs($0 - textTone) < abs($1 - textTone) }) ?? 0
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+
+            // 色（hue）
+            Text(String(localized: "panel.textColor"))
+                .font(.footnote.bold())
+                .foregroundStyle(.primary)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(hueStops, id: \.self) { hue in
+                        TextColorSwatch(
+                            color: linkedTextColor(hue: hue, tone: max(50, textTone), for: cs),
+                            isSelected: selectedHue == hue
+                        )
+                        .onTapGesture {
+                            withAnimation(.spring(response: 0.2, dampingFraction: 0.6)) {
+                                textHue = hue
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 4)
+                .padding(.horizontal, 2)
+            }
+
+            // 濃淡（tone）
+            Text(String(localized: "panel.tone"))
+                .font(.footnote.bold())
+                .foregroundStyle(.primary)
+                .padding(.top, 2)
+
+            HStack(spacing: 0) {
+                ForEach(toneStops, id: \.self) { tone in
+                    TextColorSwatch(
+                        color: linkedTextColor(hue: textHue, tone: tone, for: cs),
+                        isSelected: nearestTone == tone
+                    )
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        withAnimation(.spring(response: 0.2, dampingFraction: 0.6)) {
+                            textTone = tone
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+private struct TextColorSwatch: View {
+    let color: Color
+    let isSelected: Bool
+
+    var body: some View {
+        Circle()
+            .fill(color)
+            .frame(width: 34, height: 34)
+            .overlay(
+                Circle()
+                    .strokeBorder(
+                        isSelected ? Color.white : Color.secondary.opacity(0.25),
+                        lineWidth: isSelected ? 2.5 : 1
+                    )
+            )
+            .overlay(
+                Circle()
+                    .strokeBorder(.black.opacity(isSelected ? 0.2 : 0), lineWidth: 1.5)
+                    .padding(3)
+            )
+            .shadow(color: .black.opacity(0.25), radius: 3, x: 0, y: 1)
+            .scaleEffect(isSelected ? 1.14 : 1.0)
+            .animation(.spring(response: 0.2, dampingFraction: 0.6), value: isSelected)
     }
 }
