@@ -22,12 +22,17 @@ import SwiftUI
 import AZDial
 
 private func localizedPeopleCompact(_ count: Int) -> String {
-    let format = NSLocalizedString("%lld人短", comment: "")
+    let format = NSLocalizedString("format.people.long", comment: "")
     return String(format: format, locale: Locale.current, count)
 }
 
-private func localizedNamedTitle(_ formatKey: String, _ name: String) -> String {
-    let format = NSLocalizedString(formatKey, comment: "")
+private func localizedPeopleTitle(_ name: String) -> String {
+    let format = NSLocalizedString("format.people.title", comment: "")
+    return String(format: format, locale: Locale.current, name)
+}
+
+private func localizedAmountTitle(_ name: String) -> String {
+    let format = NSLocalizedString("format.amount.title", comment: "")
     return String(format: format, locale: Locale.current, name)
 }
 
@@ -137,7 +142,7 @@ struct Panel0View: View {
                         isLocked: $isAllLocked,
                         lockedSystemImage: "lock.fill",
                         unlockedSystemImage: "lock.open",
-                        accessibilityLabel: String(localized: "全操作ロック"),
+                        accessibilityLabel: String(localized: "lock.allControls"),
                         size: 44,
                         symbolSize: 22
                     )
@@ -163,7 +168,7 @@ struct Panel0View: View {
                 .onTapGesture {
                     guard !isPeopleLocked else { return }
                     numpadConfig = NumpadConfig(
-                        title: localizedNamedTitle("人数（%@）", name),
+                        title: localizedPeopleTitle(name),
                         initialValue: persons0,
                         maxValue: 99,
                         minValue: 1,
@@ -191,7 +196,7 @@ struct Panel0View: View {
             .frame(width: layout.amountTextW, alignment: .trailing)
             .overlay(alignment: .bottomTrailing) {
                 if status == .rounded {
-                    Text("端数切り上げ")
+                    Text("split.roundedUp")
                         .font(.caption2.bold())
                         .foregroundStyle(amountColor)
                         .fixedSize()
@@ -278,7 +283,7 @@ struct PanelSubView: View {
                 .onTapGesture {
                     guard !isPeopleLocked else { return }
                     numpadConfig = NumpadConfig(
-                        title: localizedNamedTitle("人数（%@）", name),
+                        title: localizedPeopleTitle(name),
                         initialValue: persons,
                         maxValue: 99,
                         minValue: 0,
@@ -308,7 +313,7 @@ struct PanelSubView: View {
             .onTapGesture {
                 guard persons > 0, !isAmountLocked else { return }
                 numpadConfig = NumpadConfig(
-                    title: localizedNamedTitle("金額（%@）", name),
+                    title: localizedAmountTitle(name),
                     initialValue: split,
                     maxValue: MoneyFormat.maxMinorValue,
                     minValue: 0,

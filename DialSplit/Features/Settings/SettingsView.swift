@@ -37,10 +37,10 @@ struct SettingsView: View {
     }
 
     private let tiers: [(label: String, placeholderKey: String)] = [
-        ("A", "大富豪"),
-        ("B", "富豪"),
-        ("C", "平民"),
-        ("D", "貧民"),
+        ("A", "preset.name.vip"),
+        ("B", "preset.name.high"),
+        ("C", "preset.name.mid"),
+        ("D", "preset.name.low"),
     ]
 
     var body: some View {
@@ -48,9 +48,9 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 // MARK: 区分
-                Section(String(localized: "区分")) {
+                Section(String(localized: "settings.section.category")) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(String(localized: "プリセット表示名称"))
+                        Text(String(localized: "settings.presetDisplayNames"))
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)
                             .padding(.top, 8)
@@ -74,9 +74,9 @@ struct SettingsView: View {
                     .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
 
                     HStack {
-                        Text(String(localized: "区分"))
+                        Text(String(localized: "settings.section.category"))
                         Spacer()
-                        Text(String(localized: "表示名称"))
+                        Text(String(localized: "settings.displayName"))
                     }
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.secondary)
@@ -100,12 +100,12 @@ struct SettingsView: View {
                 }
 
                 // MARK: 表示・操作
-                Section(String(localized: "表示・操作")) {
+                Section(String(localized: "settings.section.displayControls")) {
                     Button {
                         showDialSettings = true
                     } label: {
                         HStack {
-                            Text(String(localized: "ダイアル設定"))
+                            Text(String(localized: "settings.dialSettings"))
                             Spacer()
                             Text(settings.dialStyle.label)
                                 .foregroundStyle(.secondary)
@@ -115,11 +115,11 @@ struct SettingsView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(String(localized: "外観モード"))
+                        Text(String(localized: "settings.appearanceMode.title"))
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)
 
-                        Picker("外観モード", selection: $settings.appearanceMode) {
+                        Picker("settings.appearanceMode.title", selection: $settings.appearanceMode) {
                             ForEach(AppearanceMode.allCases, id: \.self) { mode in
                                 Text(mode.localizedName).tag(mode)
                             }
@@ -130,11 +130,11 @@ struct SettingsView: View {
                     .padding(.bottom, 2)
 
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(String(localized: "背景"))
+                        Text(String(localized: "settings.background.title"))
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)
 
-                        Picker("デザイン", selection: $settings.leatherStyle) {
+                        Picker("settings.design.picker", selection: $settings.leatherStyle) {
                             ForEach(LeatherStyle.allCases, id: \.self) { style in
                                 Text(style.localizedName).tag(style)
                             }
@@ -145,16 +145,16 @@ struct SettingsView: View {
                     .padding(.bottom, 2)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(String(localized: "金額ダイアルステップ"))
+                        Text(String(localized: "settings.amountDialStep"))
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)
 
                         ForEach(0..<5, id: \.self) { index in
                             HStack {
-                                Text(String(format: NSLocalizedString("ステップ%d", comment: ""), index + 1))
+                                Text(String(format: NSLocalizedString("settings.stepFormat", comment: ""), index + 1))
                                 Spacer()
                                 Picker(
-                                    String(format: NSLocalizedString("ステップ%d", comment: ""), index + 1),
+                                    String(format: NSLocalizedString("settings.stepFormat", comment: ""), index + 1),
                                     selection: Binding(
                                         get: { settings.amountDialSteps[index] },
                                         set: { settings.setAmountDialStep($0, at: index) }
@@ -173,8 +173,8 @@ struct SettingsView: View {
                 }
 
                 // MARK: サポート
-                Section("サポート") {
-                    Button(String(localized: "このアプリについて")) {
+                Section("settings.section.support") {
+                    Button(String(localized: "settings.aboutApp")) {
                         if let url = aboutURL {
                             openURL(url)
                         }
@@ -182,11 +182,11 @@ struct SettingsView: View {
                 }
 
                 // MARK: 開発者を応援
-                Section(String(localized: "開発者を応援")) {
-                    Button(String(localized: "投げ銭で応援する")) {
+                Section(String(localized: "settings.section.supportDeveloper")) {
+                    Button(String(localized: "support.tip.title")) {
                         showTipSheet = true
                     }
-                    Button(String(localized: "広告を見て応援する")) {
+                    Button(String(localized: "support.ad.title")) {
                         showAdSheet = true
                     }
                 }
@@ -202,11 +202,11 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationTitle("設定")
+            .navigationTitle("settings.title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("完了") { dismiss() }
+                    Button("common.done") { dismiss() }
                 }
             }
             .sheet(isPresented: $showTipSheet) {
@@ -225,17 +225,17 @@ struct SettingsView: View {
                     )
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
-                            Button("完了") {
+                            Button("common.done") {
                                 showDialSettings = false
                             }
                         }
                     }
                 }
             }
-            .alert(String(localized: "ありがとうございます！"), isPresented: $showAdThanks) {
-                Button("OK", role: .cancel) {}
+            .alert(String(localized: "support.thanksTitle"), isPresented: $showAdThanks) {
+                Button("common.ok", role: .cancel) {}
             } message: {
-                Text(String(localized: "広告をご覧いただきありがとうございます。これからも改善を続けてまいります！"))
+                Text(String(localized: "support.ad.thanksMessage"))
             }
             .preferredColorScheme(settings.appearanceMode.colorScheme)
         }
@@ -321,18 +321,18 @@ private struct TipSheetView: View {
                     }
                 }
             }
-            .navigationTitle(String(localized: "投げ銭で応援する"))
+            .navigationTitle(String(localized: "support.tip.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(String(localized: "閉じる")) { dismiss() }
+                    Button(String(localized: "common.close")) { dismiss() }
                 }
             }
             .task { await store.loadProducts() }
-            .alert(String(localized: "ありがとうございます！"), isPresented: $showThanks) {
-                Button("OK") { dismiss() }
+            .alert(String(localized: "support.thanksTitle"), isPresented: $showThanks) {
+                Button("common.ok") { dismiss() }
             } message: {
-                Text(String(localized: "応援いただきありがとうございます。これからも改善を続けてまいります！"))
+                Text(String(localized: "support.tip.thanksMessage"))
             }
         }
     }
@@ -348,7 +348,7 @@ private struct TipSheetView: View {
                 .padding(.horizontal, 56)
                 .padding(.top, 6)
 
-            Text(String(localized: "このアプリの開発を応援していただけると励みになります。"))
+            Text(String(localized: "support.tip.message"))
                 .font(.callout)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
@@ -385,7 +385,7 @@ private struct TipSheetView: View {
         if store.isLoadingProducts {
             ProgressView()
         } else if store.products.isEmpty {
-            Text(String(localized: "現在ご利用いただけません。"))
+            Text(String(localized: "support.unavailable"))
                 .font(.callout)
                 .foregroundStyle(.secondary)
         } else {
@@ -398,8 +398,8 @@ private struct TipSheetView: View {
                     CoinButtonView(
                         price: product.displayPrice,
                         label: isLarge
-                            ? String(localized: "たっぷり応援")
-                            : String(localized: "しっかり応援"),
+                            ? String(localized: "support.tip.large")
+                            : String(localized: "support.tip.small"),
                         color: coinColor,
                         disabled: activeThrow != nil || store.isPurchasing
                     ) {
@@ -527,7 +527,7 @@ private struct TossedCoin: View {
             .overlay(
                 ZStack {
                     Circle().stroke(.white.opacity(0.28), lineWidth: 1.5).padding(5)
-                    Text("¥").font(.title3.bold()).foregroundStyle(.white)
+                    Text(verbatim: "¥").font(.title3.bold()).foregroundStyle(.white)
                 }
             )
             .shadow(color: color.opacity(0.55), radius: 10, x: 0, y: 4)
@@ -583,9 +583,9 @@ private struct AdSupportSheet: View {
 #else
         NavigationStack {
             VStack(spacing: 16) {
-                Text(String(localized: "AdMob未導入"))
+                Text(String(localized: "admob.notLinked"))
                     .font(.headline)
-                Text(String(localized: "GoogleMobileAds パッケージを追加すると広告応援機能が有効になります。"))
+                Text(String(localized: "admob.packageMessage"))
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 20)
@@ -619,19 +619,19 @@ private struct AdMobRewardedSheet: View {
                     size: CGSize(width: 300, height: 250)
                 )
 
-                Text(String(localized: "動画広告"))
+                Text(String(localized: "support.ad.videoTitle"))
                     .font(.headline)
 
-                Text(String(localized: "最後まで視聴すると閉じる【×】ボタンが現れます"))
+                Text(String(localized: "support.ad.closeHint"))
                     .font(.footnote)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
                     .padding(.horizontal)
 
                 if loader.isLoading {
-                    ProgressView(String(localized: "広告を読み込み中..."))
+                    ProgressView(String(localized: "support.ad.loading"))
                 } else {
-                    Button(String(localized: "広告を再生する")) {
+                    Button(String(localized: "support.ad.play")) {
                         if let root = UIApplication.topMostViewController() {
                             loader.present(from: root)
                         }
@@ -640,7 +640,7 @@ private struct AdMobRewardedSheet: View {
                     .disabled(!loader.isReady)
 
                     Label {
-                        Text(String(localized: "音が出ます！"))
+                        Text(String(localized: "support.ad.soundWarning"))
                             .font(.footnote.weight(.semibold))
                     } icon: {
                         Image(systemName: "exclamationmark.triangle.fill")
@@ -649,7 +649,7 @@ private struct AdMobRewardedSheet: View {
                 }
 
                 if loader.errorMessage != nil {
-                    Button(String(localized: "再読み込み")) {
+                    Button(String(localized: "common.reload")) {
                         loader.loadAd()
                     }
                     .buttonStyle(.bordered)
@@ -658,11 +658,11 @@ private struct AdMobRewardedSheet: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle(String(localized: "広告を見て応援する"))
+            .navigationTitle(String(localized: "support.ad.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(String(localized: "閉じる")) { dismiss() }
+                    Button(String(localized: "common.close")) { dismiss() }
                 }
             }
             .onAppear {
@@ -693,7 +693,7 @@ private struct AdMobBannerView: View {
                 },
                 onFailToReceiveAd: { _ in
                     isLoading = false
-                    errorMessage = String(localized: "現在、特典付きの広告がありません。後ほどお試しください")
+                    errorMessage = String(localized: "support.ad.noRewardedAd")
                 },
                 reloadToken: reloadToken
             )
@@ -706,10 +706,10 @@ private struct AdMobBannerView: View {
             )
 
             if isLoading {
-                ProgressView(String(localized: "広告を読み込み中..."))
+                ProgressView(String(localized: "support.ad.loading"))
                     .font(.caption)
             } else if errorMessage != nil {
-                Button(String(localized: "再読み込み")) {
+                Button(String(localized: "common.reload")) {
                     reloadToken = UUID()
                     isLoading = true
                     errorMessage = nil
@@ -806,7 +806,7 @@ private final class RewardedAdLoader: NSObject, ObservableObject, FullScreenCont
                 guard let self else { return }
                 self.isLoading = false
                 if error != nil {
-                    self.errorMessage = String(localized: "現在、特典付きの広告がありません。後ほどお試しください")
+                    self.errorMessage = String(localized: "support.ad.noRewardedAd")
                     self.rewardedAd = nil
                 } else if self.rewardedAd != nil {
                     self.isReady = true
@@ -836,7 +836,7 @@ private final class RewardedAdLoader: NSObject, ObservableObject, FullScreenCont
     nonisolated func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         MainActor.assumeIsolated { [weak self] in
             guard let self else { return }
-            self.errorMessage = String(localized: "現在、特典付きの広告がありません。後ほどお試しください")
+            self.errorMessage = String(localized: "support.ad.noRewardedAd")
             self.rewardedAd = nil
             self.loadAd()
         }

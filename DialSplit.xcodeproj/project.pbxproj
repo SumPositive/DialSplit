@@ -16,7 +16,7 @@
 		9A3CC7AD8CE36855195495CF /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75996EAEFC508B777967A50 /* PanelView.swift */; };
 		A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3697A10C0EFF185C359F8DB /* SettingsView.swift */; };
 		A1B2C3D4E5F60718293A4B5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5D /* InfoPlist.strings */; };
-		A1B2C3D4E5F60718293A4B6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B6B /* Localizable.strings */; };
+		A1B2C3D4E5F60718293A4B6A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B6B /* Localizable.xcstrings */; };
 		A670342EB9D61FFA777DA4F0 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8530B55E4F2EF4243B0A6BC9 /* AppSettings.swift */; };
 		B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */; };
 		B95D897234F1A9591EAD2C2B /* AZDecimal in Frameworks */ = {isa = PBXBuildFile; productRef = 56FFB9935599C33779D4A54D /* AZDecimal */; };
@@ -33,8 +33,7 @@
 		8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrassFrame.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B5F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A1B2C3D4E5F60718293A4B6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A1B2C3D4E5F60718293A4B6D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B6B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		AD101A4BF44E11075CF17514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3697A10C0EFF185C359F8DB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B75996EAEFC508B777967A50 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
@@ -126,7 +125,7 @@
 			children = (
 				3B4E53DC0F3D53B85B73C1B3 /* Info.plist */,
 				A1B2C3D4E5F60718293A4B5D /* InfoPlist.strings */,
-				A1B2C3D4E5F60718293A4B6B /* Localizable.strings */,
+				A1B2C3D4E5F60718293A4B6B /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -176,7 +175,7 @@
 				LastUpgradeCheck = 1600;
 			};
 			buildConfigurationList = 3CBD7E56951B789D1E27BE1B /* Build configuration list for PBXProject "DialSplit" */;
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
@@ -207,7 +206,7 @@
 			files = (
 				3D46D5B41FD202C53399E30F /* Assets.xcassets in Resources */,
 				A1B2C3D4E5F60718293A4B5C /* InfoPlist.strings in Resources */,
-				A1B2C3D4E5F60718293A4B6A /* Localizable.strings in Resources */,
+				A1B2C3D4E5F60718293A4B6A /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,15 +239,6 @@
 				A1B2C3D4E5F60718293A4B5F /* ja */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A1B2C3D4E5F60718293A4B6B /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A1B2C3D4E5F60718293A4B6C /* en */,
-				A1B2C3D4E5F60718293A4B6D /* ja */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

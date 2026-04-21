@@ -147,7 +147,7 @@ struct NumpadView: View {
                 confirm()
                 selectionHaptic()
             } label: {
-                Text("完了")
+                Text("common.done")
                     .font(.headline.bold())
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)

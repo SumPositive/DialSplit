@@ -91,11 +91,11 @@ struct NamePreset: Identifiable {
         [
         NamePreset(names: ["A",    "B",    "C",    "D"   ]),  // デフォルト
         NamePreset(names: ["1",    "2",    "3",    "4"   ]),
-        NamePreset(names: [String(localized: "大富豪"), String(localized: "富豪"), String(localized: "平民"), String(localized: "貧民")]),
-        NamePreset(names: [String(localized: "社長"), String(localized: "部長"), String(localized: "課長"), String(localized: "係長")]),
-        NamePreset(names: [String(localized: "金"), String(localized: "銀"), String(localized: "銅"), String(localized: "鉄")]),
-        NamePreset(names: [String(localized: "特上"), String(localized: "上"), String(localized: "並"), String(localized: "下")]),
-        NamePreset(names: [String(localized: "先輩"), String(localized: "同僚"), String(localized: "後輩"), String(localized: "新人")]),
+        NamePreset(names: [String(localized: "preset.name.vip"), String(localized: "preset.name.high"), String(localized: "preset.name.mid"), String(localized: "preset.name.low")]),
+        NamePreset(names: [String(localized: "preset.name.exec"), String(localized: "preset.name.lead"), String(localized: "preset.name.manager"), String(localized: "preset.name.staff")]),
+        NamePreset(names: [String(localized: "preset.name.gold"), String(localized: "preset.name.silver"), String(localized: "preset.name.bronze"), String(localized: "preset.name.iron")]),
+        NamePreset(names: [String(localized: "preset.name.premium"), String(localized: "preset.name.upper"), String(localized: "preset.name.standard"), String(localized: "preset.name.basic")]),
+        NamePreset(names: [String(localized: "preset.name.senior"), String(localized: "preset.name.peer"), String(localized: "preset.name.junior"), String(localized: "preset.name.newcomer")]),
         NamePreset(names: ["",     "",     "",     ""    ]),  // ブランク
     ]
     }
@@ -151,7 +151,7 @@ final class AppSettings {
     }
 
     init() {
-        let defaults = NamePreset.all[2].names   // ["大富豪","富豪","平民","貧民"]
+        let defaults = NamePreset.all[2].names   // 初期値は大富豪・富豪・平民・貧民
         var names = UserDefaults.standard.stringArray(forKey: "panelNames") ?? defaults
         // 旧バージョンからの移行: 足りない分を補完
         while names.count < 4 { names.append(defaults[names.count]) }
@@ -238,9 +238,9 @@ enum AppearanceMode: String, CaseIterable {
 
     var localizedName: String {
         switch self {
-        case .automatic: return String(localized: "自動")
-        case .light: return String(localized: "ライト")
-        case .dark: return String(localized: "ダーク")
+        case .automatic: return String(localized: "appearance.automatic")
+        case .light: return String(localized: "appearance.light")
+        case .dark: return String(localized: "appearance.dark")
         }
     }
 
@@ -313,9 +313,9 @@ enum LeatherStyle: String, CaseIterable {
 
     var localizedName: String {
         switch self {
-        case .monotone: return String(localized: "モノトーン")
-        case .brown:    return String(localized: "ブラウンレザー")
-        case .black:    return String(localized: "ブラックレザー")
+        case .monotone: return String(localized: "leather.monotone")
+        case .brown:    return String(localized: "leather.brown")
+        case .black:    return String(localized: "leather.black")
         }
     }
 }

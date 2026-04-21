@@ -7,7 +7,7 @@ import SwiftUI
 import AZDial
 
 private func localizedPeople(_ count: Int) -> String {
-    let format = NSLocalizedString("%lld人短", comment: "")
+    let format = NSLocalizedString("format.people.long", comment: "")
     return String(format: format, locale: Locale.current, count)
 }
 
@@ -36,7 +36,7 @@ struct LockToggleButton: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(accessibilityLabel)
-        .accessibilityValue(isLocked ? String(localized: "ロック中") : String(localized: "アンロック中"))
+        .accessibilityValue(isLocked ? String(localized: "lock.locked") : String(localized: "lock.unlocked"))
     }
 }
 
@@ -187,7 +187,7 @@ private struct HeaderBar: View {
 
     var body: some View {
         ZStack {
-            Text("割勘")
+            Text("app.title")
                 .font(.title2.bold())
                 .foregroundStyle(.white)
                 .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
@@ -273,7 +273,7 @@ private struct TotalAmountPanel: View {
                         .allowsTightening(true)
                         .frame(width: personsTextW, alignment: .trailing)
 
-                    Text("合計")
+                    Text("split.total")
                         .font(.subheadline.bold())
                         .foregroundStyle(cs == .dark ? .white.opacity(0.62) : Color(.secondaryLabel))
                         .lineLimit(1)
@@ -294,7 +294,7 @@ private struct TotalAmountPanel: View {
                     .onTapGesture {
                         guard !isAllLocked else { return }
                         numpadConfig = NumpadConfig(
-                            title: String(localized: "合計金額"),
+                            title: String(localized: "split.totalAmount"),
                             initialValue: totalRaw,
                             maxValue: MoneyFormat.maxMinorValue,
                             minValue: 0,
@@ -321,7 +321,7 @@ private struct TotalAmountPanel: View {
                         ),
                         lockedSystemImage: "lock.fill",
                         unlockedSystemImage: "lock.open",
-                        accessibilityLabel: String(localized: "人数ロック"),
+                        accessibilityLabel: String(localized: "lock.people"),
                         size: 44,
                         symbolSize: 22
                     )
@@ -373,7 +373,7 @@ private struct DialUnitSegment: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            Text("金額ダイアルステップ")
+            Text("settings.amountDialStep")
                 .font(.caption.bold())
                 .foregroundStyle(.primary)
 
@@ -498,8 +498,8 @@ private struct PanelStyleSegment: View {
 
     private var textColorText: String {
         let value = normalizedTextHueValue(textHue)
-        if value == -20 { return String(localized: "黒") }
-        if value == -10 { return String(localized: "白") }
+        if value == -20 { return String(localized: "color.black") }
+        if value == -10 { return String(localized: "color.white") }
         return "\(value)°"
     }
 
@@ -513,7 +513,7 @@ private struct PanelStyleSegment: View {
                 }
             } label: {
                 HStack {
-                    Text("パネルスタイル")
+                    Text("panel.style.title")
                         .font(.caption.bold())
                         .foregroundStyle(.primary)
                     Spacer()
@@ -528,7 +528,7 @@ private struct PanelStyleSegment: View {
             if isExpanded {
                 VStack(spacing: 8) {
                     HStack(spacing: 8) {
-                        Text("\(String(localized: "パネルの明るさ")) \(brightnessText)")
+                        Text("\(String(localized: "panel.brightness")) \(brightnessText)")
                             .font(.caption2.bold())
                             .foregroundStyle(.secondary)
                             .frame(width: 130, alignment: .leading)
@@ -547,7 +547,7 @@ private struct PanelStyleSegment: View {
                     }
 
                     HStack(spacing: 8) {
-                        Text("\(String(localized: "文字の色")) \(textColorText)")
+                        Text("\(String(localized: "panel.textColor")) \(textColorText)")
                             .font(.caption2.bold())
                             .foregroundStyle(.secondary)
                             .frame(width: 130, alignment: .leading)
@@ -566,7 +566,7 @@ private struct PanelStyleSegment: View {
                     }
 
                     HStack(spacing: 8) {
-                        Text("\(String(localized: "濃淡")) \(textTone)")
+                        Text("\(String(localized: "panel.tone")) \(textTone)")
                             .font(.caption2.bold())
                             .foregroundStyle(.secondary)
                             .frame(width: 130, alignment: .leading)
