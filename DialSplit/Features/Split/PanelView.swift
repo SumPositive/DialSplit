@@ -21,10 +21,6 @@
 import SwiftUI
 import AZDial
 
-private func isEnglishUI() -> Bool {
-    Locale.preferredLanguages.first?.hasPrefix("en") == true
-}
-
 private func localizedPeopleCompact(_ count: Int) -> String {
     let format = NSLocalizedString("%lld人短", comment: "")
     return String(format: format, locale: Locale.current, count)
@@ -36,9 +32,7 @@ private func localizedNamedTitle(_ formatKey: String, _ name: String) -> String 
 }
 
 private func localizedAmount(_ value: Int, placeholder: String = "---") -> String {
-    if value == 0 { return placeholder }
-    if isEnglishUI() { return "$\(value.formatted())" }
-    return "¥\(value.formatted())"
+    MoneyFormat.localizedAmount(value, placeholder: placeholder)
 }
 
 // MARK: - レイアウト定数
@@ -189,14 +183,8 @@ struct Panel0View: View {
             Spacer(minLength: 4)
 
             // 金額（右端固定）— 端数切り上げラベルを上に overlay
-            HStack(alignment: .firstTextBaseline, spacing: 0) {
-                Text(localizedAmount(totalRaw == 0 ? 0 : split0))
-                    .font(.title.bold().monospacedDigit())
-                if isEnglishUI() && totalRaw > 0 {
-                    Text(".00")
-                        .font(.caption.bold().monospacedDigit())
-                }
-            }
+            Text(localizedAmount(totalRaw == 0 ? 0 : split0))
+                .font(.title.bold().monospacedDigit())
             .foregroundStyle(totalRaw == 0 ? colors.secondary : amountColor)
             .lineLimit(1)
             .minimumScaleFactor(0.65)
@@ -260,7 +248,7 @@ struct PanelSubView: View {
 
                     AZDialView(
                         value: $split,
-                        min: 0, max: 999_900,
+                        min: 0, max: MoneyFormat.maxMinorValue,
                         step: dialUnit, stepperStep: 0,
                         style: settings.dialStyle,
                         dialWidth: layout.amountDialW,
@@ -310,14 +298,8 @@ struct PanelSubView: View {
             Spacer(minLength: 4)
 
             // 金額（右端に固定）— 人数>0 のときタップでテンキー
-            HStack(alignment: .firstTextBaseline, spacing: 0) {
-                Text(persons == 0 ? "---" : localizedAmount(split))
-                    .font(.title.bold().monospacedDigit())
-                if isEnglishUI() && persons > 0 {
-                    Text(".00")
-                        .font(.caption.bold().monospacedDigit())
-                }
-            }
+            Text(persons == 0 ? "---" : localizedAmount(split))
+                .font(.title.bold().monospacedDigit())
             .foregroundStyle(persons == 0 ? colors.secondary : colors.accent)
             .lineLimit(1)
             .minimumScaleFactor(0.65)
@@ -328,7 +310,7 @@ struct PanelSubView: View {
                 numpadConfig = NumpadConfig(
                     title: localizedNamedTitle("金額（%@）", name),
                     initialValue: split,
-                    maxValue: 999_900,
+                    maxValue: MoneyFormat.maxMinorValue,
                     minValue: 0,
                     isAmount: true,
                     onConfirm: { split = $0 }

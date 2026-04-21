@@ -143,6 +143,33 @@ struct SettingsView: View {
                     }
                     .padding(.top, 4)
                     .padding(.bottom, 2)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(String(localized: "金額ダイアルステップ"))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.secondary)
+
+                        ForEach(0..<5, id: \.self) { index in
+                            HStack {
+                                Text(String(format: NSLocalizedString("ステップ%d", comment: ""), index + 1))
+                                Spacer()
+                                Picker(
+                                    String(format: NSLocalizedString("ステップ%d", comment: ""), index + 1),
+                                    selection: Binding(
+                                        get: { settings.amountDialSteps[index] },
+                                        set: { settings.setAmountDialStep($0, at: index) }
+                                    )
+                                ) {
+                                    ForEach(MoneyFormat.dialStepDefinitionOptions, id: \.self) { step in
+                                        Text(MoneyFormat.localizedAmount(step)).tag(step)
+                                    }
+                                }
+                                .labelsHidden()
+                            }
+                        }
+                    }
+                    .padding(.top, 4)
+                    .padding(.bottom, 2)
                 }
 
                 // MARK: サポート

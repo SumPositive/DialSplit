@@ -6,6 +6,81 @@
 import SwiftUI
 import AZDial
 
+enum MoneyFormat {
+    static var currencyCode: String {
+        Locale.current.currency?.identifier ?? "JPY"
+    }
+
+    static var fractionDigits: Int {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = .current
+        formatter.currencyCode = currencyCode
+        return max(0, formatter.maximumFractionDigits)
+    }
+
+    static var minorUnitScale: Int {
+        var scale = 1
+        for _ in 0..<fractionDigits {
+            scale *= 10
+        }
+        return scale
+    }
+
+    static var maxMajorValue: Int { 999_900 }
+    static var maxMinorValue: Int { maxMajorValue * minorUnitScale }
+
+    static var dialStepCandidates: [Int] {
+        [1, 10, 100, 500, 1_000]
+    }
+
+    static var dialStepDefinitionOptions: [Int] {
+        [1, 2, 5, 10, 20, 50, 100, 200, 500, 1_000, 2_000, 5_000, 10_000, 20_000, 50_000, 100_000]
+            .filter { $0 <= maxMinorValue }
+    }
+
+    static var defaultDialStep: Int {
+        500
+    }
+
+    static func localizedAmount(_ minorValue: Int, placeholder: String? = nil) -> String {
+        if minorValue == 0, let placeholder {
+            return localizedPlaceholder(placeholder)
+        }
+
+        let amount = NSDecimalNumber(value: minorValue)
+            .dividing(by: NSDecimalNumber(value: minorUnitScale))
+
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = .current
+        formatter.currencyCode = currencyCode
+        formatter.minimumFractionDigits = fractionDigits
+        formatter.maximumFractionDigits = fractionDigits
+        return formatter.string(from: amount) ?? amount.stringValue
+    }
+
+    static func localizedAmountValue(_ minorValue: Int) -> String {
+        let amount = NSDecimalNumber(value: minorValue)
+            .dividing(by: NSDecimalNumber(value: minorUnitScale))
+
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.minimumFractionDigits = fractionDigits
+        formatter.maximumFractionDigits = fractionDigits
+        return formatter.string(from: amount) ?? amount.stringValue
+    }
+
+    private static func localizedPlaceholder(_ placeholder: String) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = .current
+        formatter.currencyCode = currencyCode
+        return "\(formatter.positivePrefix ?? "")\(placeholder)\(formatter.positiveSuffix ?? "")"
+    }
+}
+
 // MARK: - 名称プリセット
 
 struct NamePreset: Identifiable {
@@ -55,6 +130,11 @@ final class AppSettings {
         didSet { UserDefaults.standard.set(appearanceMode.rawValue, forKey: "appearanceMode") }
     }
 
+    /// 金額ダイアルステップ候補（最小通貨単位）
+    var amountDialSteps: [Int] {
+        didSet { UserDefaults.standard.set(Self.normalizedAmountDialSteps(amountDialSteps), forKey: "amountDialSteps") }
+    }
+
     /// パネル明るさ（-40 ... 40）
     var panelBrightness: Int {
         didSet { UserDefaults.standard.set(panelBrightness, forKey: "panelBrightness") }
@@ -87,6 +167,9 @@ final class AppSettings {
         let appearanceRaw = UserDefaults.standard.string(forKey: "appearanceMode") ?? ""
         appearanceMode = AppearanceMode(rawValue: appearanceRaw) ?? .automatic
 
+        let storedSteps = UserDefaults.standard.array(forKey: "amountDialSteps") as? [Int]
+        amountDialSteps = Self.normalizedAmountDialSteps(storedSteps ?? MoneyFormat.dialStepCandidates)
+
         let storedBrightness = UserDefaults.standard.integer(forKey: "panelBrightness")
         panelBrightness = min(40, max(-40, storedBrightness))
 
@@ -111,6 +194,25 @@ final class AppSettings {
     func setName(_ name: String, for index: Int) {
         while panelNames.count <= index { panelNames.append("\(panelNames.count + 1)") }
         panelNames[index] = name
+    }
+
+    func setAmountDialStep(_ step: Int, at index: Int) {
+        guard amountDialSteps.indices.contains(index) else { return }
+        var next = amountDialSteps
+        next[index] = max(1, min(MoneyFormat.maxMinorValue, step))
+        amountDialSteps = Self.normalizedAmountDialSteps(next)
+    }
+
+    private static func normalizedAmountDialSteps(_ raw: [Int]) -> [Int] {
+        var steps = raw.map { max(1, min(MoneyFormat.maxMinorValue, $0)) }
+        if steps.isEmpty { steps = MoneyFormat.dialStepCandidates }
+        while steps.count < 5 {
+            steps.append(MoneyFormat.dialStepCandidates[min(steps.count, MoneyFormat.dialStepCandidates.count - 1)])
+        }
+        if steps.count > 5 {
+            steps = Array(steps.prefix(5))
+        }
+        return steps
     }
 
     private static func loadDialTuning() -> AZDialInteractionTuning {

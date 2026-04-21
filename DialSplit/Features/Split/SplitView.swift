@@ -6,23 +6,13 @@
 import SwiftUI
 import AZDial
 
-private func isEnglishUI() -> Bool {
-    Locale.preferredLanguages.first?.hasPrefix("en") == true
-}
-
 private func localizedPeople(_ count: Int) -> String {
     let format = NSLocalizedString("%lld人短", comment: "")
     return String(format: format, locale: Locale.current, count)
 }
 
-private func localizedAmount(_ value: Int, placeholder: String = "---", spaced: Bool = false) -> String {
-    if value == 0 {
-        return isEnglishUI() ? (spaced ? "$ \(placeholder)" : "$\(placeholder)") : "¥ \(placeholder)"
-    }
-    if isEnglishUI() {
-        return spaced ? "$ \(value.formatted())" : "$\(value.formatted())"
-    }
-    return spaced ? "¥ \(value.formatted())" : "¥\(value.formatted())"
+private func localizedAmount(_ value: Int, placeholder: String = "---") -> String {
+    MoneyFormat.localizedAmount(value, placeholder: placeholder)
 }
 
 struct LockToggleButton: View {
@@ -146,10 +136,14 @@ struct SplitView: View {
                             .frame(width: cardWidth)
 
                             // ダイアル単位セグメント（通常フロー末尾）
-                            DialUnitSegment(dialUnit: $vm.dialUnit, isLocked: isAllLocked)
-                                .frame(width: cardWidth)
-                                .padding(.top, 6)
-                                .padding(.bottom, 2)
+                            DialUnitSegment(
+                                dialUnit: $vm.dialUnit,
+                                units: settings.amountDialSteps,
+                                isLocked: isAllLocked
+                            )
+                            .frame(width: cardWidth)
+                            .padding(.top, 6)
+                            .padding(.bottom, 2)
 
                             PanelStyleSegment(
                                 panelBrightness: Binding(
@@ -237,10 +231,6 @@ private struct TotalAmountPanel: View {
         amountColor.opacity(cs == .dark ? 0.66 : 0.72)
     }
 
-    private var showsCentSuffix: Bool {
-        isEnglishUI() && totalRaw > 0
-    }
-
     private let hPad: CGFloat = 16
     private let hGap: CGFloat = 8
 
@@ -291,14 +281,8 @@ private struct TotalAmountPanel: View {
 
                     Spacer(minLength: 4)
 
-                    HStack(alignment: .firstTextBaseline, spacing: 0) {
-                        Text(localizedAmount(totalRaw, spaced: true))
-                            .font(.largeTitle.bold().monospacedDigit())
-                        if showsCentSuffix {
-                            Text(".00")
-                                .font(.title3.bold().monospacedDigit())
-                        }
-                    }
+                    Text(localizedAmount(totalRaw))
+                        .font(.largeTitle.bold().monospacedDigit())
                     .foregroundStyle(totalRaw == 0
                         ? secondaryTextColor.opacity(cs == .dark ? 0.75 : 0.70)
                         : amountColor)
@@ -312,7 +296,7 @@ private struct TotalAmountPanel: View {
                         numpadConfig = NumpadConfig(
                             title: String(localized: "合計金額"),
                             initialValue: totalRaw,
-                            maxValue: 999_900,
+                            maxValue: MoneyFormat.maxMinorValue,
                             minValue: 0,
                             isAmount: true,
                             onConfirm: { totalRaw = $0 }
@@ -349,7 +333,7 @@ private struct TotalAmountPanel: View {
                     Spacer(minLength: 0)
                     AZDialView(
                         value: $totalRaw,
-                        min: 0, max: 999_900,
+                        min: 0, max: MoneyFormat.maxMinorValue,
                         step: dialUnit, stepperStep: 0,
                         style: settings.dialStyle,
                         dialWidth: totalDialW,
@@ -372,14 +356,11 @@ private struct TotalAmountPanel: View {
 
 private struct DialUnitSegment: View {
     @Binding var dialUnit: Int
+    let units: [Int]
     let isLocked: Bool
 
-    private var units: [Int] {
-        isEnglishUI() ? [1, 5, 10, 50, 100] : [1, 10, 100, 500, 1_000]
-    }
-
     private var labels: [String] {
-        isEnglishUI() ? ["$1", "$5", "$10", "$50", "$100"] : ["¥1", "¥10", "¥100", "¥500", "¥1,000"]
+        units.map { MoneyFormat.localizedAmountValue($0) }
     }
 
     private var selectedIndex: Int {
@@ -387,7 +368,7 @@ private struct DialUnitSegment: View {
     }
 
     private var defaultUnit: Int {
-        isEnglishUI() ? 5 : 500
+        units.contains(MoneyFormat.defaultDialStep) ? MoneyFormat.defaultDialStep : (units.first ?? MoneyFormat.defaultDialStep)
     }
 
     var body: some View {
@@ -451,6 +432,10 @@ private struct DialUnitSegment: View {
             if !isLocked, !units.contains(dialUnit), let fallback = units.first(where: { $0 == defaultUnit }) ?? units.last {
                 dialUnit = fallback
             }
+        }
+        .onChange(of: units) { _, newUnits in
+            guard !isLocked, !newUnits.contains(dialUnit), let fallback = newUnits.first else { return }
+            dialUnit = fallback
         }
         .opacity(isLocked ? 0.55 : 1)
         .padding(.horizontal, 16)

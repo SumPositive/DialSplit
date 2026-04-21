@@ -21,17 +21,6 @@
 import SwiftUI
 import UIKit
 
-private func isEnglishUI() -> Bool {
-    Locale.preferredLanguages.first?.hasPrefix("en") == true
-}
-
-private func localizedAmountText(_ value: Int) -> String {
-    if isEnglishUI() {
-        return "$ \(value.formatted()).00"
-    }
-    return "¥ \(value.formatted())"
-}
-
 // MARK: - ハプティクス
 
 @MainActor
@@ -47,7 +36,7 @@ struct NumpadConfig: Identifiable {
     let initialValue: Int
     let maxValue: Int
     let minValue: Int
-    let isAmount: Bool   // true → "¥" 表示
+    let isAmount: Bool   // true → 通貨表示
     let onConfirm: (Int) -> Void
 }
 
@@ -76,20 +65,12 @@ struct NumpadView: View {
     private var displayText: String {
         let n = currentInt
         if isPlaceholder {
-            return config.isAmount ? localizedAmountText(n) : "\(n)"
+            return config.isAmount ? MoneyFormat.localizedAmount(n) : "\(n)"
         }
         guard !inputStr.isEmpty else {
-            return config.isAmount ? localizedAmountText(0) : "0"
+            return config.isAmount ? MoneyFormat.localizedAmount(0) : "0"
         }
-        return config.isAmount ? localizedAmountText(n) : "\(n)"
-    }
-
-    private var displayAmountMainText: String {
-        let n = currentInt
-        if isEnglishUI() {
-            return "$ \(n.formatted())"
-        }
-        return "¥ \(n.formatted())"
+        return config.isAmount ? MoneyFormat.localizedAmount(n) : "\(n)"
     }
 
     private var displayColorStyle: AnyShapeStyle {
@@ -125,25 +106,12 @@ struct NumpadView: View {
 
             // 入力値表示（プレースホルダー中は薄く表示）
             Group {
-                if config.isAmount && isEnglishUI() {
-                    HStack(alignment: .firstTextBaseline, spacing: 0) {
-                        Text(displayAmountMainText)
-                            .font(.system(size: 42, weight: .bold, design: .monospaced))
-                        Text(".00")
-                            .font(.system(size: 24, weight: .bold, design: .monospaced))
-                    }
+                Text(displayText)
+                    .font(.system(size: 42, weight: .bold, design: .monospaced))
                     .foregroundStyle(displayColorStyle)
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                } else {
-                    Text(displayText)
-                        .font(.system(size: 42, weight: .bold, design: .monospaced))
-                        .foregroundStyle(displayColorStyle)
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(1)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 16)

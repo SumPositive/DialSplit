@@ -4,17 +4,13 @@
 //
 //  4段階割勘モデル（A=大富豪 / B=富豪 / C=平民 / D=貧民）
 //  - B/C/D は1人あたり金額をダイアルで設定
-//  - A（最上位）は残余を¥1単位切上で自動計算
+//  - A（最上位）は残余を最小通貨単位で切上げて自動計算
 //
 //  NOTE: @Observable + didSet でプロパティを再代入すると無限再帰になるため
 //  @ObservationIgnored バッキングストレージ + 手動 access/withMutation を使用する
 //
 
 import SwiftUI
-
-private func isEnglishUI() -> Bool {
-    Locale.preferredLanguages.first?.hasPrefix("en") == true
-}
 
 // MARK: - A区分（大富豪）の計算ステータス
 
@@ -102,8 +98,8 @@ final class SplitViewModel {
         }
     }
 
-    /// A（大富豪）1人あたり（¥1単位切上・自動計算）
-    /// WariKan互換: B/C/D への分配後の残余をAで均等割り、端数はAが+¥1で被る
+    /// A（大富豪）1人あたり（最小通貨単位切上・自動計算）
+    /// WariKan互換: B/C/D への分配後の残余をAで均等割り、端数はAが最小通貨単位で被る
     var split0: Int {
         let sum0 = totalRaw - persons1 * split1 - persons2 * split2 - persons3 * split3
         let p0   = max(1, persons0)
@@ -127,7 +123,7 @@ final class SplitViewModel {
         persons1 * split1 + persons2 * split2 + persons3 * split3 > 0
     }
 
-    /// A の1人あたり目標額をセットし、B/C/D を ¥1 単位で比例縮小。端数は A に戻る。
+    /// A の1人あたり目標額をセットし、B/C/D を最小通貨単位で比例縮小。端数は A に戻る。
     func adjustA(_ newSplit0: Int) {
         let bcdTotal = persons1 * split1 + persons2 * split2 + persons3 * split3
         guard bcdTotal > 0 else { return }
@@ -140,7 +136,7 @@ final class SplitViewModel {
             withMutation(keyPath: \.split2) { _split2 = 0 }
             withMutation(keyPath: \.split3) { _split3 = 0 }
         } else {
-            // ¥1 単位で比例縮小（dialUnit への丸めは行わない）
+            // 最小通貨単位で比例縮小（dialUnit への丸めは行わない）
             let scale = Double(remaining) / Double(bcdTotal)
             withMutation(keyPath: \.split1) { _split1 = max(0, Int((Double(_split1) * scale).rounded())) }
             withMutation(keyPath: \.split2) { _split2 = max(0, Int((Double(_split2) * scale).rounded())) }
@@ -153,10 +149,22 @@ final class SplitViewModel {
 
     init() {
         let d = UserDefaults.standard
-        let isEN = isEnglishUI()
+        let storageVersion = d.integer(forKey: "sv_moneyStorageVersion")
+        let needsMinorUnitMigration = storageVersion < 1
+        let scale = MoneyFormat.minorUnitScale
+
+        func storedAmount(forKey key: String, defaultMajorValue: Int) -> Int {
+            guard d.object(forKey: key) != nil else {
+                return defaultMajorValue * scale
+            }
+            let stored = d.integer(forKey: key)
+            return needsMinorUnitMigration ? stored * scale : stored
+        }
 
         let rawObj = d.object(forKey: "sv_totalRaw")
-        _totalRaw = rawObj != nil ? d.integer(forKey: "sv_totalRaw") : (isEN ? 100 : 10_000)
+        _totalRaw = rawObj != nil
+            ? storedAmount(forKey: "sv_totalRaw", defaultMajorValue: 10_000)
+            : ((MoneyFormat.currencyCode == "JPY" ? 10_000 : 100) * scale)
 
         let p0 = d.integer(forKey: "sv_persons0")
         _persons0 = p0 > 0 ? p0 : 1
@@ -166,23 +174,35 @@ final class SplitViewModel {
         _persons2 = d.integer(forKey: "sv_persons2")
         _persons3 = d.integer(forKey: "sv_persons3")
 
-        let s1 = d.integer(forKey: "sv_split1")
-        _split1 = s1 > 0 ? s1 : (isEN ? 25 : 2_500)
-        let s2 = d.integer(forKey: "sv_split2")
-        _split2 = s2 > 0 ? s2 : (isEN ? 10 : 1_000)
-        let s3 = d.integer(forKey: "sv_split3")
-        _split3 = s3 > 0 ? s3 : (isEN ? 10 : 1_000)
+        let defaultSplit1Major = MoneyFormat.currencyCode == "JPY" ? 2_500 : 25
+        let defaultSplitMajor = MoneyFormat.currencyCode == "JPY" ? 1_000 : 10
+        _split1 = storedAmount(forKey: "sv_split1", defaultMajorValue: defaultSplit1Major)
+        if _split1 <= 0 { _split1 = defaultSplit1Major * scale }
+        _split2 = storedAmount(forKey: "sv_split2", defaultMajorValue: defaultSplitMajor)
+        if _split2 <= 0 { _split2 = defaultSplitMajor * scale }
+        _split3 = storedAmount(forKey: "sv_split3", defaultMajorValue: defaultSplitMajor)
+        if _split3 <= 0 { _split3 = defaultSplitMajor * scale }
 
         if let _ = d.object(forKey: "sv_dialUnit") {
             // 新形式: 実値で保存済み
-            _dialUnit = d.integer(forKey: "sv_dialUnit")
+            let stored = d.integer(forKey: "sv_dialUnit")
+            _dialUnit = needsMinorUnitMigration ? stored * scale : stored
         } else if let _ = d.object(forKey: "sv_dialUnitIndex") {
             // 旧形式からの移行: index → 実値 (旧: 0=100, 1=500, 2=1000)
             let oldUnits = [100, 500, 1_000]
             let idx = d.integer(forKey: "sv_dialUnitIndex")
-            _dialUnit = idx < oldUnits.count ? oldUnits[idx] : 1_000
+            _dialUnit = (idx < oldUnits.count ? oldUnits[idx] : 1_000) * scale
         } else {
-            _dialUnit = isEnglishUI() ? 5 : 500
+            _dialUnit = MoneyFormat.defaultDialStep
+        }
+        if _dialUnit <= 0 || _dialUnit > MoneyFormat.maxMinorValue {
+            _dialUnit = MoneyFormat.defaultDialStep
+        }
+
+        if needsMinorUnitMigration {
+            d.set(1, forKey: "sv_moneyStorageVersion")
+            d.set(scale, forKey: "sv_moneyMinorUnitScale")
+            saveState()
         }
     }
 
