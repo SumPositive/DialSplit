@@ -5,6 +5,11 @@ A skeuomorphic bill-splitting calculator for iOS, built with SwiftUI.
 ![Platform](https://img.shields.io/badge/platform-iOS%2017%2B-blue)
 ![Swift](https://img.shields.io/badge/Swift-6-orange)
 
+## User Guide
+
+- [English](https://azukid.com/en/sumpo/DialSplit/dialsplit.html)
+- [日本語](https://azukid.com/jp/sumpo/DialSplit/dialsplit.html)
+
 ## Overview
 
 DialSplit splits a total amount evenly across 1–3 panels, each with a scroll-wheel dial to set the number of people. The per-person amount updates instantly as you spin the dial.
