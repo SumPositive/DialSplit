@@ -172,12 +172,12 @@
 				LastUpgradeCheck = 1600;
 			};
 			buildConfigurationList = 3CBD7E56951B789D1E27BE1B /* Build configuration list for PBXProject "DialSplit" */;
-			developmentRegion = ja;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
 				ja,
+				Base,
 			);
 			mainGroup = 13F4D6260A8FB74294E3B94C;
 			minimizedProjectReferenceProxies = 1;
