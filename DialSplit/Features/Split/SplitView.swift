@@ -68,7 +68,7 @@ struct SplitView: View {
                     let cardWidth = min(max(0, proxy.size.width - cardSideMargin * 2), maxContentWidth)
                     let totalPanelWidth = min(cardWidth + 20, max(0, proxy.size.width - 4))
                     let panelAWidth = min(cardWidth + 6, max(0, proxy.size.width - 12))
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 8) {
                             // 合計金額パネル
                             TotalAmountPanel(
