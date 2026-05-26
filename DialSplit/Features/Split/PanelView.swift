@@ -129,7 +129,9 @@ struct Panel0View: View {
                     AZDialView(
                         value: $persons0,
                         min: 1, max: 99,
-                        step: 1, stepperStep: 0,
+                        step: 1,
+                        stepperStep: settings.showDialStepper ? 1 : 0,
+                        stepperPosition: .bottom,
                         style: settings.dialStyle,
                         dialWidth: layout.personsDialW,
                         tuning: settings.dialTuning
@@ -238,11 +240,13 @@ struct PanelSubView: View {
                 LeatherDivider()
 
                 // ダイアル行: 人数（左）+ 金額（右）
-                HStack(spacing: DIAL_MIN_GAP) {
+                HStack(alignment: .top, spacing: DIAL_MIN_GAP) {
                     AZDialView(
                         value: $persons,
                         min: 0, max: 99,
-                        step: 1, stepperStep: 0,
+                        step: 1,
+                        stepperStep: settings.showDialStepper ? 1 : 0,
+                        stepperPosition: .bottom,
                         style: settings.dialStyle,
                         dialWidth: layout.personsDialW,
                         tuning: settings.dialTuning
@@ -254,7 +258,9 @@ struct PanelSubView: View {
                     AZDialView(
                         value: $split,
                         min: 0, max: MoneyFormat.maxMinorValue,
-                        step: dialUnit, stepperStep: 0,
+                        step: dialUnit,
+                        stepperStep: settings.showDialStepper ? dialUnit : 0,
+                        stepperPosition: .bottom,
                         style: settings.dialStyle,
                         dialWidth: layout.amountDialW,
                         tuning: settings.dialTuning

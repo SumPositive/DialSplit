@@ -65,8 +65,21 @@ struct SettingsView: View {
 
             appearanceModeRow
             fontScaleRow
+            showDialStepperRow
             dialStepRows
         }
+    }
+
+    @ViewBuilder
+    private var showDialStepperRow: some View {
+        @Bindable var settings = settings
+        Toggle(isOn: $settings.showDialStepper) {
+            Text(String(localized: "settings.showDialStepper"))
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.secondary)
+        }
+        .padding(.top, 4)
+        .padding(.bottom, 2)
     }
 
     @ViewBuilder

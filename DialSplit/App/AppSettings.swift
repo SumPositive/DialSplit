@@ -190,6 +190,11 @@ final class AppSettings {
         didSet { UserDefaults.standard.set(fontScale.rawValue, forKey: "fontScale") }
     }
 
+    /// AZDialView のステッパーボタンを表示するか
+    var showDialStepper: Bool {
+        didSet { UserDefaults.standard.set(showDialStepper, forKey: "showDialStepper") }
+    }
+
     init() {
         let defaults = NamePreset.all[2].names   // 初期値は大富豪・富豪・平民・貧民
         var names = UserDefaults.standard.stringArray(forKey: "panelNames") ?? defaults
@@ -227,6 +232,9 @@ final class AppSettings {
 
         let storedFontScale = UserDefaults.standard.integer(forKey: "fontScale")
         fontScale = AppFontScale(rawValue: storedFontScale) ?? .system
+
+        let stepperObj = UserDefaults.standard.object(forKey: "showDialStepper")
+        showDialStepper = stepperObj != nil ? UserDefaults.standard.bool(forKey: "showDialStepper") : false
     }
 
     func name(for index: Int) -> String {

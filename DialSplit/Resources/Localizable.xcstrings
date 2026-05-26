@@ -1075,6 +1075,23 @@
         }
       }
     },
+    "settings.showDialStepper" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Dial Stepper"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダイアルステッパーを表示する"
+          }
+        }
+      }
+    },
     "settings.stepFormat" : {
       "localizations" : {
         "en" : {

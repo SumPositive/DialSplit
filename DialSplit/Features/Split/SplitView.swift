@@ -341,7 +341,9 @@ private struct TotalAmountPanel: View {
                     AZDialView(
                         value: $totalRaw,
                         min: 0, max: MoneyFormat.maxMinorValue,
-                        step: dialUnit, stepperStep: 0,
+                        step: dialUnit,
+                        stepperStep: settings.showDialStepper ? dialUnit : 0,
+                        stepperPosition: .bottom,
                         style: settings.dialStyle,
                         dialWidth: totalDialW,
                         tuning: settings.dialTuning
