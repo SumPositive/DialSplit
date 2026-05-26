@@ -139,7 +139,10 @@ struct SplitView: View {
                             DialUnitSegment(
                                 dialUnit: $vm.dialUnit,
                                 units: settings.amountDialSteps,
-                                isLocked: isAllLocked
+                                isLocked: isAllLocked,
+                                onUpdateStep: { index, newValue in
+                                    settings.setAmountDialStep(newValue, at: index)
+                                }
                             )
                             .frame(width: cardWidth)
                             .padding(.top, 6)
@@ -362,14 +365,10 @@ private struct DialUnitSegment: View {
     @Binding var dialUnit: Int
     let units: [Int]
     let isLocked: Bool
+    let onUpdateStep: (Int, Int) -> Void
 
-    private var labels: [String] {
-        units.map { MoneyFormat.localizedAmountValue($0) }
-    }
-
-    private var selectedIndex: Int {
-        units.firstIndex(of: dialUnit) ?? (units.count - 1)
-    }
+    @State private var openIndex: Int? = nil
+    @State private var anchorFrames: [Int: CGRect] = [:]
 
     private var defaultUnit: Int {
         units.contains(MoneyFormat.defaultDialStep) ? MoneyFormat.defaultDialStep : (units.first ?? MoneyFormat.defaultDialStep)
@@ -382,55 +381,17 @@ private struct DialUnitSegment: View {
                 .foregroundStyle(.primary)
 
             HStack(spacing: 6) {
-                ForEach(0..<labels.count, id: \.self) { i in
-                    let isSelected = i == selectedIndex
-                    Button {
-                        guard !isLocked else { return }
-                        dialUnit = units[i]
-                    } label: {
-                        Text(labels[i])
-                            .font(.headline.bold().monospacedDigit())
-                            .foregroundStyle(
-                                isSelected
-                                    ? Color(red: 1.0, green: 0.9647, blue: 0.8784)
-                                    : .primary.opacity(0.82)
-                            )
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.75)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 8)
-                            .background(
-                                Group {
-                                    if isSelected {
-                                        Capsule()
-                                            .fill(Color(red: 0.4196, green: 0.3059, blue: 0.1176))
-                                    }
-                                }
-                            )
-                            .overlay(
-                                Group {
-                                    if isSelected {
-                                        Capsule()
-                                            .stroke(.white.opacity(0.18), lineWidth: 1.2)
-                                    }
-                                }
-                            )
-                            .shadow(
-                                color: isSelected ? .black.opacity(0.25) : .clear,
-                                radius: isSelected ? 4 : 0,
-                                x: 0,
-                                y: isSelected ? 1 : 0
-                            )
-                    }
-                    .buttonStyle(.plain)
-                    .disabled(isLocked)
+                ForEach(0..<units.count, id: \.self) { index in
+                    stepButton(at: index)
                 }
             }
             .padding(4)
             .background(
-                Capsule()
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
                     .fill(.black.opacity(0.22))
             )
+            .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+            .allowsHitTesting(!isLocked)
         }
         .onAppear {
             if !isLocked, !units.contains(dialUnit), let fallback = units.first(where: { $0 == defaultUnit }) ?? units.last {
@@ -483,6 +444,93 @@ private struct DialUnitSegment: View {
         // ④ 手前に浮かせるシャドウ（大＋小の2層）
         .shadow(color: .black.opacity(0.28), radius: 14, x: 0, y: 7)
         .shadow(color: .black.opacity(0.12), radius:  3, x: 0, y: 1)
+    }
+
+    @ViewBuilder
+    private func stepButton(at index: Int) -> some View {
+        let value = units[index]
+        let isSelected = dialUnit == value
+        let selectedBg = Color(red: 0.4196, green: 0.3059, blue: 0.1176)
+        let selectedFg = Color(red: 1.0, green: 0.9647, blue: 0.8784)
+        let selectedBorder = Color.white.opacity(0.18)
+        let unselectedFg = Color.primary.opacity(0.82)
+
+        Text(MoneyFormat.localizedAmountValue(value))
+            .font(.subheadline.monospacedDigit())
+            .fontWeight(.bold)
+            .foregroundStyle(isSelected ? selectedFg : unselectedFg)
+            .lineLimit(1)
+            .minimumScaleFactor(0.50)
+            .allowsTightening(true)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 4)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(isSelected ? selectedBg : Color.clear)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .strokeBorder(isSelected ? selectedBorder : Color.clear, lineWidth: 1.25)
+            )
+            .contentShape(Rectangle())
+            .onTapGesture {
+                guard !isLocked else { return }
+                dialUnit = value
+            }
+            .onLongPressGesture(minimumDuration: 0.4) {
+                guard !isLocked else { return }
+                openIndex = index
+            }
+            .azDropdownPopover(
+                isPresented: Binding(
+                    get: { openIndex == index },
+                    set: { newValue in if !newValue { openIndex = nil } }
+                ),
+                anchorFrame: Binding(
+                    get: { anchorFrames[index] ?? .zero },
+                    set: { anchorFrames[index] = $0 }
+                )
+            ) {
+                stepEditPopover(at: index)
+            }
+    }
+
+    @ViewBuilder
+    private func stepEditPopover(at index: Int) -> some View {
+        let currentValue = units[index]
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(MoneyFormat.dialStepDefinitionOptions, id: \.self) { opt in
+                        Button {
+                            onUpdateStep(index, opt)
+                            openIndex = nil
+                        } label: {
+                            AZDropdownOptionButton(
+                                isSelected: opt == currentValue,
+                                minWidth: 140
+                            ) {
+                                Text(MoneyFormat.localizedAmount(opt))
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .id(opt)
+                    }
+                }
+                .padding(8)
+            }
+            .scrollIndicators(.hidden)
+            .frame(maxHeight: 320)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    withAnimation(.easeInOut(duration: 0.18)) {
+                        proxy.scrollTo(currentValue, anchor: .center)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -641,12 +689,21 @@ private struct TextColorPickerView: View {
                 .foregroundStyle(.primary)
                 .padding(.top, 2)
 
-            Picker("settings.background.title", selection: $leatherStyle) {
-                ForEach(LeatherStyle.allCases, id: \.self) { style in
-                    Text(style.localizedName).tag(style)
-                }
+            AZRadioPicker(
+                options: LeatherStyle.allCases,
+                selection: $leatherStyle,
+                minOptionWidth: 0,
+                maxOptionWidth: .infinity,
+                horizontalPadding: 4,
+                optionSpacing: 6,
+                groupPadding: 4,
+                wrapsOptions: false,
+                fillsWidth: true,
+                style: .brass
+            ) { style in
+                Text(style.localizedName)
             }
-            .pickerStyle(.segmented)
+            .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         }
     }
 }
@@ -674,5 +731,27 @@ private struct TextColorSwatch: View {
             .shadow(color: .black.opacity(0.25), radius: 3, x: 0, y: 1)
             .scaleEffect(isSelected ? 1.14 : 1.0)
             .animation(.spring(response: 0.2, dampingFraction: 0.6), value: isSelected)
+    }
+}
+
+// MARK: - ブラス調 AZPickerStyle
+
+extension AZPickerStyle {
+    /// 真鍮×ブラウンの旧デザインに寄せたピッカースタイル
+    static var brass: AZPickerStyle {
+        var s = AZPickerStyle()
+        s.cornerRadius = 14
+        s.panelBackground = .black.opacity(0.22)
+        s.optionBackground = .clear
+        s.selectedBackgroundColor = Color(red: 0.4196, green: 0.3059, blue: 0.1176)
+        s.selectedForegroundColor = Color(red: 1.0, green: 0.9647, blue: 0.8784)
+        s.selectedBorderColor = .white.opacity(0.18)
+        s.unselectedForegroundColor = .primary.opacity(0.82)
+        s.unselectedBorderColor = .clear
+        s.panelBorderOpacity = 0
+        s.shadowOpacity = 0
+        s.optionFont = .subheadline.monospacedDigit()
+        s.optionWeight = .bold
+        return s
     }
 }

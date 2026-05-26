@@ -386,13 +386,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Panel Brightness"
+            "value" : "Brightness"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "パネルの明るさ"
+            "value" : "明るさ"
           }
         }
       }

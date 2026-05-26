@@ -333,10 +333,12 @@ func linkedTextColor(hue: Int, tone: Int, for cs: ColorScheme) -> Color {
 
 // MARK: - LeatherStyle
 
-enum LeatherStyle: String, CaseIterable {
+enum LeatherStyle: String, CaseIterable, Identifiable {
     case monotone
     case brown
     case black
+
+    var id: String { rawValue }
 
     var backgroundImage: String {
         switch self {

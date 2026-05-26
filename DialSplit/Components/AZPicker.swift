@@ -120,6 +120,20 @@ struct AZPickerStyle {
     var dropdownTextFitMode: AZPickerTextFitMode = .wrap
     /// 選択ボタン右端のインジケータデフォルトは非表示
     var dropdownIndicator: AZDropdownIndicator = .none
+    /// 選択中の背景色（nil なら accentColor.opacity(selectedBackgroundOpacity)）
+    var selectedBackgroundColor: Color? = nil
+    /// 選択中の文字色（nil なら accentColor）
+    var selectedForegroundColor: Color? = nil
+    /// 選択中の枠線色（nil なら accentColor.opacity(selectedBorderOpacity)）
+    var selectedBorderColor: Color? = nil
+    /// 未選択の文字色（nil なら primary）
+    var unselectedForegroundColor: Color? = nil
+    /// 未選択の枠線色（nil なら secondary.opacity(borderOpacity)）
+    var unselectedBorderColor: Color? = nil
+    /// ボタン内の基本フォント
+    var optionFont: Font = .subheadline
+    /// ボタン内のウェイト上書き（nil なら 未選択=.regular / 選択中=.semibold）
+    var optionWeight: Font.Weight? = nil
 
     /// 標準のフォーム向けスタイル
     static let form = AZPickerStyle()
@@ -463,12 +477,19 @@ struct AZRadioPicker<Option: Hashable & Identifiable, Label: View>: View {
 
     private func optionButton(_ option: Option) -> some View {
         let isSelected = selection == option
+        let selectedBg = style.selectedBackgroundColor ?? Color.accentColor.opacity(style.selectedBackgroundOpacity)
+        let selectedFg = style.selectedForegroundColor ?? Color.accentColor
+        let selectedBorder = style.selectedBorderColor ?? Color.accentColor.opacity(style.selectedBorderOpacity)
+        let unselectedFg = style.unselectedForegroundColor ?? Color.primary
+        let unselectedBorder = style.unselectedBorderColor ?? Color.secondary.opacity(style.borderOpacity)
+        let weight = style.optionWeight ?? (isSelected ? .semibold : .regular)
         return Button {
             selection = option
         } label: {
             label(option)
-                .font(.subheadline.weight(isSelected ? .semibold : .regular))
-                .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
+                .font(style.optionFont)
+                .fontWeight(weight)
+                .foregroundStyle(isSelected ? selectedFg : unselectedFg)
                 .lineLimit(fillsWidth ? 1 : nil)
                 .minimumScaleFactor(fillsWidth ? 0.50 : 1)
                 .allowsTightening(fillsWidth)
@@ -483,12 +504,12 @@ struct AZRadioPicker<Option: Hashable & Identifiable, Label: View>: View {
                 )
                 .background(
                     RoundedRectangle(cornerRadius: style.cornerRadius, style: .continuous)
-                        .fill(isSelected ? Color.accentColor.opacity(style.selectedBackgroundOpacity) : style.optionBackground)
+                        .fill(isSelected ? selectedBg : style.optionBackground)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: style.cornerRadius, style: .continuous)
                         .strokeBorder(
-                            isSelected ? Color.accentColor.opacity(style.selectedBorderOpacity) : Color.secondary.opacity(style.borderOpacity),
+                            isSelected ? selectedBorder : unselectedBorder,
                             lineWidth: isSelected ? 1.25 : 1
                         )
                 )
