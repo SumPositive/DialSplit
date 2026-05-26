@@ -101,10 +101,45 @@ struct NamePreset: Identifiable {
     }
 }
 
+// MARK: - 文字サイズ倍率
+
+enum AppFontScale: Int, CaseIterable, Identifiable {
+    case system   = 0   // 自動（システム設定に従う）
+    case standard = 1   // 標準（Large 固定）
+    case large    = 2   // 大（xxxLarge 相当）
+    case xLarge   = 3   // 特大（accessibility2 相当）
+
+    var id: Int { rawValue }
+
+    var titleKey: String {
+        switch self {
+        case .system:   return "settings.fontScale.system"
+        case .standard: return "settings.fontScale.standard"
+        case .large:    return "settings.fontScale.large"
+        case .xLarge:   return "settings.fontScale.xLarge"
+        }
+    }
+
+    /// true のときはシステム設定に委ねる
+    var followsSystem: Bool { self == .system }
+
+    var dynamicTypeSize: DynamicTypeSize {
+        switch self {
+        case .system:   return .large
+        case .standard: return .large
+        case .large:    return .xxxLarge
+        case .xLarge:   return .accessibility2
+        }
+    }
+}
+
 // MARK: - AppSettings
 
 @Observable
+@MainActor
 final class AppSettings {
+    static let shared = AppSettings()
+
     /// 区別ごとの名称
     var panelNames: [String] {
         didSet { UserDefaults.standard.set(panelNames, forKey: "panelNames") }
@@ -150,6 +185,11 @@ final class AppSettings {
         didSet { UserDefaults.standard.set(textTone, forKey: "textTone") }
     }
 
+    /// 文字サイズ倍率
+    var fontScale: AppFontScale {
+        didSet { UserDefaults.standard.set(fontScale.rawValue, forKey: "fontScale") }
+    }
+
     init() {
         let defaults = NamePreset.all[2].names   // 初期値は大富豪・富豪・平民・貧民
         var names = UserDefaults.standard.stringArray(forKey: "panelNames") ?? defaults
@@ -184,6 +224,9 @@ final class AppSettings {
         let toneObj = UserDefaults.standard.object(forKey: "textTone")
         let storedTone = toneObj != nil ? UserDefaults.standard.integer(forKey: "textTone") : 0
         textTone = min(100, max(0, storedTone))
+
+        let storedFontScale = UserDefaults.standard.integer(forKey: "fontScale")
+        fontScale = AppFontScale(rawValue: storedFontScale) ?? .system
     }
 
     func name(for index: Int) -> String {
@@ -231,10 +274,20 @@ final class AppSettings {
     }
 }
 
-enum AppearanceMode: String, CaseIterable {
+enum AppearanceMode: String, CaseIterable, Identifiable {
     case automatic
     case light
     case dark
+
+    var id: String { rawValue }
+
+    var titleKey: String {
+        switch self {
+        case .automatic: return "appearance.automatic"
+        case .light:     return "appearance.light"
+        case .dark:      return "appearance.dark"
+        }
+    }
 
     var localizedName: String {
         switch self {

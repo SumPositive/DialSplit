@@ -21,6 +21,7 @@
 		B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCC7A4611E1D203D735A3C /* DialSplitApp.swift */; };
 		B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8EDD5282E5537EC9490C0 /* SplitView.swift */; };
 		C31B5A7D2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */; };
+		C31B5A7F2FC5C84D0090CAEC /* AZPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */; };
 		C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		B3697A10C0EFF185C359F8DB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B75996EAEFC508B777967A50 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZPicker.swift; sourceTree = "<group>"; };
 		D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadView.swift; sourceTree = "<group>"; };
 		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
 		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		FD6967EBBE26D9BBAECA5519 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */,
 				8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */,
 				F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */,
 				D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */,
@@ -223,6 +226,7 @@
 				0DD4F1E63EAE767229C8423B /* LeatherBackground.swift in Sources */,
 				9A3CC7AD8CE36855195495CF /* PanelView.swift in Sources */,
 				A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */,
+				C31B5A7F2FC5C84D0090CAEC /* AZPicker.swift in Sources */,
 				B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */,
 				5E36CF7F28ABCBC79971B413 /* SplitViewModel.swift in Sources */,
 				C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */,

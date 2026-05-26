@@ -21,6 +21,7 @@ struct SettingsView: View {
     @State private var showAdSheet = false
     @State private var showAdThanks = false
     @State private var showDialSettings = false
+    @State private var stepPickerExpanded: Int? = nil
 
     private var aboutURL: URL? {
         let isEnglish = Locale.preferredLanguages.first?.hasPrefix("en") == true
@@ -43,9 +44,139 @@ struct SettingsView: View {
         ("D", "preset.name.low"),
     ]
 
-    var body: some View {
+    // MARK: - 表示・操作セクション
+
+    @ViewBuilder
+    private var displayControlsSection: some View {
         @Bindable var settings = settings
-        NavigationStack {
+        Section(String(localized: "settings.section.displayControls")) {
+            Button {
+                showDialSettings = true
+            } label: {
+                HStack {
+                    Text(String(localized: "settings.dialSettings"))
+                    Spacer()
+                    Text(settings.dialStyle.label)
+                        .foregroundStyle(.secondary)
+                    Image(systemName: "slider.horizontal.3")
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            appearanceModeRow
+            fontScaleRow
+            dialStepRows
+        }
+    }
+
+    @ViewBuilder
+    private var appearanceModeRow: some View {
+        @Bindable var settings = settings
+        VStack(alignment: .leading, spacing: 10) {
+            Text(String(localized: "settings.appearanceMode.title"))
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.secondary)
+
+            AZRadioPicker(
+                options: AppearanceMode.allCases,
+                selection: $settings.appearanceMode,
+                minOptionWidth: 0,
+                maxOptionWidth: 120,
+                horizontalPadding: 4,
+                optionSpacing: 4,
+                groupPadding: 5,
+                wrapsOptions: false,
+                fillsWidth: true
+            ) { mode in
+                Text(LocalizedStringKey(mode.titleKey))
+            }
+        }
+        .padding(.top, 4)
+        .padding(.bottom, 2)
+    }
+
+    @ViewBuilder
+    private var fontScaleRow: some View {
+        @Bindable var settings = settings
+        VStack(alignment: .leading, spacing: 10) {
+            Text(String(localized: "settings.fontScale"))
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.secondary)
+
+            AZRadioPicker(
+                options: AppFontScale.allCases,
+                selection: $settings.fontScale,
+                minOptionWidth: 0,
+                maxOptionWidth: 120,
+                horizontalPadding: 4,
+                optionSpacing: 4,
+                groupPadding: 5,
+                wrapsOptions: false,
+                fillsWidth: true
+            ) { scale in
+                Text(LocalizedStringKey(scale.titleKey))
+            }
+        }
+        .padding(.top, 4)
+        .padding(.bottom, 2)
+    }
+
+    @ViewBuilder
+    private var dialStepRows: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(String(localized: "settings.amountDialStep"))
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.secondary)
+
+            ForEach(0..<5, id: \.self) { index in
+                dialStepRow(at: index)
+            }
+        }
+        .padding(.top, 4)
+        .padding(.bottom, 2)
+    }
+
+    @ViewBuilder
+    private func dialStepRow(at index: Int) -> some View {
+        HStack {
+            Text(String(format: NSLocalizedString("settings.stepFormat", comment: ""), index + 1))
+            Spacer()
+            AZDropdownPicker(
+                options: MoneyFormat.dialStepDefinitionOptions.map(DialStepOption.init),
+                selection: Binding(
+                    get: { DialStepOption(value: settings.amountDialSteps[index]) },
+                    set: { settings.setAmountDialStep($0.value, at: index) }
+                ),
+                isExpanded: Binding(
+                    get: { stepPickerExpanded == index },
+                    set: { stepPickerExpanded = $0 ? index : nil }
+                ),
+                minWidth: 120,
+                style: AZPickerStyle.form
+            ) { option in
+                Text(MoneyFormat.localizedAmount(option.value))
+            }
+        }
+    }
+
+    var body: some View {
+        applyFontScale {
+            settingsContent
+        }
+    }
+
+    @ViewBuilder
+    private func applyFontScale<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+        if settings.fontScale.followsSystem {
+            content()
+        } else {
+            content().dynamicTypeSize(settings.fontScale.dynamicTypeSize)
+        }
+    }
+
+    private var settingsContent: some View {
+        @Bindable var settings = settings
+        return NavigationStack {
             Form {
                 // MARK: 区分
                 Section(String(localized: "settings.section.category")) {
@@ -99,63 +230,7 @@ struct SettingsView: View {
                     }
                 }
 
-                // MARK: 表示・操作
-                Section(String(localized: "settings.section.displayControls")) {
-                    Button {
-                        showDialSettings = true
-                    } label: {
-                        HStack {
-                            Text(String(localized: "settings.dialSettings"))
-                            Spacer()
-                            Text(settings.dialStyle.label)
-                                .foregroundStyle(.secondary)
-                            Image(systemName: "slider.horizontal.3")
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(String(localized: "settings.appearanceMode.title"))
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(.secondary)
-
-                        Picker("settings.appearanceMode.title", selection: $settings.appearanceMode) {
-                            ForEach(AppearanceMode.allCases, id: \.self) { mode in
-                                Text(mode.localizedName).tag(mode)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                    }
-                    .padding(.top, 4)
-                    .padding(.bottom, 2)
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(String(localized: "settings.amountDialStep"))
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(.secondary)
-
-                        ForEach(0..<5, id: \.self) { index in
-                            HStack {
-                                Text(String(format: NSLocalizedString("settings.stepFormat", comment: ""), index + 1))
-                                Spacer()
-                                Picker(
-                                    String(format: NSLocalizedString("settings.stepFormat", comment: ""), index + 1),
-                                    selection: Binding(
-                                        get: { settings.amountDialSteps[index] },
-                                        set: { settings.setAmountDialStep($0, at: index) }
-                                    )
-                                ) {
-                                    ForEach(MoneyFormat.dialStepDefinitionOptions, id: \.self) { step in
-                                        Text(MoneyFormat.localizedAmount(step)).tag(step)
-                                    }
-                                }
-                                .labelsHidden()
-                            }
-                        }
-                    }
-                    .padding(.top, 4)
-                    .padding(.bottom, 2)
-                }
+                displayControlsSection
 
                 // MARK: サポート
                 Section("settings.section.support") {
@@ -890,4 +965,12 @@ private struct PresetChip: View {
                 .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 1.5)
         )
     }
+}
+
+
+// MARK: - ステップオプション（AZDropdownPicker 用）
+
+struct DialStepOption: Hashable, Identifiable {
+    let value: Int
+    var id: Int { value }
 }

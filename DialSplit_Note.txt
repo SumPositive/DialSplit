@@ -15,6 +15,10 @@ ConditionにあるAZPickerを引用して
 設定：外観モード　をAZRadioPickerに置き換えて文字サイズに対応したい
 設定：ステップ1から5 をAZDropdownPickerに置き換えて文字サイズに対応したい
 
+設定画面を文字サイズに対応したい
+
+メイン画面の金額ダイアルステップをAZRadioPickerにして幅オーバーすれば複数行に展開したい
+パネルスタイルの背景をAZRadioPickerにして文字サイズに対応したい
 
 
 AZDropdownPicker と AZRadioPicker
