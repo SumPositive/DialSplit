@@ -592,6 +592,16 @@ private let ADMOB_REWARD_UNIT_ID = "ca-app-pub-7576639777972199/7862774227"
 private let ADMOB_BANNER_UNIT_ID = "ca-app-pub-7576639777972199/9670679914"
 #endif
 
+// 非パーソナライズ広告（NPA）リクエスト
+@MainActor
+private func nonPersonalizedAdRequest() -> Request {
+    let request = Request()
+    let extras = Extras()
+    extras.additionalParameters = ["npa": "1"]
+    request.register(extras)
+    return request
+}
+
 private struct AdMobRewardedSheet: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var loader = RewardedAdLoader(adUnitID: ADMOB_REWARD_UNIT_ID)
@@ -734,7 +744,7 @@ private struct AdMobBannerRepresentable: UIViewControllerRepresentable {
         ])
 
         context.coordinator.bannerView = bannerView
-        bannerView.load(Request())
+        bannerView.load(nonPersonalizedAdRequest())
         return viewController
     }
 
@@ -782,7 +792,7 @@ private final class RewardedAdLoader: NSObject, ObservableObject, FullScreenCont
         isLoading = true
         isReady = false
         errorMessage = nil
-        let request = Request()
+        let request = nonPersonalizedAdRequest()
 
         RewardedAd.load(with: adUnitID, request: request) { [weak self] ad, error in
             guard let self else { return }

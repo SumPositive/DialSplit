@@ -6,5 +6,17 @@ DialSplit_PromptNote.txt
 
 設定にある外観モードのセレクタ（ラジオボタン）を Calclin で実装したオリジナルラジオボタンに置き換えたい
 
+PrivacyInfo.xcprivacyを作成して
+AdMob 利用のための SKAdNetworkItems を Info.plist に追加したい
+パーソナライズ広告を出さないので non-personalized ads に設定したい
+
+ConditionにあるAZPickerを引用して
+設定：外観モード　の下にConditionにある　文字サイズ を追加したい　
+設定：外観モード　をAZRadioPickerに置き換えて文字サイズに対応したい
+設定：ステップ1から5 をAZDropdownPickerに置き換えて文字サイズに対応したい
 
 
+
+AZDropdownPicker と AZRadioPicker
+
+設定：外観モードの下に文字サイズ
