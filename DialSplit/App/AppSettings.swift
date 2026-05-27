@@ -267,13 +267,25 @@ final class AppSettings {
     }
 
     private static func loadDialTuning() -> AZDialInteractionTuning {
-        guard
-            let data = UserDefaults.standard.data(forKey: "dialTuning"),
-            let tuning = try? JSONDecoder().decode(AZDialInteractionTuning.self, from: data)
-        else {
-            return .default
+        let defaults = UserDefaults.standard
+        let migrationKey = "dialTuningDefaultsToMildMigrated"
+
+        if let data = defaults.data(forKey: "dialTuning"),
+           let stored = try? JSONDecoder().decode(AZDialInteractionTuning.self, from: data) {
+            // 既存ユーザー：以前「標準」(.default) のままなら一度だけ「控えめ」(.mild) に移行
+            if !defaults.bool(forKey: migrationKey) {
+                defaults.set(true, forKey: migrationKey)
+                if stored == .default {
+                    let mild = AZDialInteractionTuningPreset.mild.tuning
+                    saveDialTuning(mild)
+                    return mild
+                }
+            }
+            return stored
         }
-        return tuning
+        // 新規インストール：デフォルトを「控えめ」に
+        defaults.set(true, forKey: migrationKey)
+        return AZDialInteractionTuningPreset.mild.tuning
     }
 
     private static func saveDialTuning(_ tuning: AZDialInteractionTuning) {
