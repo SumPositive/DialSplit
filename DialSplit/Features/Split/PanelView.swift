@@ -4,7 +4,7 @@
 //
 //  全パネル共通レイアウト:
 //  ┌──────────────────────────────────────────────┐
-//  │  [xx人]   [  パネル名(固定)  ]     [¥999,999]│ ← 情報行
+//  │  [xx人]   [  区分名(固定)  ]       [¥999,999]│ ← 情報行
 //  ├──────────────────────────────────────────────┤
 //  │  [人数Dal] [======= 金額Dal(220pt) =========]│ ← ダイアル行
 //  └──────────────────────────────────────────────┘
@@ -58,7 +58,8 @@ private struct PanelLayout {
         let personsDialW = min(115, max(84, inner * 0.32))
         let amountDialW = max(96, inner - personsDialW - DIAL_MIN_GAP)
 
-        let personsTextW = min(76, max(52, personsDialW * 0.66))
+        // 2桁人数（例：99人 / 12p）が .title.bold() で欠けない幅を確保
+        let personsTextW = min(88, max(72, personsDialW * 0.78))
         let nameW = min(110, max(62, inner * 0.26))
         let amountTextW = max(88, inner - personsTextW - nameW - (H_GAP * 3 + 4))
 

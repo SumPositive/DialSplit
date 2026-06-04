@@ -894,13 +894,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Display Names"
+            "value" : "Tier Names"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表示名称"
+            "value" : "区分名"
           }
         }
       }
@@ -996,13 +996,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preset Display Names"
+            "value" : "Tier Name Presets"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "プリセット表示名称"
+            "value" : "区分名プリセット"
           }
         }
       }

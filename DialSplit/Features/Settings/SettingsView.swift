@@ -28,7 +28,39 @@ struct SettingsView: View {
         let path = isEnglish
             ? "https://docs.azukid.com/en/sumpo/DialSplit/dialsplit.html"
             : "https://docs.azukid.com/jp/sumpo/DialSplit/dialsplit.html"
-        return URL(string: path)
+        guard var components = URLComponents(string: path) else {
+            return URL(string: path)
+        }
+        components.queryItems = [
+            URLQueryItem(name: "fontScale", value: webFontScaleValue)
+        ]
+        return components.url
+    }
+
+    private var webFontScaleValue: String {
+        // Web側のCSSで扱う3段階へ変換する
+        switch settings.fontScale {
+        case .standard:
+            return "standard"
+        case .large:
+            return "large"
+        case .xLarge:
+            return "xLarge"
+        case .system:
+            return currentSystemWebFontScaleValue
+        }
+    }
+
+    private var currentSystemWebFontScaleValue: String {
+        // 自動設定では現在のiOS文字サイズをWeb用の3段階へ丸める
+        switch UIApplication.shared.preferredContentSizeCategory {
+        case .extraSmall, .small, .medium, .large:
+            return "standard"
+        case .extraLarge, .extraExtraLarge, .extraExtraExtraLarge:
+            return "large"
+        default:
+            return "xLarge"
+        }
     }
 
     private var versionString: String {
