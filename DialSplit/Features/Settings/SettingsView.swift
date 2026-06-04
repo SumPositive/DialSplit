@@ -21,7 +21,6 @@ struct SettingsView: View {
     @State private var showAdSheet = false
     @State private var showAdThanks = false
     @State private var showDialSettings = false
-    @State private var stepPickerExpanded: Int? = nil
 
     private var aboutURL: URL? {
         let isEnglish = Locale.preferredLanguages.first?.hasPrefix("en") == true
@@ -98,7 +97,7 @@ struct SettingsView: View {
             appearanceModeRow
             fontScaleRow
             showDialStepperRow
-            dialStepRows
+            dialStepGuideRow
         }
     }
 
@@ -167,41 +166,18 @@ struct SettingsView: View {
     }
 
     @ViewBuilder
-    private var dialStepRows: some View {
+    private var dialStepGuideRow: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(String(localized: "settings.amountDialStep"))
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
 
-            ForEach(0..<5, id: \.self) { index in
-                dialStepRow(at: index)
-            }
+            Text(String(localized: "settings.amountDialStep.guide"))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
         }
         .padding(.top, 4)
         .padding(.bottom, 2)
-    }
-
-    @ViewBuilder
-    private func dialStepRow(at index: Int) -> some View {
-        HStack {
-            Text(String(format: NSLocalizedString("settings.stepFormat", comment: ""), index + 1))
-            Spacer()
-            AZDropdownPicker(
-                options: MoneyFormat.dialStepDefinitionOptions.map(DialStepOption.init),
-                selection: Binding(
-                    get: { DialStepOption(value: settings.amountDialSteps[index]) },
-                    set: { settings.setAmountDialStep($0.value, at: index) }
-                ),
-                isExpanded: Binding(
-                    get: { stepPickerExpanded == index },
-                    set: { stepPickerExpanded = $0 ? index : nil }
-                ),
-                minWidth: 120,
-                style: AZPickerStyle.form
-            ) { option in
-                Text(MoneyFormat.localizedAmount(option.value))
-            }
-        }
     }
 
     var body: some View {
@@ -1012,10 +988,3 @@ private struct PresetChip: View {
     }
 }
 
-
-// MARK: - ステップオプション（AZDropdownPicker 用）
-
-struct DialStepOption: Hashable, Identifiable {
-    let value: Int
-    var id: Int { value }
-}

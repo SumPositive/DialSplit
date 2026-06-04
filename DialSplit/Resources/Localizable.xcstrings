@@ -820,6 +820,23 @@
         }
       }
     },
+    "settings.amountDialStep.guide" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now change a step value by pressing and holding it on the main screen."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "主画面にあるステップ数値を長押しで変更できるようになりました"
+          }
+        }
+      }
+    },
     "settings.appearanceMode.title" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1093,6 +1110,7 @@
       }
     },
     "settings.stepFormat" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
