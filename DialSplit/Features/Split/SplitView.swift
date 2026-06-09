@@ -387,24 +387,18 @@ private struct DialUnitSegment: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
-            Text("settings.amountDialStep")
-                .font(.caption.bold())
-                .foregroundStyle(.primary)
-
-            HStack(spacing: 6) {
-                ForEach(0..<units.count, id: \.self) { index in
-                    stepButton(at: index)
-                }
+        HStack(spacing: 6) {
+            ForEach(0..<units.count, id: \.self) { index in
+                stepButton(at: index)
             }
-            .padding(4)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(.black.opacity(0.22))
-            )
-            .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
-            .allowsHitTesting(!isLocked)
         }
+        .padding(4)
+        .background(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .fill(.black.opacity(0.22))
+        )
+        .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+        .allowsHitTesting(!isLocked)
         .onAppear {
             if !isLocked, !units.contains(dialUnit), let fallback = units.first(where: { $0 == defaultUnit }) ?? units.last {
                 dialUnit = fallback
@@ -416,7 +410,7 @@ private struct DialUnitSegment: View {
         }
         .opacity(isLocked ? 0.55 : 1)
         .padding(.horizontal, 16)
-        .padding(.vertical, 14)
+        .padding(.vertical, 10)
         .background(
             ZStack {
                 // ① ブラー層（背景を透かす）
