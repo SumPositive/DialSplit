@@ -143,11 +143,11 @@ struct Panel0View: View {
                     Spacer(minLength: 0)
                     LockToggleButton(
                         isLocked: $isAllLocked,
-                        lockedSystemImage: "lock.fill",
-                        unlockedSystemImage: "lock.open",
+                        lockedSystemImage: "lock.badge.checkmark.fill",
+                        unlockedSystemImage: "lock.open.fill",
                         accessibilityLabel: String(localized: "lock.allControls"),
                         size: 44,
-                        symbolSize: 22,
+                        symbolSize: 28,
                         onToggle: { locked in
                             Telemetry.event(.allLockToggled(locked: locked))
                         }

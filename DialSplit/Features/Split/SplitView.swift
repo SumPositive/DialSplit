@@ -30,9 +30,11 @@ struct LockToggleButton: View {
             onToggle?(isLocked)
         } label: {
             Image(systemName: isLocked ? lockedSystemImage : unlockedSystemImage)
-                .font(.system(size: symbolSize, weight: .semibold))
-                .symbolRenderingMode(.hierarchical)
-                .foregroundStyle(isLocked ? Color.red.opacity(0.90) : Color.secondary.opacity(0.78))
+                .font(.system(size: symbolSize, weight: .bold))
+                .symbolRenderingMode(.monochrome)
+                .foregroundStyle(isLocked
+                    ? Color(red: 0.95, green: 0.45, blue: 0.05)
+                    : Color.secondary.opacity(0.78))
                 .frame(width: size, height: size)
                 .contentShape(Circle())
         }
@@ -331,11 +333,11 @@ private struct TotalAmountPanel: View {
                                 isPeopleLocked = newValue
                             }
                         ),
-                        lockedSystemImage: "lock.fill",
-                        unlockedSystemImage: "lock.open",
+                        lockedSystemImage: "figure.child.and.lock.fill",
+                        unlockedSystemImage: "figure.child.and.lock.open.fill",
                         accessibilityLabel: String(localized: "lock.people"),
                         size: 44,
-                        symbolSize: 22,
+                        symbolSize: 28,
                         onToggle: { locked in
                             Telemetry.event(.peopleLockToggled(locked: locked))
                         }
