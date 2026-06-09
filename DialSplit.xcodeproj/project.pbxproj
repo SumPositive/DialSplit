@@ -79,7 +79,6 @@
 		64FCE8BDEAB2F45E04FE6F4B /* DialSplit */ = {
 			isa = PBXGroup;
 			children = (
-				AD101A4BF44E11075CF17514 /* Assets.xcassets */,
 				E41BC1CA29277EEDB8C916D1 /* App */,
 				FD6967EBBE26D9BBAECA5519 /* Components */,
 				C66CEC611B542E0E56D012DC /* Features */,
@@ -132,6 +131,7 @@
 				3B4E53DC0F3D53B85B73C1B3 /* Info.plist */,
 				A1B2C3D4E5F60718293A4B5D /* InfoPlist.strings */,
 				A1B2C3D4E5F60718293A4B6B /* Localizable.xcstrings */,
+				AD101A4BF44E11075CF17514 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
