@@ -293,6 +293,7 @@ struct AZDropdownPicker<Option: Hashable & Identifiable, Label: View>: View {
     }
 }
 
+@MainActor
 enum AZDropdownPopoverMetrics {
     static func opensUpward(anchorFrame: CGRect) -> Bool {
         if anchorFrame == .zero {
