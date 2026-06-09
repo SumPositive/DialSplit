@@ -22,6 +22,7 @@
 		B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8EDD5282E5537EC9490C0 /* SplitView.swift */; };
 		C31B5A7D2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */; };
 		C31B5A7F2FC5C84D0090CAEC /* AZPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */; };
+		C38A3C942FD832AE00AC7390 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */; };
 		C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		B75996EAEFC508B777967A50 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZPicker.swift; sourceTree = "<group>"; };
+		C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadView.swift; sourceTree = "<group>"; };
 		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
 		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		FD5F64158ACA09DF7B226CDB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */,
 				C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */,
 				3B4E53DC0F3D53B85B73C1B3 /* Info.plist */,
 				A1B2C3D4E5F60718293A4B5D /* InfoPlist.strings */,
@@ -208,6 +211,7 @@
 			files = (
 				3D46D5B41FD202C53399E30F /* Assets.xcassets in Resources */,
 				A1B2C3D4E5F60718293A4B5C /* InfoPlist.strings in Resources */,
+				C38A3C942FD832AE00AC7390 /* GoogleService-Info.plist in Resources */,
 				C31B5A7D2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy in Resources */,
 				A1B2C3D4E5F60718293A4B6A /* Localizable.xcstrings in Resources */,
 			);
