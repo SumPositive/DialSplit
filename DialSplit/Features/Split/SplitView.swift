@@ -66,8 +66,6 @@ struct SplitView: View {
             LeatherBackground()
 
             VStack(spacing: 0) {
-                HeaderBar(showSettings: $showSettings)
-
                 GeometryReader { proxy in
                     let cardWidth = min(max(0, proxy.size.width - cardSideMargin * 2), maxContentWidth)
                     let totalPanelWidth = min(cardWidth + 20, max(0, proxy.size.width - 4))
@@ -84,7 +82,6 @@ struct SplitView: View {
                                 isAllLocked: isAllLocked
                             )
                             .frame(width: totalPanelWidth)
-                            .padding(.top, 14)
                             .shadow(color: .black.opacity(0.40), radius: 24, x: 0, y: 14)
                             .shadow(color: .black.opacity(0.18), radius: 7, x: 0, y: 3)
 
@@ -181,6 +178,9 @@ struct SplitView: View {
                         .frame(maxWidth: .infinity)
                     }
                     .safeAreaPadding(.bottom, 28)
+                    .safeAreaInset(edge: .top, spacing: 0) {
+                        HeaderBar(showSettings: $showSettings)
+                    }
                 }
             }
         }
@@ -201,9 +201,9 @@ private struct HeaderBar: View {
     var body: some View {
         ZStack {
             Text("app.title")
-                .font(.title2.bold())
-                .foregroundStyle(.white)
-                .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(.white.opacity(0.55))
+                .shadow(color: .black.opacity(0.5), radius: 1, x: 0, y: 1)
 
             HStack {
                 Spacer()
@@ -216,11 +216,14 @@ private struct HeaderBar: View {
                         .foregroundStyle(.white.opacity(0.85))
                         .shadow(color: .black.opacity(0.5), radius: 1)
                 }
+                .padding(.bottom, 4)
             }
         }
         .padding(.horizontal, 20)
-        .padding(.vertical, 12)
-        .background(Color.black.opacity(0.35))
+        .padding(.vertical, 4)
+        .frame(maxWidth: .infinity)
+        .background(Color.clear.contentShape(Rectangle()))
+        .contentShape(Rectangle())
     }
 }
 
