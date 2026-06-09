@@ -147,7 +147,12 @@ final class AppSettings {
 
     /// レザーデザイン
     var leatherStyle: LeatherStyle {
-        didSet { UserDefaults.standard.set(leatherStyle.rawValue, forKey: "leatherStyle") }
+        didSet {
+            UserDefaults.standard.set(leatherStyle.rawValue, forKey: "leatherStyle")
+            guard leatherStyle != oldValue else { return }
+            Telemetry.event(.backgroundChanged(style: leatherStyle.rawValue))
+            Telemetry.setUserProperty(leatherStyle.rawValue, forName: "p_leather")
+        }
     }
 
     /// ダイアルスタイル
@@ -162,7 +167,12 @@ final class AppSettings {
 
     /// 外観モード
     var appearanceMode: AppearanceMode {
-        didSet { UserDefaults.standard.set(appearanceMode.rawValue, forKey: "appearanceMode") }
+        didSet {
+            UserDefaults.standard.set(appearanceMode.rawValue, forKey: "appearanceMode")
+            guard appearanceMode != oldValue else { return }
+            Telemetry.event(.appearanceChanged(mode: appearanceMode.rawValue))
+            Telemetry.setUserProperty(appearanceMode.rawValue, forName: "p_appearance")
+        }
     }
 
     /// 金額ダイアルステップ候補（最小通貨単位）
@@ -187,12 +197,22 @@ final class AppSettings {
 
     /// 文字サイズ倍率
     var fontScale: AppFontScale {
-        didSet { UserDefaults.standard.set(fontScale.rawValue, forKey: "fontScale") }
+        didSet {
+            UserDefaults.standard.set(fontScale.rawValue, forKey: "fontScale")
+            guard fontScale != oldValue else { return }
+            Telemetry.event(.fontScaleChanged(scale: fontScale.rawValue))
+            Telemetry.setUserProperty(String(fontScale.rawValue), forName: "p_font_scale")
+        }
     }
 
     /// AZDialView のステッパーボタンを表示するか
     var showDialStepper: Bool {
-        didSet { UserDefaults.standard.set(showDialStepper, forKey: "showDialStepper") }
+        didSet {
+            UserDefaults.standard.set(showDialStepper, forKey: "showDialStepper")
+            guard showDialStepper != oldValue else { return }
+            Telemetry.event(.showDialStepperToggled(enabled: showDialStepper))
+            Telemetry.setUserProperty(showDialStepper ? "1" : "0", forName: "p_stepper")
+        }
     }
 
     init() {

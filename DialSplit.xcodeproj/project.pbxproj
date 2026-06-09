@@ -23,6 +23,11 @@
 		C31B5A7D2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */; };
 		C31B5A7F2FC5C84D0090CAEC /* AZPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */; };
 		C38A3C942FD832AE00AC7390 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */; };
+		C38A3D192FD849A900AC7390 /* TelemetryEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */; };
+		C38A3D1A2FD849A900AC7390 /* Telemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38A3D152FD849A900AC7390 /* Telemetry.swift */; };
+		C38A3D242FD84C7000AC7390 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D232FD84C7000AC7390 /* FirebaseAnalytics */; };
+		C38A3D262FD84C7000AC7390 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D252FD84C7000AC7390 /* FirebaseCore */; };
+		C38A3D282FD84C7000AC7390 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D272FD84C7000AC7390 /* FirebaseCrashlytics */; };
 		C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +47,8 @@
 		C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZPicker.swift; sourceTree = "<group>"; };
 		C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C38A3D152FD849A900AC7390 /* Telemetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telemetry.swift; sourceTree = "<group>"; };
+		C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEvent.swift; sourceTree = "<group>"; };
 		D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadView.swift; sourceTree = "<group>"; };
 		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
 		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
@@ -54,6 +61,9 @@
 			files = (
 				0A6C7416CF53A4567AE41463 /* AZDial in Frameworks */,
 				4420F4B5E4D44A0FA90F6B11 /* GoogleMobileAds in Frameworks */,
+				C38A3D282FD84C7000AC7390 /* FirebaseCrashlytics in Frameworks */,
+				C38A3D262FD84C7000AC7390 /* FirebaseCore in Frameworks */,
+				C38A3D242FD84C7000AC7390 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +89,7 @@
 		64FCE8BDEAB2F45E04FE6F4B /* DialSplit */ = {
 			isa = PBXGroup;
 			children = (
+				C38A3D182FD849A900AC7390 /* Core */,
 				E41BC1CA29277EEDB8C916D1 /* App */,
 				FD6967EBBE26D9BBAECA5519 /* Components */,
 				C66CEC611B542E0E56D012DC /* Features */,
@@ -103,6 +114,23 @@
 				57E3F9D5896BF2CA28B724CD /* DialSplit.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C38A3D172FD849A900AC7390 /* Telemetry */ = {
+			isa = PBXGroup;
+			children = (
+				C38A3D152FD849A900AC7390 /* Telemetry.swift */,
+				C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */,
+			);
+			path = Telemetry;
+			sourceTree = "<group>";
+		};
+		C38A3D182FD849A900AC7390 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C38A3D172FD849A900AC7390 /* Telemetry */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		C66CEC611B542E0E56D012DC /* Features */ = {
@@ -166,6 +194,9 @@
 			packageProductDependencies = (
 				6DC9D231461363EC29442A9E /* AZDial */,
 				4420F4B5E4D44A0FA90F6B10 /* GoogleMobileAds */,
+				C38A3D232FD84C7000AC7390 /* FirebaseAnalytics */,
+				C38A3D252FD84C7000AC7390 /* FirebaseCore */,
+				C38A3D272FD84C7000AC7390 /* FirebaseCrashlytics */,
 			);
 			productName = DialSplit;
 			productReference = 57E3F9D5896BF2CA28B724CD /* DialSplit.app */;
@@ -193,6 +224,7 @@
 			packageReferences = (
 				759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */,
 				4420F4B5E4D44A0FA90F6B12 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				C38A3D222FD84C6F00AC7390 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BEB4D055063B4BAC5CFAED9C /* Products */;
@@ -231,6 +263,8 @@
 				9A3CC7AD8CE36855195495CF /* PanelView.swift in Sources */,
 				A1274BA376A9258C3CB80270 /* SettingsView.swift in Sources */,
 				C31B5A7F2FC5C84D0090CAEC /* AZPicker.swift in Sources */,
+				C38A3D192FD849A900AC7390 /* TelemetryEvent.swift in Sources */,
+				C38A3D1A2FD849A900AC7390 /* Telemetry.swift in Sources */,
 				B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */,
 				5E36CF7F28ABCBC79971B413 /* SplitViewModel.swift in Sources */,
 				C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */,
@@ -463,6 +497,14 @@
 				kind = branch;
 			};
 		};
+		C38A3D222FD84C6F00AC7390 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.14.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -475,6 +517,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 759F607D4E5F11EE93C9FAA9 /* XCRemoteSwiftPackageReference "AZDial" */;
 			productName = AZDial;
+		};
+		C38A3D232FD84C7000AC7390 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C38A3D222FD84C6F00AC7390 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C38A3D252FD84C7000AC7390 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C38A3D222FD84C6F00AC7390 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		C38A3D272FD84C7000AC7390 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C38A3D222FD84C6F00AC7390 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

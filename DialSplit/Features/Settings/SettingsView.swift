@@ -82,6 +82,7 @@ struct SettingsView: View {
         @Bindable var settings = settings
         Section(String(localized: "settings.section.displayControls")) {
             Button {
+                Telemetry.event(.dialSettingsOpened)
                 showDialSettings = true
             } label: {
                 HStack {
@@ -265,9 +266,11 @@ struct SettingsView: View {
                 // MARK: 開発者を応援
                 Section(String(localized: "settings.section.supportDeveloper")) {
                     Button(String(localized: "support.tip.title")) {
+                        Telemetry.event(.supportSheetOpened(kind: .tip))
                         showTipSheet = true
                     }
                     Button(String(localized: "support.ad.title")) {
+                        Telemetry.event(.supportSheetOpened(kind: .ad))
                         showAdSheet = true
                     }
                 }
@@ -342,21 +345,32 @@ private final class TipStore {
         guard products.isEmpty else { return }
         isLoadingProducts = true
         defer { isLoadingProducts = false }
-        let loaded = (try? await Product.products(for: productIds)) ?? []
-        products = loaded.sorted { $0.price < $1.price }
+        do {
+            let loaded = try await Product.products(for: productIds)
+            products = loaded.sorted { $0.price < $1.price }
+        } catch {
+            Telemetry.record(error, context: "TipStore.loadProducts")
+            products = []
+        }
     }
 
     func purchase(_ product: Product) async -> Bool {
         isPurchasing = true
         defer { isPurchasing = false }
+        Telemetry.event(.tipPurchaseInitiated(productId: product.id))
         do {
             let result = try await product.purchase()
             if case .success(let verification) = result,
                case .verified(let transaction) = verification {
                 await transaction.finish()
+                Telemetry.event(.tipPurchaseSucceeded(productId: product.id))
                 return true
             }
-        } catch {}
+            Telemetry.event(.tipPurchaseFailed(productId: product.id))
+        } catch {
+            Telemetry.record(error, context: "TipStore.purchase \(product.id)")
+            Telemetry.event(.tipPurchaseFailed(productId: product.id))
+        }
         return false
     }
 }

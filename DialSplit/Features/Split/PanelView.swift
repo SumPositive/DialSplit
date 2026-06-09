@@ -147,7 +147,10 @@ struct Panel0View: View {
                         unlockedSystemImage: "lock.open",
                         accessibilityLabel: String(localized: "lock.allControls"),
                         size: 44,
-                        symbolSize: 22
+                        symbolSize: 22,
+                        onToggle: { locked in
+                            Telemetry.event(.allLockToggled(locked: locked))
+                        }
                     )
                     .frame(width: layout.amountTextW, height: 44, alignment: .center)
                 }

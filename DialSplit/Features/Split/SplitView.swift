@@ -22,10 +22,12 @@ struct LockToggleButton: View {
     let accessibilityLabel: String
     var size: CGFloat = 36
     var symbolSize: CGFloat = 18
+    var onToggle: ((Bool) -> Void)? = nil
 
     var body: some View {
         Button {
             isLocked.toggle()
+            onToggle?(isLocked)
         } label: {
             Image(systemName: isLocked ? lockedSystemImage : unlockedSystemImage)
                 .font(.system(size: symbolSize, weight: .semibold))
@@ -141,7 +143,9 @@ struct SplitView: View {
                                 units: settings.amountDialSteps,
                                 isLocked: isAllLocked,
                                 onUpdateStep: { index, newValue in
+                                    let oldValue = settings.amountDialSteps[index]
                                     settings.setAmountDialStep(newValue, at: index)
+                                    Telemetry.event(.stepEdited(index: index, oldValue: oldValue, newValue: newValue))
                                 }
                             )
                             .frame(width: cardWidth)
@@ -202,6 +206,7 @@ private struct HeaderBar: View {
             HStack {
                 Spacer()
                 Button {
+                    Telemetry.event(.settingsOpened)
                     showSettings = true
                 } label: {
                     Image(systemName: "gearshape.fill")
@@ -330,7 +335,10 @@ private struct TotalAmountPanel: View {
                         unlockedSystemImage: "lock.open",
                         accessibilityLabel: String(localized: "lock.people"),
                         size: 44,
-                        symbolSize: 22
+                        symbolSize: 22,
+                        onToggle: { locked in
+                            Telemetry.event(.peopleLockToggled(locked: locked))
+                        }
                     )
                     .frame(width: personsTextW, height: 44, alignment: .center)
                     .offset(x: 8)
@@ -480,10 +488,12 @@ private struct DialUnitSegment: View {
             .onTapGesture {
                 guard !isLocked else { return }
                 dialUnit = value
+                Telemetry.event(.stepSelected(value: value))
             }
             .onLongPressGesture(minimumDuration: 0.4) {
                 guard !isLocked else { return }
                 openIndex = index
+                Telemetry.event(.stepLongPressed(index: index))
             }
             .azDropdownPopover(
                 isPresented: Binding(

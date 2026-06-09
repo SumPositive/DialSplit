@@ -1,5 +1,7 @@
 import SwiftUI
 
+import FirebaseCore
+
 @main
 struct DialSplitApp: App {
     @State private var settings = AppSettings.shared
@@ -7,6 +9,12 @@ struct DialSplitApp: App {
     private var isPad: Bool { UIDevice.current.userInterfaceIdiom == .pad }
     private let iPhoneSE3Width: CGFloat = 375
     private let iPadDefaultWindowSize = CGSize(width: 375, height: 300)
+
+    init() {
+        FirebaseApp.configure()
+        Telemetry.setup()
+        Telemetry.snapshotSettings(AppSettings.shared)
+    }
 
     private var effectiveDynamicTypeSize: DynamicTypeSize {
         settings.fontScale.followsSystem ? systemDynamicTypeSize : settings.fontScale.dynamicTypeSize
