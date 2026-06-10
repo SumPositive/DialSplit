@@ -79,6 +79,27 @@ enum MoneyFormat {
         formatter.currencyCode = currencyCode
         return "\(formatter.positivePrefix ?? "")\(placeholder)\(formatter.positiveSuffix ?? "")"
     }
+
+    /// 切上時の拡張表示：標準精度より1桁多く表示する。
+    /// 例：JPY なら "¥28,833" + ".3"、USD なら "$28.83" + "3"
+    /// `extra` は表示時に赤字推奨。
+    static func extendedTruncated(realMinor: Double) -> (main: String, extra: String) {
+        // 整数部（標準精度の最小単位）を切り捨て
+        let mainMinor = Int(floor(realMinor))
+        let main = localizedAmount(mainMinor)
+
+        // 標準精度の1桁下の数字（端数情報）
+        let extraDigit = abs(Int(floor(realMinor * 10))) % 10
+        let extra: String
+        if fractionDigits == 0 {
+            // 通貨に小数がない場合は新しく小数点を付与
+            extra = ".\(extraDigit)"
+        } else {
+            // すでに小数がある通貨は1桁だけ追加
+            extra = "\(extraDigit)"
+        }
+        return (main, extra)
+    }
 }
 
 // MARK: - 名称プリセット

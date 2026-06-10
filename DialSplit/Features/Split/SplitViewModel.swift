@@ -116,6 +116,14 @@ final class SplitViewModel {
         return .rounded
     }
 
+    /// A 区分の「切り上げ前」の実数値（最小通貨単位）
+    /// 例：JPY で sum0=86500, p0=3 → 28833.333...
+    var split0RealMinor: Double {
+        let sum0 = totalRaw - persons1 * split1 - persons2 * split2 - persons3 * split3
+        let p0   = max(1, persons0)
+        return Double(sum0) / Double(p0)
+    }
+
     var totalPersons: Int { persons0 + persons1 + persons2 + persons3 }
 
     /// B/C/D 合計 > 0 のとき A は編集可（再配分できる相手がいる）

@@ -90,6 +90,7 @@ struct SplitView: View {
                                 name:     settings.name(for: 0),
                                 persons0: $vm.persons0,
                                 split0:   vm.split0,
+                                split0RealMinor: vm.split0RealMinor,
                                 status:   vm.split0Status,
                                 totalRaw: vm.totalRaw,
                                 panelWidth: cardWidth,

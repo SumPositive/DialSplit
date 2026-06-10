@@ -97,6 +97,7 @@ struct Panel0View: View {
     let name: String
     @Binding var persons0: Int
     let split0: Int
+    let split0RealMinor: Double
     let status: Split0Status
     let totalRaw: Int
     let panelWidth: CGFloat
@@ -169,6 +170,7 @@ struct Panel0View: View {
                 .font(.title.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
+                .minimumScaleFactor(0.6)
                 .frame(width: layout.personsTextW, alignment: .trailing)
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -190,27 +192,33 @@ struct Panel0View: View {
                 .lineLimit(1)
                 .frame(width: layout.nameW, alignment: .center)
 
-            // 柔軟スペーサー
-            Spacer(minLength: 4)
-
-            // 金額（右端固定）— 端数切り上げラベルを上に overlay
-            Text(localizedAmount(totalRaw == 0 ? 0 : split0))
+            // 金額（残り全幅・右端揃え）— 端数発生時は1桁追加表示（追加分を赤字）
+            Text(attributedAmount)
                 .font(.title.bold().monospacedDigit())
-            .foregroundStyle(totalRaw == 0 ? colors.secondary : amountColor)
-            .lineLimit(1)
-            .minimumScaleFactor(0.65)
-            .frame(width: layout.amountTextW, alignment: .trailing)
-            .overlay(alignment: .bottomTrailing) {
-                if status == .rounded {
-                    Text("split.roundedUp")
-                        .font(.caption2.bold())
-                        .foregroundStyle(amountColor)
-                        .fixedSize()
-                        .offset(y: -30)
-                }
-            }
-
+                .lineLimit(1)
+                .minimumScaleFactor(0.65)
+                .frame(maxWidth: .infinity, alignment: .trailing)
         }
+    }
+
+    /// 金額の表示テキスト：切上時は追加桁を赤字で結合した AttributedString
+    private var attributedAmount: AttributedString {
+        if totalRaw == 0 {
+            var attr = AttributedString(localizedAmount(0))
+            attr.foregroundColor = colors.secondary
+            return attr
+        }
+        if status == .rounded {
+            let r = MoneyFormat.extendedTruncated(realMinor: split0RealMinor)
+            var main = AttributedString(r.main)
+            main.foregroundColor = amountColor
+            var extra = AttributedString(r.extra)
+            extra.foregroundColor = Color(red: 0.95, green: 0.45, blue: 0.05)
+            return main + extra
+        }
+        var attr = AttributedString(localizedAmount(split0))
+        attr.foregroundColor = amountColor
+        return attr
     }
 }
 
@@ -238,43 +246,45 @@ struct PanelSubView: View {
                 // 情報行
                 infoRow
                     .padding(.horizontal, H_PAD)
-                    .padding(.top, 16)
-                    .padding(.bottom, 4)
+                    .padding(.top, persons > 0 ? 16 : 6)
+                    .padding(.bottom, persons > 0 ? 4 : 6)
 
-                LeatherDivider()
+                if persons > 0 {
+                    LeatherDivider()
 
-                // ダイアル行: 人数（左）+ 金額（右）
-                HStack(alignment: .top, spacing: DIAL_MIN_GAP) {
-                    AZDialView(
-                        value: $persons,
-                        min: 0, max: 99,
-                        step: 1,
-                        stepperStep: settings.showDialStepper ? 1 : 0,
-                        stepperPosition: .bottom,
-                        style: settings.dialStyle,
-                        dialWidth: layout.personsDialW,
-                        tuning: settings.dialTuning
-                    )
-                    .frame(width: layout.personsDialW)
-                    .allowsHitTesting(!isPeopleLocked)
-                    .opacity(isPeopleLocked ? 0.45 : 1)
+                    // ダイアル行: 人数（左）+ 金額（右）
+                    HStack(alignment: .top, spacing: DIAL_MIN_GAP) {
+                        AZDialView(
+                            value: $persons,
+                            min: 0, max: 99,
+                            step: 1,
+                            stepperStep: settings.showDialStepper ? 1 : 0,
+                            stepperPosition: .bottom,
+                            style: settings.dialStyle,
+                            dialWidth: layout.personsDialW,
+                            tuning: settings.dialTuning
+                        )
+                        .frame(width: layout.personsDialW)
+                        .allowsHitTesting(!isPeopleLocked)
+                        .opacity(isPeopleLocked ? 0.45 : 1)
 
-                    AZDialView(
-                        value: $split,
-                        min: 0, max: MoneyFormat.maxMinorValue,
-                        step: dialUnit,
-                        stepperStep: settings.showDialStepper ? dialUnit : 0,
-                        stepperPosition: .bottom,
-                        style: settings.dialStyle,
-                        dialWidth: layout.amountDialW,
-                        tuning: settings.dialTuning
-                    )
-                    .frame(maxWidth: .infinity)
-                    .allowsHitTesting(!isAmountLocked)
-                    .opacity(isAmountLocked ? 0.45 : 1)
+                        AZDialView(
+                            value: $split,
+                            min: 0, max: MoneyFormat.maxMinorValue,
+                            step: dialUnit,
+                            stepperStep: settings.showDialStepper ? dialUnit : 0,
+                            stepperPosition: .bottom,
+                            style: settings.dialStyle,
+                            dialWidth: layout.amountDialW,
+                            tuning: settings.dialTuning
+                        )
+                        .frame(maxWidth: .infinity)
+                        .allowsHitTesting(!isAmountLocked)
+                        .opacity(isAmountLocked ? 0.45 : 1)
+                    }
+                    .padding(.horizontal, H_PAD)
+                    .padding(.vertical, 8)
                 }
-                .padding(.horizontal, H_PAD)
-                .padding(.vertical, 8)
             }
         }
         .frame(maxWidth: .infinity)
@@ -288,6 +298,7 @@ struct PanelSubView: View {
                 .font(.title.bold().monospacedDigit())
                 .foregroundStyle(colors.secondary)
                 .lineLimit(1)
+                .minimumScaleFactor(0.6)
                 .frame(width: layout.personsTextW, alignment: .trailing)
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -312,24 +323,43 @@ struct PanelSubView: View {
             // 柔軟スペーサー（名称と金額の間）
             Spacer(minLength: 4)
 
-            // 金額（右端に固定）— 人数>0 のときタップでテンキー
-            Text(persons == 0 ? "---" : localizedAmount(split))
-                .font(.title.bold().monospacedDigit())
-            .foregroundStyle(persons == 0 ? colors.secondary : colors.accent)
-            .lineLimit(1)
-            .minimumScaleFactor(0.65)
-            .frame(width: layout.amountTextW, alignment: .trailing)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                guard persons > 0, !isAmountLocked else { return }
-                numpadConfig = NumpadConfig(
-                    title: localizedAmountTitle(name),
-                    initialValue: split,
-                    maxValue: MoneyFormat.maxMinorValue,
-                    minValue: 0,
-                    isAmount: true,
-                    onConfirm: { split = $0 }
-                )
+            if persons > 0 {
+                // 金額（右端に固定）— タップでテンキー
+                Text(localizedAmount(split))
+                    .font(.title.bold().monospacedDigit())
+                    .foregroundStyle(colors.accent)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
+                    .frame(width: layout.amountTextW, alignment: .trailing)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        guard !isAmountLocked else { return }
+                        numpadConfig = NumpadConfig(
+                            title: localizedAmountTitle(name),
+                            initialValue: split,
+                            maxValue: MoneyFormat.maxMinorValue,
+                            minValue: 0,
+                            isAmount: true,
+                            onConfirm: { split = $0 }
+                        )
+                    }
+            } else {
+                // OFF スイッチ — タップで人数を1に戻してパネルを展開
+                Toggle("", isOn: Binding(
+                    get: { persons > 0 },
+                    set: { newValue in
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
+                            persons = newValue ? 1 : 0
+                        }
+                    }
+                ))
+                .labelsHidden()
+                .scaleEffect(0.85)
+                // テキストの baseline ≒ height * 0.78 に合わせる
+                .alignmentGuide(.firstTextBaseline) { d in d.height * 0.78 }
+                .frame(width: layout.amountTextW, alignment: .trailing)
+                .disabled(isPeopleLocked || isAmountLocked)
+                .opacity((isPeopleLocked || isAmountLocked) ? 0.45 : 1)
             }
 
         }

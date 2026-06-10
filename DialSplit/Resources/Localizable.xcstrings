@@ -1145,6 +1145,7 @@
       }
     },
     "split.roundedUp" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
