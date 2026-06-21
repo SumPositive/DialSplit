@@ -50,6 +50,13 @@ DialSplit/
 - Xcode 26+
 - Swift 6
 
+## 開発方針
+
+- XcodeGen は使用しません
+- プロジェクト構成は `DialSplit.xcodeproj` を正として Xcode で管理します
+- ファイル追加、依存関係、Build Settings、Build Phases の変更は Xcode プロジェクトへ直接反映します
+- `project.yml` などから `.xcodeproj` を再生成しないでください
+
 ## リリース履歴
 
 | バージョン | 公開日 | 内容 |

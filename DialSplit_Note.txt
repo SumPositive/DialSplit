@@ -1,3 +1,9 @@
+DialSplit　割勘
+- 日本語名は `割勘`
+- iOSアプリ `DialSplit` のコードは `GitLocal/DialSplit` にある
+- 取扱説明の日本語版は `GitLocal/azukid.com/docs/jp/sumpo/DialSplit/` にある
+- 取扱説明の英語版は `GitLocal/azukid.com/docs/en/sumpo/DialSplit/` にある
+
 DialSplit_PromptNote.txt
 
 
@@ -110,5 +116,6 @@ enに翻訳して
 ----------------------------------------------------------
 2.3.0
 
+XcodeGenの利用禁止、まだしばらくはXcode管理で統一したい。readme.mdなどにも明示しておいて
 
 
