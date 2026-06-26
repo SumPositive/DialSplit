@@ -19,17 +19,28 @@ struct LockToggleButton: View {
     @Binding var isLocked: Bool
     let lockedSystemImage: String
     let unlockedSystemImage: String
+    /// 新しい iOS でのみ利用可能なシンボルの旧 iOS 用フォールバック
+    var lockedFallbackImage: String? = nil
+    var unlockedFallbackImage: String? = nil
     let accessibilityLabel: String
     var size: CGFloat = 36
     var symbolSize: CGFloat = 18
     var onToggle: ((Bool) -> Void)? = nil
+
+    private var resolvedSymbol: String {
+        if isLocked {
+            return lockedFallbackImage.map { SFSymbol.resolve(lockedSystemImage, fallback: $0) } ?? lockedSystemImage
+        } else {
+            return unlockedFallbackImage.map { SFSymbol.resolve(unlockedSystemImage, fallback: $0) } ?? unlockedSystemImage
+        }
+    }
 
     var body: some View {
         Button {
             isLocked.toggle()
             onToggle?(isLocked)
         } label: {
-            Image(systemName: isLocked ? lockedSystemImage : unlockedSystemImage)
+            Image(systemName: resolvedSymbol)
                 .font(.system(size: symbolSize, weight: .bold))
                 .symbolRenderingMode(.monochrome)
                 .foregroundStyle(isLocked

@@ -28,6 +28,7 @@
 		C38A3D242FD84C7000AC7390 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D232FD84C7000AC7390 /* FirebaseAnalytics */; };
 		C38A3D262FD84C7000AC7390 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D252FD84C7000AC7390 /* FirebaseCore */; };
 		C38A3D282FD84C7000AC7390 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D272FD84C7000AC7390 /* FirebaseCrashlytics */; };
+		C39F95C72FEF52E000873586 /* SFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39F95C62FEF52E000873586 /* SFSymbol.swift */; };
 		C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C38A3D152FD849A900AC7390 /* Telemetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telemetry.swift; sourceTree = "<group>"; };
 		C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEvent.swift; sourceTree = "<group>"; };
+		C39F95C62FEF52E000873586 /* SFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbol.swift; sourceTree = "<group>"; };
 		D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadView.swift; sourceTree = "<group>"; };
 		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
 		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		C38A3D182FD849A900AC7390 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C39F95C62FEF52E000873586 /* SFSymbol.swift */,
 				C38A3D172FD849A900AC7390 /* Telemetry */,
 			);
 			path = Core;
@@ -286,6 +289,7 @@
 			files = (
 				A670342EB9D61FFA777DA4F0 /* AppSettings.swift in Sources */,
 				4479B7022ED917A4B393B2F7 /* BrassFrame.swift in Sources */,
+				C39F95C72FEF52E000873586 /* SFSymbol.swift in Sources */,
 				B857F9FD5E064FEBE45EAABE /* DialSplitApp.swift in Sources */,
 				0DD4F1E63EAE767229C8423B /* LeatherBackground.swift in Sources */,
 				9A3CC7AD8CE36855195495CF /* PanelView.swift in Sources */,

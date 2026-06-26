@@ -144,8 +144,9 @@ struct Panel0View: View {
                     Spacer(minLength: 0)
                     LockToggleButton(
                         isLocked: $isAllLocked,
-                        lockedSystemImage: "lock.badge.checkmark.fill",
+                        lockedSystemImage: "lock.badge.checkmark.fill",   // iOS 26+
                         unlockedSystemImage: "lock.open.fill",
+                        lockedFallbackImage: "lock.fill",                 // iOS 17〜18 用
                         accessibilityLabel: String(localized: "lock.allControls"),
                         size: 44,
                         symbolSize: 28,
