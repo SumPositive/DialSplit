@@ -40,31 +40,31 @@ struct AdMobBannerView: View {
     @State private var reloadToken = UUID()
 
     var body: some View {
-        VStack(spacing: 8) {
-            AdMobBannerRepresentable(
-                adUnitID: adUnitID,
-                size: size,
-                onReceiveAd: {
-                    isLoading = false
-                    errorMessage = nil
-                },
-                onFailToReceiveAd: { _ in
-                    isLoading = false
-                    errorMessage = String(localized: "support.ad.noRewardedAd")
-                },
-                reloadToken: reloadToken
-            )
-            .id(reloadToken)
-            .frame(width: size.width, height: size.height)
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(uiColor: .tertiarySystemBackground))
-            )
-
+        AdMobBannerRepresentable(
+            adUnitID: adUnitID,
+            size: size,
+            onReceiveAd: {
+                isLoading = false
+                errorMessage = nil
+            },
+            onFailToReceiveAd: { _ in
+                isLoading = false
+                errorMessage = String(localized: "support.ad.noRewardedAd")
+            },
+            reloadToken: reloadToken
+        )
+        .id(reloadToken)
+        .frame(width: size.width, height: size.height)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color(uiColor: .tertiarySystemBackground))
+        )
+        // ローディング/エラーはバナー領域に重ねて表示（行を増やさない）
+        .overlay {
             if isLoading {
-                ProgressView(String(localized: "support.ad.loading"))
-                    .font(.caption)
+                ProgressView()
+                    .controlSize(.small)
             } else if errorMessage != nil {
                 Button(String(localized: "common.reload")) {
                     reloadToken = UUID()
@@ -72,6 +72,7 @@ struct AdMobBannerView: View {
                     errorMessage = nil
                 }
                 .buttonStyle(.bordered)
+                .controlSize(.small)
             }
         }
     }
