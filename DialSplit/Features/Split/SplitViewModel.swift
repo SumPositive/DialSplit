@@ -155,8 +155,12 @@ final class SplitViewModel {
 
     // MARK: - Init & Persistence
 
-    init() {
-        let d = UserDefaults.standard
+    /// 永続化先（テストで suite を注入して本番設定を汚さない）
+    @ObservationIgnored private let defaults: UserDefaults
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        let d = defaults
         let storageVersion = d.integer(forKey: "sv_moneyStorageVersion")
         let needsMinorUnitMigration = storageVersion < 1
         let scale = MoneyFormat.minorUnitScale
@@ -215,7 +219,7 @@ final class SplitViewModel {
     }
 
     private func saveState() {
-        let d = UserDefaults.standard
+        let d = defaults
         d.set(_totalRaw,      forKey: "sv_totalRaw")
         d.set(_persons0,      forKey: "sv_persons0")
         d.set(_persons1,      forKey: "sv_persons1")
@@ -228,3 +232,34 @@ final class SplitViewModel {
     }
 
 }
+
+#if DEBUG
+extension SplitViewModel {
+    /// テスト用ファクトリ。本番 UserDefaults を汚さないインメモリ suite を使う。
+    /// 金額はすべて最小通貨単位（minor）の整数で指定する。
+    static func makeForTest(
+        totalRaw: Int,
+        persons0: Int = 1,
+        persons1: Int = 0,
+        persons2: Int = 0,
+        persons3: Int = 0,
+        split1: Int = 0,
+        split2: Int = 0,
+        split3: Int = 0,
+        dialUnit: Int = 1
+    ) -> SplitViewModel {
+        let suite = UserDefaults(suiteName: "DialSplitTest-\(UUID().uuidString)")!
+        let vm = SplitViewModel(defaults: suite)
+        vm.dialUnit = dialUnit
+        vm.totalRaw = totalRaw
+        vm.persons0 = persons0
+        vm.persons1 = persons1
+        vm.persons2 = persons2
+        vm.persons3 = persons3
+        vm.split1 = split1
+        vm.split2 = split2
+        vm.split3 = split3
+        return vm
+    }
+}
+#endif

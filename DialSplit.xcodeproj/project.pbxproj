@@ -33,6 +33,16 @@
 		C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C39F96752FEFF3BF00873586 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DDCC9047EA4A55A85E4641A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D213D58F54460B23772CA23;
+			remoteInfo = DialSplit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		3B4E53DC0F3D53B85B73C1B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		46D8EDD5282E5537EC9490C0 /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
@@ -53,12 +63,28 @@
 		C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEvent.swift; sourceTree = "<group>"; };
 		C39F95C62FEF52E000873586 /* SFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbol.swift; sourceTree = "<group>"; };
 		C39F95C82FEF59B200873586 /* AdMobBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBanner.swift; sourceTree = "<group>"; };
+		C39F96712FEFF3BE00873586 /* DialSplitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialSplitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadView.swift; sourceTree = "<group>"; };
 		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
 		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C39F96722FEFF3BF00873586 /* DialSplitTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DialSplitTests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		C39F966E2FEFF3BE00873586 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBA24386C205F0AF85E6FE2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -78,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				64FCE8BDEAB2F45E04FE6F4B /* DialSplit */,
+				C39F96722FEFF3BF00873586 /* DialSplitTests */,
 				BEB4D055063B4BAC5CFAED9C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				57E3F9D5896BF2CA28B724CD /* DialSplit.app */,
+				C39F96712FEFF3BE00873586 /* DialSplitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,6 +245,29 @@
 			productReference = 57E3F9D5896BF2CA28B724CD /* DialSplit.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C39F96702FEFF3BE00873586 /* DialSplitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C39F96772FEFF3BF00873586 /* Build configuration list for PBXNativeTarget "DialSplitTests" */;
+			buildPhases = (
+				C39F966D2FEFF3BE00873586 /* Sources */,
+				C39F966E2FEFF3BE00873586 /* Frameworks */,
+				C39F966F2FEFF3BE00873586 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C39F96762FEFF3BF00873586 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C39F96722FEFF3BF00873586 /* DialSplitTests */,
+			);
+			name = DialSplitTests;
+			packageProductDependencies = (
+			);
+			productName = DialSplitTests;
+			productReference = C39F96712FEFF3BE00873586 /* DialSplitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -224,7 +275,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					C39F96702FEFF3BE00873586 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 4D213D58F54460B23772CA23;
+					};
+				};
 			};
 			buildConfigurationList = 3CBD7E56951B789D1E27BE1B /* Build configuration list for PBXProject "DialSplit" */;
 			developmentRegion = en;
@@ -247,6 +305,7 @@
 			projectRoot = "";
 			targets = (
 				4D213D58F54460B23772CA23 /* DialSplit */,
+				C39F96702FEFF3BE00873586 /* DialSplitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -261,6 +320,13 @@
 				C38A3C942FD832AE00AC7390 /* GoogleService-Info.plist in Resources */,
 				C31B5A7D2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy in Resources */,
 				A1B2C3D4E5F60718293A4B6A /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C39F966F2FEFF3BE00873586 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +360,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C39F966D2FEFF3BE00873586 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DC0BEAC2B083A8B9C219C15F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -316,6 +389,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C39F96762FEFF3BF00873586 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D213D58F54460B23772CA23 /* DialSplit */;
+			targetProxy = C39F96752FEFF3BF00873586 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A1B2C3D4E5F60718293A4B5D /* InfoPlist.strings */ = {
@@ -444,6 +525,65 @@
 			};
 			name = Debug;
 		};
+		C39F96782FEFF3BF00873586 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5C2UYK6F45;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.sumpo.spm.DialSplitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DialSplit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DialSplit";
+			};
+			name = Debug;
+		};
+		C39F96792FEFF3BF00873586 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5C2UYK6F45;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.sumpo.spm.DialSplitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DialSplit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DialSplit";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		D21E0623C91C06048DCEAE58 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -528,6 +668,15 @@
 			buildConfigurations = (
 				6C6159F1D5DF531730810481 /* Debug */,
 				4B8088D64DB9EC60398C5A4F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C39F96772FEFF3BF00873586 /* Build configuration list for PBXNativeTarget "DialSplitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C39F96782FEFF3BF00873586 /* Debug */,
+				C39F96792FEFF3BF00873586 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
