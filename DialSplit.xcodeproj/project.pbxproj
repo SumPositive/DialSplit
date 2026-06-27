@@ -392,7 +392,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.AzSplitIt;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -419,7 +419,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.azukid.AzSplitIt;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -535,8 +535,9 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SumPositive/AZDial";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = versionRange;
+				maximumVersion = 4.0.0;
+				minimumVersion = 1.0.0;
 			};
 		};
 		C38A3D222FD84C6F00AC7390 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
