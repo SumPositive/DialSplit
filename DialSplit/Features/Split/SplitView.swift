@@ -60,6 +60,7 @@ struct SplitView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var vm = SplitViewModel()
     @State private var showSettings = false
+    @State private var showPanelStyle = false
     @State private var isPeopleLocked = false
     @State private var isAllLocked = false
     private let cardSideMargin: CGFloat = 16
@@ -163,27 +164,21 @@ struct SplitView: View {
                             .padding(.top, 6)
                             .padding(.bottom, 2)
 
-                            PanelStyleSegment(
-                                panelBrightness: Binding(
-                                    get: { settings.panelBrightness },
-                                    set: { settings.panelBrightness = min(40, max(-40, $0)) }
-                                ),
-                                textHue: Binding(
-                                    get: { settings.textHue },
-                                    set: { settings.textHue = normalizedTextHueValue($0) }
-                                ),
-                                textTone: Binding(
-                                    get: { settings.textTone },
-                                    set: { settings.textTone = min(100, max(0, $0)) }
-                                ),
-                                leatherStyle: Binding(
-                                    get: { settings.leatherStyle },
-                                    set: { settings.leatherStyle = $0 }
-                                ),
-                                dialStyle: settings.dialStyle,
-                                dialTuning: settings.dialTuning,
-                                isLocked: isAllLocked
-                            )
+                            HStack {
+                                Spacer()
+                                Button {
+                                    showPanelStyle = true
+                                } label: {
+                                    Image(systemName: "paintpalette.fill")
+                                        .font(.title3)
+                                        .foregroundStyle(.white.opacity(0.85))
+                                        .shadow(color: .black.opacity(0.5), radius: 1)
+                                        .frame(width: 44, height: 44)
+                                        .contentShape(Circle())
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel(Text("panel.style.title"))
+                            }
                             .frame(width: cardWidth)
                             .padding(.bottom, 4)
                         }
@@ -193,7 +188,17 @@ struct SplitView: View {
                     .safeAreaInset(edge: .top, spacing: 0) {
                         HeaderBar(showSettings: $showSettings)
                     }
+                    .safeAreaInset(edge: .bottom, spacing: 0) {
+                        if isAllLocked {
+                            FooterBannerView()
+                                .padding(.vertical, 6)
+                                .frame(maxWidth: .infinity)
+                                .background(.ultraThinMaterial)
+                                .transition(.move(edge: .bottom).combined(with: .opacity))
+                        }
+                    }
                 }
+                .animation(.easeInOut(duration: 0.25), value: isAllLocked)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -201,6 +206,31 @@ struct SplitView: View {
             SettingsView()
                 .environment(settings)
                 .preferredColorScheme(settingsSheetColorScheme)
+        }
+        .sheet(isPresented: $showPanelStyle) {
+            PanelStyleSheet(
+                panelBrightness: Binding(
+                    get: { settings.panelBrightness },
+                    set: { settings.panelBrightness = min(40, max(-40, $0)) }
+                ),
+                textHue: Binding(
+                    get: { settings.textHue },
+                    set: { settings.textHue = normalizedTextHueValue($0) }
+                ),
+                textTone: Binding(
+                    get: { settings.textTone },
+                    set: { settings.textTone = min(100, max(0, $0)) }
+                ),
+                leatherStyle: Binding(
+                    get: { settings.leatherStyle },
+                    set: { settings.leatherStyle = $0 }
+                ),
+                dialStyle: settings.dialStyle,
+                dialTuning: settings.dialTuning
+            )
+            .environment(settings)
+            .preferredColorScheme(settingsSheetColorScheme)
+            .presentationDetents([.medium, .large])
         }
     }
 }
@@ -559,87 +589,52 @@ private struct DialUnitSegment: View {
 
 // MARK: - パネルスタイル
 
-private struct PanelStyleSegment: View {
+private struct PanelStyleSheet: View {
     @Binding var panelBrightness: Int
     @Binding var textHue: Int
     @Binding var textTone: Int
     @Binding var leatherStyle: LeatherStyle
     let dialStyle: DialStyle
     let dialTuning: AZDialInteractionTuning
-    let isLocked: Bool
+    @Environment(\.dismiss) private var dismiss
 
     private var brightnessText: String {
         panelBrightness > 0 ? "+\(panelBrightness)" : "\(panelBrightness)"
     }
 
-    private var textColorText: String {
-        let value = normalizedTextHueValue(textHue)
-        if value == -20 { return String(localized: "color.black") }
-        if value == -10 { return String(localized: "color.white") }
-        return "\(value)°"
-    }
-
-    @State private var isExpanded = false
-
     var body: some View {
-        VStack(spacing: 8) {
-            Button {
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
-                    isExpanded.toggle()
-                }
-            } label: {
-                HStack {
-                    Text("panel.style.title")
-                        .font(.caption.bold())
+        NavigationStack {
+            VStack(spacing: 20) {
+                HStack(spacing: 8) {
+                    Text("\(String(localized: "panel.brightness")) \(brightnessText)")
+                        .font(.footnote.bold())
                         .foregroundStyle(.primary)
-                    Spacer()
-                    Image(systemName: "chevron.down")
-                        .font(.caption.bold())
-                        .foregroundStyle(.secondary)
-                        .rotationEffect(.degrees(isExpanded ? 180 : 0))
+                        .frame(width: 130, alignment: .leading)
+
+                    AZDialView(
+                        value: $panelBrightness,
+                        min: -40, max: 40,
+                        step: 1, stepperStep: 0,
+                        style: dialStyle,
+                        dialWidth: 160,
+                        tuning: dialTuning
+                    )
+                    .frame(maxWidth: .infinity)
                 }
+
+                TextColorPickerView(textHue: $textHue, textTone: $textTone, leatherStyle: $leatherStyle)
+
+                Spacer(minLength: 0)
             }
-            .buttonStyle(.plain)
-
-            if isExpanded {
-                VStack(spacing: 8) {
-                    HStack(spacing: 8) {
-                        Text("\(String(localized: "panel.brightness")) \(brightnessText)")
-                            .font(.footnote.bold())
-                            .foregroundStyle(.primary)
-                            .frame(width: 130, alignment: .leading)
-
-                        AZDialView(
-                            value: $panelBrightness,
-                            min: -40, max: 40,
-                            step: 1, stepperStep: 0,
-                            style: dialStyle,
-                            dialWidth: 160,
-                            tuning: dialTuning
-                        )
-                        .frame(maxWidth: .infinity)
-                        .allowsHitTesting(!isLocked)
-                        .opacity(isLocked ? 0.45 : 1)
-                    }
-
-                    TextColorPickerView(textHue: $textHue, textTone: $textTone, leatherStyle: $leatherStyle)
-                        .allowsHitTesting(!isLocked)
-                        .opacity(isLocked ? 0.45 : 1)
+            .padding(20)
+            .navigationTitle("panel.style.title")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("common.done") { dismiss() }
                 }
-                .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
-        .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(.ultraThinMaterial)
-                RoundedRectangle(cornerRadius: 16)
-                    .strokeBorder(.white.opacity(0.24), lineWidth: 1)
-            }
-        )
-        .clipped()
     }
 }
 
