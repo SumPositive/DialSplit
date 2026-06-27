@@ -303,15 +303,17 @@ struct SettingsView: View {
                 }
             }
             .sheet(isPresented: $showDialSettings) {
-                NavigationStack {
-                    AZDialSettingsView(
-                        tuning: $settings.dialTuning,
-                        style: $settings.dialStyle
-                    )
-                    .toolbar {
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("common.done") {
-                                showDialSettings = false
+                applyFontScale {
+                    NavigationStack {
+                        AZDialSettingsView(
+                            tuning: $settings.dialTuning,
+                            style: $settings.dialStyle
+                        )
+                        .toolbar {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("common.done") {
+                                    showDialSettings = false
+                                }
                             }
                         }
                     }
