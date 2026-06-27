@@ -7,6 +7,7 @@
 
 import Testing
 import SwiftUI
+import Foundation
 @testable import DialSplit
 
 struct HelperTests {
@@ -82,20 +83,21 @@ struct HelperTests {
     }
 }
 
-// MARK: - 通貨依存ヘルパー（JPY 環境前提）
+// MARK: - 通貨依存ヘルパー（JPY 環境でのみ実行）
+
+/// テスト実行環境のロケールが日本円かどうか
+private var isJPY: Bool { MoneyFormat.currencyCode == "JPY" }
 
 struct MoneyFormatTests {
 
-    @Test("JPY は小数なし（fractionDigits=0 / scale=1）")
-    func jpyScale() throws {
-        try #require(MoneyFormat.currencyCode == "JPY")
+    @Test("JPY は小数なし（fractionDigits=0 / scale=1）", .enabled(if: isJPY))
+    func jpyScale() {
         #expect(MoneyFormat.fractionDigits == 0)
         #expect(MoneyFormat.minorUnitScale == 1)
     }
 
-    @Test("JPY の端数拡張表示は小数1位を追加する")
-    func extendedTruncatedJPY() throws {
-        try #require(MoneyFormat.currencyCode == "JPY")
+    @Test("JPY の端数拡張表示は小数1位を追加する", .enabled(if: isJPY))
+    func extendedTruncatedJPY() {
         // 28,833.6 → main は 28,833 を含み、extra は ".6"
         let r = MoneyFormat.extendedTruncated(realMinor: 28_833.6)
         #expect(r.main.contains("28,833"))
@@ -108,5 +110,12 @@ struct MoneyFormatTests {
             #expect(step <= MoneyFormat.maxMinorValue)
             #expect(step >= 1)
         }
+    }
+
+    @Test("通貨の小数桁と scale が整合する（ロケール非依存）")
+    func scaleConsistency() {
+        let digits = MoneyFormat.fractionDigits
+        let expectedScale = Int(pow(10.0, Double(digits)))
+        #expect(MoneyFormat.minorUnitScale == expectedScale)
     }
 }

@@ -18,11 +18,11 @@ struct PersistenceTests {
         UserDefaults(suiteName: "DialSplitPersistTest-\(UUID().uuidString)")!
     }
 
-    // MARK: - 新規インストールのデフォルト（JPY 前提）
+    // MARK: - 新規インストールのデフォルト（JPY 環境でのみ実行）
 
-    @Test("空 suite では JPY のデフォルト値で初期化される")
-    func freshInstallDefaultsJPY() throws {
-        try #require(MoneyFormat.currencyCode == "JPY")
+    @Test("空 suite では JPY のデフォルト値で初期化される",
+          .enabled(if: MoneyFormat.currencyCode == "JPY"))
+    func freshInstallDefaultsJPY() {
         let vm = SplitViewModel(defaults: makeSuite())
         #expect(vm.totalRaw == 10_000)
         #expect(vm.persons0 == 1)
