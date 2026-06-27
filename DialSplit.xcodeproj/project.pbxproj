@@ -29,6 +29,7 @@
 		C38A3D262FD84C7000AC7390 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D252FD84C7000AC7390 /* FirebaseCore */; };
 		C38A3D282FD84C7000AC7390 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D272FD84C7000AC7390 /* FirebaseCrashlytics */; };
 		C39F95C72FEF52E000873586 /* SFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39F95C62FEF52E000873586 /* SFSymbol.swift */; };
+		C39F95CA2FEF59B200873586 /* AdMobBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39F95C82FEF59B200873586 /* AdMobBanner.swift */; };
 		C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		C38A3D152FD849A900AC7390 /* Telemetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telemetry.swift; sourceTree = "<group>"; };
 		C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEvent.swift; sourceTree = "<group>"; };
 		C39F95C62FEF52E000873586 /* SFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbol.swift; sourceTree = "<group>"; };
+		C39F95C82FEF59B200873586 /* AdMobBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBanner.swift; sourceTree = "<group>"; };
 		D7B8E1A4C56F2039B8D74E20 /* NumpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadView.swift; sourceTree = "<group>"; };
 		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
 		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
@@ -136,9 +138,18 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		C39F95C92FEF59B200873586 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				C39F95C82FEF59B200873586 /* AdMobBanner.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		C66CEC611B542E0E56D012DC /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				C39F95C92FEF59B200873586 /* Ads */,
 				3607910E528D76580371F6AA /* Settings */,
 				7E6263DCBBED09963F5646AE /* Split */,
 			);
@@ -300,6 +311,7 @@
 				B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */,
 				5E36CF7F28ABCBC79971B413 /* SplitViewModel.swift in Sources */,
 				C3A5F2D8E94B1067A3F82E19 /* NumpadView.swift in Sources */,
+				C39F95CA2FEF59B200873586 /* AdMobBanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

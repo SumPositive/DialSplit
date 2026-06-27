@@ -694,34 +694,16 @@ private struct AdSupportSheet: View {
 
 #if canImport(GoogleMobileAds)
 
-#if DEBUG
-private let ADMOB_REWARD_UNIT_ID = "ca-app-pub-3940256099942544/1712485313"
-private let ADMOB_BANNER_UNIT_ID = "ca-app-pub-3940256099942544/2435281174"
-#else
-private let ADMOB_REWARD_UNIT_ID = "ca-app-pub-7576639777972199/7862774227"
-private let ADMOB_BANNER_UNIT_ID = "ca-app-pub-7576639777972199/9670679914"
-#endif
-
-// 非パーソナライズ広告（NPA）リクエスト
-@MainActor
-private func nonPersonalizedAdRequest() -> Request {
-    let request = Request()
-    let extras = Extras()
-    extras.additionalParameters = ["npa": "1"]
-    request.register(extras)
-    return request
-}
-
 private struct AdMobRewardedSheet: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var loader = RewardedAdLoader(adUnitID: ADMOB_REWARD_UNIT_ID)
+    @StateObject private var loader = RewardedAdLoader(adUnitID: AdMobConfig.rewardUnitID)
     let onRewardEarned: () -> Void
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
                 AdMobBannerView(
-                    adUnitID: ADMOB_BANNER_UNIT_ID,
+                    adUnitID: AdMobConfig.bannerUnitID,
                     size: CGSize(width: 300, height: 250)
                 )
 
@@ -776,108 +758,6 @@ private struct AdMobRewardedSheet: View {
                     onRewardEarned()
                 }
             }
-        }
-    }
-}
-
-private struct AdMobBannerView: View {
-    let adUnitID: String
-    let size: CGSize
-
-    @State private var isLoading = true
-    @State private var errorMessage: String?
-    @State private var reloadToken = UUID()
-
-    var body: some View {
-        VStack(spacing: 8) {
-            AdMobBannerRepresentable(
-                adUnitID: adUnitID,
-                size: size,
-                onReceiveAd: {
-                    isLoading = false
-                    errorMessage = nil
-                },
-                onFailToReceiveAd: { _ in
-                    isLoading = false
-                    errorMessage = String(localized: "support.ad.noRewardedAd")
-                },
-                reloadToken: reloadToken
-            )
-            .id(reloadToken)
-            .frame(width: size.width, height: size.height)
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(uiColor: .tertiarySystemBackground))
-            )
-
-            if isLoading {
-                ProgressView(String(localized: "support.ad.loading"))
-                    .font(.caption)
-            } else if errorMessage != nil {
-                Button(String(localized: "common.reload")) {
-                    reloadToken = UUID()
-                    isLoading = true
-                    errorMessage = nil
-                }
-                .buttonStyle(.bordered)
-            }
-        }
-    }
-}
-
-private struct AdMobBannerRepresentable: UIViewControllerRepresentable {
-    let adUnitID: String
-    let size: CGSize
-    let onReceiveAd: () -> Void
-    let onFailToReceiveAd: (Error) -> Void
-    let reloadToken: UUID
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(onReceiveAd: onReceiveAd, onFailToReceiveAd: onFailToReceiveAd)
-    }
-
-    func makeUIViewController(context: Context) -> UIViewController {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .clear
-
-        let bannerView = BannerView(adSize: adSizeFor(cgSize: size))
-        bannerView.adUnitID = adUnitID
-        bannerView.rootViewController = viewController
-        bannerView.delegate = context.coordinator
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-
-        viewController.view.addSubview(bannerView)
-        NSLayoutConstraint.activate([
-            bannerView.centerXAnchor.constraint(equalTo: viewController.view.centerXAnchor),
-            bannerView.centerYAnchor.constraint(equalTo: viewController.view.centerYAnchor),
-        ])
-
-        context.coordinator.bannerView = bannerView
-        bannerView.load(nonPersonalizedAdRequest())
-        return viewController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        context.coordinator.bannerView?.rootViewController = uiViewController
-    }
-
-    final class Coordinator: NSObject, BannerViewDelegate {
-        weak var bannerView: BannerView?
-        private let onReceiveAd: () -> Void
-        private let onFailToReceiveAd: (Error) -> Void
-
-        init(onReceiveAd: @escaping () -> Void, onFailToReceiveAd: @escaping (Error) -> Void) {
-            self.onReceiveAd = onReceiveAd
-            self.onFailToReceiveAd = onFailToReceiveAd
-        }
-
-        func bannerViewDidReceiveAd(_ bannerView: BannerView) {
-            onReceiveAd()
-        }
-
-        func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
-            onFailToReceiveAd(error)
         }
     }
 }
