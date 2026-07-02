@@ -1,2 +1,3 @@
 Neu in 2.3.0
 - Unterstützung für weitere Sprachen: Deutsch, Spanisch, Französisch, Italienisch, Koreanisch und Traditionelles Chinesisch
+- Überarbeitetes App-Symbol

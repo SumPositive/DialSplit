@@ -1,2 +1,3 @@
 Novità della versione 2.3.0
 - Aggiunto il supporto per altre lingue: tedesco, spagnolo, francese, italiano, coreano e cinese tradizionale
+- Rinnovata l'icona dell'app
