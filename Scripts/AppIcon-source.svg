@@ -1,22 +1,20 @@
 <svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F7E6B0"/>
-      <stop offset="0.45" stop-color="#CDA64F"/>
-      <stop offset="1" stop-color="#8A6B22"/>
+    <linearGradient id="divBrass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FCF1C8"/>
+      <stop offset="0.5" stop-color="#E4C877"/>
+      <stop offset="1" stop-color="#B8933F"/>
     </linearGradient>
   </defs>
   <rect x="0" y="0" width="1024" height="1024" fill="#9B4A44"/>
-  <circle cx="512" cy="512" r="360" fill="none" stroke="url(#brass)" stroke-width="120"/>
-  <circle cx="512" cy="512" r="420" fill="none" stroke="#5F4A18" stroke-width="6" opacity="0.55"/>
-  <circle cx="512" cy="512" r="300" fill="none" stroke="#5F4A18" stroke-width="6" opacity="0.55"/>
-  <g stroke="#9B4A44" stroke-width="36" stroke-linecap="butt">
+  <circle cx="512" cy="512" r="360" fill="none" stroke="#E4C877" stroke-width="120"/>
+  <g stroke="#9B4A44" stroke-width="23" stroke-linecap="butt">
     <line x1="512" y1="78"  x2="512" y2="226"/>
     <line x1="946" y1="512" x2="798" y2="512"/>
     <line x1="512" y1="946" x2="512" y2="798"/>
     <line x1="78"  y1="512" x2="226" y2="512"/>
   </g>
-  <g fill="#F7E6B0">
+  <g fill="url(#divBrass)">
     <circle cx="512" cy="404" r="48"/>
     <rect x="342" y="474" width="340" height="76" rx="38"/>
     <circle cx="512" cy="620" r="48"/>
