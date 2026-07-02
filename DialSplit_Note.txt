@@ -3,6 +3,8 @@ DialSplit　割勘
 - iOSアプリ `DialSplit` のコードは `GitLocal/DialSplit` にある
 - 取扱説明の日本語版は `GitLocal/azukid.com/docs/jp/sumpo/DialSplit/` にある
 - 取扱説明の英語版は `GitLocal/azukid.com/docs/en/sumpo/DialSplit/` にある
+- 言語ロケールは、ja,de,en,es,fr,it,ko,zh-Hant に対応
+
 
 DialSplit_PromptNote.txt
 
@@ -140,13 +142,16 @@ enにして
 2. 丸枠の切欠けを残したまま正菱形に変更して家紋風にする
 
 ロケールを追加したい。割勘を使いそうでユーザが多い地域のロケールを提案して
-ko,de,zh-Hant,fr,es に対応したい　　　　　（zh-Hans 簡体字 中国本土等 には対応しない）
+ko,de,zh-Hant,fr,es,it に対応したい　　　　　（zh-Hans 簡体字 中国本土等 には対応しない）
+
+公開アプリパネル、取扱説明の言語ロケールを ja,de,en,es,fr,it,ko,zh-Hant に対応したい
  
 
 -----------
 2.3.0 
-- 多言語対応：de/zh-HANS/fr/it
-enにして
+- 多言語対応：de,es,fr,it,ko,zh-Hant に対応
+-
+de,en,es,fr,it,ko,zh-Hant にして
 -----
 2.3.0 本日公開、README.mdの開発メモ、公開アプリパネル、取扱説明（jp/en）を更新してほしい。
 --------------------------------
