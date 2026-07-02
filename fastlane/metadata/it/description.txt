@@ -1,0 +1,14 @@
+DialSplit è un'app per dividere il conto in cui regoli il numero di persone e gli importi con le ghiere.
+
+Inserisci l'importo totale e le persone di ogni pannello: l'importo del pannello A viene calcolato automaticamente. Assegna un nome ai quattro pannelli (A/B/C/D) e affronta ogni occasione: aperitivi, cene o feste.
+
+■ Funzioni principali
+・Regola persone e importi rapidamente con la ghiera
+・Inserimento diretto degli importi con il tastierino numerico
+・Nomi personalizzabili e preimpostazioni (VIP / Capo / Oro / Premium, ecc.)
+・Blocco delle persone e blocco completo per evitare errori
+・Regolazione della sensibilità della ghiera
+・Cambia luminosità, colore del testo, saturazione e sfondo dalla schermata principale
+・Modalità aspetto chiara / scura / automatica
+
+Un'interfaccia semplice che puoi appoggiare sul tavolo per controllare insieme sul momento.

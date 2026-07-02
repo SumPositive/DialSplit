@@ -1,0 +1,14 @@
+DialSplit est une application de partage d'addition dans laquelle vous ajustez le nombre de personnes et les montants à l'aide de molettes.
+
+Saisissez le montant total et le nombre de personnes par panneau : le montant du panneau A est calculé automatiquement. Nommez chacun des quatre panneaux (A/B/C/D) pour vous adapter à toutes les occasions : verres, repas ou fêtes.
+
+■ Fonctions principales
+・Ajustez rapidement personnes et montants avec la molette
+・Saisie directe des montants au pavé numérique
+・Noms personnalisables et préréglages (VIP / PDG / Or / Premium, etc.)
+・Verrou des personnes et verrou complet contre les erreurs
+・Réglage de la sensibilité de la molette
+・Modifiez luminosité, couleur du texte, saturation et arrière-plan depuis l'écran principal
+・Mode d'apparence clair / sombre / automatique
+
+Une interface simple que vous pouvez poser sur la table pour vérifier ensemble sur le moment.

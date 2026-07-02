@@ -1,0 +1,14 @@
+DialSplit is a bill-splitting calculator app where you adjust the number of people and the amounts with tactile dials.
+
+Set the total amount and the number of people in each panel, and the amount for Panel A is calculated automatically. Give each of the four panels (A/B/C/D) its own name to handle any occasion — drinks, dining, or parties.
+
+■ Key features
+・Quickly adjust people and amounts with the dial
+・Enter amounts directly with the numeric keypad
+・Customizable names and presets (VIP / Exec / Gold / Premium, etc.)
+・People lock and full-control lock to prevent mistakes
+・Adjustable dial sensitivity
+・Change panel brightness, text color, saturation, and background right from the main screen
+・Light / Dark / Automatic appearance modes
+
+A simple interface you can set on the table and review together on the spot.

@@ -1,0 +1,2 @@
+Nouveautés de la version 2.3.0
+- Prise en charge de nouvelles langues : allemand, espagnol, français, italien, coréen et chinois traditionnel

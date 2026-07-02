@@ -7,3 +7,16 @@ DerivedData/
 *.xcworkspace/xcshareddata/swiftpm/
 .swiftpm/
 Pods/
+
+# fastlane
+*.p8
+fastlane/AuthKey_*.p8
+fastlane/.env
+fastlane/.env.*
+!fastlane/.env.example
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/test_output/
+fastlane/README.md.bak
+vendor/bundle/
+.bundle/

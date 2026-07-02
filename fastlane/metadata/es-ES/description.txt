@@ -1,0 +1,14 @@
+DialSplit es una app para dividir la cuenta en la que ajustas el número de personas y los importes con diales giratorios.
+
+Introduce el importe total y las personas de cada panel, y el importe del panel A se calcula automáticamente. Asigna nombres a los cuatro paneles (A/B/C/D) y adáptate a cualquier ocasión: copas, comidas o celebraciones.
+
+■ Funciones principales
+・Ajusta personas e importes rápidamente con el dial
+・Introduce importes directamente con el teclado numérico
+・Nombres personalizables y preajustes (VIP / Jefe / Oro / Premium, etc.)
+・Bloqueo de personas y bloqueo total para evitar errores
+・Ajuste de la sensibilidad del dial
+・Cambia brillo, color de texto, saturación y fondo desde la pantalla principal
+・Modo de apariencia claro / oscuro / automático
+
+Una interfaz sencilla que puedes dejar sobre la mesa para revisarla con todos en el momento.

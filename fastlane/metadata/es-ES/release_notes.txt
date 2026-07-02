@@ -1,0 +1,2 @@
+Novedades de la versión 2.3.0
+- Se añadió compatibilidad con más idiomas: alemán, español, francés, italiano, coreano y chino tradicional

@@ -1,0 +1,27 @@
+# DialSplit — App Store メタデータ配信設定
+#
+# このファイルは `fastlane deliver` の既定挙動を定義する。
+# 目的: 説明文(description) と プロモーションテキスト(promotional_text) の
+#       多言語更新のみを安全に反映すること。
+#
+# metadata/<locale>/*.txt に存在する項目だけが更新対象になる。
+# キーワード・スクリーンショット・価格などは触らない（ファイルを置いていないため）。
+
+# App Store Connect の審査には出さず、メタデータのみ保存する
+submit_for_review(false)
+
+# バイナリ(ipa)はアップロードしない。メタデータ専用の実行にする
+skip_binary_upload(true)
+
+# スクリーンショットは今回対象外
+skip_screenshots(true)
+
+# メタデータのうち、ファイルが存在する項目のみ送信される。
+# 明示的にテキストだけを扱うことを示しておく。
+overwrite_screenshots(false)
+
+# 実行前に差分を目視確認できるよう、確認プロンプトを残す（自動化時は --force で無効化可能）
+force(false)
+
+# 対象アプリ
+app_identifier("com.azukid.AzSplitIt")

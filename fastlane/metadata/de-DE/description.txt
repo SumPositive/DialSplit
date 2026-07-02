@@ -1,0 +1,14 @@
+DialSplit ist eine Rechner-App zum Teilen der Rechnung, bei der du Personenzahl und Beträge per Drehregler anpasst.
+
+Gib den Gesamtbetrag und die Personenzahl je Panel ein – der Betrag von Panel A wird automatisch berechnet. Vergib eigene Namen für die vier Panels (A/B/C/D) und meistere so jede Situation: Umtrunk, Essen oder Feier.
+
+■ Hauptfunktionen
+・Personenzahl und Beträge schnell per Drehregler anpassen
+・Beträge direkt über den Ziffernblock eingeben
+・Anpassbare Namen und Vorlagen (VIP / Chef / Gold / Premium usw.)
+・Personen- und Komplettsperre gegen versehentliche Änderungen
+・Einstellbare Drehregler-Empfindlichkeit
+・Helligkeit, Textfarbe, Sättigung und Hintergrund direkt vom Hauptbildschirm ändern
+・Hell / Dunkel / Automatisch als Erscheinungsmodus
+
+Eine schlichte Oberfläche, die du auf den Tisch legen und gemeinsam vor Ort prüfen kannst.
