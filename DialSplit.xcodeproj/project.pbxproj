@@ -52,6 +52,11 @@
 		8EA7EA67C8118A6B30E23390 /* BrassFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrassFrame.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B5F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		414C48769DE546BFA336E4E8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C2652058B35848D8BD4C4B9D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		337FAAED761C4994990F2D21 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0694D63A2E184119A485F8A3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		342065E0D6E44FE68A648EE2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B6B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		AD101A4BF44E11075CF17514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3697A10C0EFF185C359F8DB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -290,7 +295,12 @@
 			knownRegions = (
 				en,
 				ja,
+				de,
 				Base,
+				fr,
+				"zh-Hant",
+				ko,
+				es,
 			);
 			mainGroup = 13F4D6260A8FB74294E3B94C;
 			minimizedProjectReferenceProxies = 1;
@@ -404,6 +414,11 @@
 			children = (
 				A1B2C3D4E5F60718293A4B5E /* en */,
 				A1B2C3D4E5F60718293A4B5F /* ja */,
+				414C48769DE546BFA336E4E8 /* ko */,
+				C2652058B35848D8BD4C4B9D /* de */,
+				337FAAED761C4994990F2D21 /* zh-Hant */,
+				0694D63A2E184119A485F8A3 /* fr */,
+				342065E0D6E44FE68A648EE2 /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
