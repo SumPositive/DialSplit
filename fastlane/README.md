@@ -31,6 +31,30 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 説明文・プロモーションテキストを App Store Connect に反映する（審査提出はしない）
 
+### ios screenshots
+
+```sh
+[bundle exec] fastlane ios screenshots
+```
+
+シミュレータでスクショを撮影する（Snapfile の言語・デバイスに従う。アップロードはしない）
+
+### ios upload_screenshots
+
+```sh
+[bundle exec] fastlane ios upload_screenshots
+```
+
+既存の ./fastlane/screenshots をそのまま App Store Connect に反映する（撮影はしない・審査提出はしない）
+
+### ios screenshots_and_upload
+
+```sh
+[bundle exec] fastlane ios screenshots_and_upload
+```
+
+撮影 → アップロードを一気に行う（審査提出はしない）
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

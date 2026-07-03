@@ -41,6 +41,17 @@
                ReferencedContainer = "container:DialSplit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C39F96BA2FF74AB800873586"
+               BuildableName = "DialSplitUITests.xctest"
+               BlueprintName = "DialSplitUITests"
+               ReferencedContainer = "container:DialSplit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

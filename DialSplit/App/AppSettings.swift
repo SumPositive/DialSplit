@@ -7,14 +7,32 @@ import SwiftUI
 import AZDial
 
 enum MoneyFormat {
+    /// 通貨・桁数の判定に使うロケール。
+    /// 通常は端末の `Locale.current` をそのまま使う。
+    /// ただし fastlane snapshot 実行時（`-FASTLANE_SNAPSHOT YES`）は、
+    /// `-AppleLocale` が `Locale.current` に反映されない既知の制約があるため、
+    /// 表示言語から代表的な地域ロケールを導出して通貨を確定させる（撮影専用）。
+    static var effectiveLocale: Locale {
+        #if DEBUG
+        // fastlane snapshot 撮影時のみ、UITest が渡す通貨ロケールを最優先で使う。
+        // 例: -SNAPSHOT_CURRENCY_LOCALE zh_TW → NT$。
+        // -AppleLocale は Locale.current に確実には効かないため、専用キーで明示渡しする。
+        if let override = UserDefaults.standard.string(forKey: "SNAPSHOT_CURRENCY_LOCALE"),
+           !override.isEmpty {
+            return Locale(identifier: override)
+        }
+        #endif
+        return .current
+    }
+
     static var currencyCode: String {
-        Locale.current.currency?.identifier ?? "JPY"
+        effectiveLocale.currency?.identifier ?? "JPY"
     }
 
     static var fractionDigits: Int {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.locale = .current
+        formatter.locale = effectiveLocale
         formatter.currencyCode = currencyCode
         return max(0, formatter.maximumFractionDigits)
     }
@@ -53,7 +71,7 @@ enum MoneyFormat {
 
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.locale = .current
+        formatter.locale = effectiveLocale
         formatter.currencyCode = currencyCode
         formatter.minimumFractionDigits = fractionDigits
         formatter.maximumFractionDigits = fractionDigits
@@ -66,7 +84,7 @@ enum MoneyFormat {
 
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.locale = .current
+        formatter.locale = effectiveLocale
         formatter.minimumFractionDigits = fractionDigits
         formatter.maximumFractionDigits = fractionDigits
         return formatter.string(from: amount) ?? amount.stringValue
@@ -75,7 +93,7 @@ enum MoneyFormat {
     private static func localizedPlaceholder(_ placeholder: String) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.locale = .current
+        formatter.locale = effectiveLocale
         formatter.currencyCode = currencyCode
         return "\(formatter.positivePrefix ?? "")\(placeholder)\(formatter.positiveSuffix ?? "")"
     }

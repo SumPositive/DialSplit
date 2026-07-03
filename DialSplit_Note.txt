@@ -164,12 +164,30 @@ ko,de,zh-Hant,fr,es,it に対応したい　　　　　（zh-Hans 簡体字 中
 
 テーブルの上に置いて、その場でみんなと一緒に確認できるシンプルな UI です。
 
+fastlane によるAppStoreの自動更新を導入
+Claude code に指示して fastlane/metadata を作成し、
+　cd /Users/sumpositive/GitLocal/DialSplit
+　fastlane upload_metadata
+を実行する
 
------------
-2.3.0 
-- 多言語対応：de,es,fr,it,ko,zh-Hant に対応
--
-de,en,es,fr,it,ko,zh-Hant にして
+it,ko,zh-Hant の金額単位が違う
+
+
+
+-----------AppStore 更新
+　メタデータを生成する
+　-----
+2.3.0 更新内容
+- 多言語対応：de,es,fr,it,ko,zh-Hant に対応しました
+- アプリアイコンを刷新
+　確認後、アップロードする
+fastlane upload_metadata
+　-----
+　スクリーンショットを生成する
+cd /Users/sumpositive/GitLocal/DialSplit
+fastlane screenshots
+　確認後、アップロードする
+fastlane upload_screenshots
 -----
 2.3.0 本日公開、README.mdの開発メモ、公開アプリパネル、取扱説明を更新したい、アプリアイコンも更新して
 --------------------------------

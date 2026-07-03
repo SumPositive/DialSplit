@@ -17,6 +17,8 @@ fastlane/.env.*
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/test_output/
+fastlane/screenshots/screenshots.html
+fastlane/screenshots/**/*.html
 fastlane/README.md.bak
 vendor/bundle/
 .bundle/

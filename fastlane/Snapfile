@@ -1,0 +1,47 @@
+# fastlane snapshot 設定
+# ------------------------------------------------------------
+# まずは「1カット × 少数言語 × 1デバイス」で仕組みを検証する構成。
+# 動作確認できたら languages と devices を増やして本番展開する。
+
+# --- 検証フェーズ（最初はこれで動作確認）---
+# iPhone 17 Pro Max = 6.9"（App Store の現行必須サイズ）。この Mac に実在を確認済み。
+devices([
+  "iPhone 17 Pro Max"
+])
+
+# 言語コード = 出力フォルダ名（App Store のロケール名に一致させる）かつ -AppleLanguages。
+# 言語切替は SnapshotHelper が language.txt（=この値）で行う。値は各アプリの
+# .lproj 名と一致させること（例 "zh-Hant"。"zh-Hant-TW" 等に変えると .lproj に
+# マッチせず言語が切り替わらない）。
+# 通貨は UITest 側（DialSplitUITests.swift の currencyLocale）が言語→地域へマップし、
+# -SNAPSHOT_CURRENCY_LOCALE でアプリへ明示渡しする。
+languages([
+  "ja",
+  "en-US",
+  "de-DE",
+  "es-ES",
+  "fr-FR",
+  "it",
+  "ko",
+  "zh-Hant"
+])
+
+# 撮影対象スキーム（UITest ターゲット追加後にスキーム名を確認して調整）
+scheme("DialSplit")
+
+# 出力先。deliver がここから拾う
+output_directory("./fastlane/screenshots")
+
+# 撮影ごとに端末フレーム画像はここでは付けない（frameit は別途）
+# 8言語すべてを撮り直すので、古いスクショ（旧通貨・旧言語）をクリアしてから撮る。
+clear_previous_screenshots(true)
+
+# 起動を安定させる
+stop_after_first_error(true)
+concurrent_simulators(false)
+
+# --- シミュレータ起動失敗（Clone の launch-failed / RequestDenied）対策 ---
+# USB上のXcode + iOS 26.5 でクローン起動が拒否されることがあるため、リトライを増やす。
+# 失敗が続く場合は、実行前に `xcrun simctl shutdown all` +
+# `sudo killall -9 com.apple.CoreSimulator.CoreSimulatorService` でクリーンにする。
+number_of_retries(3)

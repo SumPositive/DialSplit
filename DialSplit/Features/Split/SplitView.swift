@@ -178,6 +178,7 @@ struct SplitView: View {
                                 }
                                 .buttonStyle(.plain)
                                 .accessibilityLabel(Text("panel.style.title"))
+                                .accessibilityIdentifier("openPanelStyleButton")
                             }
                             .frame(width: cardWidth)
                             .padding(.bottom, 4)
@@ -259,6 +260,7 @@ private struct HeaderBar: View {
                         .shadow(color: .black.opacity(0.5), radius: 1)
                 }
                 .padding(.bottom, 4)
+                .accessibilityIdentifier("openSettingsButton")
             }
         }
         .padding(.horizontal, 20)
