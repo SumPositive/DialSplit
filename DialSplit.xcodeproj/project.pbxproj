@@ -70,6 +70,7 @@
 		C2652058B35848D8BD4C4B9D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZPicker.swift; sourceTree = "<group>"; };
+		C3562CF82FF7B8D500539096 /* DialSplit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = DialSplit.xctestplan; sourceTree = "<group>"; };
 		C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C38A3D152FD849A900AC7390 /* Telemetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telemetry.swift; sourceTree = "<group>"; };
 		C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEvent.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		13F4D6260A8FB74294E3B94C = {
 			isa = PBXGroup;
 			children = (
+				C3562CF82FF7B8D500539096 /* DialSplit.xctestplan */,
 				64FCE8BDEAB2F45E04FE6F4B /* DialSplit */,
 				C39F96722FEFF3BF00873586 /* DialSplitTests */,
 				C39F96BC2FF74AB800873586 /* DialSplitUITests */,

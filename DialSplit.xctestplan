@@ -1,0 +1,39 @@
+{
+  "configurations" : [
+    {
+      "id" : "AD962ADA-C96C-4AAE-BD7F-EB9D38134E88",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:DialSplit.xcodeproj",
+      "identifier" : "4D213D58F54460B23772CA23",
+      "name" : "DialSplit"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DialSplit.xcodeproj",
+        "identifier" : "C39F96702FEFF3BE00873586",
+        "name" : "DialSplitTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DialSplit.xcodeproj",
+        "identifier" : "C39F96BA2FF74AB800873586",
+        "name" : "DialSplitUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
