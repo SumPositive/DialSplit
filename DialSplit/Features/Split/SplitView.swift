@@ -58,14 +58,19 @@ struct LockToggleButton: View {
 struct SplitView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.horizontalSizeClass) private var hSizeClass
     @State private var vm = SplitViewModel()
     @State private var showSettings = false
     @State private var showPanelStyle = false
     @State private var isPeopleLocked = false
     @State private var isAllLocked = false
     private let cardSideMargin: CGFloat = 16
-    // iPadでは、iPhone Pro Max相当の幅を上限にして中央カラム表示
-    private let maxContentWidth: CGFloat = 430
+    // iPhoneでは iPhone Pro Max 相当(430)を上限に中央カラム表示。
+    // iPad(regular幅)は少しだけ広げる程度に留め(横に伸ばしすぎると中身がスカスカ)、
+    // 間延びは縦中央寄せ側で解消する。
+    private var maxContentWidth: CGFloat {
+        hSizeClass == .regular ? 520 : 430
+    }
 
     private var settingsSheetColorScheme: ColorScheme? {
         settings.appearanceMode.colorScheme ?? colorScheme
