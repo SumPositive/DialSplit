@@ -3,11 +3,25 @@
 # まずは「1カット × 少数言語 × 1デバイス」で仕組みを検証する構成。
 # 動作確認できたら languages と devices を増やして本番展開する。
 
-# --- 検証フェーズ（最初はこれで動作確認）---
-# iPhone 17 Pro Max = 6.9"（App Store の現行必須サイズ）。この Mac に実在を確認済み。
+# App Store 必須サイズ:
+#   - iPhone 6.9": iPhone 17 Pro Max（撮影済み・8言語×3）
+#   - iPad 13":    iPad Pro 13-inch (M5)
+#
+# 【重要】UITest ターゲットの IPHONEOS_DEPLOYMENT_TARGET が 26.5 のため、
+# シミュレータも iOS 26.5 ランタイムでないと "doesn't match deployment target" で
+# ビルド不可 → UITest が走らず snapshot 0枚(❌)になる。
+# iOS 26.5 を積む iPad は「iPad Pro 13-inch (M5)」（M4 は 26.0/18.4 しか無い）。
+#
+# 今は iPad のみ撮影（iPhone は撮影済み・下記 clear_previous_screenshots(false) で保護）。
 devices([
-  "iPhone 17 Pro Max"
+  "iPad Pro 13-inch (M5)"
 ])
+
+# iPhone を撮り直す場合はこちら（iPad と一緒に）:
+# devices([
+#   "iPhone 17 Pro Max",
+#   "iPad Pro 13-inch (M5)"
+# ])
 
 # 言語コード = 出力フォルダ名（App Store のロケール名に一致させる）かつ -AppleLanguages。
 # 言語切替は SnapshotHelper が language.txt（=この値）で行う。値は各アプリの
@@ -15,26 +29,26 @@ devices([
 # マッチせず言語が切り替わらない）。
 # 通貨は UITest 側（DialSplitUITests.swift の currencyLocale）が言語→地域へマップし、
 # -SNAPSHOT_CURRENCY_LOCALE でアプリへ明示渡しする。
-languages([
-  "ja",
-  "en-US",
-  "de-DE",
-  "es-ES",
-  "fr-FR",
-  "it",
-  "ko",
-  "zh-Hant"
-])
+# iPad(520pt幅レイアウト)で8言語のフルスクリーン3カットを撮影。
+# 手動 Stage Manager スクショ(04StageManager.png、英語1枚を全言語共用)は
+# clear_previous_screenshots(false) により消えず、01〜03の後ろに残る。
+languages(["ja","en-US","de-DE","es-ES","fr-FR","it","ko","zh-Hant"])
 
-# 撮影対象スキーム（UITest ターゲット追加後にスキーム名を確認して調整）
+# 撮影対象スキーム
 scheme("DialSplit")
+
+# 撮影用 UITest を明示指定する。
+# TestPlan 経由だと UITest が実行されず snapshot() が呼ばれない（結果0枚=❌）ことがあるため、
+# 撮影対象を UITest ターゲットに固定する。
+only_testing(["DialSplitUITests/DialSplitUITests/testTakeScreenshots"])
 
 # 出力先。deliver がここから拾う
 output_directory("./fastlane/screenshots")
 
 # 撮影ごとに端末フレーム画像はここでは付けない（frameit は別途）
-# 8言語すべてを撮り直すので、古いスクショ（旧通貨・旧言語）をクリアしてから撮る。
-clear_previous_screenshots(true)
+# 【iPad検証中は false】iPhone分の既存スクショ(8言語×3)を消さないため。
+# iPad が別ファイル名(iPad Pro 13-inch...)で追加されるので iPhone分とは共存する。
+clear_previous_screenshots(false)
 
 # 起動を安定させる
 stop_after_first_error(true)
