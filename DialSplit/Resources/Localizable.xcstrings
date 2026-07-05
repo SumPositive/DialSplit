@@ -158,25 +158,25 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "DialSplit"
+            "value": "Divigo"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "DialSplit"
+            "value": "Divigo"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "DialSplit"
+            "value": "Divigo"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "DialSplit"
+            "value": "Divigo"
           }
         },
         "ja": {
@@ -188,19 +188,19 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "DialSplit"
+            "value": "Divigo"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "DialSplit"
+            "value": "Divigo"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "DialSplit"
+            "value": "Divigo"
           }
         }
       }

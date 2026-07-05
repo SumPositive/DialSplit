@@ -175,15 +175,17 @@ it,ko,zh-Hant の金額単位が違う
 
 
 -----------AppStore 更新
-　メタデータを生成する
+　fastlane メタデータを生成する
 　-----
 2.3.0 更新内容
 - 多言語対応：de,es,fr,it,ko,zh-Hant に対応しました
 - アプリアイコンを刷新
+- iPadレイアウト調整
+　-----
 　確認後、アップロードする
 fastlane upload_metadata
 　-----
-　スクリーンショットを生成する
+　fastlane スクリーンショットを生成する
 cd /Users/sumpositive/GitLocal/DialSplit
 fastlane screenshots
 　確認後、アップロードする
