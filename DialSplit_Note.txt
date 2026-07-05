@@ -172,7 +172,9 @@ Claude code に指示して fastlane/metadata を作成し、
 
 it,ko,zh-Hant の金額単位が違う
 
+アプリ名を Divigo に変更（jaは割勘）
 
+メタデータ（キーワード）を言語対応したい
 
 -----------AppStore 更新
 　fastlane メタデータを生成する
@@ -193,4 +195,6 @@ fastlane upload_screenshots
 -----
 2.3.0 本日公開、README.mdの開発メモ、公開アプリパネル、取扱説明を更新したい、アプリアイコンも更新して
 --------------------------------
+
+
 

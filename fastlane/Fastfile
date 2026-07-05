@@ -15,7 +15,7 @@ def load_asc_api_key
 end
 
 platform :ios do
-  desc "説明文・プロモーションテキストの差分を確認する（force: false なので送信前に確認プロンプトで停止）"
+  desc "テキストメタデータ（説明文・プロモーションテキスト・キーワード）の差分を確認する（force: false なので送信前に確認プロンプトで停止）"
   lane :preview_metadata do
     load_asc_api_key
     deliver(
@@ -29,7 +29,7 @@ platform :ios do
     )
   end
 
-  desc "説明文・プロモーションテキストを App Store Connect に反映する（審査提出はしない）"
+  desc "テキストメタデータ（説明文・プロモーションテキスト・キーワード）を App Store Connect に反映する（審査提出はしない）"
   lane :upload_metadata do
     load_asc_api_key
     deliver(

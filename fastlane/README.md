@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios preview_metadata
 ```
 
-説明文・プロモーションテキストの差分を確認する（force: false なので送信前に確認プロンプトで停止）
+テキストメタデータ（説明文・プロモーションテキスト・キーワード）の差分を確認する（force: false なので送信前に確認プロンプトで停止）
 
 ### ios upload_metadata
 
@@ -29,7 +29,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios upload_metadata
 ```
 
-説明文・プロモーションテキストを App Store Connect に反映する（審査提出はしない）
+テキストメタデータ（説明文・プロモーションテキスト・キーワード）を App Store Connect に反映する（審査提出はしない）
 
 ### ios screenshots
 

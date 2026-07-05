@@ -1,11 +1,12 @@
 # DialSplit — App Store メタデータ配信設定
 #
 # このファイルは `fastlane deliver` の既定挙動を定義する。
-# 目的: 説明文(description) と プロモーションテキスト(promotional_text) の
-#       多言語更新のみを安全に反映すること。
+# 目的: 説明文(description)・プロモーションテキスト(promotional_text)・
+#       キーワード(keywords) などのテキストメタデータを多言語で安全に反映すること。
 #
 # metadata/<locale>/*.txt に存在する項目だけが更新対象になる。
-# キーワード・スクリーンショット・価格などは触らない（ファイルを置いていないため）。
+# keywords.txt を各ロケールに配置済みのため、keywords も更新対象に含まれる（上限100字）。
+# スクリーンショット・価格などは触らない（ファイルを置いていない／skip 設定のため）。
 
 # App Store Connect の審査には出さず、メタデータのみ保存する
 submit_for_review(false)
