@@ -7,12 +7,12 @@
     </linearGradient>
   </defs>
   <rect x="0" y="0" width="1024" height="1024" fill="#9B4A44"/>
-  <circle cx="512" cy="512" r="360" fill="none" stroke="#E4C877" stroke-width="120"/>
-  <g stroke="#9B4A44" stroke-width="23" stroke-linecap="butt">
-    <line x1="512" y1="78"  x2="512" y2="226"/>
-    <line x1="946" y1="512" x2="798" y2="512"/>
-    <line x1="512" y1="946" x2="512" y2="798"/>
-    <line x1="78"  y1="512" x2="226" y2="512"/>
+  <circle cx="512" cy="512" r="316.8" fill="none" stroke="#E4C877" stroke-width="105.6"/>
+  <g stroke="#9B4A44" stroke-width="20.24" stroke-linecap="butt">
+    <line x1="512" y1="130.08" x2="512" y2="260.32"/>
+    <line x1="893.92" y1="512" x2="763.68" y2="512"/>
+    <line x1="512" y1="893.92" x2="512" y2="763.68"/>
+    <line x1="130.08" y1="512" x2="260.32" y2="512"/>
   </g>
   <g fill="url(#divBrass)">
     <circle cx="512" cy="404" r="48"/>
