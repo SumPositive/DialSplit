@@ -130,6 +130,41 @@ struct AZTenkeyInputTests {
         #expect(input.enteredValue == Decimal(6))
     }
 
+    @Test func 演算子を外したあと別の演算子で計算し直せる() {
+        var input = makeInput(initial: 100)
+        input.append("8", rounding: .halfUp)
+        input.selectOperator(.divide)
+        input.append("2", rounding: .halfUp)
+        #expect(input.activeValue == Decimal(4))
+
+        // 右辺を消し、続けて押して演算子も外す
+        input.deleteLast(rounding: .halfUp)
+        input.deleteLast(rounding: .halfUp)
+        #expect(input.pendingOperator == nil)
+        #expect(input.enteredValue == Decimal(8))
+
+        // 左辺はそのまま残っているので、別の演算子で組み直せる
+        input.selectOperator(.multiply)
+        input.append("3", rounding: .halfUp)
+        #expect(input.activeValue == Decimal(24))
+    }
+
+    @Test func 右辺を入れ直すと計算結果も追従する() {
+        var input = makeInput(initial: 0)
+        input.append("9", rounding: .halfUp)
+        input.selectOperator(.add)
+        input.append("1", rounding: .halfUp)
+        #expect(input.activeValue == Decimal(10))
+
+        // 桁を足す
+        input.append("0", rounding: .halfUp)
+        #expect(input.activeValue == Decimal(19))
+
+        // 消して入れ直す
+        input.deleteLast(rounding: .halfUp)
+        #expect(input.activeValue == Decimal(10))
+    }
+
     // MARK: 計算
 
     @Test func 割り切れない値は丸めずに保つ() {
