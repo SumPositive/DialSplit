@@ -1,3 +1,3 @@
-Neu in 2.3.0
-- Unterstützung für weitere Sprachen: Deutsch, Spanisch, Französisch, Italienisch, Koreanisch und Traditionelles Chinesisch
-- Überarbeitetes App-Symbol
+Neu in 2.4.0
+- Das Tastenfeld für Personenanzahl und Beträge beherrscht jetzt Addition, Subtraktion, Multiplikation und Division
+- Überarbeitete Auswahl in den Einstellungen

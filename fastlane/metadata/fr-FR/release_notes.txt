@@ -1,3 +1,3 @@
-Nouveautés de la version 2.3.0
-- Prise en charge de nouvelles langues : allemand, espagnol, français, italien, coréen et chinois traditionnel
-- Icône de l'app repensée
+Nouveautés de la version 2.4.0
+- Le pavé numérique de saisie du nombre de personnes et des montants gère désormais l'addition, la soustraction, la multiplication et la division
+- Sélection des options repensée dans les réglages
