@@ -22,11 +22,6 @@
 		B95E263AA343375B20EC1CB0 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8EDD5282E5537EC9490C0 /* SplitView.swift */; };
 		C31B5A7D2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */; };
 		C31B5A7F2FC5C84D0090CAEC /* AZPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */; };
-		C3A15C022FC5C84D0090CAEC /* AZTenkeyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15C012FC5C84D0090CAEC /* AZTenkeyCalculator.swift */; };
-		C3A15D022FC5C84D0090CAEC /* AZTenkeyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15D012FC5C84D0090CAEC /* AZTenkeyFormat.swift */; };
-		C3A15D062FC5C84D0090CAEC /* AZTenkeySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15D052FC5C84D0090CAEC /* AZTenkeySheet.swift */; };
-		C3A15D042FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15D032FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift */; };
-		C3A15B022FC5C84D0090CAEC /* SheetCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15B012FC5C84D0090CAEC /* SheetCloseButton.swift */; };
 		C38A3C942FD832AE00AC7390 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */; };
 		C38A3D192FD849A900AC7390 /* TelemetryEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */; };
 		C38A3D1A2FD849A900AC7390 /* Telemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38A3D152FD849A900AC7390 /* Telemetry.swift */; };
@@ -34,8 +29,14 @@
 		C38A3D262FD84C7000AC7390 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D252FD84C7000AC7390 /* FirebaseCore */; };
 		C38A3D282FD84C7000AC7390 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C38A3D272FD84C7000AC7390 /* FirebaseCrashlytics */; };
 		C39F95C72FEF52E000873586 /* SFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39F95C62FEF52E000873586 /* SFSymbol.swift */; };
-		C3A15A022FD849A900AC7390 /* SnapshotSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15A012FD849A900AC7390 /* SnapshotSupport.swift */; };
 		C39F95CA2FEF59B200873586 /* AdMobBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39F95C82FEF59B200873586 /* AdMobBanner.swift */; };
+		C3A15A022FD849A900AC7390 /* SnapshotSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15A012FD849A900AC7390 /* SnapshotSupport.swift */; };
+		C3A15B022FC5C84D0090CAEC /* SheetCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15B012FC5C84D0090CAEC /* SheetCloseButton.swift */; };
+		C3A15C022FC5C84D0090CAEC /* AZTenkeyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15C012FC5C84D0090CAEC /* AZTenkeyCalculator.swift */; };
+		C3A15D022FC5C84D0090CAEC /* AZTenkeyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15D012FC5C84D0090CAEC /* AZTenkeyFormat.swift */; };
+		C3A15D042FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15D032FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift */; };
+		C3A15D062FC5C84D0090CAEC /* AZTenkeySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15D052FC5C84D0090CAEC /* AZTenkeySheet.swift */; };
+		C3A15D082FC5C84D0090CAEC /* AZTenkeyInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A15D072FC5C84D0090CAEC /* AZTenkeyInput.swift */; };
 		C3A5F2D8E94B1067A3F82E19 /* AZTenkeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8E1A4C56F2039B8D74E20 /* AZTenkeyView.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,20 +77,21 @@
 		C2652058B35848D8BD4C4B9D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C31B5A7C2FC5C30F0090CAEC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C31B5A7E2FC5C84D0090CAEC /* AZPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZPicker.swift; sourceTree = "<group>"; };
-		C3A15C012FC5C84D0090CAEC /* AZTenkeyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZTenkeyCalculator.swift; sourceTree = "<group>"; };
-		C3A15D012FC5C84D0090CAEC /* AZTenkeyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZTenkeyFormat.swift; sourceTree = "<group>"; };
-		C3A15D052FC5C84D0090CAEC /* AZTenkeySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZTenkeySheet.swift; sourceTree = "<group>"; };
-		C3A15D032FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AZTenkeyFormat+DialSplit.swift"; sourceTree = "<group>"; };
-		C3A15B012FC5C84D0090CAEC /* SheetCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetCloseButton.swift; sourceTree = "<group>"; };
 		C3562CF82FF7B8D500539096 /* DialSplit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = DialSplit.xctestplan; sourceTree = "<group>"; };
 		C38A3C932FD832AE00AC7390 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C38A3D152FD849A900AC7390 /* Telemetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telemetry.swift; sourceTree = "<group>"; };
 		C38A3D162FD849A900AC7390 /* TelemetryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEvent.swift; sourceTree = "<group>"; };
 		C39F95C62FEF52E000873586 /* SFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbol.swift; sourceTree = "<group>"; };
-		C3A15A012FD849A900AC7390 /* SnapshotSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotSupport.swift; sourceTree = "<group>"; };
 		C39F95C82FEF59B200873586 /* AdMobBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBanner.swift; sourceTree = "<group>"; };
 		C39F96712FEFF3BE00873586 /* DialSplitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialSplitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39F96BB2FF74AB800873586 /* DialSplitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialSplitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3A15A012FD849A900AC7390 /* SnapshotSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotSupport.swift; sourceTree = "<group>"; };
+		C3A15B012FC5C84D0090CAEC /* SheetCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetCloseButton.swift; sourceTree = "<group>"; };
+		C3A15C012FC5C84D0090CAEC /* AZTenkeyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZTenkeyCalculator.swift; sourceTree = "<group>"; };
+		C3A15D012FC5C84D0090CAEC /* AZTenkeyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZTenkeyFormat.swift; sourceTree = "<group>"; };
+		C3A15D032FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AZTenkeyFormat+DialSplit.swift"; sourceTree = "<group>"; };
+		C3A15D052FC5C84D0090CAEC /* AZTenkeySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZTenkeySheet.swift; sourceTree = "<group>"; };
+		C3A15D072FC5C84D0090CAEC /* AZTenkeyInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZTenkeyInput.swift; sourceTree = "<group>"; };
 		D7B8E1A4C56F2039B8D74E20 /* AZTenkeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZTenkeyView.swift; sourceTree = "<group>"; };
 		EE609A1439FF7003CCAFF619 /* SplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewModel.swift; sourceTree = "<group>"; };
 		F5CEDC8CCDD97DFD3F1DF4BB /* LeatherBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherBackground.swift; sourceTree = "<group>"; };
@@ -217,6 +219,19 @@
 			path = Ads;
 			sourceTree = "<group>";
 		};
+		C3A15D002FC5C84D0090CAEC /* AZTenkey */ = {
+			isa = PBXGroup;
+			children = (
+				D7B8E1A4C56F2039B8D74E20 /* AZTenkeyView.swift */,
+				C3A15C012FC5C84D0090CAEC /* AZTenkeyCalculator.swift */,
+				C3A15D012FC5C84D0090CAEC /* AZTenkeyFormat.swift */,
+				C3A15D052FC5C84D0090CAEC /* AZTenkeySheet.swift */,
+				C3A15D072FC5C84D0090CAEC /* AZTenkeyInput.swift */,
+				C3A15D032FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift */,
+			);
+			path = AZTenkey;
+			sourceTree = "<group>";
+		};
 		C66CEC611B542E0E56D012DC /* Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,18 +262,6 @@
 				AD101A4BF44E11075CF17514 /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		C3A15D002FC5C84D0090CAEC /* AZTenkey */ = {
-			isa = PBXGroup;
-			children = (
-				D7B8E1A4C56F2039B8D74E20 /* AZTenkeyView.swift */,
-				C3A15C012FC5C84D0090CAEC /* AZTenkeyCalculator.swift */,
-				C3A15D012FC5C84D0090CAEC /* AZTenkeyFormat.swift */,
-				C3A15D052FC5C84D0090CAEC /* AZTenkeySheet.swift */,
-				C3A15D032FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift */,
-			);
-			path = AZTenkey;
 			sourceTree = "<group>";
 		};
 		FD6967EBBE26D9BBAECA5519 /* Components */ = {
@@ -487,6 +490,7 @@
 				C3A15C022FC5C84D0090CAEC /* AZTenkeyCalculator.swift in Sources */,
 				C3A15D022FC5C84D0090CAEC /* AZTenkeyFormat.swift in Sources */,
 				C3A15D062FC5C84D0090CAEC /* AZTenkeySheet.swift in Sources */,
+				C3A15D082FC5C84D0090CAEC /* AZTenkeyInput.swift in Sources */,
 				C3A15D042FC5C84D0090CAEC /* AZTenkeyFormat+DialSplit.swift in Sources */,
 				C3A15B022FC5C84D0090CAEC /* SheetCloseButton.swift in Sources */,
 				C38A3D192FD849A900AC7390 /* TelemetryEvent.swift in Sources */,

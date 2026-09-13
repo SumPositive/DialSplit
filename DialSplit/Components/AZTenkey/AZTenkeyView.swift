@@ -99,14 +99,6 @@ struct AZTenkeyConfig: Identifiable {
     }
 }
 
-// MARK: - キー種別
-
-private enum AZTenkeyKey {
-    case digit(String)
-    case doubleZero
-    case delete
-}
-
 // MARK: - キーのボタンスタイル
 
 /// 押しても見た目を変えないボタンスタイル。
@@ -126,14 +118,8 @@ struct AZTenkeyView: View {
     /// キーや余白は Font に任せられないので、文字サイズ設定を寸法へ自前で反映する
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-    @State private var inputStr: String = ""
-    @State private var isPlaceholder: Bool = true   // true = 初期値をプレースホルダー表示中
-
-    // 電卓の状態
-    @State private var accumulator: Decimal?          // 左辺（未丸めの途中結果）
-    @State private var pendingOperator: AZTenkeyOperator?
-    @State private var calculationResult: Decimal?    // 右辺入力中の途中結果
-    @State private var errorKey: String?
+    /// 入力の状態遷移は View から切り離してある（AZTenkeyInput で単体検証できる）
+    @State private var input: AZTenkeyInput
     @State private var isRoundingExpanded = false
 
     /// 丸め方法の保存先。アプリ側の設定キーとぶつかる時はここだけ変える
@@ -144,6 +130,11 @@ struct AZTenkeyView: View {
 
     init(config: AZTenkeyConfig) {
         self.config = config
+        _input = State(initialValue: AZTenkeyInput(
+            initialValue: config.initialValue,
+            minValue: config.minValue,
+            maxValue: config.maxValue
+        ))
     }
 
     // MARK: 寸法
@@ -199,43 +190,15 @@ struct AZTenkeyView: View {
 
     // MARK: 計算プロパティ
 
-    /// いま入力中の数値（右辺）。未入力なら nil
-    private var enteredValue: Decimal? {
-        guard !isPlaceholder, !inputStr.isEmpty else { return nil }
-        return Decimal(string: inputStr)
-    }
-
-    /// 画面に出す値。式の途中なら計算結果、そうでなければ入力値
-    private var activeValue: Decimal {
-        if pendingOperator != nil, let calculationResult { return calculationResult }
-        if let enteredValue { return enteredValue }
-        if let calculationResult { return calculationResult }
-        if let accumulator { return accumulator }
-        return Decimal(config.initialValue)
-    }
-
-    /// 確定時の値。ここで初めて整数へ丸める
-    private var committedValue: Int {
-        let rounded = rounding.roundToInt(activeValue)
-        return NSDecimalNumber(decimal: rounded).intValue
-    }
-
-    /// 端数があり、丸め方法によって結果が変わる状態か
-    private var needsRounding: Bool {
-        AZTenkeyRounding.down.roundToInt(activeValue) != activeValue
-    }
-
-    /// まだ何も操作していない（初期値をそのまま見せている）状態か
-    private var isPristine: Bool {
-        isPlaceholder && accumulator == nil && calculationResult == nil
-    }
-
-    private var isOutOfRange: Bool {
-        !isPristine && (committedValue < config.minValue || committedValue > config.maxValue)
-    }
+    private var activeValue: Decimal { input.activeValue }
+    private var needsRounding: Bool { input.needsRounding }
+    private var isPristine: Bool { input.isPristine }
+    private var isOutOfRange: Bool { input.isOutOfRange(rounding: rounding) }
+    private var errorKey: String? { input.errorKey }
+    private var pendingOperator: AZTenkeyOperator? { input.pendingOperator }
 
     private var displayText: String {
-        config.format.display(committedValue)
+        config.format.display(input.committedValue(rounding: rounding))
     }
 
     private var displayColor: Color {
@@ -244,9 +207,7 @@ struct AZTenkeyView: View {
         return Color(.label)
     }
 
-    private var canConfirm: Bool {
-        errorKey == nil && !isOutOfRange
-    }
+    private var canConfirm: Bool { input.canConfirm(rounding: rounding) }
 
     /// 確定アイコンの色。
     /// まだ何も入力していない間は淡くして、値を変えていないことを示す。
@@ -258,10 +219,10 @@ struct AZTenkeyView: View {
 
     /// 「78,500 ÷ 3」のような途中式。左辺が無ければ出さない
     private var expressionText: String? {
-        guard let accumulator, let pendingOperator else { return nil }
+        guard let accumulator = input.accumulator, let pendingOperator else { return nil }
         let left = plainNumberText(accumulator)
-        guard let enteredValue else { return "\(left) \(pendingOperator.symbol)" }
-        return "\(left) \(pendingOperator.symbol) \(rightOperandText(enteredValue))"
+        guard let entered = input.enteredValue else { return "\(left) \(pendingOperator.symbol)" }
+        return "\(left) \(pendingOperator.symbol) \(rightOperandText(entered))"
     }
 
     // MARK: ビュー
@@ -391,7 +352,7 @@ struct AZTenkeyView: View {
     /// 計算式と丸め前の結果を一行にまとめる
     private var calculationLine: some View {
         let resultSuffix: String = {
-            guard calculationResult != nil else { return "" }
+            guard input.calculationResult != nil else { return "" }
             return " = \(resultNumberText(activeValue))"
         }()
         return Text((expressionText ?? "") + resultSuffix)
@@ -451,6 +412,20 @@ struct AZTenkeyView: View {
     private var keyHeight: CGFloat { (isCompact ? 52 : 56) * uiScale }
     private var keyFont: Font { isCompact ? .title2.weight(.medium) : .title.weight(.medium) }
 
+    /// ⌫ と演算子キーの地。
+    ///
+    /// tertiarySystemGroupedBackground はライトだと地の
+    /// systemGroupedBackground と同じ色になり、キーの輪郭が消えてしまう。
+    /// ライトでは数字キー（白）より一段暗く、ダークでは地より一段明るい灰を
+    /// 明示して、どちらのモードでもキーとして見えるようにする
+    private var subKeyBackground: Color {
+        Color(uiColor: UIColor { trait in
+            trait.userInterfaceStyle == .dark
+                ? UIColor(white: 0.22, alpha: 1)
+                : UIColor(white: 0.88, alpha: 1)
+        })
+    }
+
     private func digitKey(_ label: String, key: AZTenkeyKey) -> some View {
         Button {
             handleKey(key)
@@ -475,7 +450,7 @@ struct AZTenkeyView: View {
                 .font(isCompact ? .title3 : .title2)
                 .foregroundStyle(Color(.label))
                 .frame(maxWidth: .infinity, minHeight: keyHeight)
-                .background(Color(.tertiarySystemGroupedBackground))
+                .background(subKeyBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(AZTenkeyKeyStyle())
@@ -491,7 +466,7 @@ struct AZTenkeyView: View {
                 .font(isCompact ? .title2.weight(.semibold) : .title.weight(.semibold))
                 .foregroundStyle(isSelected ? Color.white : Color.accentColor)
                 .frame(width: keyHeight, height: keyHeight)
-                .background(isSelected ? Color.accentColor : Color(.tertiarySystemGroupedBackground))
+                .background(isSelected ? Color.accentColor : subKeyBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(AZTenkeyKeyStyle())
@@ -501,136 +476,21 @@ struct AZTenkeyView: View {
     // MARK: ロジック
 
     private func handleKey(_ key: AZTenkeyKey) {
-        switch key {
-        case .digit(let d):   appendDigit(d)
-        case .doubleZero:     appendDigit("00")
-        case .delete:         deleteDigit()
-        }
-    }
-
-    private func appendDigit(_ d: String) {
-        errorKey = nil
-
-        // プレースホルダー中は入力をリセットしてから1桁目を受け付ける
-        if isPlaceholder {
-            isPlaceholder = false
-            inputStr = (d == "0" || d == "00") ? "" : d
-            updateCalculationPreview()
-            return
-        }
-        // "00" は "0" を2回追加
-        if d == "00" {
-            appendDigit("0")
-            appendDigit("0")
-            return
-        }
-        // 先頭ゼロを除去
-        let newStr: String
-        if inputStr.isEmpty || inputStr == "0" {
-            newStr = d == "0" ? "" : d
-        } else {
-            newStr = inputStr + d
-        }
-        // 最大桁数制限（maxValue の桁数 + 1 まで許可してはみ出しを赤表示）。
-        // 乗除算の右辺は金額ではなく倍率なので、桁数は別に抑える
-        let maxDigits: Int
-        if pendingOperator == .multiply || pendingOperator == .divide {
-            maxDigits = 4
-        } else {
-            maxDigits = String(config.maxValue).count + 1
-        }
-        guard newStr.count <= maxDigits else { return }
-        inputStr = newStr
-        updateCalculationPreview()
-    }
-
-    private func deleteDigit() {
-        errorKey = nil
-
-        // プレースホルダー中は ⌫ でクリア（0 入力状態へ）
-        if isPlaceholder {
-            isPlaceholder = false
-            inputStr = ""
-            return
-        }
-        if !inputStr.isEmpty {
-            inputStr.removeLast()
-            updateCalculationPreview()
-            return
-        }
-        // 右辺を消し終えた次のBSで演算子を外し、左辺を再編集できる形へ戻す。
-        // 左辺は未丸めの途中結果なので、表示していた値と食い違わないよう
-        // 選択中の丸め方法で確定してから入力欄へ戻す
-        guard pendingOperator != nil, let left = accumulator else { return }
-        pendingOperator = nil
-        calculationResult = nil
-        accumulator = nil
-        let settled = rounding.roundToInt(left)
-        inputStr = NSDecimalNumber(decimal: settled).stringValue
+        input.handle(key, rounding: rounding)
     }
 
     private func selectOperator(_ newOperator: AZTenkeyOperator) {
-        errorKey = nil
-
-        if let currentOperator = pendingOperator,
-           let left = accumulator,
-           let right = enteredValue {
-            // 式が揃っていれば、まず今の式を畳んでから次の演算子を受ける
-            guard let result = calculate(left, currentOperator, right) else { return }
-            accumulator = result
-            calculationResult = result
-        } else if accumulator == nil {
-            accumulator = activeValue
-        }
-        pendingOperator = newOperator
-        // 左辺を取り込んだので、右辺の入力欄を空にする
-        isPlaceholder = false
-        inputStr = ""
-    }
-
-    private func updateCalculationPreview() {
-        guard let left = accumulator,
-              let pendingOperator,
-              let right = enteredValue else {
-            calculationResult = nil
-            return
-        }
-        calculationResult = calculate(left, pendingOperator, right)
+        input.selectOperator(newOperator)
     }
 
     private func confirm() {
         // 式が途中なら、確定前に畳む
-        if let left = accumulator,
-           let pendingOperator,
-           let right = enteredValue {
-            guard let result = calculate(left, pendingOperator, right) else { return }
-            calculationResult = result
-        }
-        guard canConfirm else { return }
-        let n = max(config.minValue, min(config.maxValue, committedValue))
+        guard input.finalizeExpression() else { return }
+        guard input.canConfirm(rounding: rounding) else { return }
         // 閉じるかどうかは置いた側で決める（シートなら dismiss、埋め込みなら据え置き）
-        config.onConfirm(n)
+        config.onConfirm(input.clampedValue(rounding: rounding))
     }
 
-    /// 計算規則は AZTenkeyCalculator に持たせ、ここでは結果を画面状態へ反映する
-    private func calculate(
-        _ left: Decimal,
-        _ operation: AZTenkeyOperator,
-        _ right: Decimal
-    ) -> Decimal? {
-        switch AZTenkeyCalculator.calculate(
-            left, operation, right,
-            minValue: config.minValue,
-            maxValue: config.maxValue
-        ) {
-        case .success(let result):
-            errorKey = nil
-            return result
-        case .failure(let error):
-            errorKey = error.titleKey
-            return nil
-        }
-    }
 
     /// 式の左辺に出す数値。
     /// 金額は内部では最小単位（セント等）の整数なので、式でも通貨の単位へ直して見せる。

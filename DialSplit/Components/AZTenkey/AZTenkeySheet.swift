@@ -52,14 +52,15 @@ struct AZTenkeySheet: View {
                         .accessibilityIdentifier("sheet.close")
                     }
                 }
-                .toolbarBackground(Color(uiColor: .systemGroupedBackground), for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
         }
         .onPreferenceChange(AZTenkeyHeightKey.self) { height in
             sheetHeight = height
         }
         .presentationDetents([.height(sheetHeight + Self.navigationBarHeight)])
         .presentationDragIndicator(.visible)
+        // ナビゲーションバーとホームインジケータ側までテンキーと同じ地で塗る。
+        // 既定のシート背景のままだと、この2箇所が半透明になって背後が透ける
+        .presentationBackground(Color(uiColor: .systemGroupedBackground))
     }
 
     /// inline のナビゲーションバーぶん。detent は中身＋バーで決まる
