@@ -94,6 +94,82 @@ struct PersistenceTests {
         #expect(vm.dialUnit == MoneyFormat.defaultDialStep)
     }
 
+    // MARK: - 通貨（地域）変更にともなう再スケール
+
+    /// 現在の通貨と異なる最小単位で保存されていた状況を作る。
+    /// JPY 環境なら「以前ドルで保存した」、USD 環境なら「以前円で保存した」を再現する
+    private var otherScale: Int {
+        MoneyFormat.minorUnitScale == 1 ? 100 : 1
+    }
+
+    @Test("保存時と最小単位が違えば金額を換算して読み戻す")
+    func rescalesAmountsWhenCurrencyChanged() {
+        let suite = makeSuite()
+        let stored = otherScale
+        let current = MoneyFormat.minorUnitScale
+
+        // 「前回の通貨」での 10,000 単位ぶんを保存しておく
+        suite.set(1, forKey: "sv_moneyStorageVersion")
+        suite.set(stored, forKey: "sv_moneyMinorUnitScale")
+        suite.set(10_000 * stored, forKey: "sv_totalRaw")
+        suite.set(2_500 * stored, forKey: "sv_split1")
+
+        let vm = SplitViewModel(defaults: suite)
+
+        // 同じ「金額」を表す、現在の通貨の最小単位へ揃っていること
+        #expect(vm.totalRaw == 10_000 * current)
+        #expect(vm.split1 == 2_500 * current)
+    }
+
+    @Test("換算後は現在の最小単位が保存し直される")
+    func storesCurrentScaleAfterRescale() {
+        let suite = makeSuite()
+        suite.set(1, forKey: "sv_moneyStorageVersion")
+        suite.set(otherScale, forKey: "sv_moneyMinorUnitScale")
+        suite.set(10_000 * otherScale, forKey: "sv_totalRaw")
+
+        _ = SplitViewModel(defaults: suite)
+        #expect(suite.integer(forKey: "sv_moneyMinorUnitScale") == MoneyFormat.minorUnitScale)
+
+        // 二重に換算されないこと（もう一度読んでも値が変わらない）
+        let vm2 = SplitViewModel(defaults: suite)
+        #expect(vm2.totalRaw == 10_000 * MoneyFormat.minorUnitScale)
+    }
+
+    @Test("最小単位が同じなら換算しない")
+    func keepsAmountsWhenScaleUnchanged() {
+        let suite = makeSuite()
+        suite.set(1, forKey: "sv_moneyStorageVersion")
+        suite.set(MoneyFormat.minorUnitScale, forKey: "sv_moneyMinorUnitScale")
+        suite.set(77_000, forKey: "sv_totalRaw")
+
+        let vm = SplitViewModel(defaults: suite)
+        #expect(vm.totalRaw == 77_000)
+    }
+
+    @Test("最小単位の記録が無い保存データは換算しない")
+    func skipsRescaleWithoutStoredScale() {
+        let suite = makeSuite()
+        // sv_moneyMinorUnitScale を持たない、移行済みの古いデータ
+        suite.set(1, forKey: "sv_moneyStorageVersion")
+        suite.set(77_000, forKey: "sv_totalRaw")
+
+        let vm = SplitViewModel(defaults: suite)
+        #expect(vm.totalRaw == 77_000)
+    }
+
+    @Test("ダイアル単位は換算後もっとも近い候補へ寄せる")
+    func snapsDialUnitToCandidate() {
+        let suite = makeSuite()
+        suite.set(1, forKey: "sv_moneyStorageVersion")
+        suite.set(otherScale, forKey: "sv_moneyMinorUnitScale")
+        suite.set(500 * otherScale, forKey: "sv_dialUnit")
+
+        let vm = SplitViewModel(defaults: suite)
+        // 単純換算では刻みとして半端になりうるので、候補のどれかに収まっていること
+        #expect(MoneyFormat.dialStepCandidates.contains(vm.dialUnit))
+    }
+
     // MARK: - 保存→再読込の往復
 
     @Test("変更した値は再 init で復元される")

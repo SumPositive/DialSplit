@@ -165,12 +165,27 @@ final class SplitViewModel {
         let needsMinorUnitMigration = storageVersion < 1
         let scale = MoneyFormat.minorUnitScale
 
+        // 前回保存した時の最小単位。地域を変えると通貨が変わり、
+        // 同じ整数でも表す金額が変わってしまうため、読み戻しで換算し直す。
+        // （例: 円で 10,000 を保存 → 米国へ変更すると 10000 は $100.00 と読まれる）
+        let storedScale = d.integer(forKey: "sv_moneyMinorUnitScale")
+        // マイグレーション前・初回起動は換算しない（この後 scale が書き込まれる）
+        let needsCurrencyRescale = !needsMinorUnitMigration
+            && 0 < storedScale
+            && storedScale != scale
+
+        /// 保存時の通貨から現在の通貨へ、最小単位の桁を合わせる
+        func rescaled(_ minorValue: Int) -> Int {
+            guard needsCurrencyRescale else { return minorValue }
+            return Int((Double(minorValue) / Double(storedScale) * Double(scale)).rounded())
+        }
+
         func storedAmount(forKey key: String, defaultMajorValue: Int) -> Int {
             guard d.object(forKey: key) != nil else {
                 return defaultMajorValue * scale
             }
             let stored = d.integer(forKey: key)
-            return needsMinorUnitMigration ? stored * scale : stored
+            return needsMinorUnitMigration ? stored * scale : rescaled(stored)
         }
 
         let rawObj = d.object(forKey: "sv_totalRaw")
@@ -198,7 +213,19 @@ final class SplitViewModel {
         if let _ = d.object(forKey: "sv_dialUnit") {
             // 新形式: 実値で保存済み
             let stored = d.integer(forKey: "sv_dialUnit")
-            _dialUnit = needsMinorUnitMigration ? stored * scale : stored
+            if needsMinorUnitMigration {
+                _dialUnit = stored * scale
+            } else if needsCurrencyRescale {
+                // 単純に換算すると 500円 → 5ドルのような半端な刻みになるので、
+                // 換算値にいちばん近い候補へ寄せる
+                let converted = rescaled(stored)
+                let candidates = MoneyFormat.dialStepCandidates
+                _dialUnit = candidates.min {
+                    abs($0 - converted) < abs($1 - converted)
+                } ?? MoneyFormat.defaultDialStep
+            } else {
+                _dialUnit = stored
+            }
         } else if let _ = d.object(forKey: "sv_dialUnitIndex") {
             // 旧形式からの移行: index → 実値 (旧: 0=100, 1=500, 2=1000)
             let oldUnits = [100, 500, 1_000]
@@ -211,9 +238,8 @@ final class SplitViewModel {
             _dialUnit = MoneyFormat.defaultDialStep
         }
 
-        if needsMinorUnitMigration {
+        if needsMinorUnitMigration || needsCurrencyRescale {
             d.set(1, forKey: "sv_moneyStorageVersion")
-            d.set(scale, forKey: "sv_moneyMinorUnitScale")
             saveState()
         }
     }
@@ -229,6 +255,9 @@ final class SplitViewModel {
         d.set(_split2,        forKey: "sv_split2")
         d.set(_split3,        forKey: "sv_split3")
         d.set(_dialUnit,      forKey: "sv_dialUnit")
+        // どの通貨の最小単位で保存したのかを必ず残す。
+        // これが無いと、次回起動時に換算が要るかどうか判断できない
+        d.set(MoneyFormat.minorUnitScale, forKey: "sv_moneyMinorUnitScale")
     }
 
 }
