@@ -310,7 +310,7 @@ private struct TotalAmountPanel: View {
     let isAllLocked: Bool
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
-    @State private var numpadConfig: NumpadConfig?
+    @State private var tenkeyConfig: AZTenkeyConfig?
 
     private var amountColor: Color {
         linkedTextColor(hue: settings.textHue, tone: settings.textTone, for: cs)
@@ -382,12 +382,12 @@ private struct TotalAmountPanel: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         guard !isAllLocked else { return }
-                        numpadConfig = NumpadConfig(
+                        tenkeyConfig = AZTenkeyConfig(
                             title: String(localized: "split.totalAmount"),
                             initialValue: totalRaw,
                             maxValue: MoneyFormat.maxMinorValue,
                             minValue: 0,
-                            isAmount: true,
+                            format: .dialSplitAmount,
                             onConfirm: { totalRaw = $0 }
                         )
                     }
@@ -442,7 +442,11 @@ private struct TotalAmountPanel: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .sheet(item: $numpadConfig) { NumpadView(config: $0) }
+        .sheet(item: $tenkeyConfig) {
+            // シートはルートの .dynamicTypeSize を継承しないので、ここで渡す
+            AZTenkeySheet(config: $0)
+                .appFontScale(settings.fontScale)
+        }
     }
 }
 

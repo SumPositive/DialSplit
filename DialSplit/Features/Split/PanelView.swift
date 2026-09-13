@@ -15,7 +15,7 @@
 //  Panel0View（A）: 人数のみダイアル操作（A金額は表示専用）
 //  PanelSubView（B/C/D）: 右列ダイアルは通常のインタラクティブ
 //
-//  テンキー: 人数・金額テキストをタップすると NumpadView がポップアップ
+//  テンキー: 人数・金額テキストをタップすると AZTenkeyView がポップアップ
 //
 
 import SwiftUI
@@ -106,7 +106,7 @@ struct Panel0View: View {
 
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
-    @State private var numpadConfig: NumpadConfig?
+    @State private var tenkeyConfig: AZTenkeyConfig?
 
     private var colors: PanelColors { .make(cs, textHue: settings.textHue, textTone: settings.textTone) }
     private var layout: PanelLayout { .make(panelWidth: panelWidth) }
@@ -161,7 +161,11 @@ struct Panel0View: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .sheet(item: $numpadConfig) { NumpadView(config: $0) }
+        .sheet(item: $tenkeyConfig) {
+            // シートはルートの .dynamicTypeSize を継承しないので、ここで渡す
+            AZTenkeySheet(config: $0)
+                .appFontScale(settings.fontScale)
+        }
     }
 
     @ViewBuilder private var infoRow: some View {
@@ -176,12 +180,12 @@ struct Panel0View: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     guard !isPeopleLocked else { return }
-                    numpadConfig = NumpadConfig(
+                    tenkeyConfig = AZTenkeyConfig(
                         title: localizedPeopleTitle(name),
                         initialValue: persons0,
                         maxValue: 99,
                         minValue: 1,
-                        isAmount: false,
+                        format: .dialSplitCount,
                         onConfirm: { persons0 = $0 }
                     )
                 }
@@ -236,7 +240,7 @@ struct PanelSubView: View {
 
     @Environment(AppSettings.self) private var settings
     @Environment(\.colorScheme) private var cs
-    @State private var numpadConfig: NumpadConfig?
+    @State private var tenkeyConfig: AZTenkeyConfig?
 
     private var colors: PanelColors { .make(cs, textHue: settings.textHue, textTone: settings.textTone) }
     private var layout: PanelLayout { .make(panelWidth: panelWidth) }
@@ -289,7 +293,11 @@ struct PanelSubView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .sheet(item: $numpadConfig) { NumpadView(config: $0) }
+        .sheet(item: $tenkeyConfig) {
+            // シートはルートの .dynamicTypeSize を継承しないので、ここで渡す
+            AZTenkeySheet(config: $0)
+                .appFontScale(settings.fontScale)
+        }
     }
 
     @ViewBuilder private var infoRow: some View {
@@ -304,12 +312,12 @@ struct PanelSubView: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     guard !isPeopleLocked else { return }
-                    numpadConfig = NumpadConfig(
+                    tenkeyConfig = AZTenkeyConfig(
                         title: localizedPeopleTitle(name),
                         initialValue: persons,
                         maxValue: 99,
                         minValue: 0,
-                        isAmount: false,
+                        format: .dialSplitCount,
                         onConfirm: { persons = $0 }
                     )
                 }
@@ -335,12 +343,12 @@ struct PanelSubView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         guard !isAmountLocked else { return }
-                        numpadConfig = NumpadConfig(
+                        tenkeyConfig = AZTenkeyConfig(
                             title: localizedAmountTitle(name),
                             initialValue: split,
                             maxValue: MoneyFormat.maxMinorValue,
                             minValue: 0,
-                            isAmount: true,
+                            format: .dialSplitAmount,
                             onConfirm: { split = $0 }
                         )
                     }

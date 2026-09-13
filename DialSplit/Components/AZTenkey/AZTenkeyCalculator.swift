@@ -6,7 +6,7 @@
 import Foundation
 
 /// 簡易電卓で使う四則演算子
-enum NumpadOperator: CaseIterable, Identifiable {
+enum AZTenkeyOperator: CaseIterable, Identifiable {
     case divide
     case multiply
     case subtract
@@ -26,7 +26,7 @@ enum NumpadOperator: CaseIterable, Identifiable {
 
 /// 割り算などで生じた端数を整数へそろえる方法。
 /// 選択を保存できるよう、保存名を持つ
-enum NumpadRounding: String, CaseIterable, Hashable, Identifiable {
+enum AZTenkeyRounding: String, CaseIterable, Hashable, Identifiable {
     case up      = "up"
     case halfUp  = "halfUp"
     case bankers = "bankers"
@@ -36,10 +36,10 @@ enum NumpadRounding: String, CaseIterable, Hashable, Identifiable {
 
     var titleKey: String {
         switch self {
-        case .up:      "calculator.rounding.up"
-        case .halfUp:  "calculator.rounding.halfUp"
-        case .bankers: "calculator.rounding.bankers"
-        case .down:    "calculator.rounding.down"
+        case .up:      "azTenkey.rounding.up"
+        case .halfUp:  "azTenkey.rounding.halfUp"
+        case .bankers: "azTenkey.rounding.bankers"
+        case .down:    "azTenkey.rounding.down"
         }
     }
 
@@ -62,7 +62,7 @@ enum NumpadRounding: String, CaseIterable, Hashable, Identifiable {
 }
 
 /// 計算できなかった理由。View 側でエラー文言に対応づける
-enum NumpadCalculatorError: Error, Equatable {
+enum AZTenkeyCalculatorError: Error, Equatable {
     /// 0 で割ろうとした
     case divideByZero
     /// 結果が扱える範囲を超えた
@@ -71,14 +71,14 @@ enum NumpadCalculatorError: Error, Equatable {
     /// 表示に使う文字列カタログのキー
     var titleKey: String {
         switch self {
-        case .divideByZero: "calculator.error.divideByZero"
-        case .outOfRange:   "calculator.error.outOfRange"
+        case .divideByZero: "azTenkey.error.divideByZero"
+        case .outOfRange:   "azTenkey.error.outOfRange"
         }
     }
 }
 
 /// テンキーの計算規則をまとめた入れ物。状態を持たないので単体で検証できる
-enum NumpadCalculator {
+enum AZTenkeyCalculator {
 
     /// 二項演算を行い、扱える範囲に収まっているか確かめる。
     ///
@@ -92,14 +92,14 @@ enum NumpadCalculator {
     ///   - right: 右辺
     ///   - minValue: 確定できる値の下限
     ///   - maxValue: 確定できる値の上限
-    /// - Returns: 計算結果。0 除算と範囲外は `NumpadCalculatorError` を返す
+    /// - Returns: 計算結果。0 除算と範囲外は `AZTenkeyCalculatorError` を返す
     static func calculate(
         _ left: Decimal,
-        _ operation: NumpadOperator,
+        _ operation: AZTenkeyOperator,
         _ right: Decimal,
         minValue: Int,
         maxValue: Int
-    ) -> Result<Decimal, NumpadCalculatorError> {
+    ) -> Result<Decimal, AZTenkeyCalculatorError> {
         let result: Decimal
         switch operation {
         case .divide:

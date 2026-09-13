@@ -1,9 +1,9 @@
 //
-//  NumpadView.swift
+//  AZTenkeyView.swift
 //  DialSplit
 //
 //  テンキー入力シート（簡易電卓つき）
-//  .sheet(item: $numpadConfig) { NumpadView(config: $0) } で呼び出す
+//  .sheet(item: $tenkeyConfig) { AZTenkeyView(config: $0) } で呼び出す
 //
 //  初期値はプレースホルダー表示（薄いカラー）。
 //  数字キーを押した瞬間にクリアされ、1桁目から入力開始。
@@ -37,7 +37,7 @@ import UIKit
 /// キーを叩くたびに生成すると初回に引っかかるため、1つを使い回して鳴らす。
 /// prepare() でハードウェアを起こしておき、押した瞬間の遅れをなくす
 @MainActor
-private enum NumpadHaptics {
+private enum AZTenkeyHaptics {
     static let generator = UISelectionFeedbackGenerator()
 
     static func prepare() {
@@ -53,19 +53,55 @@ private enum NumpadHaptics {
 
 // MARK: - 設定 (Identifiable で sheet(item:) に使用)
 
-struct NumpadConfig: Identifiable {
-    let id = UUID()
+struct AZTenkeyConfig: Identifiable {
+    let id: UUID
     let title: String
     let initialValue: Int
     let maxValue: Int
     let minValue: Int
-    let isAmount: Bool   // true → 通貨表示
+    /// 値の見せ方。通貨か、ただの整数かをここで決める
+    let format: AZTenkeyFormat
     let onConfirm: (Int) -> Void
+
+    init(
+        id: UUID = UUID(),
+        title: String,
+        initialValue: Int,
+        maxValue: Int,
+        minValue: Int,
+        format: AZTenkeyFormat,
+        onConfirm: @escaping (Int) -> Void
+    ) {
+        self.id = id
+        self.title = title
+        self.initialValue = initialValue
+        self.maxValue = maxValue
+        self.minValue = minValue
+        self.format = format
+        self.onConfirm = onConfirm
+    }
+
+    /// 通貨として扱うか（式の桁の直し方を分けるのに使う）
+    var isAmount: Bool { format.minorUnitScale != 1 || format.fractionDigits != 0 }
+
+    /// 確定時の処理だけを差し替えた設定を作る。
+    /// シートに載せる時に「確定したら閉じる」を足すのに使う
+    func replacingOnConfirm(_ newValue: @escaping (Int) -> Void) -> AZTenkeyConfig {
+        AZTenkeyConfig(
+            id: id,
+            title: title,
+            initialValue: initialValue,
+            maxValue: maxValue,
+            minValue: minValue,
+            format: format,
+            onConfirm: newValue
+        )
+    }
 }
 
 // MARK: - キー種別
 
-private enum NumpadKey {
+private enum AZTenkeyKey {
     case digit(String)
     case doubleZero
     case delete
@@ -76,7 +112,7 @@ private enum NumpadKey {
 /// 押しても見た目を変えないボタンスタイル。
 /// .plain でも押下中は文字が薄くなるフェードが入るため、それも止める。
 /// 連打する電卓キーでは、明滅より即時に値が変わる方が速く見える
-private struct NumpadKeyStyle: ButtonStyle {
+private struct AZTenkeyKeyStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
     }
@@ -84,24 +120,29 @@ private struct NumpadKeyStyle: ButtonStyle {
 
 // MARK: - テンキービュー
 
-struct NumpadView: View {
-    let config: NumpadConfig
+struct AZTenkeyView: View {
+    let config: AZTenkeyConfig
 
-    @Environment(\.dismiss) private var dismiss
+    /// キーや余白は Font に任せられないので、文字サイズ設定を寸法へ自前で反映する
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     @State private var inputStr: String = ""
     @State private var isPlaceholder: Bool = true   // true = 初期値をプレースホルダー表示中
 
     // 電卓の状態
     @State private var accumulator: Decimal?          // 左辺（未丸めの途中結果）
-    @State private var pendingOperator: NumpadOperator?
+    @State private var pendingOperator: AZTenkeyOperator?
     @State private var calculationResult: Decimal?    // 右辺入力中の途中結果
     @State private var errorKey: String?
     @State private var isRoundingExpanded = false
 
-    /// 丸め方法はシートを閉じても選んだものを引き継ぐ。既定は四捨五入
-    @AppStorage("setting.calculatorRounding") private var rounding: NumpadRounding = .halfUp
+    /// 丸め方法の保存先。アプリ側の設定キーとぶつかる時はここだけ変える
+    static let roundingStorageKey = "azTenkey.rounding"
 
-    init(config: NumpadConfig) {
+    /// 丸め方法はシートを閉じても選んだものを引き継ぐ。既定は四捨五入
+    @AppStorage(AZTenkeyView.roundingStorageKey) private var rounding: AZTenkeyRounding = .halfUp
+
+    init(config: AZTenkeyConfig) {
         self.config = config
     }
 
@@ -109,25 +150,46 @@ struct NumpadView: View {
 
     /// 縦に余裕のない端末では、キーと余白を一段詰める
     private var isCompact: Bool { UIScreen.main.bounds.height <= 700 }
-    private var keySpacing: CGFloat { isCompact ? 8 : 10 }
-    private var sheetSpacing: CGFloat { isCompact ? 10 : 14 }
-    private var displayFontSize: CGFloat { isCompact ? 48 : 56 }
-    private var checkmarkSize: CGFloat { isCompact ? 34 : 38 }
-    /// 式と丸めを並べた1行の高さ。背の高い方（title3 の行高）で決まる
-    private var statusRowHeight: CGFloat { 26 }
 
-    /// シートの高さ。中身の増減に合わせて変え、テンキーの位置を動かさない。
+    /// 文字サイズ設定に応じた寸法の倍率。
+    /// キーの高さや余白は Font のように自動では伸びないので、ここで掛ける。
+    /// アクセシビリティサイズまで素直に追うとテンキーが画面へ収まらなくなるため、
+    /// 伸びしろは頭打ちにしている
+    private var uiScale: CGFloat {
+        switch dynamicTypeSize {
+        case .xSmall, .small, .medium:      return 0.95
+        case .large:                        return 1.0
+        case .xLarge:                       return 1.06
+        case .xxLarge:                      return 1.12
+        case .xxxLarge:                     return 1.18
+        default:                            return 1.26   // アクセシビリティサイズ
+        }
+    }
+
+    /// 金額表示だけは伸びを抑える。大きく出したいが、行から溢れさせたくない
+    private var displayScale: CGFloat { min(uiScale, 1.12) }
+
+    private var keySpacing: CGFloat { (isCompact ? 8 : 10) * uiScale }
+    private var sheetSpacing: CGFloat { (isCompact ? 10 : 14) * uiScale }
+    private var displayFontSize: CGFloat { (isCompact ? 48 : 56) * displayScale }
+    private var checkmarkSize: CGFloat { (isCompact ? 34 : 38) * displayScale }
+    /// 式と丸めを並べた1行の高さ。背の高い方（title3 の行高）で決まる
+    private var statusRowHeight: CGFloat { 26 * uiScale }
+
+    /// このテンキーを表示するのに要る高さ。
     ///
-    /// シートは下端が画面に固定されるので、この値を増やすと上へ伸びる。
-    /// 固定値にすると、式が出た分だけテンキーが押し下げられてしまう
-    private var sheetHeight: CGFloat {
-        let navBar: CGFloat = 50
-        let top: CGFloat = 8
+    /// シートに載せる時は、これを detent へ渡すと中身の増減に追従して
+    /// 上へ伸び、テンキーの位置が動かない（シートは下端が固定のため）。
+    /// 固定値にすると、式が出た分だけテンキーが押し下げられてしまう。
+    /// 値は `AZTenkeyHeightKey` でも親へ伝えている
+    var preferredHeight: CGFloat {
+        let top: CGFloat = 8 * uiScale
         let amountRow = displayFontSize * 1.25 + 8
         let keypad = keyHeight * 4 + keySpacing * 3
-        let bottom: CGFloat = 12
+        let bottom: CGFloat = 12 * uiScale
 
-        var height = navBar + top + amountRow + sheetSpacing + keypad + bottom
+        // この View 自身の高さだけを返す。ナビゲーションバーは載せる側が足す
+        var height = top + amountRow + sheetSpacing + keypad + bottom
         // 式と丸めは同じ行に並ぶので、増えるのは1行ぶんだけ
         if errorKey != nil || expressionText != nil {
             height += sheetSpacing + statusRowHeight
@@ -160,7 +222,7 @@ struct NumpadView: View {
 
     /// 端数があり、丸め方法によって結果が変わる状態か
     private var needsRounding: Bool {
-        NumpadRounding.down.roundToInt(activeValue) != activeValue
+        AZTenkeyRounding.down.roundToInt(activeValue) != activeValue
     }
 
     /// まだ何も操作していない（初期値をそのまま見せている）状態か
@@ -173,8 +235,7 @@ struct NumpadView: View {
     }
 
     private var displayText: String {
-        let n = committedValue
-        return config.isAmount ? MoneyFormat.localizedAmount(n) : "\(n)"
+        config.format.display(committedValue)
     }
 
     private var displayColor: Color {
@@ -206,41 +267,29 @@ struct NumpadView: View {
     // MARK: ビュー
 
     var body: some View {
-        NavigationStack {
-            // 畳んだ行の spacing が残らないよう、VStack 自体は詰めて置き、
-            // 行間はそれぞれの行に持たせる
-            VStack(spacing: 0) {
-                amountDisplayRow
+        // 畳んだ行の spacing が残らないよう、VStack 自体は詰めて置き、
+        // 行間はそれぞれの行に持たせる
+        VStack(spacing: 0) {
+            amountDisplayRow
 
-                statusRow
+            statusRow
 
-                HStack(alignment: .top, spacing: keySpacing) {
-                    keypadGrid
-                    operatorColumn
-                }
-                .padding(.horizontal, isCompact ? 16 : 20)
-                .padding(.top, sheetSpacing)
-                .padding(.bottom, 12)
+            HStack(alignment: .top, spacing: keySpacing) {
+                keypadGrid
+                operatorColumn
             }
-            .padding(.top, 8)
-            .frame(maxWidth: .infinity, alignment: .top)
-            // キーの地（secondarySystemGroupedBackground）と同色にならないよう、
-            // 一段沈んだグループ背景を敷いてキーの輪郭を出す
-            .background(Color(uiColor: .systemGroupedBackground))
-            .navigationTitle(config.title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    SheetCloseButton { dismiss() }
-                }
-            }
-            .toolbarBackground(Color(uiColor: .systemGroupedBackground), for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
+            .padding(.horizontal, (isCompact ? 16 : 20) * uiScale)
+            .padding(.top, sheetSpacing)
+            .padding(.bottom, 12 * uiScale)
         }
-        .presentationDetents([.height(sheetHeight)])
-        // パネル設定シートと同じく、下へスライドしても閉じられるようにする
-        .presentationDragIndicator(.visible)
-        .onAppear { NumpadHaptics.prepare() }
+        .padding(.top, 8 * uiScale)
+        .frame(maxWidth: .infinity, alignment: .top)
+        // キーの地（secondarySystemGroupedBackground）と同色にならないよう、
+        // 一段沈んだグループ背景を敷いてキーの輪郭を出す
+        .background(Color(uiColor: .systemGroupedBackground))
+        .onAppear { AZTenkeyHaptics.prepare() }
+        // シートに載せた親が detent を追従できるよう、必要な高さを伝える
+        .preference(key: AZTenkeyHeightKey.self, value: preferredHeight)
         // 入力・演算子選択・式の出現をアニメーションさせず、即時に切り替える
         .transaction { transaction in
             transaction.animation = nil
@@ -253,11 +302,11 @@ struct NumpadView: View {
     private var amountDisplayRow: some View {
         Button {
             confirm()
-            NumpadHaptics.tap()
+            AZTenkeyHaptics.tap()
         } label: {
             // 金額とチェックをひと組にして中央へ置く。
             // チェックは行の右端ではなく、金額のすぐ右に添える
-            HStack(spacing: 12) {
+            HStack(spacing: 12 * uiScale) {
                 Text(displayText)
                     .font(.system(size: displayFontSize, weight: .bold, design: .rounded).monospacedDigit())
                     .foregroundStyle(displayColor)
@@ -266,20 +315,19 @@ struct NumpadView: View {
                     .allowsTightening(true)
 
                 Image(systemName: "checkmark.circle.fill")
-                    .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
                     .font(.system(size: checkmarkSize))
                     .foregroundStyle(checkmarkColor)
                     .frame(width: checkmarkSize, height: checkmarkSize)
             }
             .frame(maxWidth: .infinity)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 4)
+            .padding(.horizontal, 16 * uiScale)
+            .padding(.vertical, 4 * uiScale)
             // 数字と数字の隙間も押せるよう、行全体を当たり判定にする
             .contentShape(Rectangle())
         }
-        .buttonStyle(NumpadKeyStyle())
+        .buttonStyle(AZTenkeyKeyStyle())
         .disabled(!canConfirm)
-        .accessibilityLabel(Text("common.done"))
+        .accessibilityLabel(Text("azTenkey.done"))
         .accessibilityValue(Text(displayText))
     }
 
@@ -298,7 +346,7 @@ struct NumpadView: View {
         } else if expressionText != nil {
             // 式と丸めをひと組にして中央へ置く。
             // 式に幅いっぱいを取らせると、丸めだけが右端へ離れてしまう
-            HStack(spacing: 8) {
+            HStack(spacing: 8 * uiScale) {
                 calculationLine
 
                 // 端数が出ない式では丸めを選ぶ意味がないので、その分を畳む
@@ -307,7 +355,7 @@ struct NumpadView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 16 * uiScale)
             .padding(.top, sheetSpacing)
         }
     }
@@ -317,7 +365,7 @@ struct NumpadView: View {
         Group {
             // 端数が出て、丸め方で結果が変わるときだけ選ばせる
             AZDropdownPicker(
-                options: NumpadRounding.allCases,
+                options: AZTenkeyRounding.allCases,
                 selection: $rounding,
                 isExpanded: $isRoundingExpanded,
                 minWidth: 0,
@@ -392,7 +440,7 @@ struct NumpadView: View {
     /// 演算子は数字と取り違えないよう、右端へ1列にまとめる
     private var operatorColumn: some View {
         VStack(spacing: keySpacing) {
-            ForEach(NumpadOperator.allCases) { operation in
+            ForEach(AZTenkeyOperator.allCases) { operation in
                 operatorKey(operation)
             }
         }
@@ -400,13 +448,13 @@ struct NumpadView: View {
 
     // MARK: キー部品
 
-    private var keyHeight: CGFloat { isCompact ? 52 : 56 }
+    private var keyHeight: CGFloat { (isCompact ? 52 : 56) * uiScale }
     private var keyFont: Font { isCompact ? .title2.weight(.medium) : .title.weight(.medium) }
 
-    private func digitKey(_ label: String, key: NumpadKey) -> some View {
+    private func digitKey(_ label: String, key: AZTenkeyKey) -> some View {
         Button {
             handleKey(key)
-            NumpadHaptics.tap()
+            AZTenkeyHaptics.tap()
         } label: {
             Text(label)
                 .font(keyFont)
@@ -415,30 +463,29 @@ struct NumpadView: View {
                 .background(Color(.secondarySystemGroupedBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
-        .buttonStyle(NumpadKeyStyle())
+        .buttonStyle(AZTenkeyKeyStyle())
     }
 
     private var deleteKey: some View {
         Button {
             handleKey(.delete)
-            NumpadHaptics.tap()
+            AZTenkeyHaptics.tap()
         } label: {
             Image(systemName: "delete.left")
-                .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
                 .font(isCompact ? .title3 : .title2)
                 .foregroundStyle(Color(.label))
                 .frame(maxWidth: .infinity, minHeight: keyHeight)
                 .background(Color(.tertiarySystemGroupedBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
-        .buttonStyle(NumpadKeyStyle())
+        .buttonStyle(AZTenkeyKeyStyle())
     }
 
-    private func operatorKey(_ operation: NumpadOperator) -> some View {
+    private func operatorKey(_ operation: AZTenkeyOperator) -> some View {
         let isSelected = pendingOperator == operation
         return Button {
             selectOperator(operation)
-            NumpadHaptics.tap()
+            AZTenkeyHaptics.tap()
         } label: {
             Text(operation.symbol)
                 .font(isCompact ? .title2.weight(.semibold) : .title.weight(.semibold))
@@ -447,13 +494,13 @@ struct NumpadView: View {
                 .background(isSelected ? Color.accentColor : Color(.tertiarySystemGroupedBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
-        .buttonStyle(NumpadKeyStyle())
+        .buttonStyle(AZTenkeyKeyStyle())
         .accessibilityLabel(Text(operation.symbol))
     }
 
     // MARK: ロジック
 
-    private func handleKey(_ key: NumpadKey) {
+    private func handleKey(_ key: AZTenkeyKey) {
         switch key {
         case .digit(let d):   appendDigit(d)
         case .doubleZero:     appendDigit("00")
@@ -522,7 +569,7 @@ struct NumpadView: View {
         inputStr = NSDecimalNumber(decimal: settled).stringValue
     }
 
-    private func selectOperator(_ newOperator: NumpadOperator) {
+    private func selectOperator(_ newOperator: AZTenkeyOperator) {
         errorKey = nil
 
         if let currentOperator = pendingOperator,
@@ -561,17 +608,17 @@ struct NumpadView: View {
         }
         guard canConfirm else { return }
         let n = max(config.minValue, min(config.maxValue, committedValue))
+        // 閉じるかどうかは置いた側で決める（シートなら dismiss、埋め込みなら据え置き）
         config.onConfirm(n)
-        dismiss()
     }
 
-    /// 計算規則は NumpadCalculator に持たせ、ここでは結果を画面状態へ反映する
+    /// 計算規則は AZTenkeyCalculator に持たせ、ここでは結果を画面状態へ反映する
     private func calculate(
         _ left: Decimal,
-        _ operation: NumpadOperator,
+        _ operation: AZTenkeyOperator,
         _ right: Decimal
     ) -> Decimal? {
-        switch NumpadCalculator.calculate(
+        switch AZTenkeyCalculator.calculate(
             left, operation, right,
             minValue: config.minValue,
             maxValue: config.maxValue
@@ -589,15 +636,15 @@ struct NumpadView: View {
     /// 金額は内部では最小単位（セント等）の整数なので、式でも通貨の単位へ直して見せる。
     /// そうしないとドルなどで「7850000 ÷ 3」のような桁で出てしまう
     private func plainNumberText(_ value: Decimal) -> String {
-        let scale = config.isAmount ? MoneyFormat.minorUnitScale : 1
+        let scale = config.format.minorUnitScale
         let shown = scale == 1 ? value : value / Decimal(scale)
 
         // 端数があるときだけ小数を見せる。金額は通貨の小数桁も足して見る
-        let baseDigits = config.isAmount ? MoneyFormat.fractionDigits : 0
-        let hasFraction = NumpadRounding.down.roundToInt(value) != value
+        let baseDigits = config.format.fractionDigits
+        let hasFraction = AZTenkeyRounding.down.roundToInt(value) != value
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.locale = MoneyFormat.effectiveLocale
+        formatter.locale = config.format.locale
         formatter.maximumFractionDigits = hasFraction ? baseDigits + 2 : baseDigits
         return formatter.string(from: shown as NSDecimalNumber) ?? "\(shown)"
     }
@@ -605,14 +652,14 @@ struct NumpadView: View {
     /// 式の末尾に出す「= 結果」の数値。
     /// 丸める前の値なので、端数があるときは小数を見せて丸めとの差が分かるようにする
     private func resultNumberText(_ value: Decimal) -> String {
-        let scale = config.isAmount ? MoneyFormat.minorUnitScale : 1
+        let scale = config.format.minorUnitScale
         let shown = scale == 1 ? value : value / Decimal(scale)
 
-        let baseDigits = config.isAmount ? MoneyFormat.fractionDigits : 0
+        let baseDigits = config.format.fractionDigits
         let digits = needsRounding ? baseDigits + 1 : baseDigits
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.locale = MoneyFormat.effectiveLocale
+        formatter.locale = config.format.locale
         formatter.minimumFractionDigits = digits
         formatter.maximumFractionDigits = digits
         return formatter.string(from: shown as NSDecimalNumber) ?? "\(shown)"
@@ -626,7 +673,7 @@ struct NumpadView: View {
         case .multiply, .divide:
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
-            formatter.locale = MoneyFormat.effectiveLocale
+            formatter.locale = config.format.locale
             formatter.maximumFractionDigits = 0
             return formatter.string(from: value as NSDecimalNumber) ?? "\(value)"
         case .add, .subtract:

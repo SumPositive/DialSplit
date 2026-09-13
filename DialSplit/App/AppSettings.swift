@@ -172,6 +172,24 @@ enum AppFontScale: Int, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - シートへの文字サイズ引き継ぎ
+
+extension View {
+    /// アプリ内の文字サイズ設定をこのビューへ適用する。
+    ///
+    /// シートは別のビュー階層に出るため、ルートに掛けた `.dynamicTypeSize` を
+    /// 継承しない。シートの中身にはこれを明示的に付ける。
+    @ViewBuilder
+    func appFontScale(_ fontScale: AppFontScale) -> some View {
+        if fontScale.followsSystem {
+            // 端末の設定にそのまま従う（環境値を上書きしない）
+            self
+        } else {
+            self.dynamicTypeSize(fontScale.dynamicTypeSize)
+        }
+    }
+}
+
 // MARK: - AppSettings
 
 @Observable
