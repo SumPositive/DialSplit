@@ -116,6 +116,9 @@ struct AZPickerStyle {
     var dropdownOptionVerticalPadding: CGFloat = 10
     /// ドロップダウン候補一覧だけに適用する文字サイズ範囲
     var dropdownPopoverDynamicTypeRange: ClosedRange<DynamicTypeSize> = DynamicTypeSize.xSmall...DynamicTypeSize.accessibility5
+    /// 折りたたみ時の選択ボタン内の上下余白。
+    /// 小さく添えるだけの用途では詰められるようにする
+    var collapsedVerticalPadding: CGFloat = 8
     /// ドロップダウン選択中表示と候補一覧の幅不足時処理
     var dropdownTextFitMode: AZPickerTextFitMode = .wrap
     /// ラベル内で指定した色をそのまま使う
@@ -162,6 +165,9 @@ struct AZDropdownPicker<Option: Hashable & Identifiable, Label: View>: View {
     /// 選択ボタンを親の横幅いっぱいに広げる
     var fillsWidth: Bool = false
     var style: AZPickerStyle = .form
+    /// 折りたたみ時の選択表示だけを差し替える。
+    /// 候補一覧の文字サイズは保ったまま、選択結果だけ小さく見せたい時に使う
+    var collapsedLabelOverride: ((Option) -> AnyView)? = nil
     @ViewBuilder let label: (Option) -> Label
 
     var body: some View {
@@ -203,7 +209,7 @@ struct AZDropdownPicker<Option: Hashable & Identifiable, Label: View>: View {
                 indicatorView
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, 8)
+            .padding(.vertical, style.collapsedVerticalPadding)
             .frame(
                 minWidth: minWidth,
                 maxWidth: fillsWidth ? .infinity : nil,
@@ -235,7 +241,11 @@ struct AZDropdownPicker<Option: Hashable & Identifiable, Label: View>: View {
 
     @ViewBuilder
     private var selectedLabel: some View {
-        if style.preservesLabelForegroundStyle {
+        if let collapsedLabelOverride {
+            collapsedLabelOverride(selection)
+                .foregroundStyle(style.dropdownSelectedValueColor)
+                .azPickerTextFit(style.dropdownTextFitMode, alignment: .center)
+        } else if style.preservesLabelForegroundStyle {
             label(selection)
                 .font(.subheadline)
                 .azPickerTextFit(style.dropdownTextFitMode, alignment: .center)

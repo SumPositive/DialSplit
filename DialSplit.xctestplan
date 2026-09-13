@@ -26,7 +26,6 @@
       }
     },
     {
-      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:DialSplit.xcodeproj",
         "identifier" : "C39F96BA2FF74AB800873586",
