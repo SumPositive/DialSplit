@@ -27,8 +27,21 @@ struct AZTenkeySheet: View {
     let config: AZTenkeyConfig
 
     @Environment(\.dismiss) private var dismiss
-    /// 中身から伝わってくる必要な高さ。確定するまでは概算で開く
-    @State private var sheetHeight: CGFloat = 0
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    /// 中身から伝わってくる必要な高さ。
+    /// 0 で開くとナビゲーションバーぶんだけの潰れた状態が一瞬見えるので、
+    /// 計測が届くまでは同じ計算式で求めた概算を使う
+    @State private var sheetHeight: CGFloat?
+
+    /// 計測前に使う高さ。式の行はまだ無いので、その分を除いて見積もる
+    private var estimatedHeight: CGFloat {
+        AZTenkeyView.height(
+            dynamicTypeSize: dynamicTypeSize,
+            isCompact: AZTenkeyView.isCompactScreen,
+            hasStatusRow: false
+        )
+    }
 
     var body: some View {
         // 確定したらシートを閉じる。閉じる責務は View 本体ではなくここが持つ
@@ -54,9 +67,10 @@ struct AZTenkeySheet: View {
                 }
         }
         .onPreferenceChange(AZTenkeyHeightKey.self) { height in
+            guard 0 < height else { return }
             sheetHeight = height
         }
-        .presentationDetents([.height(sheetHeight + Self.navigationBarHeight)])
+        .presentationDetents([.height((sheetHeight ?? estimatedHeight) + Self.navigationBarHeight)])
         .presentationDragIndicator(.visible)
         // ナビゲーションバーとホームインジケータ側までテンキーと同じ地で塗る。
         // 既定のシート背景のままだと、この2箇所が半透明になって背後が透ける

@@ -140,13 +140,15 @@ struct AZTenkeyView: View {
     // MARK: 寸法
 
     /// 縦に余裕のない端末では、キーと余白を一段詰める
-    private var isCompact: Bool { UIScreen.main.bounds.height <= 700 }
+    static var isCompactScreen: Bool { UIScreen.main.bounds.height <= 700 }
+
+    private var isCompact: Bool { Self.isCompactScreen }
 
     /// 文字サイズ設定に応じた寸法の倍率。
     /// キーの高さや余白は Font のように自動では伸びないので、ここで掛ける。
     /// アクセシビリティサイズまで素直に追うとテンキーが画面へ収まらなくなるため、
     /// 伸びしろは頭打ちにしている
-    private var uiScale: CGFloat {
+    static func uiScale(for dynamicTypeSize: DynamicTypeSize) -> CGFloat {
         switch dynamicTypeSize {
         case .xSmall, .small, .medium:      return 0.95
         case .large:                        return 1.0
@@ -156,6 +158,8 @@ struct AZTenkeyView: View {
         default:                            return 1.26   // アクセシビリティサイズ
         }
     }
+
+    private var uiScale: CGFloat { Self.uiScale(for: dynamicTypeSize) }
 
     /// 金額表示だけは伸びを抑える。大きく出したいが、行から溢れさせたくない
     private var displayScale: CGFloat { min(uiScale, 1.12) }
@@ -167,25 +171,42 @@ struct AZTenkeyView: View {
     /// 式と丸めを並べた1行の高さ。背の高い方（title3 の行高）で決まる
     private var statusRowHeight: CGFloat { 26 * uiScale }
 
-    /// このテンキーを表示するのに要る高さ。
+    /// テンキーの高さ。寸法の組み立てはここ1箇所にまとめる。
     ///
-    /// シートに載せる時は、これを detent へ渡すと中身の増減に追従して
-    /// 上へ伸び、テンキーの位置が動かない（シートは下端が固定のため）。
-    /// 固定値にすると、式が出た分だけテンキーが押し下げられてしまう。
-    /// 値は `AZTenkeyHeightKey` でも親へ伝えている
-    var preferredHeight: CGFloat {
-        let top: CGFloat = 8 * uiScale
-        let amountRow = displayFontSize * 1.25 + 8
-        let keypad = keyHeight * 4 + keySpacing * 3
-        let bottom: CGFloat = 12 * uiScale
+    /// シートに載せる側は、最初のレイアウト計測が終わる前でもこれを呼んで
+    /// 初期の detent を決められる（0 で開くと一瞬つぶれて見えるため）。
+    /// - Parameter hasStatusRow: 計算式か、エラーの行が出ているか
+    static func height(
+        dynamicTypeSize: DynamicTypeSize,
+        isCompact: Bool,
+        hasStatusRow: Bool
+    ) -> CGFloat {
+        let scale = uiScale(for: dynamicTypeSize)
+        let displayScale = min(scale, 1.12)
+
+        let top: CGFloat = 8 * scale
+        let amountRow = (isCompact ? 48 : 56) * displayScale * 1.25 + 8
+        let keyHeight = (isCompact ? 52 : 56) * scale
+        let keySpacing = (isCompact ? 8 : 10) * scale
+        let sheetSpacing = (isCompact ? 10 : 14) * scale
+        let bottom: CGFloat = 12 * scale
 
         // この View 自身の高さだけを返す。ナビゲーションバーは載せる側が足す
-        var height = top + amountRow + sheetSpacing + keypad + bottom
+        var height = top + amountRow + sheetSpacing + (keyHeight * 4 + keySpacing * 3) + bottom
         // 式と丸めは同じ行に並ぶので、増えるのは1行ぶんだけ
-        if errorKey != nil || expressionText != nil {
-            height += sheetSpacing + statusRowHeight
+        if hasStatusRow {
+            height += sheetSpacing + 26 * scale
         }
         return height
+    }
+
+    /// いまの状態で必要な高さ。`AZTenkeyHeightKey` で親へも伝えている
+    var preferredHeight: CGFloat {
+        Self.height(
+            dynamicTypeSize: dynamicTypeSize,
+            isCompact: isCompact,
+            hasStatusRow: errorKey != nil || expressionText != nil
+        )
     }
 
     // MARK: 計算プロパティ
