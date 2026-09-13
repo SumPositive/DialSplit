@@ -14,8 +14,8 @@
 //     -AppleLocale は Locale.current に確実に効かないため使わない。
 //
 //  タップ対象は言語非依存の accessibilityIdentifier で特定:
-//    - openSettingsButton   … ヘッダーの歯車（設定）
-//    - openPanelStyleButton … パレット（パネルスタイル）
+//    - openSettingsButton   … ヘッダー右端の歯車（設定）
+//    - openPanelStyleButton … ヘッダー左端のパレット（パネルスタイル）
 //
 
 import XCTest
@@ -83,11 +83,8 @@ final class DialSplitUITests: XCTestCase {
         }
 
         // 3 カット目: パネルスタイル（パレットボタン → シート）
+        // パレットボタンはヘッダー左端にあり、スクロールせずに常に見えている
         let styleButton = app.buttons["openPanelStyleButton"]
-        if !styleButton.isHittable {
-            app.swipeUp(velocity: .fast)
-            sleep(1)
-        }
         if styleButton.waitForExistence(timeout: 10) {
             styleButton.tap()
             sleep(2)

@@ -83,6 +83,13 @@ struct SplitView: View {
             LeatherBackground()
 
             VStack(spacing: 0) {
+                // 広告帯は画面最上部（ヘッダーの上）に置き、アプリの操作面と分ける
+                HeaderBannerView()
+
+                // タイトル行はスクロール領域の外に置く。
+                // 重ねて浮かせるとパネルが下を通って透けるため、場所を分けて解決する
+                HeaderBar(showSettings: $showSettings, showPanelStyle: $showPanelStyle)
+
                 GeometryReader { proxy in
                     let cardWidth = min(max(0, proxy.size.width - cardSideMargin * 2), maxContentWidth)
                     let totalPanelWidth = min(cardWidth + 20, max(0, proxy.size.width - 4))
@@ -168,41 +175,12 @@ struct SplitView: View {
                             .frame(width: cardWidth)
                             .padding(.top, 6)
                             .padding(.bottom, 2)
-
-                            HStack {
-                                Spacer()
-                                Button {
-                                    showPanelStyle = true
-                                } label: {
-                                    Image(systemName: "paintpalette.fill")
-                                        .font(.title3)
-                                        .foregroundStyle(.white.opacity(0.85))
-                                        .shadow(color: .black.opacity(0.5), radius: 1)
-                                        .frame(width: 44, height: 44)
-                                        .contentShape(Circle())
-                                }
-                                .buttonStyle(.plain)
-                                .accessibilityLabel(Text("panel.style.title"))
-                                .accessibilityIdentifier("openPanelStyleButton")
-                            }
-                            .frame(width: cardWidth)
-                            .padding(.bottom, 4)
                         }
                         .frame(maxWidth: .infinity)
+                        // タイトル行と最初のパネル（影が大きい）が接しないよう間を空ける
+                        .padding(.top, 6)
                     }
                     .safeAreaPadding(.bottom, 28)
-                    .safeAreaInset(edge: .top, spacing: 0) {
-                        HeaderBar(showSettings: $showSettings)
-                    }
-                    .safeAreaInset(edge: .bottom, spacing: 0) {
-                        if isAllLocked {
-                            FooterBannerView()
-                                .padding(.vertical, 6)
-                                .frame(maxWidth: .infinity)
-                                .background(.ultraThinMaterial)
-                                .transition(.move(edge: .bottom).combined(with: .opacity))
-                        }
-                    }
                 }
                 .animation(.easeInOut(duration: 0.25), value: isAllLocked)
             }
@@ -245,6 +223,16 @@ struct SplitView: View {
 
 private struct HeaderBar: View {
     @Binding var showSettings: Bool
+    @Binding var showPanelStyle: Bool
+
+    /// タイトル行の固定高さ。文字サイズ設定によらず一定に保ち、
+    /// ダイヤル面の位置が設定で動かないようにする。
+    /// 44pt は歯車ボタンの推奨タップ領域と同じ寸法でもある
+    private static let barHeight: CGFloat = 44
+
+    /// 44pt のタップ枠に .title3（約22pt）の記号を中央置きしたときの片側余白。
+    /// この分を負の余白で戻し、アイコンの右端を画面端から20ptに保つ
+    private static let iconInset: CGFloat = 11
 
     var body: some View {
         ZStack {
@@ -252,27 +240,62 @@ private struct HeaderBar: View {
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(.white.opacity(0.55))
                 .shadow(color: .black.opacity(0.5), radius: 1, x: 0, y: 1)
+                // タイトルは文字サイズ設定に追従させず、常に標準サイズで表示する
+                .dynamicTypeSize(.large)
+                // 言語によっては標準サイズでも収まらないため、行を増やさず縮めて収める
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                // 左右のアイコンに被らない幅に収める（両側のタップ枠ぶんを空ける）
+                .padding(.horizontal, Self.barHeight - Self.iconInset)
 
             HStack {
+                Button {
+                    showPanelStyle = true
+                } label: {
+                    headerIcon("paintpalette.fill")
+                }
+                .buttonStyle(.plain)
+                // タップ枠を広げた分だけアイコンが内側へ寄るため、その差を戻して
+                // 見た目の左端位置を歯車の右端と揃える
+                .padding(.leading, -Self.iconInset)
+                .accessibilityLabel(Text("panel.style.title"))
+                .accessibilityIdentifier("openPanelStyleButton")
+
                 Spacer()
+
                 Button {
                     Telemetry.event(.settingsOpened)
                     showSettings = true
                 } label: {
-                    Image(systemName: "gearshape.fill")
-                        .font(.title3)
-                        .foregroundStyle(.white.opacity(0.85))
-                        .shadow(color: .black.opacity(0.5), radius: 1)
+                    headerIcon("gearshape.fill")
                 }
-                .padding(.bottom, 4)
+                .buttonStyle(.plain)
+                // タップ枠を広げた分だけアイコンが内側へ寄るため、その差を戻して
+                // 見た目の右端位置を従来どおりに保つ
+                .padding(.trailing, -Self.iconInset)
                 .accessibilityIdentifier("openSettingsButton")
             }
         }
         .padding(.horizontal, 20)
-        .padding(.vertical, 4)
         .frame(maxWidth: .infinity)
-        .background(Color.clear.contentShape(Rectangle()))
+        .frame(height: Self.barHeight)
+        // スクロール領域の外にあるためパネルは下を通らない。
+        // 地を敷かずレザー背景をそのまま見せ、帯が乗ったようには見せない
         .contentShape(Rectangle())
+    }
+
+    /// ヘッダー左右のアイコン。左右で見た目とタップ領域を揃える
+    private func headerIcon(_ systemName: String) -> some View {
+        Image(systemName: systemName)
+            .font(.title3)
+            // タイトルと同じく、文字サイズ設定で記号が大きくならないようにする。
+            // 44pt の枠からはみ出させないための固定でもある
+            .dynamicTypeSize(.large)
+            .foregroundStyle(.white.opacity(0.85))
+            .shadow(color: .black.opacity(0.5), radius: 1)
+            // アイコンだけだとタップ領域が狭いため、行の高さいっぱいまで広げる
+            .frame(width: Self.barHeight, height: Self.barHeight)
+            .contentShape(Rectangle())
     }
 }
 
@@ -638,7 +661,7 @@ private struct PanelStyleSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("common.done") { dismiss() }
+                    SheetCloseButton { dismiss() }
                 }
             }
         }

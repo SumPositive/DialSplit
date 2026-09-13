@@ -18,8 +18,6 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @State private var showTipSheet = false
-    @State private var showAdSheet = false
-    @State private var showAdThanks = false
     @State private var showDialSettings = false
     @State private var isAppearanceModeExpanded = false
     @State private var isFontScaleExpanded = false
@@ -292,10 +290,6 @@ struct SettingsView: View {
                         Telemetry.event(.supportSheetOpened(kind: .tip))
                         showTipSheet = true
                     }
-                    Button(String(localized: "support.ad.title")) {
-                        Telemetry.event(.supportSheetOpened(kind: .ad))
-                        showAdSheet = true
-                    }
                 }
 
                 // MARK: バージョン（最下部）
@@ -314,16 +308,11 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("common.done") { dismiss() }
+                    SheetCloseButton { dismiss() }
                 }
             }
             .sheet(isPresented: $showTipSheet) {
                 TipSheetView()
-            }
-            .sheet(isPresented: $showAdSheet) {
-                AdSupportSheet {
-                    showAdThanks = true
-                }
             }
             .sheet(isPresented: $showDialSettings) {
                 applyFontScale {
@@ -334,18 +323,13 @@ struct SettingsView: View {
                         )
                         .toolbar {
                             ToolbarItem(placement: .confirmationAction) {
-                                Button("common.done") {
+                                SheetCloseButton {
                                     showDialSettings = false
                                 }
                             }
                         }
                     }
                 }
-            }
-            .alert(String(localized: "support.thanksTitle"), isPresented: $showAdThanks) {
-                Button("common.ok", role: .cancel) {}
-            } message: {
-                Text(String(localized: "support.ad.thanksMessage"))
             }
             .preferredColorScheme(settings.appearanceMode.colorScheme)
         }
@@ -694,186 +678,6 @@ private struct TossedCoin: View {
             .id(key)
     }
 }
-
-private struct AdSupportSheet: View {
-    let onRewardEarned: () -> Void
-
-    var body: some View {
-#if canImport(GoogleMobileAds)
-        AdMobRewardedSheet(onRewardEarned: onRewardEarned)
-#else
-        NavigationStack {
-            VStack(spacing: 16) {
-                Text(String(localized: "admob.notLinked"))
-                    .font(.headline)
-                Text(String(localized: "admob.packageMessage"))
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal, 20)
-            }
-            .padding()
-        }
-#endif
-    }
-}
-
-#if canImport(GoogleMobileAds)
-
-private struct AdMobRewardedSheet: View {
-    @Environment(\.dismiss) private var dismiss
-    @StateObject private var loader = RewardedAdLoader(adUnitID: AdMobConfig.rewardUnitID)
-    let onRewardEarned: () -> Void
-
-    var body: some View {
-        NavigationStack {
-            VStack(spacing: 16) {
-                AdMobBannerView(
-                    adUnitID: AdMobConfig.bannerUnitID,
-                    size: CGSize(width: 300, height: 250)
-                )
-
-                Text(String(localized: "support.ad.videoTitle"))
-                    .font(.headline)
-
-                Text(String(localized: "support.ad.closeHint"))
-                    .font(.footnote)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal)
-
-                if loader.isLoading {
-                    ProgressView(String(localized: "support.ad.loading"))
-                } else {
-                    Button(String(localized: "support.ad.play")) {
-                        if let root = UIApplication.topMostViewController() {
-                            loader.present(from: root)
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(!loader.isReady)
-
-                    Label {
-                        Text(String(localized: "support.ad.soundWarning"))
-                            .font(.footnote.weight(.semibold))
-                    } icon: {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                    }
-                    .foregroundStyle(.red)
-                }
-
-                if loader.errorMessage != nil {
-                    Button(String(localized: "common.reload")) {
-                        loader.loadAd()
-                    }
-                    .buttonStyle(.bordered)
-                }
-
-                Spacer()
-            }
-            .padding()
-            .navigationTitle(String(localized: "support.ad.title"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(String(localized: "common.close")) { dismiss() }
-                }
-            }
-            .onAppear {
-                loader.onRewardEarned = { _ in
-                    onRewardEarned()
-                }
-            }
-        }
-    }
-}
-
-@MainActor
-private final class RewardedAdLoader: NSObject, ObservableObject, FullScreenContentDelegate {
-    @Published private(set) var isLoading = false
-    @Published private(set) var isReady = false
-    @Published private(set) var errorMessage: String?
-
-    var onRewardEarned: ((AdReward) -> Void)?
-    private let adUnitID: String
-    nonisolated(unsafe) private var rewardedAd: RewardedAd?
-
-    init(adUnitID: String) {
-        self.adUnitID = adUnitID
-        super.init()
-        loadAd()
-    }
-
-    func loadAd() {
-        isLoading = true
-        isReady = false
-        errorMessage = nil
-        let request = nonPersonalizedAdRequest()
-
-        RewardedAd.load(with: adUnitID, request: request) { [weak self] ad, error in
-            guard let self else { return }
-            self.rewardedAd = ad
-            if let ad { ad.fullScreenContentDelegate = self }
-            MainActor.assumeIsolated { [weak self] in
-                guard let self else { return }
-                self.isLoading = false
-                if error != nil {
-                    self.errorMessage = String(localized: "support.ad.noRewardedAd")
-                    self.rewardedAd = nil
-                } else if self.rewardedAd != nil {
-                    self.isReady = true
-                }
-            }
-        }
-    }
-
-    func present(from root: UIViewController) {
-        guard let rewardedAd else { return }
-        let ad = rewardedAd
-        isReady = false
-        ad.present(from: root) { [weak self] in
-            guard let self else { return }
-            self.onRewardEarned?(ad.adReward)
-        }
-    }
-
-    nonisolated func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
-        MainActor.assumeIsolated { [weak self] in
-            guard let self else { return }
-            self.rewardedAd = nil
-            self.loadAd()
-        }
-    }
-
-    nonisolated func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        MainActor.assumeIsolated { [weak self] in
-            guard let self else { return }
-            self.errorMessage = String(localized: "support.ad.noRewardedAd")
-            self.rewardedAd = nil
-            self.loadAd()
-        }
-    }
-}
-
-private extension UIApplication {
-    static func topMostViewController(
-        base: UIViewController? = UIApplication.shared.connectedScenes
-            .compactMap { ($0 as? UIWindowScene)?.windows.first(where: { $0.isKeyWindow })?.rootViewController }
-            .first
-    ) -> UIViewController? {
-        if let nav = base as? UINavigationController {
-            return topMostViewController(base: nav.visibleViewController)
-        }
-        if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
-            return topMostViewController(base: selected)
-        }
-        if let presented = base?.presentedViewController {
-            return topMostViewController(base: presented)
-        }
-        return base
-    }
-}
-
-#endif
 
 // MARK: - プリセットチップ
 
