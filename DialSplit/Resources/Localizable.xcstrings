@@ -1,4550 +1,4603 @@
 {
-  "sourceLanguage": "ja",
-  "strings": {
-    "%@ %@": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ %2$@"
+  "sourceLanguage" : "ja",
+  "strings" : {
+    "%@ %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ %2$@"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ %2$@"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ %2$@"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ %2$@"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ %2$@"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ %2$@"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@"
           }
         }
       }
     },
-    "admob.notLinked": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AdMob nicht verknüpft"
+    "admob.notLinked" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdMob nicht verknüpft"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AdMob Not Linked"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdMob Not Linked"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AdMob no vinculado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdMob no vinculado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AdMob non lié"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdMob non lié"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AdMob未導入"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdMob non collegato"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AdMob 미연결"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdMob未導入"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AdMob 未整合"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdMob 미연결"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AdMob non collegato"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdMob 未整合"
           }
         }
       }
     },
-    "admob.packageMessage": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fügen Sie das GoogleMobileAds-Paket hinzu, um die Werbeunterstützung zu aktivieren."
+    "admob.packageMessage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fügen Sie das GoogleMobileAds-Paket hinzu, um die Werbeunterstützung zu aktivieren."
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add the GoogleMobileAds package to enable ad support."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add the GoogleMobileAds package to enable ad support."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añade el paquete GoogleMobileAds para habilitar el soporte de anuncios."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade el paquete GoogleMobileAds para habilitar el soporte de anuncios."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoutez le package GoogleMobileAds pour activer la prise en charge des publicités."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez le package GoogleMobileAds pour activer la prise en charge des publicités."
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GoogleMobileAds パッケージを追加すると広告応援機能が有効になります。"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi il pacchetto GoogleMobileAds per abilitare il supporto pubblicitario."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GoogleMobileAds 패키지를 추가하면 광고 응원 기능이 활성화됩니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GoogleMobileAds パッケージを追加すると広告応援機能が有効になります。"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "加入 GoogleMobileAds 套件即可啟用廣告支援功能。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GoogleMobileAds 패키지를 추가하면 광고 응원 기능이 활성화됩니다."
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aggiungi il pacchetto GoogleMobileAds per abilitare il supporto pubblicitario."
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加入 GoogleMobileAds 套件即可啟用廣告支援功能。"
           }
         }
       }
     },
-    "app.title": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Divigo"
+    "app.title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divigo"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Divigo"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divigo"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Divigo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divigo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Divigo"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divigo"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "割勘"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divigo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Divigo"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "割勘"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Divigo"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divigo"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Divigo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divigo"
           }
         }
       }
     },
-    "appearance.automatic": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatisch"
+    "appearance.automatic" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisch"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自動"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatico"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자동"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自動"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatico"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
           }
         }
       }
     },
-    "appearance.dark": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dunkel"
+    "appearance.dark" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dunkel"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dark"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oscuro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oscuro"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sombre"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sombre"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ダーク"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scuro"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "다크"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダーク"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "深色"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다크"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scuro"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "深色"
           }
         }
       }
     },
-    "appearance.light": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hell"
+    "appearance.light" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hell"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Light"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claro"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clair"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clair"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ライト"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiaro"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "라이트"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ライト"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "淺色"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "라이트"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chiaro"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "淺色"
           }
         }
       }
     },
-    "color.black": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schwarz"
+    "color.black" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwarz"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Black"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Black"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Negro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negro"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noir"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noir"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "黒"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nero"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "검정"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "黒"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "黑"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "검정"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nero"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "黑"
           }
         }
       }
     },
-    "color.white": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weiß"
+    "color.white" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiß"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "White"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "White"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blanco"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blanco"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blanc"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blanc"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "白"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bianco"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "흰색"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "白"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "白"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "흰색"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bianco"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "白"
           }
         }
       }
     },
-    "common.close": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schließen"
+    "common.close" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Close"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cerrar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fermer"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "閉じる"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "닫기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "閉じる"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "關閉"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닫기"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chiudi"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關閉"
           }
         }
       }
     },
-    "common.done": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fertig"
+    "common.done" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fertig"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Done"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Listo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terminé"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminé"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "完了"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fatto"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "완료"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完了"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "完成"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "완료"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fatto"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成"
           }
         }
       }
     },
-    "common.ok": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OK"
+    "common.ok" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OK"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OK"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OK"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OK"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "확인"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "確定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OK"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "確定"
           }
         }
       }
     },
-    "common.reload": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neu laden"
+    "common.reload" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neu laden"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reload"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reload"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recargar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recargar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recharger"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recharger"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "再読み込み"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricarica"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "새로 고침"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "再読み込み"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "重新載入"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새로 고침"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ricarica"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新載入"
           }
         }
       }
     },
-    "format.amount.title": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Betrag (%@)"
+    "format.amount.title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betrag (%@)"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amount (%@)"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount (%@)"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Importe (%@)"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importe (%@)"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Montant (%@)"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montant (%@)"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "金額（%@）"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importo (%@)"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "금액（%@）"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "金額（%@）"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "金額（%@）"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "금액（%@）"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Importo (%@)"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "金額（%@）"
           }
         }
       }
     },
-    "format.people.long": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld P."
+    "format.people.long" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld P."
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lldp"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldp"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld p."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld p."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld p."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld p."
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld人"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld pers."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld명"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld人"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld人"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld명"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld pers."
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld人"
           }
         }
       }
     },
-    "format.people.title": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personen (%@)"
+    "format.people.title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personen (%@)"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "People (%@)"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "People (%@)"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personas (%@)"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personas (%@)"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personnes (%@)"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personnes (%@)"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "人数（%@）"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Persone (%@)"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "인원수（%@）"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人数（%@）"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "人數（%@）"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인원수（%@）"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Persone (%@)"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人數（%@）"
           }
         }
       }
     },
-    "leather.black": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schwarzes Leder"
+    "leather.black" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwarzes Leder"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Black Leather"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Black Leather"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cuero negro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuero negro"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cuir noir"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuir noir"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ブラックレザー"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pelle nera"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "블랙 가죽"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ブラックレザー"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "黑色皮革"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "블랙 가죽"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pelle nera"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "黑色皮革"
           }
         }
       }
     },
-    "leather.brown": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Braunes Leder"
+    "leather.brown" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Braunes Leder"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brown Leather"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brown Leather"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cuero marrón"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuero marrón"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cuir marron"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuir marron"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ブラウンレザー"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pelle marrone"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "브라운 가죽"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ブラウンレザー"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "棕色皮革"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브라운 가죽"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pelle marrone"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "棕色皮革"
           }
         }
       }
     },
-    "leather.monotone": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monoton"
+    "leather.monotone" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monoton"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monotone"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monotone"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monocromo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monocromo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monochrome"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monochrome"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "モノトーン"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monocromo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "모노톤"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モノトーン"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "單色"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모노톤"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monocromo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "單色"
           }
         }
       }
     },
-    "lock.allControls": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alles sperren"
+    "lock.allControls" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alles sperren"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lock All Controls"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock All Controls"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloquear todo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquear todo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout verrouiller"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout verrouiller"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "全操作ロック"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocca tutto"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "전체 잠금"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全操作ロック"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "鎖定全部"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체 잠금"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blocca tutto"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鎖定全部"
           }
         }
       }
     },
-    "lock.locked": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gesperrt"
+    "lock.locked" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesperrt"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Locked"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locked"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloqueado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqueado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verrouillé"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouillé"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ロック中"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloccato"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "잠김"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ロック中"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已鎖定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잠김"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloccato"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已鎖定"
           }
         }
       }
     },
-    "lock.people": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personen sperren"
+    "lock.people" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personen sperren"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "People Lock"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "People Lock"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloquear personas"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquear personas"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verrouiller les personnes"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouiller les personnes"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "人数ロック"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocca persone"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "인원수 잠금"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人数ロック"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "鎖定人數"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인원수 잠금"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blocca persone"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鎖定人數"
           }
         }
       }
     },
-    "lock.unlocked": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entsperrt"
+    "lock.unlocked" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entsperrt"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unlocked"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlocked"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desbloqueado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desbloqueado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Déverrouillé"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouillé"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "アンロック中"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sbloccato"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "잠금 해제"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アンロック中"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "未鎖定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잠금 해제"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sbloccato"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未鎖定"
           }
         }
       }
     },
-    "panel.brightness": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Helligkeit"
+    "panel.brightness" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helligkeit"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brightness"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brightness"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brillo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brillo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luminosité"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luminosité"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "明るさ"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luminosità"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "밝기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "明るさ"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "亮度"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밝기"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luminosità"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "亮度"
           }
         }
       }
     },
-    "panel.style.title": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Panel-Stil"
+    "panel.style.title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Panel-Stil"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Panel Style"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Panel Style"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Estilo del panel"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estilo del panel"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Style du panneau"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style du panneau"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネルスタイル"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stile pannello"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널 스타일"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パネルスタイル"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "面板樣式"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "패널 스타일"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stile pannello"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "面板樣式"
           }
         }
       }
     },
-    "panel.textColor": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Textfarbe"
+    "panel.textColor" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Textfarbe"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Text Color"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text Color"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Color del texto"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color del texto"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Couleur du texte"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur du texte"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "文字の色"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Colore testo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "글자 색상"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文字の色"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "文字顏色"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글자 색상"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Colore testo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文字顏色"
           }
         }
       }
     },
-    "panel.tone": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ton"
+    "panel.tone" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tone"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tone"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tono"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tono"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teinte"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teinte"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "濃淡"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tono"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "농담"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "濃淡"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "濃淡"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "농담"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tono"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "濃淡"
           }
         }
       }
     },
-    "preset.name.basic": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Basis"
+    "preset.name.basic" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basis"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Basic"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basic"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Básico"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Básico"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Base"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Base"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "下"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Base"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "하"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "下"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Base"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下"
           }
         }
       }
     },
-    "preset.name.bronze": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bronze"
+    "preset.name.bronze" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bronze"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bronze"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bronze"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bronce"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bronce"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bronze"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bronze"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "銅"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bronzo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "동"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "銅"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "銅"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "동"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bronzo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "銅"
           }
         }
       }
     },
-    "preset.name.exec": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chef"
+    "preset.name.exec" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chef"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Exec"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exec"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jefe"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jefe"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PDG"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDG"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "社長"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "사장"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "社長"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "社長"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사장"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Capo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "社長"
           }
         }
       }
     },
-    "preset.name.gold": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gold"
+    "preset.name.gold" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gold"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gold"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gold"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oro"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Or"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "金"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oro"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "금"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "金"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "金"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "금"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oro"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "金"
           }
         }
       }
     },
-    "preset.name.high": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reich"
+    "preset.name.high" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reich"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rico"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rico"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Riche"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riche"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "富豪"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricco"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "부자"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "富豪"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "富豪"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "부자"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ricco"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "富豪"
           }
         }
       }
     },
-    "preset.name.iron": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eisen"
+    "preset.name.iron" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eisen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Iron"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iron"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hierro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hierro"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fer"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fer"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "鉄"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferro"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "철"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鉄"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "鐵"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "철"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ferro"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鐵"
           }
         }
       }
     },
-    "preset.name.junior": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Junior"
+    "preset.name.junior" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Junior"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Junior"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Junior"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Junior"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Junior"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Junior"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Junior"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "後輩"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Junior"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "후배"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "後輩"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "後輩"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "후배"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Junior"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "後輩"
           }
         }
       }
     },
-    "preset.name.lead": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Leiter"
+    "preset.name.lead" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leiter"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lead"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lead"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Director"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Director"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Directeur"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Directeur"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "部長"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direttore"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "부장"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "部長"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "部長"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "부장"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Direttore"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "部長"
           }
         }
       }
     },
-    "preset.name.low": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arm"
+    "preset.name.low" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arm"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Low"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pobre"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pobre"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pauvre"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pauvre"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "貧民"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Povero"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "서민"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "貧民"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "貧民"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "서민"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Povero"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "貧民"
           }
         }
       }
     },
-    "preset.name.manager": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manager"
+    "preset.name.manager" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mgr"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mgr"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Encargado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encargado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manager"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "課長"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "과장"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "課長"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "課長"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "과장"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manager"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "課長"
           }
         }
       }
     },
-    "preset.name.mid": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mitte"
+    "preset.name.mid" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitte"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mid"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mid"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Medio"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medio"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moyen"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moyen"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "平民"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medio"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "평민"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平民"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "平民"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "평민"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Medio"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平民"
           }
         }
       }
     },
-    "preset.name.newcomer": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neu"
+    "preset.name.newcomer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neu"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nuevo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recrue"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recrue"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新人"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "신입"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新人"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新人"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "신입"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nuovo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新人"
           }
         }
       }
     },
-    "preset.name.peer": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kollege"
+    "preset.name.peer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kollege"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Peer"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peer"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Colega"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Colega"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Collègue"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collègue"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "同僚"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collega"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "동료"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同僚"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "同事"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "동료"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Collega"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同事"
           }
         }
       }
     },
-    "preset.name.premium": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Premium"
+    "preset.name.premium" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Premium"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Premium"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Premium"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "特上"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "특상"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "特上"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "特級"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "특상"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Premium"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "特級"
           }
         }
       }
     },
-    "preset.name.senior": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Senior"
+    "preset.name.senior" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senior"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Senior"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senior"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Senior"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senior"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Senior"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senior"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "先輩"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senior"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "선배"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "先輩"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "前輩"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선배"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Senior"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前輩"
           }
         }
       }
     },
-    "preset.name.silver": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Silber"
+    "preset.name.silver" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Silber"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Silver"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Silver"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plata"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plata"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argent"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argent"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "銀"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argento"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "은"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "銀"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "銀"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "은"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argento"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "銀"
           }
         }
       }
     },
-    "preset.name.staff": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teamleiter"
+    "preset.name.staff" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teamleiter"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Staff"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Staff"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Supervisor"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supervisor"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Superviseur"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Superviseur"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "係長"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supervisore"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "계장"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係長"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "股長"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계장"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Supervisore"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "股長"
           }
         }
       }
     },
-    "preset.name.standard": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard"
+    "preset.name.standard" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Estándar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estándar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "並"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "보통"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "並"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "普通"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "보통"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "普通"
           }
         }
       }
     },
-    "preset.name.upper": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plus"
+    "preset.name.upper" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plus"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plus"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plus"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "上"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "상"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "上"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "상"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plus"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上"
           }
         }
       }
     },
-    "preset.name.vip": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "VIP"
+    "preset.name.vip" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VIP"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "VIP"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VIP"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "VIP"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VIP"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "VIP"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VIP"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "大富豪"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VIP"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "대부호"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大富豪"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "大富豪"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "대부호"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "VIP"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大富豪"
           }
         }
       }
     },
-    "settings.aboutApp": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Über diese App"
+    "rate.this.app" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App bewerten"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "About This App"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rate This App"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Acerca de la app"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valorar la app"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À propos de l’app"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noter l’app"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このアプリについて"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valuta l’app"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "앱 정보"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アプリを評価する"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "關於此 App"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱 평가하기"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Informazioni sull’app"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "為這個 App 評分"
           }
         }
       }
     },
-    "settings.amountDialStep": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Betragsschrittweite"
+    "rate.this.app.description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Teilen Sie uns gerne Ihre Wünsche und Vorschläge mit. Sie helfen uns bei der Auswahl künftiger Funktionen und Verbesserungen."
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amount Dial Step"
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "We’d love to hear your requests and suggestions. They help us decide which new features and improvements to work on next."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paso del dial de importe"
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nos encantaría conocer tus peticiones y sugerencias. Nos ayudan a decidir qué funciones y mejoras desarrollar."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pas du cadran de montant"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "N’hésitez pas à nous faire part de vos demandes et suggestions. Elles nous aident à choisir les prochaines fonctionnalités et améliorations."
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "金額ダイアルステップ"
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Faccelo sapere con richieste e suggerimenti. Ci aiutano a decidere quali nuove funzioni e miglioramenti realizzare."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "금액 다이얼 단위"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ご要望やご提案もぜひお聞かせください。今後の新機能や改善を検討する際の参考にさせていただきます"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "金額轉盤級距"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "요청이나 제안도 꼭 들려주세요. 앞으로의 새 기능과 개선을 검토할 때 참고하겠습니다."
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Passo importo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "也歡迎告訴我們您的需求與建議。這些意見將作為我們規劃新功能與改善的參考。"
           }
         }
       }
     },
-    "settings.amountDialStep.guide": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sie können einen Schrittwert jetzt ändern, indem Sie ihn auf dem Hauptbildschirm gedrückt halten."
+    "settings.aboutApp" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzerhandbuch"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You can now change a step value by pressing and holding it on the main screen."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User Guide"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ahora puedes cambiar un valor de paso manteniéndolo pulsado en la pantalla principal."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guía de uso"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vous pouvez désormais modifier une valeur de pas en la maintenant enfoncée sur l’écran principal."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guide d’utilisation"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "主画面にあるステップ数値を長押しで変更できるようになりました"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guida utente"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이제 메인 화면에서 단위 값을 길게 눌러 변경할 수 있습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取扱説明"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "現在可在主畫面長按級距數值來變更。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용 설명서"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ora puoi modificare un valore di passo tenendolo premuto nella schermata principale."
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用說明"
           }
         }
       }
     },
-    "settings.appearanceMode.title": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Erscheinungsbild"
+    "settings.amountDialStep" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betragsschrittweite"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appearance Mode"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount Dial Step"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modo de apariencia"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paso del dial de importe"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mode d’apparence"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas du cadran de montant"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "外観モード"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passo importo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "화면 모드"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "金額ダイアルステップ"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "外觀模式"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "금액 다이얼 단위"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modalità aspetto"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "金額轉盤級距"
           }
         }
       }
     },
-    "settings.background.title": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hintergrund"
+    "settings.amountDialStep.guide" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie können einen Schrittwert jetzt ändern, indem Sie ihn auf dem Hauptbildschirm gedrückt halten."
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Background"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now change a step value by pressing and holding it on the main screen."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fondo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora puedes cambiar un valor de paso manteniéndolo pulsado en la pantalla principal."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrière-plan"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvez désormais modifier une valeur de pas en la maintenant enfoncée sur l’écran principal."
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "背景"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ora puoi modificare un valore di passo tenendolo premuto nella schermata principale."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "배경"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "主画面にあるステップ数値を長押しで変更できるようになりました"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "背景"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이제 메인 화면에서 단위 값을 길게 눌러 변경할 수 있습니다."
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sfondo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "現在可在主畫面長按級距數值來變更。"
           }
         }
       }
     },
-    "settings.design.picker": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Design"
+    "settings.appearanceMode.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erscheinungsbild"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Design"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance Mode"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diseño"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo de apariencia"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Design"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode d’apparence"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "デザイン"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modalità aspetto"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "디자인"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "外観モード"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設計"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "화면 모드"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Design"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "外觀模式"
           }
         }
       }
     },
-    "settings.dialSettings": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reglereinstellungen"
+    "settings.background.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hintergrund"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dial Settings"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Background"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes del dial"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fondo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réglages du cadran"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrière-plan"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ダイアル設定"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sfondo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "다이얼 설정"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "轉盤設定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배경"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Impostazioni manopola"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景"
           }
         }
       }
     },
-    "settings.displayName": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stufennamen"
+    "settings.design.picker" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Design"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tier Names"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Design"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nombres de niveles"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diseño"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noms des niveaux"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Design"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "区分名"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Design"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "구분 이름"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デザイン"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "級別名稱"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "디자인"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nomi dei livelli"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設計"
           }
         }
       }
     },
-    "settings.fontScale": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schriftgröße"
+    "settings.dialSettings" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reglereinstellungen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Font Size"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dial Settings"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tamaño de fuente"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes del dial"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Taille du texte"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages du cadran"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "文字サイズ"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni manopola"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "글자 크기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダイアル設定"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "文字大小"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다이얼 설정"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dimensione testo"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "轉盤設定"
           }
         }
       }
     },
-    "settings.fontScale.large": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Groß"
+    "settings.displayName" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stufennamen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Large"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tier Names"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grande"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombres de niveles"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grand"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noms des niveaux"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "大"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nomi dei livelli"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "크게"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "区分名"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "大"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "구분 이름"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grande"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "級別名稱"
           }
         }
       }
     },
-    "settings.fontScale.standard": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard"
+    "settings.fontScale" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schriftgröße"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Font Size"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Estándar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamaño de fuente"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille du texte"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "標準"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimensione testo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "표준"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文字サイズ"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "標準"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글자 크기"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文字大小"
           }
         }
       }
     },
-    "settings.fontScale.system": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatisch"
+    "settings.fontScale.large" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groß"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Large"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grande"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grand"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自動"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grande"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자동"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自動"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "크게"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatico"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大"
           }
         }
       }
     },
-    "settings.fontScale.xLarge": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sehr groß"
+    "settings.fontScale.standard" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "X-Large"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Muy grande"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estándar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Très grand"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "特大"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "아주 크게"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "標準"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "特大"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "표준"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Molto grande"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "標準"
           }
         }
       }
     },
-    "settings.presetDisplayNames": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stufennamen-Vorlagen"
+    "settings.fontScale.system" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisch"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tier Name Presets"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes de nombres"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Préréglages de noms"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "区分名プリセット"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatico"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "구분 이름 프리셋"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "級別名稱預設"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preset nomi livelli"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
           }
         }
       }
     },
-    "settings.section.category": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stufen"
+    "settings.fontScale.xLarge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sehr groß"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tiers"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X-Large"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Niveles"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muy grande"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Niveaux"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Très grand"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "区分"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Molto grande"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "구분"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "特大"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "級別"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아주 크게"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Livelli"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "特大"
           }
         }
       }
     },
-    "settings.section.displayControls": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anzeige & Steuerung"
+    "settings.presetDisplayNames" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stufennamen-Vorlagen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Display & Controls"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tier Name Presets"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pantalla y controles"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes de nombres"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Affichage et commandes"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préréglages de noms"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表示・操作"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preset nomi livelli"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "표시·조작"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "区分名プリセット"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "顯示與操作"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "구분 이름 프리셋"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Visualizzazione e controlli"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "級別名稱預設"
           }
         }
       }
     },
-    "settings.section.support": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support"
+    "settings.section.category" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stufen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiers"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Soporte"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveles"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Assistance"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveaux"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "サポート"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Livelli"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "지원"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "区分"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支援"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "구분"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Supporto"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "級別"
           }
         }
       }
     },
-    "settings.section.supportDeveloper": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entwickler unterstützen"
+    "settings.section.displayControls" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeige & Steuerung"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support the Developer"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display & Controls"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apoyar al desarrollador"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pantalla y controles"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Soutenir le développeur"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Affichage et commandes"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "開発者を応援"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualizzazione e controlli"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "개발자 응원"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表示・操作"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支持開發者"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "표시·조작"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sostieni lo sviluppatore"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示與操作"
           }
         }
       }
     },
-    "settings.showDialStepper": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regler-Stepper anzeigen"
+    "settings.section.supportDeveloper" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entwickler unterstützen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show Dial Stepper"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support the Developer"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mostrar el paso del dial"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apoyar al desarrollador"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Afficher le pas à pas"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soutenir le développeur"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ダイアルステッパーを表示する"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sostieni lo sviluppatore"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "다이얼 스테퍼 표시"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開発者を応援"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "顯示轉盤步進器"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개발자 응원"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mostra stepper manopola"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "支持開發者"
           }
         }
       }
     },
-    "settings.stepFormat": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schritt %d"
+    "settings.showDialStepper" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regler-Stepper anzeigen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Step %d"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Dial Stepper"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paso %d"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el paso del dial"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pas %d"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le pas à pas"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ステップ%d"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra stepper manopola"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "단위 %d"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダイアルステッパーを表示する"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "級距 %d"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다이얼 스테퍼 표시"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Passo %d"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示轉盤步進器"
           }
         }
       }
     },
-    "settings.title": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einstellungen"
+    "settings.stepFormat" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schritt %d"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step %d"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paso %d"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réglages"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas %d"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passo %d"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ステップ%d"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "단위 %d"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Impostazioni"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "級距 %d"
           }
         }
       }
     },
-    "split.roundedUp": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aufgerundet"
+    "settings.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rounded Up"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Redondeado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrondi"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "端数切り上げ"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "올림"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "進位"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrotondato"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
           }
         }
       }
     },
-    "split.total": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Summe"
+    "split.roundedUp" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgerundet"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rounded Up"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redondeado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrondi"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "合計"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrotondato"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "합계"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "端数切り上げ"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "合計"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "올림"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Totale"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "進位"
           }
         }
       }
     },
-    "split.totalAmount": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gesamtbetrag"
+    "split.total" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summe"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total Amount"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Importe total"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Montant total"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "合計金額"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Totale"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "합계 금액"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "合計"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "合計金額"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "합계"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Importo totale"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "合計"
           }
         }
       }
     },
-    "support.ad.closeHint": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sehen Sie bis zum Ende, dann erscheint die Schließen-Schaltfläche [×]."
+    "split.totalAmount" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamtbetrag"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Watch to the end and the close [×] button will appear."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Amount"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Míralo hasta el final y aparecerá el botón de cerrar [×]."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importe total"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regardez jusqu’à la fin et le bouton de fermeture [×] apparaîtra."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montant total"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最後まで視聴すると閉じる【×】ボタンが現れます"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importo totale"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "끝까지 시청하면 닫기【×】버튼이 나타납니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "合計金額"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "觀看至結束後會出現關閉【×】按鈕。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "합계 금액"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guardalo fino alla fine per far comparire il pulsante di chiusura [×]."
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "合計金額"
           }
         }
       }
     },
-    "support.ad.loading": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anzeige wird geladen …"
+    "support.ad.closeHint" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sehen Sie bis zum Ende, dann erscheint die Schließen-Schaltfläche [×]."
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Loading ad..."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch to the end and the close [×] button will appear."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cargando anuncio…"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Míralo hasta el final y aparecerá el botón de cerrar [×]."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chargement de la pub…"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regardez jusqu’à la fin et le bouton de fermeture [×] apparaîtra."
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "広告を読み込み中..."
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardalo fino alla fine per far comparire il pulsante di chiusura [×]."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "광고 불러오는 중..."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最後まで視聴すると閉じる【×】ボタンが現れます"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "廣告載入中…"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "끝까지 시청하면 닫기【×】버튼이 나타납니다."
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Caricamento annuncio..."
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "觀看至結束後會出現關閉【×】按鈕。"
           }
         }
       }
     },
-    "support.ad.noRewardedAd": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Derzeit sind keine belohnten Anzeigen verfügbar. Bitte versuchen Sie es später erneut."
+    "support.ad.loading" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeige wird geladen …"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No rewarded ads are available right now. Please try again later."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading ad..."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No hay anuncios con recompensa disponibles ahora. Inténtalo más tarde."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando anuncio…"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucune publicité avec récompense n’est disponible pour le moment. Réessayez plus tard."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chargement de la pub…"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "現在、特典付きの広告がありません。後ほどお試しください"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento annuncio..."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 이용 가능한 보상형 광고가 없습니다. 나중에 다시 시도해 주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "広告を読み込み中..."
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目前沒有可用的獎勵廣告，請稍後再試。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고 불러오는 중..."
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Al momento nessun annuncio con premio disponibile. Riprova più tardi."
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "廣告載入中…"
           }
         }
       }
     },
-    "support.ad.play": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anzeige abspielen"
+    "support.ad.noRewardedAd" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Derzeit sind keine belohnten Anzeigen verfügbar. Bitte versuchen Sie es später erneut."
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Play Ad"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No rewarded ads are available right now. Please try again later."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reproducir anuncio"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay anuncios con recompensa disponibles ahora. Inténtalo más tarde."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lire la publicité"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune publicité avec récompense n’est disponible pour le moment. Réessayez plus tard."
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "広告を再生する"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al momento nessun annuncio con premio disponibile. Riprova più tardi."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "광고 재생"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "現在、特典付きの広告がありません。後ほどお試しください"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "播放廣告"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 이용 가능한 보상형 광고가 없습니다. 나중에 다시 시도해 주세요."
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Riproduci annuncio"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目前沒有可用的獎勵廣告，請稍後再試。"
           }
         }
       }
     },
-    "support.ad.soundWarning": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Es wird Ton abgespielt!"
+    "support.ad.play" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeige abspielen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sound will play!"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play Ad"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¡Se reproducirá sonido!"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reproducir anuncio"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le son va être diffusé !"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lire la publicité"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "音が出ます！"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riproduci annuncio"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "소리가 재생됩니다!"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "広告を再生する"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "將會發出聲音！"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고 재생"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verrà riprodotto audio!"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "播放廣告"
           }
         }
       }
     },
-    "support.ad.thanksMessage": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Danke, dass Sie sich die Anzeige angesehen haben. Wir verbessern die App weiter!"
+    "support.ad.soundWarning" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es wird Ton abgespielt!"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Thanks for watching the ad. We will keep improving the app."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound will play!"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gracias por ver el anuncio. Seguiremos mejorando la app."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Se reproducirá sonido!"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Merci d’avoir regardé la publicité. Nous continuerons à améliorer l’app !"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le son va être diffusé !"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "広告をご覧いただきありがとうございます。これからも改善を続けてまいります！"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrà riprodotto audio!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "광고를 시청해 주셔서 감사합니다. 앞으로도 계속 개선해 나가겠습니다!"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音が出ます！"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "感謝您觀看廣告。我們會持續改進 App！"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "소리가 재생됩니다!"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grazie per aver guardato l’annuncio. Continueremo a migliorare l’app!"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "將會發出聲音！"
           }
         }
       }
     },
-    "support.ad.title": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit Werbung unterstützen"
+    "support.ad.thanksMessage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danke, dass Sie sich die Anzeige angesehen haben. Wir verbessern die App weiter!"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Watch an Ad to Support"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thanks for watching the ad. We will keep improving the app."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver un anuncio para apoyar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gracias por ver el anuncio. Seguiremos mejorando la app."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regarder une pub pour soutenir"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merci d’avoir regardé la publicité. Nous continuerons à améliorer l’app !"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "広告を見て応援する"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grazie per aver guardato l’annuncio. Continueremo a migliorare l’app!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "광고 보고 응원하기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "広告をご覧いただきありがとうございます。これからも改善を続けてまいります！"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "觀看廣告支持"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고를 시청해 주셔서 감사합니다. 앞으로도 계속 개선해 나가겠습니다!"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guarda un annuncio per sostenerci"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "感謝您觀看廣告。我們會持續改進 App！"
           }
         }
       }
     },
-    "support.ad.videoTitle": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Belohntes Video"
+    "support.ad.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit Werbung unterstützen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rewarded Video"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch an Ad to Support"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vídeo con recompensa"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver un anuncio para apoyar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vidéo avec récompense"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regarder une pub pour soutenir"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "動画広告"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guarda un annuncio per sostenerci"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "보상형 동영상"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "広告を見て応援する"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "獎勵影片"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고 보고 응원하기"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Video con premio"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "觀看廣告支持"
           }
         }
       }
     },
-    "support.thanksTitle": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vielen Dank!"
+    "support.ad.videoTitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Belohntes Video"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Thank You!"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rewarded Video"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¡Gracias!"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vídeo con recompensa"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Merci !"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vidéo avec récompense"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ありがとうございます！"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video con premio"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "감사합니다!"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "動画広告"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "謝謝您！"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "보상형 동영상"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grazie!"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "獎勵影片"
           }
         }
       }
     },
-    "support.tip.large": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Große Unterstützung"
+    "support.thanksTitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vielen Dank!"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Big Tip"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank You!"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Propina grande"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Gracias!"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grand pourboire"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merci !"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "たっぷり応援"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grazie!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "듬뿍 응원"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ありがとうございます！"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "大力支持"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "감사합니다!"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sostegno generoso"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "謝謝您！"
           }
         }
       }
     },
-    "support.tip.message": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ihre Unterstützung hilft, diese App weiter zu verbessern."
+    "support.tip.large" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Große Unterstützung"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your support helps keep this app improving."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Big Tip"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu apoyo ayuda a mejorar esta app."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Propina grande"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre soutien aide à améliorer cette app."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grand pourboire"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このアプリの開発を応援していただけると励みになります。"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sostegno generoso"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "여러분의 응원이 이 앱을 계속 발전시키는 힘이 됩니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "たっぷり応援"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "您的支持能讓這款 App 持續進步。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "듬뿍 응원"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il tuo sostegno ci aiuta a continuare a migliorare questa app."
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大力支持"
           }
         }
       }
     },
-    "support.tip.small": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unterstützen"
+    "support.tip.message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre Unterstützung hilft, diese App weiter zu verbessern."
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Give a Tip"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your support helps keep this app improving."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dar propina"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu apoyo ayuda a mejorar esta app."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Laisser un pourboire"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre soutien aide à améliorer cette app."
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "しっかり応援"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo sostegno ci aiuta a continuare a migliorare questa app."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "든든한 응원"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このアプリの開発を応援していただけると励みになります。"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "給予支持"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "여러분의 응원이 이 앱을 계속 발전시키는 힘이 됩니다."
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lascia una mancia"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您的支持能讓這款 App 持續進步。"
           }
         }
       }
     },
-    "support.tip.thanksMessage": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Danke für Ihre Unterstützung. Wir verbessern die App weiter!"
+    "support.tip.small" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unterstützen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Thank you for your support. We will keep improving the app."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give a Tip"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gracias por tu apoyo. Seguiremos mejorando la app."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dar propina"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Merci pour votre soutien. Nous continuerons à améliorer l’app !"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laisser un pourboire"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "応援いただきありがとうございます。これからも改善を続けてまいります！"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lascia una mancia"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "응원해 주셔서 감사합니다. 앞으로도 계속 개선해 나가겠습니다!"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "しっかり応援"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "感謝您的支持。我們會持續改進 App！"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "든든한 응원"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grazie per il tuo sostegno. Continueremo a migliorare l’app!"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "給予支持"
           }
         }
       }
     },
-    "support.tip.title": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit Trinkgeld unterstützen"
+    "support.tip.thanksMessage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danke für Ihre Unterstützung. Wir verbessern die App weiter!"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support with a Tip"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank you for your support. We will keep improving the app."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apoyar con una propina"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gracias por tu apoyo. Seguiremos mejorando la app."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Soutenir avec un pourboire"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merci pour votre soutien. Nous continuerons à améliorer l’app !"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "投げ銭で応援する"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grazie per il tuo sostegno. Continueremo a migliorare l’app!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "팁으로 응원하기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "応援いただきありがとうございます。これからも改善を続けてまいります！"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "以贊助支持"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "응원해 주셔서 감사합니다. 앞으로도 계속 개선해 나가겠습니다!"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sostieni con una mancia"
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "感謝您的支持。我們會持續改進 App！"
           }
         }
       }
     },
-    "support.unavailable": {
-      "extractionState": "stale",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Derzeit nicht verfügbar."
+    "support.tip.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit Trinkgeld unterstützen"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Currently unavailable."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support with a Tip"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No disponible actualmente."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apoyar con una propina"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actuellement indisponible."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soutenir avec un pourboire"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "現在ご利用いただけません。"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sostieni con una mancia"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 이용할 수 없습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投げ銭で応援する"
           }
         },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目前無法使用。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팁으로 응원하기"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Al momento non disponibile."
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以贊助支持"
+          }
+        }
+      }
+    },
+    "support.unavailable" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Derzeit nicht verfügbar."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Currently unavailable."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No disponible actualmente."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actuellement indisponible."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al momento non disponibile."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "現在ご利用いただけません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 이용할 수 없습니다."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目前無法使用。"
           }
         }
       }
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

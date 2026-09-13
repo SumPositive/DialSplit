@@ -24,6 +24,14 @@ struct SettingsView: View {
     @State private var isAppearanceModeExpanded = false
     @State private var isFontScaleExpanded = false
 
+    /// App Store のアプリID（割勘 DialSplit）
+    private static let appStoreID = "467941202"
+
+    /// レビュー入力欄を開いた状態で App Store アプリを表示する。
+    /// https:// だと Safari が先に受け取り、リダイレクトで action= が落ちて
+    /// 「アドレスが無効です」になるため、App Store を直接指す itms-apps:// を使う
+    private static let appStoreReviewURL = URL(string: "itms-apps://apps.apple.com/app/id\(appStoreID)?action=write-review")
+
     private var aboutURL: URL? {
         let isEnglish = Locale.preferredLanguages.first?.hasPrefix("en") == true
         let path = isEnglish
@@ -250,12 +258,31 @@ struct SettingsView: View {
 
                 displayControlsSection
 
-                // MARK: サポート
-                Section("settings.section.support") {
+                // MARK: 取扱説明・評価
+                Section {
                     Button(String(localized: "settings.aboutApp")) {
                         if let url = aboutURL {
                             openURL(url)
                         }
+                    }
+
+                    // アプリを評価する（App Store のレビュー入力欄を直接開く）
+                    Button {
+                        // requestReview は表示可否をOSが決めるため、押しても何も起きないことがある。
+                        // ボタンからは App Store を直接開く
+                        if let url = Self.appStoreReviewURL {
+                            openURL(url)
+                        }
+                    } label: {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(String(localized: "rate.this.app"))
+                            // 要望や提案もレビューへ記入できることを案内する
+                            Text(String(localized: "rate.this.app.description"))
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
 
