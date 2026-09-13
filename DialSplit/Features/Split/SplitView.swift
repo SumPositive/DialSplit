@@ -652,6 +652,7 @@ private struct TextColorPickerView: View {
     @Binding var textTone: Int
     @Binding var leatherStyle: LeatherStyle
     @Environment(\.colorScheme) private var cs
+    @State private var isLeatherStyleExpanded = false
 
     private let hueStops: [Int] = [-20, -10, 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
     private let toneStops: [Int] = [0, 20, 40, 60, 80, 100]
@@ -714,21 +715,19 @@ private struct TextColorPickerView: View {
                 .foregroundStyle(.primary)
                 .padding(.top, 2)
 
-            AZRadioPicker(
+            // 設定画面と揃えて、背景もブラス調のドロップダウンPickerで選ぶ
+            AZDropdownPicker(
                 options: LeatherStyle.allCases,
                 selection: $leatherStyle,
-                minOptionWidth: 0,
-                maxOptionWidth: .infinity,
-                horizontalPadding: 4,
-                optionSpacing: 6,
-                groupPadding: 4,
-                wrapsOptions: false,
+                isExpanded: $isLeatherStyleExpanded,
+                minWidth: 0,
                 fillsWidth: true,
-                style: .brass
+                style: .brassDropdown
             ) { style in
                 Text(style.localizedName)
             }
             .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+            .zIndex(isLeatherStyleExpanded ? 60 : 0)
         }
     }
 }
@@ -768,8 +767,8 @@ extension AZPickerStyle {
         s.cornerRadius = 14
         s.panelBackground = .black.opacity(0.22)
         s.optionBackground = .clear
-        s.selectedBackgroundColor = Color(red: 0.4196, green: 0.3059, blue: 0.1176)
-        s.selectedForegroundColor = Color(red: 1.0, green: 0.9647, blue: 0.8784)
+        s.selectedBackgroundColor = brassSelectedBackground
+        s.selectedForegroundColor = brassSelectedForeground
         s.selectedBorderColor = .white.opacity(0.18)
         s.unselectedForegroundColor = .primary.opacity(0.82)
         s.unselectedBorderColor = .clear
@@ -779,4 +778,27 @@ extension AZPickerStyle {
         s.optionWeight = .bold
         return s
     }
+
+    /// ブラス調のままドロップダウンで使えるようにしたピッカースタイル
+    static var brassDropdown: AZPickerStyle {
+        var s = AZPickerStyle.brass
+        // 折りたたみボタンをラジオの選択中と同じ「濃い茶の塗り×クリーム色の字」にして、
+        // 半透明の黒に暗い茶字が乗って読めなくなるのを避ける
+        s.panelBackground = brassSelectedBackground
+        s.dropdownSelectedValueColor = brassSelectedForeground
+        // 候補一覧の背景に使われるため、透明のままでは下が透けてしまう
+        s.optionBackground = Color(.secondarySystemGroupedBackground)
+        // 候補一覧は標準背景なので、未選択の枠線と文字色も標準へ戻して読みやすくする
+        s.unselectedBorderColor = nil
+        s.unselectedForegroundColor = nil
+        s.dropdownOptionAlignment = .center
+        s.dropdownOptionStackAlignment = .center
+        s.dropdownOptionTextAlignment = .center
+        return s
+    }
+
+    /// 真鍮調の選択中の塗り
+    private static let brassSelectedBackground = Color(red: 0.4196, green: 0.3059, blue: 0.1176)
+    /// 真鍮調の選択中の文字色
+    private static let brassSelectedForeground = Color(red: 1.0, green: 0.9647, blue: 0.8784)
 }

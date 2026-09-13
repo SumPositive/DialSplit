@@ -118,6 +118,11 @@ struct AZPickerStyle {
     var dropdownPopoverDynamicTypeRange: ClosedRange<DynamicTypeSize> = DynamicTypeSize.xSmall...DynamicTypeSize.accessibility5
     /// ドロップダウン選択中表示と候補一覧の幅不足時処理
     var dropdownTextFitMode: AZPickerTextFitMode = .wrap
+    /// ラベル内で指定した色をそのまま使う
+    var preservesLabelForegroundStyle: Bool = false
+    /// 折りたたみ時に表示する選択値の文字色。
+    /// 候補一覧の選択中項目と同じアクセント色にして、現在値が一目で分かるようにする
+    var dropdownSelectedValueColor: Color = .accentColor
     /// 選択ボタン右端のインジケータデフォルトは非表示
     var dropdownIndicator: AZDropdownIndicator = .none
     /// 選択中の背景色（nil なら accentColor.opacity(selectedBackgroundOpacity)）
@@ -211,7 +216,7 @@ struct AZDropdownPicker<Option: Hashable & Identifiable, Label: View>: View {
             .overlay(
                 RoundedRectangle(cornerRadius: style.cornerRadius, style: .continuous)
                     .strokeBorder(
-                        isExpanded ? Color.accentColor.opacity(style.selectedBorderOpacity) : Color.secondary.opacity(style.borderOpacity),
+                        isExpanded ? expandedBorder : collapsedBorder,
                         lineWidth: isExpanded ? 1.2 : 1
                     )
             )
@@ -220,11 +225,26 @@ struct AZDropdownPicker<Option: Hashable & Identifiable, Label: View>: View {
         .buttonStyle(.plain)
     }
 
+    private var expandedBorder: Color {
+        style.selectedBorderColor ?? Color.accentColor.opacity(style.selectedBorderOpacity)
+    }
+
+    private var collapsedBorder: Color {
+        style.unselectedBorderColor ?? Color.secondary.opacity(style.borderOpacity)
+    }
+
+    @ViewBuilder
     private var selectedLabel: some View {
-        label(selection)
-            .font(.subheadline)
-            .foregroundStyle(Color.primary)
-            .azPickerTextFit(style.dropdownTextFitMode, alignment: .center)
+        if style.preservesLabelForegroundStyle {
+            label(selection)
+                .font(.subheadline)
+                .azPickerTextFit(style.dropdownTextFitMode, alignment: .center)
+        } else {
+            label(selection)
+                .font(.subheadline)
+                .foregroundStyle(style.dropdownSelectedValueColor)
+                .azPickerTextFit(style.dropdownTextFitMode, alignment: .center)
+        }
     }
 
     /// 選択ボタン右端のインジケータスタイル設定で非表示／chevron を切り替える
@@ -403,25 +423,57 @@ struct AZDropdownOptionButton<Label: View>: View {
     @ViewBuilder let label: () -> Label
 
     var body: some View {
-        label()
-            .font(.subheadline.weight(isSelected ? .semibold : .regular))
-            .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
-            .azPickerTextFit(style.dropdownTextFitMode, alignment: style.dropdownOptionTextAlignment)
-            .lineLimit(lineLimit)
+        optionLabel
             .padding(.horizontal, style.dropdownOptionHorizontalPadding)
             .padding(.vertical, style.dropdownOptionVerticalPadding)
             .frame(minWidth: minWidth, maxWidth: .infinity, alignment: style.dropdownOptionAlignment)
             .background(
                 RoundedRectangle(cornerRadius: style.cornerRadius, style: .continuous)
-                    .fill(isSelected ? Color.accentColor.opacity(style.selectedBackgroundOpacity) : style.optionBackground)
+                    .fill(isSelected ? selectedBackground : style.optionBackground)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: style.cornerRadius, style: .continuous)
                     .strokeBorder(
-                        isSelected ? Color.accentColor.opacity(style.selectedBorderOpacity) : Color.secondary.opacity(style.borderOpacity),
+                        isSelected ? selectedBorder : unselectedBorder,
                         lineWidth: isSelected ? 1.2 : 1
                     )
             )
+    }
+
+    private var selectedBackground: Color {
+        style.selectedBackgroundColor ?? Color.accentColor.opacity(style.selectedBackgroundOpacity)
+    }
+
+    private var selectedBorder: Color {
+        style.selectedBorderColor ?? Color.accentColor.opacity(style.selectedBorderOpacity)
+    }
+
+    private var unselectedBorder: Color {
+        style.unselectedBorderColor ?? Color.secondary.opacity(style.borderOpacity)
+    }
+
+    @ViewBuilder
+    private var optionLabel: some View {
+        if style.preservesLabelForegroundStyle {
+            label()
+                .font(.subheadline.weight(isSelected ? .semibold : .regular))
+                .azPickerTextFit(style.dropdownTextFitMode, alignment: style.dropdownOptionTextAlignment)
+                .lineLimit(lineLimit)
+        } else {
+            label()
+                .font(.subheadline.weight(isSelected ? .semibold : .regular))
+                .foregroundStyle(isSelected ? selectedForeground : unselectedForeground)
+                .azPickerTextFit(style.dropdownTextFitMode, alignment: style.dropdownOptionTextAlignment)
+                .lineLimit(lineLimit)
+        }
+    }
+
+    private var selectedForeground: Color {
+        style.selectedForegroundColor ?? Color.accentColor
+    }
+
+    private var unselectedForeground: Color {
+        style.unselectedForegroundColor ?? Color.primary
     }
 }
 

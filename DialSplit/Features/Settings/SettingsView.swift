@@ -21,6 +21,8 @@ struct SettingsView: View {
     @State private var showAdSheet = false
     @State private var showAdThanks = false
     @State private var showDialSettings = false
+    @State private var isAppearanceModeExpanded = false
+    @State private var isFontScaleExpanded = false
 
     private var aboutURL: URL? {
         let isEnglish = Locale.preferredLanguages.first?.hasPrefix("en") == true
@@ -117,25 +119,22 @@ struct SettingsView: View {
     @ViewBuilder
     private var appearanceModeRow: some View {
         @Bindable var settings = settings
-        VStack(alignment: .leading, spacing: 10) {
+        AZAdaptiveControlRow {
             Text(String(localized: "settings.appearanceMode.title"))
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
-
-            AZRadioPicker(
+        } control: {
+            // 外観モードは共通のドロップダウンPickerで選ぶ
+            AZDropdownPicker(
                 options: AppearanceMode.allCases,
                 selection: $settings.appearanceMode,
-                minOptionWidth: 0,
-                maxOptionWidth: 120,
-                horizontalPadding: 4,
-                optionSpacing: 4,
-                groupPadding: 5,
-                wrapsOptions: false,
-                fillsWidth: true
+                isExpanded: $isAppearanceModeExpanded,
+                minWidth: 150
             ) { mode in
                 Text(LocalizedStringKey(mode.titleKey))
             }
         }
+        .zIndex(isAppearanceModeExpanded ? 65 : 0)
         .padding(.top, 4)
         .padding(.bottom, 2)
     }
@@ -143,25 +142,22 @@ struct SettingsView: View {
     @ViewBuilder
     private var fontScaleRow: some View {
         @Bindable var settings = settings
-        VStack(alignment: .leading, spacing: 10) {
+        AZAdaptiveControlRow {
             Text(String(localized: "settings.fontScale"))
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
-
-            AZRadioPicker(
+        } control: {
+            // 文字サイズも同じドロップダウンPickerで揃える
+            AZDropdownPicker(
                 options: AppFontScale.allCases,
                 selection: $settings.fontScale,
-                minOptionWidth: 0,
-                maxOptionWidth: 120,
-                horizontalPadding: 4,
-                optionSpacing: 4,
-                groupPadding: 5,
-                wrapsOptions: false,
-                fillsWidth: true
+                isExpanded: $isFontScaleExpanded,
+                minWidth: 150
             ) { scale in
                 Text(LocalizedStringKey(scale.titleKey))
             }
         }
+        .zIndex(isFontScaleExpanded ? 64 : 0)
         .padding(.top, 4)
         .padding(.bottom, 2)
     }
